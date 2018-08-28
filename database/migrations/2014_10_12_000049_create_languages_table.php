@@ -25,7 +25,7 @@ class CreateLanguagesTable extends Migration
             $table->string('currency_code', 3);
             $table->foreign('currency_code')->references('code')->on('currencies');
 
-            $table->string('pricing_currency', 3)->nullable();
+            $table->string('pricing_currency', 3);
             $table->foreign('pricing_currency')->references('code')->on('currencies');
 
             $table->string('locale', 2);
