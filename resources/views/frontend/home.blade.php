@@ -1,5 +1,13 @@
 @extends('frontend.layout.app')
 
+@section('meta')
+    <title>OCG - Online Casino Games</title>
+
+    <meta name="keywords" content="online casino games, online casino, casino games, online casino real money,
+casino gambling, online casino gambling, win real money gambling online, win real money games, win real money online casino, win real money playing games, win real money instantly, win real money playing slots" />
+    <meta name="description" content="OCG is the most engaging gaming website to satisfy all your gambling needs">
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="{!! mix('compiled/css/pages/home.css') !!}">
 @endsection
