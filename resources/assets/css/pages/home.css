@@ -2,3 +2,23 @@
     margin: 25px;
     display: inline-block;
 }
+
+.btn-filter-active {
+    background-color: #327ee0 !important;
+}
+
+.jackpot-board h2 {
+    font-size: 3em !important;
+    padding-bottom: 0 !important;
+    color: #0088cc !important;
+}
+
+.game-item h5 {
+    transition: all 0.3s ease 0s;
+    border-bottom: 1px solid transparent;
+}
+
+.game-item:hover h5 {
+    color: #417edf;
+    border-bottom: 1px solid #417edf;
+}

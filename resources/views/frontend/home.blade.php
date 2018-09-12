@@ -1,11 +1,10 @@
 @extends('frontend.layout.app')
 
 @section('meta')
-    <title>OCG - Online Casino Games</title>
+    <title>{{ trans('app.meta.title') }}</title>
 
-    <meta name="keywords" content="online casino games, online casino, casino games, online casino real money,
-casino gambling, online casino gambling, win real money gambling online, win real money games, win real money online casino, win real money playing games, win real money instantly, win real money playing slots" />
-    <meta name="description" content="OCG is the most engaging gaming website to satisfy all your gambling needs">
+    <meta name="keywords" content="{{ trans('app.meta.keywords') }}" />
+    <meta name="description" content="{{ trans('app.meta.description') }}">
 @endsection
 
 @section('styles')
@@ -55,7 +54,7 @@ casino gambling, online casino gambling, win real money gambling online, win rea
 
                         <a class="tp-caption btn btn-lg btn-primary btn-slider-action"
                            data-hash
-                           data-hash-offset="85"
+                           data-hash-offset="120"
                            href="#demos"
                            data-x="center" data-hoffset="0"
                            data-y="center" data-voffset="80"
@@ -82,7 +81,7 @@ casino gambling, online casino gambling, win real money gambling online, win rea
                     </div>
                     <div class="col-md-4">
                         <div class="mt-lg mb-xl text-right">
-                            <a href="#demos" data-hash data-hash-offset="85" class="btn btn-primary mr-md appear-animation" data-appear-animation="fadeInDown" data-appear-animation-delay="300">TEST OUT OUR GAMES!</a>
+                            <a href="#demos" data-hash data-hash-offset="120" class="btn btn-primary mr-md appear-animation" data-appear-animation="fadeInDown" data-appear-animation-delay="300">TEST OUT OUR GAMES!</a>
                         </div>
                     </div>
                 </div>
@@ -156,54 +155,59 @@ casino gambling, online casino gambling, win real money gambling online, win rea
                         <h2 class="mt-xlg mb-none">Our <strong>Games</strong></h2>
                         <p class="lead">Click on any game <span class="alternative-font font-size-xl">...and play for free!</span></p>
 
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#">ALL GAMES</a>
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#">SLOT</a>
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#">ROULETTE</a>
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#">CARD</a>
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#">BINGO</a>
-                        <a class="open-demo-options btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg" href="#"><i class="fas fa-star"></i> POPULAR</a>
-
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter btn-filter-active" data-group="-1">ALL GAMES</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_SLOT }}" data-show-board="1">SLOT</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_ROULETTE }}">ROULETTE</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_CARD }}">CARD</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_BINGO }}">BINGO</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_OTHER }}">OTHER</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" ><i class="fas fa-star"></i> POPULAR</button>
                     </div>
+                </div>
 
+                <div class="row jackpot-board" style="display: none">
+                    <div class="col-md-4 text-center">
+                        <h2 class="custom-underline alternative-font mb-xs">OCG JACKPOT</h2>
+                        <hr>
+                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 25,000</h4>
+                        <h4 class="custom-underline mb-xs">16 Days</h4>
+                        <h3 class="custom-underline alternative-font">BE THE LUCKY ONE!</h3>
+                    </div>
+                    <div class="col-md-4 text-center jackpot-board">
+                        <h2 class="custom-underline alternative-font mb-xs">HIGHEST WIN</h2>
+                        <hr>
+                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 5,000</h4>
+                        <h4 class="custom-underline mb-xs">5 Days</h4>
+                        <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> alexplay</h3>
+                    </div>
+                    <div class="col-md-4 text-center jackpot-board">
+                        <h2 class="custom-underline alternative-font mb-xs">LAST WIN</h2>
+                        <hr>
+                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 2,500</h4>
+                        <h4 class="custom-underline mb-xs">3 Days</h4>
+                        <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> zack2057</h3>
+                    </div>
                 </div>
 
                 <div class="row">
                     <ul class="sample-item-list sample-item-list-loaded">
-                        @foreach ([
-                        'Slot Machine - The Fruits',
-                        '3D Blackjack',
-                        'Slot Machine - Ultimate Soccer',
-                        '3D Roulette',
-                        'Slot Machine - Mr. Chicken',
-                        'Jacks or Better',
-                        'Slot Machine - Space Adventure',
-                        'Scratch Fruit',
-                        '3 Cards Monte',
-                        'High or Low',
-                        'Wheel of Fortune',
-                        'Keno',
-                        'Slot Machine - Ramses Treasure',
-                        'Slot Machine - Lucky Christmas',
-                        'Slot Machine - Arabian Nights',
-                        'Bingo',
-                        'Baccarat',
-                        'Craps',
-                        'Caribbean Stud',
-                        'Pai Gow Poker',
-                        'Joker Poker',
-                        'Three Card Poker',
-                        'Spin and Win',
-                        'Plinko',
-                        ] as $key => $game)
-                            <li class="col-sm-6 col-md-3 isotope-item">
+                        @foreach ($games as $game)
+                            <li data-group="{{ $game->group }}" class="col-sm-6 col-md-3 isotope-item game-item">
                                 <div class="sample-item sample-item-home pl-md pr-md">
-                                    <a href="#" target="_blank">
+                                    <a href="{{ route('home.game', ['slug' => $game->slug]) }}" target="_blank">
                                     <span class="sample-item-image-wrapper">
-                                        <span class="sample-item-image" data-original="{{ asset("img/games/".($key + 1).".jpg") }}" data-plugin-lazyload data-plugin-options="{'appearEffect': 'animated fadeIn'}"></span>
+                                        <span class="sample-item-image" data-original="{{ asset($game->icon_url) }}" data-plugin-lazyload data-plugin-options="{'appearEffect': 'animated fadeIn'}"></span>
                                         <i class="fa fa-spinner fa-spin fa-fw"></i>
                                     </span>
                                         <span class="sample-item-description">
-                                        <h5>{{ $game }}</h5>
+                                        <h5>{{ $game->name }}<br>
+                                            @if ($game->isInstantWin())
+                                                <strong class="custom-underline alternative-font">Instant Win</strong>
+                                            @else
+                                                <strong class="custom-underline alternative-font">&nbsp;</strong>
+                                            @endif
+                                        </h5>
+
                                     </span>
                                     </a>
                                 </div>
@@ -232,4 +236,8 @@ casino gambling, online casino gambling, win real money gambling online, win rea
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{!! mix('compiled/js/pages/home.js') !!}"></script>
 @endsection

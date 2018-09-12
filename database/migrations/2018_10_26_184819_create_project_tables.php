@@ -89,17 +89,19 @@ class CreateProjectTables extends Migration
 
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('slug');
             $table->string('icon_url');
             $table->integer('credits');
             $table->integer('type');
             $table->integer('group');
             $table->boolean('has_jackpot');
-            $table->integer('jackpot_multiplier')->nullable();
+            $table->integer('jackpot_size');
+            $table->text('settings');
+            /*$table->integer('jackpot_multiplier')->nullable();
             $table->decimal('jackpot_chance_percent')->nullable();
             $table->decimal('min_bet');
             $table->decimal('max_bet');
-            $table->decimal('interval_bet')->nullable();
+            $table->decimal('interval_bet')->nullable();*/
             $table->boolean('allow_tournaments')->default(1);
             $table->boolean('enabled')->default(1);
             $table->timestamps();

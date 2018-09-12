@@ -9035,7 +9035,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 	}
 
 	.col-md-3.isotope-item:nth-child(4n+1) {
-		clear: both;
+		/*clear: both;*/
 	}
 
 	.col-md-1-5.isotope-item:nth-child(5n+1) {

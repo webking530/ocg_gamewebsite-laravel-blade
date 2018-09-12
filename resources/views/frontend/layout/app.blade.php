@@ -35,7 +35,7 @@
                 <div class="header-row">
                     <div class="header-column">
                         <div class="header-logo">
-                            <a href="index.html">
+                            <a href="{{ route('home') }}">
                                 <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
                             </a>
                         </div>
@@ -49,9 +49,9 @@
                                 </button>
                                 <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                                     <nav>
-                                        <ul class="nav nav-pills navbar-center" style="display: inline-block;">
+                                        <ul class="nav nav-pills navbar-center navbar-custom">
                                             <li class="">
-                                                <a href="#">
+                                                <a data-hash data-hash-offset="120" href="#demos">
                                                     Casino Games
                                                 </a>
                                             </li>
@@ -72,7 +72,7 @@
                                             </li>
                                         </ul>
 
-                                        <ul class="nav nav-pills navbar-right" style="display: inline-block;">
+                                        <ul class="nav nav-pills navbar-right navbar-custom">
                                             <li class="dropdown">
                                                 <a class="dropdown-toggle" href="#">
                                                     <i class="fas fa-globe"></i> Language
@@ -143,6 +143,29 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="header-row hidden-xs clearfix">
+                    <div class="header-column">
+                        <p class="mb-none text-center">
+                            <span class="alternative-font">RECENT WINNERS</span>
+                            &mdash; <span class="text-light">username02 (<i class="fas fa-coins"></i> 350)</span>
+                            &mdash; <span class="text-light">username3 (<i class="fas fa-coins"></i> 750)</span>
+                            &mdash; <span class="text-light">username24 (<i class="fas fa-coins"></i> 1,250)</span>
+                            &mdash; <span class="text-light">username15 (<i class="fas fa-coins"></i> 335)</span>
+                            &mdash; <span class="text-light">username17 (<i class="fas fa-coins"></i> 7,750)</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="header-row hidden-xs clearfix">
+                    <div class="header-column pt-lg">
+                        <p class="mb-none text-light text-center">
+                            <i class="fa fa-star text-warning"></i> Bonus content number one...
+                            <i class="fa fa-star text-warning"></i> Bonus content number two...
+                            <i class="fa fa-star text-warning"></i> Bonus content number three...
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -180,8 +203,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-1">
-                        <a href="index.html" class="logo">
-                            <img alt="OCG - Online Casino Games" class="img-responsive" src="{{ asset('img/logo.png') }}">
+                        <a href="{{ route('home') }}" class="logo">
+                            <img width="68" alt="OCG - Online Casino Games" class="img-responsive" src="{{ asset('img/logo.png') }}">
                         </a>
                     </div>
                     <div class="col-md-7">
