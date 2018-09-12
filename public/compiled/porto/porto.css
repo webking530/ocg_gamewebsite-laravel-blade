@@ -73,7 +73,7 @@ li {
 	transition: min-height 0.3s ease;
 	width: 100%;
 	z-index: 1001;
-	min-height: 125px;
+	min-height: 0px;
 }
 
 #header.header-no-min-height .header-body {
@@ -490,7 +490,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
 /* Header Nav Main */
 @media (min-width: 992px) {
 	#header .header-nav-main {
-		float: right;
+		float: none;
 		margin: 12px 0 0;
 		min-height: 45px;
 	}
@@ -9035,7 +9035,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 	}
 
 	.col-md-3.isotope-item:nth-child(4n+1) {
-		clear: both;
+		/*clear: both;*/
 	}
 
 	.col-md-1-5.isotope-item:nth-child(5n+1) {

@@ -3,13 +3,14 @@ let mix = require('laravel-mix');
 // Shared styles and scripts
 mix.styles([
     'resources/assets/vendor/bootstrap/css/bootstrap.min.css',
-    'resources/assets/vendor/bootstrap/css/bootstrap-theme.min.css',
     'resources/assets/vendor/fontawesome-5.2.0/all.min.css',
+    'resources/assets/css/app.css',
 ], 'public/compiled/css/shared.css');
 
 mix.scripts([
     'resources/assets/vendor/jquery-3.3.1/jquery-3.3.1.js',
     'resources/assets/vendor/bootstrap/js/bootstrap.min.js',
+    'resources/assets/js/app.js',
 ], 'public/compiled/js/shared.js');
 
 mix.copyDirectory('resources/assets/vendor/fontawesome-5.2.0/webfonts', 'public/compiled/webfonts');
@@ -30,6 +31,8 @@ mix.styles([
     'resources/assets/vendor/porto/css/skins/default.css',
 ], 'public/compiled/porto/porto.css');
 
+
+
 mix.scripts([
     'resources/assets/vendor/porto/vendor/modernizr/modernizr.min.js',
     'resources/assets/vendor/porto/vendor/jquery.appear/jquery.appear.min.js',
@@ -46,6 +49,15 @@ mix.scripts([
     'resources/assets/vendor/porto/js/views/view.home.js',
     'resources/assets/vendor/porto/js/theme.init.js',
 ], 'public/compiled/porto/porto.js');
+
+// Pages
+mix.styles([
+    'resources/assets/css/pages/home.css',
+], 'public/compiled/css/pages/home.css');
+
+mix.scripts([
+    'resources/assets/js/pages/home.js',
+], 'public/compiled/js/pages/home.js');
 
 // Lumino Admin Template
 mix.styles([

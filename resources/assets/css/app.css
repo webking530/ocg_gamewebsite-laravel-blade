@@ -1,0 +1,17 @@
+.btn-play {
+    width: 92px;
+}
+
+.margin-auto {
+    margin: auto !important;
+}
+
+.navbar-custom {
+    display: inline-block;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-custom {
+        width: 100% !important;
+    }
+}
