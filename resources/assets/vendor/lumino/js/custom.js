@@ -29,6 +29,30 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 $(document).ready(function(){
-	$('#datepicker').datepicker();
 	
+	$('.input-daterange').datepicker({
+		endDate: '+0d',
+        autoclose: true,
+		format: 'yyyy-mm-dd'
+	}).on('changeDate',depowith);
 });
+function depowith(){
+
+	var fromdate = $("#from").val();
+	var fromval = $("#to").val();
+	var url = $("#url").val();
+	var token = $("#token").val();
+	if(!fromdate == '' && !fromval==''){
+		$.ajax({
+			type:'post',
+			url:url+'paymentsbydate',
+			data:{'from':fromdate,'to':fromval,"_token":token},
+			success:function(data){
+				console
+			}
+			
+			
+		})
+	}
+}
+
