@@ -12,4 +12,5 @@ yarn-error.log
 .env
 composer.phar
 public/.htaccess
+public/compiled/*
 .htaccess
