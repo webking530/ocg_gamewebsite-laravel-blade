@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Models\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,6 +65,21 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'nickname' => $data['nickname'],
+            'lastname' => $data['lastname'],
+            'gender' => $data['gender'],
+            'mobile_number' => $data['mobile_number'],
+            'avatar_url' => $data['avatar_url'],
+            'credits' => $data['credits'],
+            'country_code' => $data['country_code'],
+            'currency_code' => $data['currency_code'],
+            'verification_pin' => $data['verification_pin'],
+            'low_balance_threshold' => $data['low_balance_threshold'],
+            'role' => $data['role'],
+            'locale' => $data['locale'],
+            'verified_identification' => $data['verified_identification'],
+            'notifications' => $data['notifications'],
+             'lottery_sms_notification_minutes' => $data['lottery_sms_notification_minutes'],
             'password' => bcrypt($data['password']),
         ]);
     }

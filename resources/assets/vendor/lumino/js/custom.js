@@ -28,3 +28,7 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 		$this.find('em').removeClass('fa-toggle-down').addClass('fa-toggle-up');
 	}
 })
+$(document).ready(function(){
+	$('#datepicker').datepicker();
+	
+});

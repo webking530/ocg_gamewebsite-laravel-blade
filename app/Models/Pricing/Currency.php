@@ -1,5 +1,5 @@
 <?php
-namespace Models\Pricing;
+namespace App\Models\Pricing;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -7,6 +7,8 @@ class Currency extends Model
 {
     protected $primaryKey = 'code';
     public $incrementing = false;
+    protected $table = 'currencies';
+
 
     public function fromExchanges()
     {
