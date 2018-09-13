@@ -1,3 +1,5 @@
+@inject('bannersService', "App\Models\Banners\BannersService")
+
 <!DOCTYPE html>
 <html class="dark">
 <head>
@@ -51,7 +53,7 @@
                                     <nav>
                                         <ul class="nav nav-pills navbar-center navbar-custom">
                                             <li class="">
-                                                <a data-hash data-hash-offset="120" href="#demos">
+                                                <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
                                                     Casino Games
                                                 </a>
                                             </li>
@@ -60,13 +62,13 @@
                                                     Lottery
                                                 </a>
                                             </li>
-                                            <li class="">
-                                                <a href="#">
+                                            <li class="{{ set_active('home.tournaments') }}">
+                                                <a href="{{ route('home.tournaments') }}">
                                                     Tournament
                                                 </a>
                                             </li>
-                                            <li class="">
-                                                <a href="#">
+                                            <li class="{{ set_active('home.bonuses') }}">
+                                                <a href="{{ route('home.bonuses') }}">
                                                     Bonuses
                                                 </a>
                                             </li>
@@ -144,33 +146,37 @@
                     </div>
                 </div>
 
-                <div class="header-row hidden-xs clearfix">
-                    <div class="header-column">
-                        <p class="mb-none text-center">
-                            <span class="alternative-font">RECENT WINNERS</span>
-                            &mdash; <span class="text-light">username02 (<i class="fas fa-coins"></i> 350)</span>
-                            &mdash; <span class="text-light">username3 (<i class="fas fa-coins"></i> 750)</span>
-                            &mdash; <span class="text-light">username24 (<i class="fas fa-coins"></i> 1,250)</span>
-                            &mdash; <span class="text-light">username15 (<i class="fas fa-coins"></i> 335)</span>
-                            &mdash; <span class="text-light">username17 (<i class="fas fa-coins"></i> 7,750)</span>
-                        </p>
-                    </div>
-                </div>
+                {{--<div class="header-row hidden-xs clearfix">--}}
+                    {{--<div class="header-column">--}}
+                        {{--<p class="mb-none text-center">--}}
+                            {{--<span class="alternative-font">RECENT WINNERS</span>--}}
+                            {{--&mdash; <span class="text-light">username02 (<i class="fas fa-coins"></i> 350)</span>--}}
+                            {{--&mdash; <span class="text-light">username3 (<i class="fas fa-coins"></i> 750)</span>--}}
+                            {{--&mdash; <span class="text-light">username24 (<i class="fas fa-coins"></i> 1,250)</span>--}}
+                            {{--&mdash; <span class="text-light">username15 (<i class="fas fa-coins"></i> 335)</span>--}}
+                            {{--&mdash; <span class="text-light">username17 (<i class="fas fa-coins"></i> 7,750)</span>--}}
+                        {{--</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                <div class="header-row hidden-xs clearfix">
-                    <div class="header-column pt-lg">
-                        <p class="mb-none text-light text-center">
-                            <i class="fa fa-star text-warning"></i> Bonus content number one...
-                            <i class="fa fa-star text-warning"></i> Bonus content number two...
-                            <i class="fa fa-star text-warning"></i> Bonus content number three...
-                        </p>
-                    </div>
-                </div>
+                {{--<div class="header-row hidden-xs clearfix">--}}
+                    {{--<div class="header-column pt-lg">--}}
+                        {{--<p class="mb-none text-light text-center">--}}
+                            {{--<i class="fa fa-star text-warning"></i> Bonus content number one...--}}
+                            {{--<i class="fa fa-star text-warning"></i> Bonus content number two...--}}
+                            {{--<i class="fa fa-star text-warning"></i> Bonus content number three...--}}
+                        {{--</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
         </div>
     </header>
 
     @yield('content')
+
+    @include('frontend.partials.recent_winners')
+
+    @include('frontend.partials.bonus_content')
 
     <footer id="footer">
         <div class="container">
@@ -192,8 +198,9 @@
                     <h4>Latest News</h4>
                     <div id="news" class="twitter">
                         <ul>
-                            <li><a href="#">Except of news number one. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</a></li>
-                            <li><a href="#">Except of news number two. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</a></li>
+                            @foreach ($bannersService->getLatestNews() as $news)
+                                <li><a href="#">{{ mb_strimwidth($news->content, 0, 178, '...') }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

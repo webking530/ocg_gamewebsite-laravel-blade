@@ -14,3 +14,4 @@ composer.phar
 public/.htaccess
 public/compiled/*
 .htaccess
+/public/compiled

@@ -54,7 +54,7 @@
 
                         <a class="tp-caption btn btn-lg btn-primary btn-slider-action"
                            data-hash
-                           data-hash-offset="120"
+                           data-hash-offset="100"
                            href="#demos"
                            data-x="center" data-hoffset="0"
                            data-y="center" data-voffset="80"
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mt-lg mb-xl text-right">
-                            <a href="#demos" data-hash data-hash-offset="120" class="btn btn-primary mr-md appear-animation" data-appear-animation="fadeInDown" data-appear-animation-delay="300">TEST OUT OUR GAMES!</a>
+                            <a href="#demos" data-hash data-hash-offset="100" class="btn btn-primary mr-md appear-animation" data-appear-animation="fadeInDown" data-appear-animation-delay="300">TEST OUT OUR GAMES!</a>
                         </div>
                     </div>
                 </div>
@@ -169,21 +169,21 @@
                     <div class="col-md-4 text-center">
                         <h2 class="custom-underline alternative-font mb-xs">OCG JACKPOT</h2>
                         <hr>
-                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 25,000</h4>
+                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 25,000</h4>
                         <h4 class="custom-underline mb-xs">16 Days</h4>
                         <h3 class="custom-underline alternative-font">BE THE LUCKY ONE!</h3>
                     </div>
                     <div class="col-md-4 text-center jackpot-board">
                         <h2 class="custom-underline alternative-font mb-xs">HIGHEST WIN</h2>
                         <hr>
-                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 5,000</h4>
+                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 5,000</h4>
                         <h4 class="custom-underline mb-xs">5 Days</h4>
                         <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> alexplay</h3>
                     </div>
                     <div class="col-md-4 text-center jackpot-board">
                         <h2 class="custom-underline alternative-font mb-xs">LAST WIN</h2>
                         <hr>
-                        <h4 class="custom-underline mb-xs"><i class="fas fa-coins"></i> 2,500</h4>
+                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 2,500</h4>
                         <h4 class="custom-underline mb-xs">3 Days</h4>
                         <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> zack2057</h3>
                     </div>
