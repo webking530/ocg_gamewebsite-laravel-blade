@@ -11,5 +11,8 @@ Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get('dashboard', 'AdminController@index')->name('admin.home');
     Route::post('paymentsbydate', 'AdminController@paymentsByDate')->name('admin.paymentsbydate');
+    Route::get('users','AdminController@userListing')->name('admin.getUsers');
+    Route::get('addUser','AdminController@addUser')->name('admin.adduser');
+    Route::post('saveUser','AdminController@saveUser')->name('admin.saveUser');
 });
 

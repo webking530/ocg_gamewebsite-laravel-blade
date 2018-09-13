@@ -29,12 +29,15 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 $(document).ready(function(){
-	
+	 $('#users-table').DataTable();
 	$('.input-daterange').datepicker({
 		endDate: '+0d',
         autoclose: true,
 		format: 'yyyy-mm-dd'
 	}).on('changeDate',depowith);
+	$('#birthday').datepicker({
+		format: 'yyyy-mm-dd'
+	});
 });
 function depowith(){
 
@@ -48,11 +51,15 @@ function depowith(){
 			url:url+'paymentsbydate',
 			data:{'from':fromdate,'to':fromval,"_token":token},
 			success:function(data){
-				console
+				console.log(data);
+				$(".amtpenappdepo").text(parseInt(data['AmtPnappdepo'][0].AmtPngApplDepost));
+				$(".amtpenappwith").text(parseInt(data['AmtPendApplWith'][0].AmtPendApplWith));
+				$(".totamtapp").text(parseInt(data['TotAmtAppr'][0].TotAmtAppr));
+				$(".totwith").text(parseInt(data['TotAmtWdraw'][0].TotAmtWdraw));	
 			}
-			
-			
 		})
 	}
 }
+
+//function 
 

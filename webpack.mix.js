@@ -64,6 +64,7 @@ mix.scripts([
 mix.styles([
     'resources/assets/vendor/lumino/css/datepicker3.css',
     'resources/assets/vendor/lumino/css/datepicker.css',
+    'resources/assets/vendor/lumino/css/dataTables.bootstrap.min.css',
     'resources/assets/vendor/lumino/css/styles.css',
 ], 'public/compiled/lumino/lumino.css');
 
@@ -73,6 +74,8 @@ mix.scripts([
     'resources/assets/vendor/lumino/js/easypiechart.js',
     'resources/assets/vendor/lumino/js/easypiechart-data.js',
     'resources/assets/vendor/lumino/js/bootstrap-datepicker.js',
+    'resources/assets/vendor/lumino/js/dataTables.min.js',
+    'resources/assets/vendor/lumino/js/dataTables.bootstrap.min.js',
     'resources/assets/vendor/lumino/js/custom.js',
 ], 'public/compiled/lumino/lumino.js');
 

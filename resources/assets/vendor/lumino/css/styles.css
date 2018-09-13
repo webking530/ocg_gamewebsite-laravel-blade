@@ -1031,3 +1031,8 @@ p.back-link {
   margin-bottom: 20px;
   font-size: 12px;
   text-transform: uppercase; }
+
+  .add-user-form .form-control {
+    width:95% !important;
+    height: 46px;
+  }
