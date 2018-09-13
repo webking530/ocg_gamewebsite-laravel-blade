@@ -26,3 +26,16 @@
         width: 100% !important;
     }
 }
+
+.thumb-info-inner .game-name {
+    font-size: 12px;
+}
+
+.money-earned {
+    color: yellow !important;
+}
+
+.bonus-icon {
+    font-size: 50px;
+    color: #ea9c1f;
+}

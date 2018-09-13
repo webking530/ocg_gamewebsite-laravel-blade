@@ -23,6 +23,7 @@ mix.styles([
     'resources/assets/vendor/porto/vendor/owl.carousel/assets/owl.theme.default.min.css',
     'resources/assets/vendor/porto/vendor/magnific-popup/magnific-popup.min.css',
     'resources/assets/vendor/porto/css/theme.css',
+    'resources/assets/vendor/porto/css/theme-blog.css',
     'resources/assets/vendor/porto/css/theme-elements.css',
     'resources/assets/vendor/porto/vendor/rs-plugin/css/settings.css',
     'resources/assets/vendor/porto/vendor/rs-plugin/css/layers.css',
