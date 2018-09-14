@@ -201,11 +201,11 @@
                                     </span>
                                         <span class="sample-item-description">
                                         <h5>{{ $game->name }}<br>
-                                            @if ($game->isInstantWin())
-                                                <strong class="custom-underline alternative-font">Instant Win</strong>
-                                            @else
-                                                <strong class="custom-underline alternative-font">&nbsp;</strong>
-                                            @endif
+                                            {{--@if ($game->isInstantWin())--}}
+                                                {{--<strong class="custom-underline alternative-font">Instant Win</strong>--}}
+                                            {{--@else--}}
+                                                {{--<strong class="custom-underline alternative-font">&nbsp;</strong>--}}
+                                            {{--@endif--}}
                                         </h5>
 
                                     </span>

@@ -28,3 +28,50 @@
     font-size: 50px;
     color: #ea9c1f;
 }
+
+.podium {
+    margin: 70px auto 50px;
+    width: 50%;
+    text-align: center;
+}
+
+.podium h2 {
+    font-size: 50px;
+}
+
+.podium > div {
+    display: inline-block;
+    padding: 10px;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    vertical-align: bottom;
+    width: 100px;
+}
+
+.podium div.prize {
+    text-align: center;
+    position: relative;
+    top: -40px;
+    font-size: 20px;
+}
+
+.podium div.number {
+    text-align: center;
+    font-size: 60px;
+}
+
+.podium .place1 {
+    height: 150px;
+    background-color: gold;
+}
+
+.podium .place2 {
+    height: 110px;
+    background-color: silver;
+}
+
+.podium .place3 {
+    height: 80px;
+    background-color: #a5612a;
+}

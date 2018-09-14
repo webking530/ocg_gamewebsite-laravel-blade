@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bonuses\Bonus;
 use App\Models\Gaming\Game;
+use App\Models\Gaming\Tournament;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,7 +22,9 @@ class HomeController extends Controller
     }
 
     public function tournaments() {
-        return view('frontend.tournaments');
+        $tournaments = Tournament::orderBy('group', 'ASC')->get();
+
+        return view('frontend.tournaments', compact('tournaments'));
     }
 
     public function bonuses() {

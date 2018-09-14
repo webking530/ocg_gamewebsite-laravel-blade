@@ -29,6 +29,10 @@ class Game extends Model
         return trans('games.group.' . $this->group);
     }
 
+    public function getSmallIconAttribute() {
+        return "img/games/icons/{$this->id}.png";
+    }
+
     public function scopeEnabled($query) {
         return $query->where('enabled', true);
     }

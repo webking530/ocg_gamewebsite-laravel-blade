@@ -13,6 +13,12 @@ class User extends Authenticatable
     use HasCurrency;
     use HasCountry;
 
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+
+    const GENDER_MALE = 0;
+    const GENDER_FEMALE = 1;
+
     /**
      * The attributes that are mass assignable.
      *
