@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <h2 class="text-center text-blue">Badges Earned</h2>
+                <h2 class="text-center text-blue"><i class="fas fa-star"></i> Badges Earned</h2>
                 <hr>
 
                 @forelse ($user->badges as $badge)

@@ -2,8 +2,8 @@
 
 use App\Models\Gaming\Game;
 use App\Models\Gaming\Tournament;
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Models\Auth\User;
 
 class TournamentSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class TournamentSeeder extends Seeder
             'nickname' => 'username001',
             'name' => 'Player',
             'lastname' => '01',
-            'gender' => User::GENDER_MALE,
+            'gender' => User::GENDER_FEMALE,
             'mobile_number' => 584265461179,
             'email' => 'alexplay03@gmail.com',
             'password' => bcrypt('123456'),
@@ -56,7 +56,7 @@ class TournamentSeeder extends Seeder
             'nickname' => 'username003',
             'name' => 'Player',
             'lastname' => '03',
-            'gender' => User::GENDER_MALE,
+            'gender' => User::GENDER_FEMALE,
             'mobile_number' => 584265461177,
             'email' => 'alexplay05@gmail.com',
             'password' => bcrypt('123456'),
