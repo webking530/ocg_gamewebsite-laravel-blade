@@ -67,7 +67,7 @@
                                                 @foreach ($tournament->users as $position => $user)
                                                     <tr>
                                                         <td>{{ $position + 1 }}</td>
-                                                        <td><a class="label label-primary" href="#"><i class="fas fa-user"></i> {{ $user->nickname }}</a></td>
+                                                        <td>@include('frontend.partials.username', ['user' => $user])</td>
                                                         <td><i class="fas fa-coins money-earned"></i> {{ number_format($user->pivot->total_win) }}</td>
                                                     </tr>
                                                 @endforeach

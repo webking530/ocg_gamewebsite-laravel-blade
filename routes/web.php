@@ -1,12 +1,27 @@
 <?php
 
-Auth::routes();
+// Auth Routes
+//Auth::routes();
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('home.login');
+Route::post('login', 'Auth\LoginController@login')->name('home.login.post');
+
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('home.register');
+Route::post('register', 'Auth\RegisterController@register')->name('home.register.post');
+
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('home.password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('home.password.request.send');
+
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('home.password.reset.token');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('home.password.reset.post');
+
+// Public pages
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('game/{slug}', 'HomeController@game')->name('home.game');
 Route::get('game/demo/{slug}', 'GameController@playDemo')->name('home.game.demo');
 Route::get('tournaments', 'HomeController@tournaments')->name('home.tournaments');
 Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
+Route::get('profile/{username}', 'HomeController@userProfile')->name('home.user.profile');
 
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get('dashboard', 'AdminController@index')->name('admin.home');

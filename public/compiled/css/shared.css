@@ -102,3 +102,17 @@
         border: none;
     }
 }
+
+.text-blue {
+    color: #0088cc !important;
+}
+
+.label-pink {
+    background-color: #cc00b1 !important;
+    color: #fff !important;
+}
+
+.little-flag-winners {
+    width: 24px !important;
+    display: inline-block !important;
+}

@@ -2,6 +2,7 @@
 
 namespace Models\Auth;
 
+use App\Models\Gaming\Badge;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Models\Location\HasCountry;
@@ -13,18 +14,13 @@ class User extends Authenticatable
     use HasCurrency;
     use HasCountry;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
 
+    const GENDER_MALE = 0;
+    const GENDER_FEMALE = 1;
 
     protected $guarded = ['id'];
-    protected $fillable = ['name', 'email','nickname','lastname','gender','mobile_number',
-    'avatar_url','credits','country_code','currency_code','verification_pin','low_balance_threshold',
-    'role','locale','verified_identification','notifications','lottery_sms_notification_minutes',
-    'password'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -39,11 +35,66 @@ class User extends Authenticatable
         'birthdate'
     ];
 
+    public static function getGenderList() {
+        return [
+            self::GENDER_MALE => trans('app.user.gender.male'),
+            self::GENDER_FEMALE => trans('app.user.gender.female')
+        ];
+    }
+
     public function referral() {
         return $this->belongsTo(User::class, 'referral_id');
     }
 
+    public function badges() {
+        return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id');
+    }
+
     public function isUser() {
-        return false; // TODO: check user role
+        return (int)$this->role === self::ROLE_USER;
+    }
+
+    public function isAdmin() {
+        return (int)$this->role === self::ROLE_ADMIN;
+    }
+
+    public function isMale() {
+        return (int)$this->gender === self::GENDER_MALE;
+    }
+
+    public function getGenderIconAttribute() {
+        if ((int)$this->gender === self::GENDER_MALE) {
+            return 'fas fa-male';
+        }
+
+        return 'fas fa-female';
+    }
+
+    public function getGenderColorAttribute() {
+        if ((int)$this->gender === self::GENDER_MALE) {
+            return 'label-primary';
+        }
+
+        return 'label-pink';
+    }
+
+    public function getFlagIconAttribute() {
+        return "img/flags/" . mb_strtolower($this->country_code) . ".png";
+    }
+
+    public function getFormattedAvatarAttribute() {
+        if (empty($this->avatar_url)) {
+            return $this->isMale() ? 'img/avatar/avatar_male.png' : 'img/avatar/avatar_female.png';
+        }
+
+        return $this->avatar_url;
+    }
+
+    public function getFullNameAttribute() {
+        return "{$this->name} {$this->lastname}";
+    }
+
+    public function getCountryNameAttribute() {
+        return country_name($this->country_code);
     }
 }

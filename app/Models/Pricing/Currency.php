@@ -9,6 +9,9 @@ class Currency extends Model
     public $incrementing = false;
     protected $table = 'currencies';
 
+    public function getFormattedCodeAttribute() {
+        return "{$this->code} ({$this->symbol})";
+    }
 
     public function fromExchanges()
     {

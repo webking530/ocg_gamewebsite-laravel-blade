@@ -56,6 +56,10 @@ mix.styles([
     'resources/assets/css/pages/home.css',
 ], 'public/compiled/css/pages/home.css');
 
+mix.styles([
+    'resources/assets/css/pages/public_profile.css',
+], 'public/compiled/css/pages/public_profile.css');
+
 mix.scripts([
     'resources/assets/js/pages/home.js',
 ], 'public/compiled/js/pages/home.js');

@@ -2,8 +2,8 @@
 
 namespace App\Models\Gaming;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Models\Auth\User;
 
 class Tournament extends Model
 {

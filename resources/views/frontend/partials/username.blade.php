@@ -1,0 +1,1 @@
+<a class="label {{ $user->gender_color }}" href="{{ route('home.user.profile', ['username' => $user->nickname]) }}"><img src="{{ asset($user->flag_icon) }}" width="18" alt="{{ $user->country_code }}"> {{ $user->nickname }}</a>

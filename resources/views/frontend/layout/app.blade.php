@@ -129,12 +129,12 @@
                                             </li>
 
                                             <li class="">
-                                                <a href="#">
+                                                <a href="{{ route('home.login') }}">
                                                     <i class="fas fa-user"></i> Login
                                                 </a>
                                             </li>
                                             <li class="">
-                                                <a href="#">
+                                                <a href="{{ route('home.register') }}">
                                                     Sign Up
                                                 </a>
                                             </li>

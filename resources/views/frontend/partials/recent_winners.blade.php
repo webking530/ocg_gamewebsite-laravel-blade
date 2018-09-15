@@ -17,7 +17,7 @@
                                                     <span class="game-name">{{ $game->name }}</span><br>
                                                     <span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(array_random([1250,500,3650,120,7800,650,3000,550])) }}</span>
                                                 </span>
-                                                <span class="thumb-info-type"><i class="fas fa-user"></i> {{ array_random(['username00323', 'username3349', 'username01', 'username007', 'username3122', 'username994', 'username011', 'username344']) }}</span>
+                                                <span class="thumb-info-type {{ array_random(['', 'label-pink']) }}"><img class="little-flag-winners" src="{{ asset(array_random(['img/flags/de.png', 'img/flags/ve.png', 'img/flags/pt.png', 'img/flags/tr.png'])) }}" width="18" alt=""> {{ array_random(['username00323', 'username3349', 'username01', 'username007', 'username3122', 'username994', 'username011', 'username344']) }}</span>
                                             </span>
                                             <span class="thumb-info-action">
                                                 <span class="thumb-info-action-icon"><i class="fas fa-play-circle"></i></span>
