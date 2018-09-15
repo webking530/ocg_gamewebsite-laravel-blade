@@ -42,7 +42,7 @@
 
 .podium {
     margin: 70px auto 50px;
-    width: 50%;
+    width: 100%;
     text-align: center;
 }
 
@@ -67,6 +67,16 @@
     font-size: 20px;
 }
 
+@media screen and (max-width: 370px) {
+    .podium > div {
+        width: 80px;
+    }
+
+    .podium div.prize {
+        font-size: 14px;
+    }
+}
+
 .podium div.number {
     text-align: center;
     font-size: 60px;
@@ -85,4 +95,10 @@
 .podium .place3 {
     height: 80px;
     background-color: #a5612a;
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        border: none;
+    }
 }

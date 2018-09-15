@@ -31,7 +31,7 @@
 
 .podium {
     margin: 70px auto 50px;
-    width: 50%;
+    width: 100%;
     text-align: center;
 }
 
@@ -54,6 +54,16 @@
     position: relative;
     top: -40px;
     font-size: 20px;
+}
+
+@media screen and (max-width: 370px) {
+    .podium > div {
+        width: 80px;
+    }
+
+    .podium div.prize {
+        font-size: 14px;
+    }
 }
 
 .podium div.number {
