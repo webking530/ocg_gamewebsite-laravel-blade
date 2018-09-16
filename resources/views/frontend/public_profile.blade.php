@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('meta')
-    <title>{{ trans('frontend/public_profile.title') }} - {{ trans('app.meta.short_title') }}</title>
+    <title>{{ trans('frontend/public_profile.title') }}, {{ $user->nickname }} - {{ trans('app.meta.short_title') }}</title>
 
     <meta name="keywords" content="{{ trans('frontend/public_profile.keywords') }}" />
     <meta name="description" content="{{ trans('frontend/public_profile.description', ['username' => $user->nickname]) }}">
