@@ -199,7 +199,7 @@
                     <div id="news" class="twitter">
                         <ul>
                             @foreach ($bannersService->getLatestNews() as $news)
-                                <li><a href="#">{{ mb_strimwidth($news->content, 0, 178, '...') }}</a></li>
+                                <li><a href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->content, 0, 178, '...') }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -220,8 +220,8 @@
                     <div class="col-md-4">
                         <nav id="sub-menu">
                             <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="{{ route('home.terms') }}">Terms & Conditions</a></li>
+                                <li><a href="{{ route('home.policy') }}">Privacy Policy</a></li>
                             </ul>
                         </nav>
                     </div>

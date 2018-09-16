@@ -23,6 +23,11 @@ Route::get('tournaments', 'HomeController@tournaments')->name('home.tournaments'
 Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
 Route::get('profile/{username}', 'HomeController@userProfile')->name('home.user.profile');
 
+Route::get('news/{news}', 'NewsController@news')->name('news.details');
+
+Route::get('terms', 'HomeController@terms')->name('home.terms');
+Route::get('policy', 'HomeController@policy')->name('home.policy');
+
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get('dashboard', 'AdminController@index')->name('admin.home');
     Route::post('paymentsbydate', 'AdminController@paymentsByDate')->name('admin.paymentsbydate');

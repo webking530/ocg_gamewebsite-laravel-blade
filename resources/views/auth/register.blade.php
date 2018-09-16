@@ -13,7 +13,7 @@
 <div role="main" class="main">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8">
                 <div class="featured-boxes mt-none mb-none">
                     <div class="featured-box featured-box-primary mt-xl" style="text-align: left">
                         <div class="box-content">
@@ -161,7 +161,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
-                                        <label><input type="checkbox" name="terms" value="1" required> I accept the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a> of
+                                        <label><input type="checkbox" name="terms" value="1" required> I accept the <a href="{{ route('home.terms') }}">Terms & Conditions</a> and <a href="{{ route('home.policy') }}">Privacy Policy</a> of
                                         Online Casino Games.</label>
                                     </div>
                                 </div>
@@ -175,6 +175,19 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mt-none">
+                    <div class="featured-box featured-box-primary featured-box-effect-1 mt-xl">
+                        <div class="box-content">
+                            <i class="icon-featured {{ $welcomeBonus->icon }}"></i>
+                            <h4 class="text-uppercase">{{ $welcomeBonus->name }}</h4>
+                            <p class="text-light">{{ $welcomeBonus->description }}</p>
+                            <h4 class="money-earned">{!! $welcomeBonus->formatted_prize !!}</h4>
                         </div>
                     </div>
                 </div>

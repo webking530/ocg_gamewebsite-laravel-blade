@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('meta')
-    <title>{{ trans('frontend/bonuses.meta.title') }}</title>
+    <title>{{ trans('frontend/bonuses.meta.title') }} - {{ trans('app.meta.short_title') }}</title>
 
     <meta name="keywords" content="{{ trans('frontend/bonuses.meta.keywords') }}" />
     <meta name="description" content="{{ trans('frontend/bonuses.meta.description') }}">

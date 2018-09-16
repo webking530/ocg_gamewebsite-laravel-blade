@@ -1,7 +1,7 @@
 <?php
 return [
     'meta' => [
-        'title' => 'Bonuses - Online Casino Games',
+        'title' => 'Bonuses',
         'keywords' => 'bonuses',
         'description' => 'Available Bonuses'
     ],

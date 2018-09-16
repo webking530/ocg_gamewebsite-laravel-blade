@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function badges() {
-        return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id');
+        return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id')->orderBy('relevance', 'DESC');
     }
 
     public function isUser() {

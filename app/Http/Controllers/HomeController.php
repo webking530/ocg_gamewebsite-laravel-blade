@@ -39,4 +39,12 @@ class HomeController extends Controller
 
         return view('frontend.public_profile', compact('user'));
     }
+
+    public function terms() {
+        return view('frontend.terms');
+    }
+
+    public function policy() {
+        return view('frontend.policy');
+    }
 }
