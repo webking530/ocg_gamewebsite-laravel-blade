@@ -17,6 +17,7 @@ class BadgeSeeder extends Seeder
         for ($i = 1; $i <= 6; $i++) {
             $badges[] = Badge::create([
                 'name' => "Sample Badge $i",
+                'slug' => "sample-badge-$i",
                 'description' => "Sample badge $i description. Complete X condition to earn this!",
                 'image_url' => 'img/badges/placeholder.png',
                 'relevance' => 1
