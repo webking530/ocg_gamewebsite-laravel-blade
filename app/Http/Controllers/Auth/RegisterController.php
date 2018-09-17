@@ -68,7 +68,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $welcomeBonus = Bonus::where('name', 'like', '%welcome%')->first();
+        $welcomeBonus = Bonus::whereSlug(Bonus::SLUG_WELCOME)->first();
 
         return view('auth.register', compact('welcomeBonus'));
     }

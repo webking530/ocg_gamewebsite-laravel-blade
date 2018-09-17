@@ -13,6 +13,8 @@ class Bonus extends Model
     const TYPE_MULTIPLIER = 1;
     const TYPE_PERCENT = 2;
 
+    const SLUG_WELCOME = 'welcome';
+
     public function getIconAttribute() {
         switch ($this->type) {
             default:
