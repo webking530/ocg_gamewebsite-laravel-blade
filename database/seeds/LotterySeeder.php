@@ -37,7 +37,7 @@ class LotterySeeder extends Seeder
             'lottery_id' => $lotteryLow->id,
             'user_id' => 1,
             'numbers' => [10,12,5,7,20,33],
-            'winner' => true
+            'winner' => false
         ]);
         LotteryTicket::create([
             'lottery_id' => $lotteryLow->id,
