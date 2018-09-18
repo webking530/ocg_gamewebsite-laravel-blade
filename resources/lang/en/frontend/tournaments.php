@@ -1,7 +1,7 @@
 <?php
 return [
     'meta' => [
-        'title' => 'Tournaments - Online Casino Games',
+        'title' => 'Tournaments',
         'keywords' => 'Tournaments',
         'description' => 'Tournaments'
     ],

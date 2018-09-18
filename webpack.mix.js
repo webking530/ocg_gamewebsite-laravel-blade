@@ -56,13 +56,21 @@ mix.styles([
     'resources/assets/css/pages/home.css',
 ], 'public/compiled/css/pages/home.css');
 
+mix.scripts([
+    'resources/assets/js/pages/home.js',
+], 'public/compiled/js/pages/home.js');
+
 mix.styles([
     'resources/assets/css/pages/public_profile.css',
 ], 'public/compiled/css/pages/public_profile.css');
 
+mix.styles([
+    'resources/assets/css/pages/lottery.css',
+], 'public/compiled/css/pages/lottery.css');
+
 mix.scripts([
-    'resources/assets/js/pages/home.js',
-], 'public/compiled/js/pages/home.js');
+    'resources/assets/js/pages/lottery.js',
+], 'public/compiled/js/pages/lottery.js');
 
 // Lumino Admin Template
 mix.styles([

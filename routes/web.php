@@ -19,6 +19,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('home.
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('game/{slug}', 'HomeController@game')->name('home.game');
 Route::get('game/demo/{slug}', 'GameController@playDemo')->name('home.game.demo');
+
+Route::get('lottery', 'LotteryController@index')->name('lottery.index');
+Route::get('lottery/countdown', 'LotteryController@getCountdown')->name('lottery.countdown.get');
+Route::get('lottery/tab-content', 'LotteryController@getTabContent')->name('lottery.tab_content.get');
+
 Route::get('tournaments', 'HomeController@tournaments')->name('home.tournaments');
 Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
 Route::get('profile/{username}', 'HomeController@userProfile')->name('home.user.profile');

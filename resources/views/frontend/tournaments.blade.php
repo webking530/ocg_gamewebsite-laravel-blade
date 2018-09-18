@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('meta')
-    <title>{{ trans('frontend/tournaments.meta.title') }}</title>
+    <title>{{ trans('frontend/tournaments.meta.title') }} - {{ trans('app.meta.short_title') }}</title>
 
     <meta name="keywords" content="{{ trans('frontend/tournaments.meta.keywords') }}" />
     <meta name="description" content="{{ trans('frontend/tournaments.meta.description') }}">
@@ -17,7 +17,7 @@
 
             <div class="row mt-lg">
                 <div class="col-md-12 center">
-                    <h2 class="mb-sm"><strong>Tournaments</strong></h2>
+                    <h2 class="mb-sm"><strong>{{ trans('frontend/tournaments.meta.title') }}</strong></h2>
                 </div>
             </div>
 

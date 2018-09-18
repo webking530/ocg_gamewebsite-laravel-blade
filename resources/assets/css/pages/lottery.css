@@ -1,0 +1,18 @@
+.lottery-numbers {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+
+.lottery-numbers span {
+    color: white;
+    background: orange;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    line-height: 52px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 500px;
+    border: 2px solid white;
+}

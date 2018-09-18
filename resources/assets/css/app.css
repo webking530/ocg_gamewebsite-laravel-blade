@@ -96,6 +96,11 @@
     color: #0088cc !important;
 }
 
+.label-blue {
+    background-color: #0088cc !important;
+    color: #fff !important;
+}
+
 .label-pink {
     background-color: #cc00b1 !important;
     color: #fff !important;
