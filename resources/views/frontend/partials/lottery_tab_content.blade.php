@@ -28,7 +28,7 @@
             {{--<a href="#" class="btn btn-success btn-lg"><i class="fas fa-eye"></i> {{ trans('frontend/lottery.watch_results') }}</a>--}}
 
 
-            <iframe class="lottery-frame" autofocus="true" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
+            <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
 
             <hr>
             <div class="text-center">
