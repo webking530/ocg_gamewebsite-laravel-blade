@@ -66,8 +66,7 @@
 </div>
 <!-- CONTENT END-->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
+<script src="{{ asset('lottery-game/js/vendor/jquery-1.12.4.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
