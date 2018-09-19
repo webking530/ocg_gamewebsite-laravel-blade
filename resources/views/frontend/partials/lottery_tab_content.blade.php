@@ -7,9 +7,9 @@
     </div>
 @else
     @if ($lottery->isPending())
-        <div class="">
-            <h2 class="text-center"><strong class="countdown" data-route="{{ route('lottery.countdown.get') }}" data-lottery-id="{{ $lottery->id }}">{{ $lottery->getBeginCountdown() }}</strong></h2>
-            <h3 class="alternative-font text-center">{{ trans('frontend/lottery.countdown_start') }}</h3>
+        <div class="pending-container">
+            <h2 class="text-center"><strong class="countdown" data-route="{{ route('lottery.countdown.get') }}" data-lottery-id="{{ $lottery->id }}">{{ $lottery->getBeginCountdown()['text'] }}</strong></h2>
+            <h3 class="alternative-font text-center about-to-start-text">{{ trans('frontend/lottery.countdown_start') }}</h3>
             <hr>
             <div class="text-center mb-md">
                 <h2 style="font-size:50px" class="alternative-font text-blue mb-lg mt-lg">{{ trans('frontend/lottery.prize') }}</h2>
@@ -25,7 +25,11 @@
     @elseif ($lottery->isActive())
         <div class="text-center">
             <h3 class="alternative-font text-center mt-lg" style="font-size:50px">{{ trans('frontend/lottery.lottery_in_progress') }}</h3>
-            <a href="#" class="btn btn-success btn-lg"><i class="fas fa-eye"></i> {{ trans('frontend/lottery.watch_results') }}</a>
+            {{--<a href="#" class="btn btn-success btn-lg"><i class="fas fa-eye"></i> {{ trans('frontend/lottery.watch_results') }}</a>--}}
+
+
+            <iframe class="lottery-frame" autofocus="true" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
+
             <hr>
             <div class="text-center">
                 <h2 style="font-size:50px" class="alternative-font text-blue mb-lg mt-lg">{{ trans('frontend/lottery.prize') }}</h2>

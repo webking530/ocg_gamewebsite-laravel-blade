@@ -25,7 +25,8 @@ return [
     'buy_tickets_now' => 'Buy your tickets now!',
     'prize' => 'Prize',
 
-    'lottery_in_progress' => 'Lottery is currently LIVE!',
+    'lottery_in_progress' => 'Lottery is COMPLETED!',
+    'lottery_starting' => 'Lottery is about to start, please wait while load the necessary info',
 
     'watch_results' => 'Watch Lottery Results',
     'winner' => 'WINNER',

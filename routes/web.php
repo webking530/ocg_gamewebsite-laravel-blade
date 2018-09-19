@@ -24,6 +24,8 @@ Route::get('lottery', 'LotteryController@index')->name('lottery.index');
 Route::get('lottery/countdown', 'LotteryController@getCountdown')->name('lottery.countdown.get');
 Route::get('lottery/tab-content', 'LotteryController@getTabContent')->name('lottery.tab_content.get');
 
+Route::get('lottery/{lottery}/watch', 'LotteryController@watch')->name('lottery.watch');
+
 Route::get('tournaments', 'HomeController@tournaments')->name('home.tournaments');
 Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
 Route::get('profile/{username}', 'HomeController@userProfile')->name('home.user.profile');

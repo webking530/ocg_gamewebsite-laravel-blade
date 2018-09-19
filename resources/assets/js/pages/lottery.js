@@ -32,16 +32,20 @@ $(document).ready(function() {
     }, 1000);
 
     setInterval(function() {
-        $.each($('.countdown'), function (k, obj) {
-            let lotteryId = $(obj).data('lottery-id');
-            let route = $(obj).data('route');
+        $.each($('.pending-container'), function (k, obj) {
+            let lotteryId = $(obj).find('.countdown').data('lottery-id');
+            let route = $(obj).find('.countdown').data('route');
 
             let data = {
                 lottery_id: lotteryId
             };
 
             $.get(route, data, function(response) {
-                $(obj).html(response);
+                if (response.started) {
+                    $('.about-to-start-text').hide();
+                }
+
+                $(obj).find('.countdown').html(response.text);
             });
         });
     }, 1000);

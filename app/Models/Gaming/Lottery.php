@@ -58,7 +58,10 @@ class Lottery extends Model
         $now = Carbon::now();
 
         if ($now->timestamp >= $this->date_begin->timestamp) {
-            return trans('frontend/lottery.lottery_in_progress');
+            return [
+                'started' => true,
+                'text' =>trans ('frontend/lottery.lottery_starting')
+            ];
         }
 
         $text = null;
@@ -83,7 +86,10 @@ class Lottery extends Model
 
         }
 
-        return $text;
+        return [
+            'started' => false,
+            'text' => $text
+        ];
     }
 
     public function getBoughtTicketsTotal() {

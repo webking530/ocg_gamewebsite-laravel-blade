@@ -24,7 +24,12 @@ class LotteryController extends Controller
     public function getCountdown(Request $request) {
         $lottery = Lottery::find($request->get('lottery_id'));
 
-        return $lottery->getBeginCountdown();
+        $countdown = $lottery->getBeginCountdown();
+
+        return [
+            'started' => $countdown['started'],
+            'text' => $countdown['text']
+        ];
     }
 
     public function getTabContent(Request $request) {
@@ -42,5 +47,11 @@ class LotteryController extends Controller
             'status' => $lottery->status,
             'html' => view('frontend.partials.lottery_tab_content', compact('lottery'))->render()
         ];
+    }
+
+    public function watch(Lottery $lottery) {
+        $winningNumber = json_encode($lottery->getWinningTicket()->formatted_numbers_for_game);
+
+        return view('frontend.lottery.game', compact('winningNumber'));
     }
 }
