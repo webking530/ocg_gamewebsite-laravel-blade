@@ -11,5 +11,6 @@ return [
             'male' => 'Male',
             'female' => 'Female'
         ]
-    ]
+    ],
+    'days' => ':days Day|:days Days'
 ];

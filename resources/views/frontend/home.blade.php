@@ -167,27 +167,34 @@
                 </div>
 
                 <div class="row jackpot-board" style="display: none">
-                    <div class="col-md-4 text-center">
+                    <div class="@if ($latestJackpot == null) col-md-12 @else col-md-4 @endif text-center">
                         <h2 class="custom-underline alternative-font mb-xs">OCG JACKPOT</h2>
                         <hr>
-                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 25,000</h4>
-                        <h4 class="custom-underline mb-xs">16 Days</h4>
+                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($currentJackpot['size']) }}</h4>
+                        <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $currentJackpot['days'], ['days' => $currentJackpot['days']]) }}</h4>
                         <h3 class="custom-underline alternative-font">BE THE LUCKY ONE!</h3>
                     </div>
-                    <div class="col-md-4 text-center jackpot-board">
-                        <h2 class="custom-underline alternative-font mb-xs">HIGHEST WIN</h2>
-                        <hr>
-                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 5,000</h4>
-                        <h4 class="custom-underline mb-xs">5 Days</h4>
-                        <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> alexplay</h3>
-                    </div>
-                    <div class="col-md-4 text-center jackpot-board">
-                        <h2 class="custom-underline alternative-font mb-xs">LAST WIN</h2>
-                        <hr>
-                        <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> 2,500</h4>
-                        <h4 class="custom-underline mb-xs">3 Days</h4>
-                        <h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> zack2057</h3>
-                    </div>
+                    @unless ($highestJackpot == null)
+                        <div class="col-md-4 text-center jackpot-board">
+                            <h2 class="custom-underline alternative-font mb-xs">HIGHEST WIN</h2>
+                            <hr>
+                            <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($highestJackpot->prize) }}</h4>
+                            <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $highestJackpot->days_since_jackpot, ['days' => $highestJackpot->days_since_jackpot]) }}</h4>
+                            {{--<h3 class="custom-underline alternative-font"><a href="{{ route('home.user.profile', ['username' => $highestJackpot->user->nickname]) }}"><i class="fas fa-user"></i> {{ $highestJackpot->user->nickname }}</a></h3>--}}
+                            @include('frontend.partials.username', ['user' => $highestJackpot->user])
+                        </div>
+                    @endunless
+
+                    @unless ($latestJackpot == null)
+                        <div class="col-md-4 text-center jackpot-board">
+                            <h2 class="custom-underline alternative-font mb-xs">LAST WIN</h2>
+                            <hr>
+                            <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($latestJackpot->prize) }}</h4>
+                            <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $latestJackpot->days_since_jackpot, ['days' => $latestJackpot->days_since_jackpot]) }}</h4>
+                            {{--<h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> zack2057</h3>--}}
+                            @include('frontend.partials.username', ['user' => $latestJackpot->user])
+                        </div>
+                    @endunless
                 </div>
 
                 <div class="row">

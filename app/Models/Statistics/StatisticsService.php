@@ -10,6 +10,7 @@ namespace Models\Statistics;
 
 
 use App\Models\Gaming\Game;
+use App\Models\Gaming\Jackpot;
 use App\Models\Gaming\Lottery;
 use App\Models\Pricing\Withdrawal;
 use Models\Auth\User;

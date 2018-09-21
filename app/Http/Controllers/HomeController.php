@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bonuses\Bonus;
 use App\Models\Gaming\Game;
+use App\Models\Gaming\Jackpot;
 use App\Models\Gaming\Tournament;
 use Illuminate\Http\Request;
 use Models\Auth\User;
@@ -13,7 +14,11 @@ class HomeController extends Controller
     public function index() {
         $games = Game::enabled()->orderByRaw('RAND()')->get();
 
-        return view('frontend.home', compact('games'));
+        $currentJackpot = Jackpot::getCurrentJackpot();
+        $highestJackpot = Jackpot::getHighestJackpot();
+        $latestJackpot = Jackpot::getLatestJackpot();
+
+        return view('frontend.home', compact('games', 'currentJackpot', 'highestJackpot', 'latestJackpot'));
     }
 
     public function game($slug) {
