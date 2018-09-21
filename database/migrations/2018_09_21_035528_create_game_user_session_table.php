@@ -28,7 +28,7 @@ class CreateGameUserSessionTable extends Migration
         });
 
         Schema::table('games', function (Blueprint $table) {
-            $table->integer('sessions_opened', false, true);
+            $table->integer('sessions_opened', false, true)->default(0);
         });
     }
 
