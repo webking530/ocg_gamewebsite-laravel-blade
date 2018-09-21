@@ -6,6 +6,8 @@
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('home.login');
 Route::post('login', 'Auth\LoginController@login')->name('home.login.post');
 
+Route::get('logout', 'Auth\LoginController@logout')->name('home.logout');
+
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('home.register');
 Route::post('register', 'Auth\RegisterController@register')->name('home.register.post');
 
@@ -35,11 +37,17 @@ Route::get('news/{news}', 'NewsController@news')->name('news.details');
 Route::get('terms', 'HomeController@terms')->name('home.terms');
 Route::get('policy', 'HomeController@policy')->name('home.policy');
 
+// User pages
+Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () {
+    Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');
+});
+
+// Admin pages
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
-    Route::get('dashboard', 'AdminController@index')->name('admin.home');
-    Route::post('paymentsbydate', 'AdminController@paymentsByDate')->name('admin.paymentsbydate');
-    Route::get('users','AdminController@userListing')->name('admin.getUsers');
-    Route::get('addUser','AdminController@addUser')->name('admin.adduser');
-    Route::post('saveUser','AdminController@saveUser')->name('admin.saveUser');
+    Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
+    Route::post('paymentsbydate', 'Admin\AdminController@paymentsByDate')->name('admin.paymentsbydate');
+    Route::get('users','Admin\AdminController@userListing')->name('admin.getUsers');
+    Route::get('addUser','Admin\AdminController@addUser')->name('admin.adduser');
+    Route::post('saveUser','Admin\AdminController@saveUser')->name('admin.saveUser');
 });
 

@@ -128,16 +128,18 @@
                                                 </ul>
                                             </li>
 
-                                            <li class="">
-                                                <a href="{{ route('home.login') }}">
-                                                    <i class="fas fa-user"></i> Login
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ route('home.register') }}">
-                                                    Sign Up
-                                                </a>
-                                            </li>
+                                            @if ( ! Auth::check())
+                                                <li class="{{ set_active('home.login') }}">
+                                                    <a href="{{ route('home.login') }}">
+                                                        <i class="fas fa-user"></i> Login
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('home.register') }}">
+                                                    <a href="{{ route('home.register') }}">
+                                                        Sign Up
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>
