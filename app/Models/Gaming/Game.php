@@ -17,6 +17,8 @@ class Game extends Model
     const GROUP_BINGO = 3;
     const GROUP_OTHER = 4;
 
+    const POPULAR_GAMES_AMOUNT = 8;
+
     public function getNameAttribute() {
         return trans('games.name.' . $this->id);
     }
@@ -39,5 +41,11 @@ class Game extends Model
 
     public function isInstantWin() {
         return $this->type === self::TYPE_INSTANT_WIN;
+    }
+
+    public function isPopular() {
+        $populars = self::orderBy('sessions_opened', 'DESC')->take(self::POPULAR_GAMES_AMOUNT)->pluck('id')->all();
+
+        return in_array($this->id, $populars);
     }
 }

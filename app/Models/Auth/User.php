@@ -3,6 +3,7 @@
 namespace Models\Auth;
 
 use App\Models\Gaming\Badge;
+use App\Models\Gaming\Game;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Models\Location\HasCountry;
@@ -48,6 +49,10 @@ class User extends Authenticatable
 
     public function badges() {
         return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id')->orderBy('relevance', 'DESC');
+    }
+
+    public function gameSessions() {
+        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits']);
     }
 
     public function isUser() {

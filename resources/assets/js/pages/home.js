@@ -5,6 +5,7 @@ $(document).ready(function() {
 
         let $allGames = $('li[data-group]');
         let group = parseInt($(this).data('group'));
+        let showPopulars = $(this).data('group') === 'popular';
         let $jackpotBoard = $('.jackpot-board');
 
         if ($(this).data('show-board') === 1) {
@@ -19,6 +20,12 @@ $(document).ready(function() {
         }
 
         $allGames.hide();
-        $('li[data-group="'+group+'"]').show();
+
+        if (showPopulars) {
+            $('li[data-popular]').show();
+        } else {
+            $('li[data-group="'+group+'"]').show();
+        }
+
     });
 });

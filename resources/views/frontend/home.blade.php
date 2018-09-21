@@ -162,7 +162,7 @@
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_CARD }}">CARD</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_BINGO }}">BINGO</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \App\Models\Gaming\Game::GROUP_OTHER }}">OTHER</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" ><i class="fas fa-star"></i> POPULAR</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="popular"><i class="fas fa-star"></i> POPULAR</button>
                     </div>
                 </div>
 
@@ -193,7 +193,7 @@
                 <div class="row">
                     <ul class="sample-item-list sample-item-list-loaded">
                         @foreach ($games as $game)
-                            <li data-group="{{ $game->group }}" class="col-sm-6 col-md-3 isotope-item game-item">
+                            <li data-group="{{ $game->group }}" class="col-sm-6 col-md-3 isotope-item game-item" @if ($game->isPopular()) data-popular @endif>
                                 <div class="sample-item sample-item-home pl-md pr-md">
                                     <a href="{{ route('home.game', ['slug' => $game->slug]) }}" target="_blank">
                                     <span class="sample-item-image-wrapper">
