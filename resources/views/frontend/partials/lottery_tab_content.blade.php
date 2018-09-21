@@ -27,14 +27,11 @@
             <h3 class="alternative-font text-center mt-lg" style="font-size:50px">{{ trans('frontend/lottery.lottery_in_progress') }}</h3>
             {{--<a href="#" class="btn btn-success btn-lg"><i class="fas fa-eye"></i> {{ trans('frontend/lottery.watch_results') }}</a>--}}
 
-
-            <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
-
-            <hr>
-            <div class="text-center">
-                <h2 style="font-size:50px" class="alternative-font text-blue mb-lg mt-lg">{{ trans('frontend/lottery.prize') }}</h2>
-                <h3 class="money-earned"><i class="fas fa-coins"></i> {{ number_format($lottery->getPotSize()) }}</h3>
-            </div>
+            {{--<hr>--}}
+            {{--<div class="text-center">--}}
+                {{--<h2 style="font-size:50px" class="alternative-font text-blue mb-lg mt-lg">{{ trans('frontend/lottery.prize') }}</h2>--}}
+                {{--<h3 class="money-earned"><i class="fas fa-coins"></i> {{ number_format($lottery->getPotSize()) }}</h3>--}}
+            {{--</div>--}}
         </div>
 
         <hr>
@@ -55,6 +52,12 @@
             <h3 class="alternative-font text-light" style="font-size:30px">{{ trans('frontend/lottery.prize_won') }}:</h3>
             <h3 class="money-earned mt-xlg" style="font-size: 40px"><i class="fas fa-coins"></i> {{ number_format($lottery->getPotSize()) }}</h3>
             {{--<h2 class="alternative-font text-blue" style="font-size:60px">{{ trans('frontend/lottery.congratulations') }}<i class="fas fa-exclamation"></i></h2>--}}
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+            <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
         </div>
     @else
         <div class="">
