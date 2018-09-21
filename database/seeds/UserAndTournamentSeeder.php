@@ -5,7 +5,7 @@ use App\Models\Gaming\Tournament;
 use Illuminate\Database\Seeder;
 use Models\Auth\User;
 
-class TournamentSeeder extends Seeder
+class UserAndTournamentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

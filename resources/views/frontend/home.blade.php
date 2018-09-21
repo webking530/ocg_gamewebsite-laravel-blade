@@ -1,3 +1,4 @@
+@inject('statsService', "Models\Statistics\StatisticsService")
 @extends('frontend.layout.app')
 
 @section('meta')
@@ -101,28 +102,28 @@
                 <div class="counters counters-text-dark">
                     <div class="col-md-3 col-sm-6">
                         <div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
-                            <strong data-to="25000" data-append="+">0</strong>
+                            <strong data-to="{{ $statsService->getUsersAmount() }}" data-append="+">0</strong>
                             <label>Happy Gamers</label>
                             <p class="text-color-primary mb-xl">They can't be wrong</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="600">
-                            <strong data-to="25">0</strong>
+                            <strong data-to="{{ $statsService->getGamesAmount() }}">0</strong>
                             <label>Engaging Games</label>
                             <p class="text-color-primary mb-xl">Many more to come</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="900">
-                            <strong data-to="250000" data-append="+" data-prepend="$">0</strong>
+                            <strong data-to="{{ $statsService->getMoneyPaid() }}" data-append="+" data-prepend="$">0</strong>
                             <label>Money Paid</label>
                             <p class="text-color-primary mb-xl">Satisfaction guaranteed</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="counter appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="1200">
-                            <strong data-to="75000" data-append="+" data-prepend="$">0</strong>
+                            <strong data-to="{{ $statsService->getHighestLotteryPot() }}" data-append="+" data-prepend="$">0</strong>
                             <label>Highest Lottery Pot</label>
                             <p class="text-color-primary mb-xl">Participate and win big!</p>
                         </div>

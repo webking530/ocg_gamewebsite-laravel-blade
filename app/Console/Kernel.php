@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\Pricing\ExchangeUpdate::class,
         Commands\Pricing\Notification::class,
-        Commands\Lottery\ProcessLottery::class
+        Commands\Lottery\ProcessLottery::class,
+        Commands\Jackpot\JackpotStats::class,
     ];
 
     /**
@@ -30,6 +31,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('pricing:notification')->environments('production')->hourly()->withoutOverlapping();
 
         $schedule->command('lottery:process')->environments('production')->everyMinute()->withoutOverlapping();
+
+        $schedule->command('jackpot:process-stats')->environments('production')->daily()->withoutOverlapping();
     }
 
     /**

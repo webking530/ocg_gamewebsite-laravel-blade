@@ -63,6 +63,10 @@ class ProcessLottery extends Command
             $ticket->winner = true;
             $ticket->save();
 
+            // after selecting the winning ticket, add the lottery prize to the user balance
+            $ticket->user->credits += $lottery->prize;
+            $ticket->user->save();
+
             DB::commit();
         }
     }

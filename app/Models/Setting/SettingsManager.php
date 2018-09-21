@@ -16,7 +16,7 @@ class SettingsManager
 
     public function get($key, $fresh = false)
     {
-        $value = Setting::whereKey($key)->firstOrFail()->value;
+        $value = Setting::where('key', $key)->firstOrFail()->value;
 
         return $value;
     }
