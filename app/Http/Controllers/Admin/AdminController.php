@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Location\Language;
+use App\Models\Pricing\Deposit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use App\Models\Pricing\Deposits;
 use App\Models\Pricing\Withdrawal;
 use App\Models\Pricing\Country;
 use App\Models\Pricing\Currency;
-use App\Models\Language;
+use Models\Auth\User;
+
 
 class AdminController extends Controller
 {
@@ -17,13 +19,13 @@ class AdminController extends Controller
 
     public function index() {
 
-    	$deposit_data = Deposits::with(['user','currency'])->where('status','0')->get()->toArray();
+    	$deposit_data = Deposit::with(['user','currency'])->where('status','0')->get()->toArray();
     	//get data from deposit
-    	$AmmountPendingApprovelDeposits =Deposits::select('amount')->where(['status'=>0])->get();
+    	$AmmountPendingApprovelDeposits =Deposit::select('amount')->where(['status'=>0])->get();
     	//get data from withdrawl
     	$AmmountPendingApprovelWithdrawl = Withdrawal::select('amount')->where(['status'=>0])->get()->toArray();
     	//ammount approved where status 1
-    	$TotAmtAppr = Deposits::select('amount')->where(['status'=>1])->get()->toArray();
+    	$TotAmtAppr = Deposit::select('amount')->where(['status'=>1])->get()->toArray();
     	//total ammount withdrawn by user
     	$TotAmtWdraw = Withdrawal::select('amount')->get()->toArray();
         return view('admin.home',compact('deposit_data','AmmountPendingApprovelDeposits','AmmountPendingApprovelWithdrawl','TotAmtAppr','TotAmtWdraw'));
@@ -35,7 +37,7 @@ class AdminController extends Controller
         $from = $request->input('from');
         $to = $request->input('to');
      
-        $AmtPngApplDepost = Deposits::select('amount')
+        $AmtPngApplDepost = Deposit::select('amount')
         ->whereBetween(DB::raw('DATE(created_at)'), array($from, $to))
         ->where('status','0')
         ->get();
@@ -77,7 +79,7 @@ class AdminController extends Controller
     public function saveUser(Request $request)
     {
         $data = $request->all();
-        $checkEmailExits =User::select('id')->where(['email'=>$data['email']])->orwhere(['nickname' => $data['nickname']])->count();
+        $checkEmailExits = User::select('id')->where(['email'=>$data['email']])->orwhere(['nickname' => $data['nickname']])->count();
 
         if($checkEmailExits == '0'){
            
