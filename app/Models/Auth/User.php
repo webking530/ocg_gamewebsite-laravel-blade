@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits']);
     }
 
+    public function winnings() {
+        return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount']);
+    }
+
     public function isUser() {
         return (int)$this->role === self::ROLE_USER;
     }

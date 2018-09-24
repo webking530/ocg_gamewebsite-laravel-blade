@@ -3,6 +3,7 @@
 namespace App\Models\Gaming;
 
 use Illuminate\Database\Eloquent\Model;
+use Models\Auth\User;
 
 class Game extends Model
 {
@@ -18,6 +19,10 @@ class Game extends Model
     const GROUP_OTHER = 4;
 
     const POPULAR_GAMES_AMOUNT = 8;
+
+    public function winnings() {
+        return $this->belongsToMany(User::class, 'game_user_winnings', 'game_id', 'user_id')->withPivot(['win_amount']);
+    }
 
     public function getNameAttribute() {
         return trans('games.name.' . $this->id);

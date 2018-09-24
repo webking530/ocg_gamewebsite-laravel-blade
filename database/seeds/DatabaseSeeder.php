@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LotterySeeder::class);
         $this->call(GamePopularitySeeder::class);
         $this->call(JackpotSeeder::class);
+        $this->call(GameUserWinningsSeeder::class);
     }
 }
