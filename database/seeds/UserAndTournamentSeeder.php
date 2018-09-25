@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Gaming\Game;
-use App\Models\Gaming\Tournament;
+use Models\Gaming\Game;
+use Models\Gaming\Tournament;
 use Illuminate\Database\Seeder;
 use Models\Auth\User;
 

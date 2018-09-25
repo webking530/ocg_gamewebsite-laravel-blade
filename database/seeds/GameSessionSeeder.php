@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Gaming\Game;
+use Models\Gaming\Game;
 use Illuminate\Database\Seeder;
 use Models\Auth\User;
 

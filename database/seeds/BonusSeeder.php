@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Bonuses\Bonus;
+use Models\Bonuses\Bonus;
 use Illuminate\Database\Seeder;
 
 class BonusSeeder extends Seeder

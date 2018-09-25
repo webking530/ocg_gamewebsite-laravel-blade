@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\News\News;
+use Models\News\News;
 use Illuminate\Database\Seeder;
 
 class NewsSeeder extends Seeder

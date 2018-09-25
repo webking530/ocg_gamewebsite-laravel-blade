@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Gaming\Game;
-use App\Models\Gaming\Jackpot;
+use Models\Gaming\Game;
+use Models\Gaming\Jackpot;
 use Illuminate\Database\Seeder;
 
 class JackpotSeeder extends Seeder

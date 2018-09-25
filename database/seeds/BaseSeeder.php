@@ -11,22 +11,22 @@ class BaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Pricing\Currency::create([
+        \Models\Pricing\Currency::create([
             'code' => 'EUR',
             'symbol' => '€'
         ]);
 
-        \App\Models\Pricing\Currency::create([
+        \Models\Pricing\Currency::create([
             'code' => 'GBP',
             'symbol' => '£'
         ]);
 
-        \App\Models\Pricing\Currency::create([
+        \Models\Pricing\Currency::create([
             'code' => 'TRY',
             'symbol' => '₺'
         ]);
 
-        \App\Models\Pricing\Currency::create([
+        \Models\Pricing\Currency::create([
             'code' => 'USD',
             'symbol' => '$'
         ]);

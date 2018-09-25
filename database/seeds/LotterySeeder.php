@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Gaming\Lottery;
-use App\Models\Gaming\LotteryTicket;
+use Models\Gaming\Lottery;
+use Models\Gaming\LotteryTicket;
 use Illuminate\Database\Seeder;
 
 class LotterySeeder extends Seeder
