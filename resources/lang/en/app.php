@@ -12,5 +12,6 @@ return [
             'female' => 'Female'
         ]
     ],
-    'days' => ':days Day|:days Days'
+    'days' => ':days day ago|:days days ago',
+    'since_date' => 'Since :date'
 ];

@@ -158,8 +158,8 @@
 
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter btn-filter-active" data-group="-1">ALL GAMES</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_SLOT }}" data-show-board="1">SLOT</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_ROULETTE }}">ROULETTE</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_CARD }}">CARD</button>
+                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_ROULETTE }}">ROULETTE</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_BINGO }}">BINGO</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_OTHER }}">OTHER</button>
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="popular"><i class="fas fa-star"></i> POPULAR</button>
@@ -171,7 +171,7 @@
                         <h2 class="custom-underline alternative-font mb-xs">OCG JACKPOT</h2>
                         <hr>
                         <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($currentJackpot['size']) }}</h4>
-                        <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $currentJackpot['days'], ['days' => $currentJackpot['days']]) }}</h4>
+                        <h4 class="custom-underline mb-xs">{{ trans('app.since_date', ['date' => \Carbon\Carbon::now()->subDays($currentJackpot['days'])->format('d M Y')]) }}</h4>
                         <h3 class="custom-underline alternative-font">BE THE LUCKY ONE!</h3>
                     </div>
                     @unless ($highestJackpot == null)

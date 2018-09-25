@@ -128,7 +128,7 @@ class GamesSeeder extends Seeder
             'icon_url' => 'img/games/11.jpg',
             'credits' => 0,
             'type' => GAME::TYPE_INSTANT_WIN,
-            'group' => Game::GROUP_ROULETTE,
+            'group' => Game::GROUP_OTHER,
             'has_jackpot' => false,
             'settings' => '',
             'enabled' => true
@@ -260,7 +260,7 @@ class GamesSeeder extends Seeder
             'icon_url' => 'img/games/23.jpg',
             'credits' => 0,
             'type' => GAME::TYPE_INSTANT_WIN,
-            'group' => Game::GROUP_ROULETTE,
+            'group' => Game::GROUP_OTHER,
             'has_jackpot' => false,
             'settings' => '',
             'enabled' => true
