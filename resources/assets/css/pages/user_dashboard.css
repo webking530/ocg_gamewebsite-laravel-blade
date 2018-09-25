@@ -1,0 +1,39 @@
+.dashboard-badges {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.dashboard-badges > div {
+    border-radius: 10px;
+    padding: 15px;
+    margin: 1%;
+    width: 46%;
+    border: 1px solid #3d4046;
+    border-top: 4px solid #4489cb;
+}
+
+.dashboard-badges > div:hover {
+    background: #00000029;
+}
+
+.new-badge {
+    background: #ffff00de;
+    color: black;
+    border-radius: 100px;
+}
+
+.dashboard-badges::-webkit-scrollbar {
+    width: 12px;
+}
+
+.dashboard-badges::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(55, 80, 191);;
+    border-radius: 10px;
+
+}
+
+.dashboard-badges::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background: #4489cb;
+}

@@ -52,7 +52,17 @@ class User extends Authenticatable
     }
 
     public function gameSessions() {
-        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits']);
+        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'created_at']);
+    }
+
+    public function gameSessionsCreditSum() {
+        $sum = 0;
+
+        foreach ($this->gameSessions as $game) {
+            $sum += $game->pivot->credits;
+        }
+
+        return $sum;
     }
 
     public function betsOpen() {

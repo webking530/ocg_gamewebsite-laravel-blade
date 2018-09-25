@@ -156,6 +156,11 @@
                                                                         <hr>
                                                                         <ul class="dropdown-mega-sub-nav text-center">
                                                                             <li>
+                                                                                <a href="{{ route('home.user.profile', ['username' => Auth::user()->nickname]) }}">
+                                                                                    <i class="fas fa-user"></i> My Public Profile
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
                                                                                 <a href="#">
                                                                                     <i class="fas fa-plus-circle"></i> Add Money
                                                                                 </a>

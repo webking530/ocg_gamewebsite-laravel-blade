@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('price', function ($expression) {
             return "<?php echo formatted_price({$expression})?>";
         });
+
+        Blade::directive('datetime', function ($expression) {
+            return "<?php echo with({$expression}) == null? trans('app.common.not_yet') : (\"<abbr data-toggle='tooltip' data-original-title='\" . with({$expression})->toDayDateTimeString().\"'>\" . with({$expression})->diffForHumans() . \"</abbr>\"); ?>";
+        });
     }
 
     /**

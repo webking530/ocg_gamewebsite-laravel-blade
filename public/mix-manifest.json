@@ -8,6 +8,7 @@
     "/compiled/css/pages/public_profile.css": "/compiled/css/pages/public_profile.css",
     "/compiled/css/pages/lottery.css": "/compiled/css/pages/lottery.css",
     "/compiled/js/pages/lottery.js": "/compiled/js/pages/lottery.js",
+    "/compiled/css/pages/user_dashboard.css": "/compiled/css/pages/user_dashboard.css",
     "/compiled/lumino/lumino.css": "/compiled/lumino/lumino.css",
     "/compiled/lumino/lumino.js": "/compiled/lumino/lumino.js"
 }

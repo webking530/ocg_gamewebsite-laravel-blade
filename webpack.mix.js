@@ -72,6 +72,10 @@ mix.scripts([
     'resources/assets/js/pages/lottery.js',
 ], 'public/compiled/js/pages/lottery.js');
 
+mix.styles([
+    'resources/assets/css/pages/user_dashboard.css',
+], 'public/compiled/css/pages/user_dashboard.css');
+
 // Lumino Admin Template
 mix.styles([
     'resources/assets/vendor/lumino/css/datepicker3.css',

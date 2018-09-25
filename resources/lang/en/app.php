@@ -12,6 +12,9 @@ return [
             'female' => 'Female'
         ]
     ],
+    'common' => [
+        'not_yet' => 'Not yet'
+    ],
     'days' => ':days day ago|:days days ago',
     'since_date' => 'Since :date'
 ];
