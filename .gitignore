@@ -1,6 +1,6 @@
 node_modules
 storage
-vendor
+/vendor
 .idea
 .vagrant
 Homestead.json

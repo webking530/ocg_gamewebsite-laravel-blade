@@ -32,8 +32,6 @@ mix.styles([
     'resources/assets/css/app.css',
 ], 'public/compiled/porto/porto.css');
 
-
-
 mix.scripts([
     'resources/assets/vendor/porto/vendor/modernizr/modernizr.min.js',
     'resources/assets/vendor/porto/vendor/jquery.appear/jquery.appear.min.js',
@@ -73,8 +71,14 @@ mix.scripts([
 ], 'public/compiled/js/pages/lottery.js');
 
 mix.styles([
+    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.css',
     'resources/assets/css/pages/user_dashboard.css',
 ], 'public/compiled/css/pages/user_dashboard.css');
+
+mix.scripts([
+    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
+    'resources/assets/js/pages/user_dashboard.js',
+], 'public/compiled/js/pages/user_dashboard.js');
 
 // Lumino Admin Template
 mix.styles([

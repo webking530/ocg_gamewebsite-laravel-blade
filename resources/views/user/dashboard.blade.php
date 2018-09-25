@@ -45,9 +45,9 @@
                                         <h4 class="heading-primary text-uppercase mb-md"><i class="fas fa-star"></i> Badges</h4>
                                         <hr>
 
-                                        <div class="row dashboard-badges">
+                                        <div class="row dashboard-badges custom-scroll">
                                             @forelse ($user->badges as $badge)
-                                                <div class="col-md-6 text-center">
+                                                <div class="col-md-6 text-center single-badge">
                                                     <img width="64" class="img-responsive margin-auto" src="{{ asset($badge->image_url) }}" alt="{{ $badge->name }}">
                                                     <h4 class="text-uppercase">{{ $badge->name }}</h4>
                                                     <p class="text-light">{{ $badge->description }}</p>
@@ -136,5 +136,5 @@
 @endsection
 
 @section('scripts')
-
+    <script src="{!! mix('compiled/js/pages/user_dashboard.js') !!}"></script>
 @endsection

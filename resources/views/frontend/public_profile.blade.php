@@ -19,17 +19,16 @@
                     <img class="avatar-img {{ $user->isMale() ? 'avatar-male' : 'avatar-female' }} img-responsive" src="{{ asset($user->formatted_avatar) }}" alt="{{ $user->nickname }}" title="{{ $user->nickname }}"/>
 
                     <h2 class="{{ $user->gender_color }} mt-lg pb-sm pt-sm">
-                        <i class="{{ $user->gender_icon }}"></i> {{ $user->nickname }}
-                        <span class="fullname alternative-font"><img src="{{ asset($user->flag_icon) }}" alt="{{ $user->country_code }}" title="{{ $user->country_name }}" width="48"/> {{ $user->full_name }}</span>
+                        <img src="{{ asset($user->flag_icon) }}" alt="{{ $user->country_code }}" title="{{ $user->country_name }}" width="48"/> {{ $user->nickname }}
                     </h2>
 
                     <div class="featured-box featured-box-primary featured-box-effect-1">
                         <div class="box-content {{ ! $user->isMale() ? 'featured-box-pink-border' : '' }}">
                             <h3 class="alternative-font">Ranking:</h3>
-                            <h2><i class="fas fa-hashtag"></i> 350</h2>
+                            <h2><i class="fas fa-hashtag"></i> {{ $user->getRankingNumber() }}</h2>
                             <hr>
                             <h3 class="alternative-font">Total Won:</h3>
-                            <h2><i class="fas fa-coins money-earned"></i> 25,000</h2>
+                            <h2><i class="fas fa-coins money-earned"></i> {{ number_format($user->getTotalWinningCredits()) }}</h2>
                         </div>
                     </div>
 

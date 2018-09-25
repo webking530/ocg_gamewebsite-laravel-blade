@@ -2,6 +2,7 @@
 
 namespace Models\Auth;
 
+use DB;
 use Models\Gaming\Badge;
 use Models\Gaming\Game;
 use Models\Location\HasCountry;
@@ -121,9 +122,39 @@ class User extends Authenticatable
         return country_name($this->country_code);
     }
 
-    public function getFormattedBalance() {
-        $credits = $this->credits;
+    public function getTotalWinningCredits() {
+        $credits = 0;
 
+        foreach ($this->winnings as $winning) {
+            $credits += $winning->pivot->win_amount;
+        }
 
+        return $credits;
+    }
+
+    public function getRankingNumber() {
+        $query = DB::select("
+        SELECT * FROM (
+            SELECT @i := @i + 1 AS ranking, id AS user_id
+            FROM
+            (
+                SELECT id, t.total FROM users
+                LEFT JOIN (
+                    SELECT 
+                    user_id, 
+                    SUM(win_amount) total           
+                    FROM game_user_winnings      
+                    GROUP BY user_id
+                ) AS t
+                ON users.id = t.user_id
+                WHERE users.id IS NOT NULL
+                ORDER BY total DESC
+            ) AS t,
+            (SELECT @i := 0) AS temp
+        ) AS r
+        WHERE r.user_id = {$this->id}
+        ");
+
+        return $query[0]->ranking;
     }
 }

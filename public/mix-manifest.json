@@ -9,6 +9,7 @@
     "/compiled/css/pages/lottery.css": "/compiled/css/pages/lottery.css",
     "/compiled/js/pages/lottery.js": "/compiled/js/pages/lottery.js",
     "/compiled/css/pages/user_dashboard.css": "/compiled/css/pages/user_dashboard.css",
+    "/compiled/js/pages/user_dashboard.js": "/compiled/js/pages/user_dashboard.js",
     "/compiled/lumino/lumino.css": "/compiled/lumino/lumino.css",
     "/compiled/lumino/lumino.js": "/compiled/lumino/lumino.js"
 }

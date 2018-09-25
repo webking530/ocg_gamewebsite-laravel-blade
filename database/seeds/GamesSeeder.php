@@ -276,5 +276,27 @@ class GamesSeeder extends Seeder
             'settings' => '',
             'enabled' => true
         ]);
+        Game::create([
+            'id' => 25,
+            'slug' => 'roulette-royale',
+            'icon_url' => 'img/games/25.jpg',
+            'credits' => 0,
+            'type' => GAME::TYPE_NORMAL,
+            'group' => Game::GROUP_ROULETTE,
+            'has_jackpot' => false,
+            'settings' => '',
+            'enabled' => true
+        ]);
+        Game::create([
+            'id' => 26,
+            'slug' => 'american-roulette-royale',
+            'icon_url' => 'img/games/26.jpg',
+            'credits' => 0,
+            'type' => GAME::TYPE_NORMAL,
+            'group' => Game::GROUP_ROULETTE,
+            'has_jackpot' => false,
+            'settings' => '',
+            'enabled' => true
+        ]);
     }
 }
