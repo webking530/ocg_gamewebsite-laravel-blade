@@ -53,26 +53,64 @@
                                 <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
                                     <nav>
                                         <ul class="nav nav-pills navbar-center navbar-custom">
-                                            <li class="">
-                                                <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
-                                                    Casino Games
-                                                </a>
-                                            </li>
-                                            <li class="{{ set_active('lottery.index') }}">
-                                                <a href="{{ route('lottery.index') }}">
-                                                    Lottery
-                                                </a>
-                                            </li>
-                                            <li class="{{ set_active('home.tournaments') }}">
-                                                <a href="{{ route('home.tournaments') }}">
-                                                    Tournament
-                                                </a>
-                                            </li>
-                                            <li class="{{ set_active('home.bonuses') }}">
-                                                <a href="{{ route('home.bonuses') }}">
-                                                    Bonuses
-                                                </a>
-                                            </li>
+                                            @if (Auth::check())
+                                                <li class="{{ set_active('user.dashboard.index') }}">
+                                                    <a href="{{ route('user.dashboard.index') }}">
+                                                        Dashboard
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#">
+                                                        Money
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#">
+                                                        Casino Games
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('lottery.index') }}">
+                                                    <a href="{{ route('lottery.index') }}">
+                                                        Lottery
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('home.tournaments') }}">
+                                                    <a href="{{ route('home.tournaments') }}">
+                                                        Tournament
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('home.bonuses') }}">
+                                                    <a href="{{ route('home.bonuses') }}">
+                                                        Bonuses
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#">
+                                                        Settings
+                                                    </a>
+                                                </li>
+                                            @else
+                                                <li class="">
+                                                    <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
+                                                        Casino Games
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('lottery.index') }}">
+                                                    <a href="{{ route('lottery.index') }}">
+                                                        Lottery
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('home.tournaments') }}">
+                                                    <a href="{{ route('home.tournaments') }}">
+                                                        Tournament
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('home.bonuses') }}">
+                                                    <a href="{{ route('home.bonuses') }}">
+                                                        Bonuses
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
 
                                         <ul class="nav nav-pills navbar-right navbar-custom">
@@ -82,48 +120,18 @@
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a href="https://www.smswords.net/de">
-                                                            Deutsch
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/">
+                                                        <a href="#">
                                                             English
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="https://www.smswords.net/es">
+                                                        <a href="#">
                                                             Español
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="https://www.smswords.net/fr">
-                                                            Français
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/it">
-                                                            Italiano
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/nl">
-                                                            Nederlands
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/pl">
-                                                            Polski
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/tr">
+                                                        <a href="#">
                                                             Türkçe
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://www.smswords.net/ru">
-                                                            Русский
                                                         </a>
                                                     </li>
                                                 </ul>
