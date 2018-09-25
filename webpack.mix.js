@@ -4,7 +4,6 @@ let mix = require('laravel-mix');
 mix.styles([
     'resources/assets/vendor/bootstrap/css/bootstrap.min.css',
     'resources/assets/vendor/fontawesome-5.2.0/all.min.css',
-    'resources/assets/css/app.css',
 ], 'public/compiled/css/shared.css');
 
 mix.scripts([
@@ -30,6 +29,7 @@ mix.styles([
     'resources/assets/vendor/porto/vendor/rs-plugin/css/navigation.css',
     'resources/assets/vendor/porto/vendor/circle-flip-slideshow/css/component.css',
     'resources/assets/vendor/porto/css/skins/default.css',
+    'resources/assets/css/app.css',
 ], 'public/compiled/porto/porto.css');
 
 
