@@ -20,9 +20,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -33,9 +31,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -46,9 +42,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -59,9 +53,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_ROULETTE,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -72,9 +64,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -85,9 +75,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -98,9 +86,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -111,9 +97,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_INSTANT_WIN,
             'group' => Game::GROUP_OTHER,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -124,9 +108,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => false
         ]);
         Game::create([
@@ -137,9 +119,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_INSTANT_WIN,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -150,9 +130,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_INSTANT_WIN,
             'group' => Game::GROUP_ROULETTE,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -163,9 +141,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_BINGO,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -176,9 +152,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -189,9 +163,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -202,9 +174,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -215,9 +185,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_BINGO,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -228,9 +196,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -241,9 +207,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_OTHER,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -254,9 +218,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -267,9 +229,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -280,9 +240,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -293,9 +251,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_CARD,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -306,9 +262,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_INSTANT_WIN,
             'group' => Game::GROUP_ROULETTE,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
         Game::create([
@@ -319,9 +273,7 @@ class GamesSeeder extends Seeder
             'type' => GAME::TYPE_NORMAL,
             'group' => Game::GROUP_OTHER,
             'has_jackpot' => false,
-            'jackpot_size' => 0,
             'settings' => '',
-            'allow_tournaments' => true,
             'enabled' => true
         ]);
     }
