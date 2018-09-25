@@ -26,14 +26,14 @@
                     <div class="col-md-12">
                         <ul class="nav nav-pills nav-justified" role="tablist">
                             @foreach ($tournaments as $tournament)
-                                <li role="presentation" class="@if ($tournament->group == \App\Models\Gaming\Game::GROUP_SLOT) active @endif"><a href="#tournament_{{ $tournament->group }}" aria-controls="home" role="tab" data-toggle="tab">{{ $tournament->formattedGroup }}</a></li>
+                                <li role="presentation" class="@if ($tournament->group == \Models\Gaming\Game::GROUP_SLOT) active @endif"><a href="#tournament_{{ $tournament->group }}" aria-controls="home" role="tab" data-toggle="tab">{{ $tournament->formattedGroup }}</a></li>
                             @endforeach
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             @foreach ($tournaments as $tournament)
-                                <div role="tabpanel" class="tab-pane @if ($tournament->group == \App\Models\Gaming\Game::GROUP_SLOT) active @endif" id="tournament_{{ $tournament->group }}">
+                                <div role="tabpanel" class="tab-pane @if ($tournament->group == \Models\Gaming\Game::GROUP_SLOT) active @endif" id="tournament_{{ $tournament->group }}">
 
                                     <h3 class="text-center"><i class="fas fa-clock"></i> Tournament ends on <abbr data-toggle="tooltip" data-original-title="{{ $tournament->date_to->format('l, F j, Y, g:i a') }}">{{ $tournament->date_to->diffForHumans() }}</abbr></h3>
 

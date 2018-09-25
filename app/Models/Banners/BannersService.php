@@ -6,13 +6,12 @@
  * Time: 01:35 PM
  */
 
-namespace App\Models\Banners;
+namespace Models\Banners;
 
 
-use App\Models\Bonuses\Bonus;
-use App\Models\Gaming\Game;
-use App\Models\Gaming\GameUserWinning;
-use App\Models\News\News;
+use Models\Bonuses\Bonus;
+use Models\Gaming\GameUserWinning;
+use Models\News\News;
 
 class BannersService
 {

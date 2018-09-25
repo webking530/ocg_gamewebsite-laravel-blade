@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Bonuses\Bonus;
+use Models\Bonuses\Bonus;
 use Models\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;

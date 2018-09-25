@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gaming\Lottery;
+use Models\Gaming\Lottery;
 use Illuminate\Http\Request;
 
 class LotteryController extends Controller

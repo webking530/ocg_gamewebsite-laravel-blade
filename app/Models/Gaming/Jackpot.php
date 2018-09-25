@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Gaming;
+namespace Models\Gaming;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bonuses\Bonus;
-use App\Models\Gaming\Game;
-use App\Models\Gaming\Jackpot;
-use App\Models\Gaming\Tournament;
+use Models\Bonuses\Bonus;
+use Models\Gaming\Game;
+use Models\Gaming\Jackpot;
+use Models\Gaming\Tournament;
 use Illuminate\Http\Request;
 use Models\Auth\User;
 

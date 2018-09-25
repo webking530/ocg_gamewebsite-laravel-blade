@@ -6,7 +6,7 @@
  * Time: 12:06 PM
  */
 
-namespace App\Models\Pricing;
+namespace Models\Pricing;
 
 
 class PricingService

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Location\Language;
-use App\Models\Pricing\Deposit;
+use Models\Location\Language;
+use Models\Pricing\Deposit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Pricing\Withdrawal;
-use App\Models\Pricing\Country;
-use App\Models\Pricing\Currency;
+use Models\Pricing\Withdrawal;
+use Models\Pricing\Country;
+use Models\Pricing\Currency;
 use Models\Auth\User;
 
 

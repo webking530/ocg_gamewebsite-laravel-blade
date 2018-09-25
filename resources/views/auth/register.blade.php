@@ -1,5 +1,5 @@
-@inject('locationService', "App\Models\Location\LocationService")
-@inject('pricingService', "App\Models\Pricing\PricingService")
+@inject('locationService', "Models\Location\LocationService")
+@inject('pricingService', "Models\Pricing\PricingService")
 @extends('frontend.layout.app')
 
 @section('meta')
@@ -107,7 +107,7 @@
                                     <label for="gender" class="col-md-4 control-label">Gender</label>
 
                                     <div class="col-md-6">
-                                        {!! Form::select('gender', \Models\Auth\User::getGenderList(), null, ['class' => 'form-control', 'required' => true]) !!}
+                                        {!! Form::select('gender', Models\Auth\User::getGenderList(), null, ['class' => 'form-control', 'required' => true]) !!}
 
                                         @if ($errors->has('gender'))
                                             <span class="help-block">

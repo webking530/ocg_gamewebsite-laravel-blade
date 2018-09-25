@@ -9,10 +9,10 @@
 namespace Models\Statistics;
 
 
-use App\Models\Gaming\Game;
-use App\Models\Gaming\Jackpot;
-use App\Models\Gaming\Lottery;
-use App\Models\Pricing\Withdrawal;
+use Models\Gaming\Game;
+use Models\Gaming\Jackpot;
+use Models\Gaming\Lottery;
+use Models\Pricing\Withdrawal;
 use Models\Auth\User;
 
 class StatisticsService

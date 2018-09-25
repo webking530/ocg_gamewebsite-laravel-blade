@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Location;
+namespace Models\Location;
 
 use Illuminate\Database\Eloquent\Model;
 

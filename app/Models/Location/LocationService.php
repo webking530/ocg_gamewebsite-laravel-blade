@@ -6,10 +6,7 @@
  * Time: 12:02 PM
  */
 
-namespace App\Models\Location;
-
-
-use Models\Location\Country;
+namespace Models\Location;
 
 class LocationService
 {

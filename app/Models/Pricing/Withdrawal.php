@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pricing;
+namespace Models\Pricing;
 
 use Illuminate\Database\Eloquent\Model;
 use Models\Auth\BelongsToAUser;

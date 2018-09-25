@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Lottery;
 
-use App\Models\Gaming\Lottery;
-use App\Models\Gaming\LotteryTicket;
+use Models\Gaming\Lottery;
+use Models\Gaming\LotteryTicket;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Console\Command;

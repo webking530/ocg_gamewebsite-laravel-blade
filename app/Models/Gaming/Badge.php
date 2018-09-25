@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Gaming;
+namespace Models\Gaming;
 
-use Illuminate\Database\Eloquent\Model;
 use Models\Auth\User;
+use Illuminate\Database\Eloquent\Model;
 
 class Badge extends Model
 {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gaming\Game;
+use Models\Gaming\Game;
 use Illuminate\Http\Request;
 
 class GameController extends Controller

@@ -1,6 +1,7 @@
 <?php
 namespace Models\Mailing;
 
+use Models\Auth\User;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Mail\Message;
 

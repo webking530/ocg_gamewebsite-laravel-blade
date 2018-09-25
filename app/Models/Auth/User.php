@@ -2,12 +2,12 @@
 
 namespace Models\Auth;
 
-use App\Models\Gaming\Badge;
-use App\Models\Gaming\Game;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Models\Gaming\Badge;
+use Models\Gaming\Game;
 use Models\Location\HasCountry;
 use Models\Pricing\HasCurrency;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -109,5 +109,11 @@ class User extends Authenticatable
 
     public function getCountryNameAttribute() {
         return country_name($this->country_code);
+    }
+
+    public function getFormattedBalance() {
+        $credits = $this->credits;
+
+
     }
 }
