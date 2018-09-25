@@ -4,20 +4,6 @@
     color: white !important;
 }
 
-.avatar-img {
-    border-radius: 500px;
-    border: 10px solid white;
-    margin: auto !important;
-}
-
-.avatar-male {
-    border-color: #0088cc;
-}
-
-.avatar-female {
-    border-color: #cc00b1;
-}
-
 html .featured-box-primary .featured-box-pink-border {
     border-color: #cc00b1 !important;
 }

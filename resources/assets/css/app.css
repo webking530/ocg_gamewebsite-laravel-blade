@@ -110,3 +110,49 @@
     width: 24px !important;
     display: inline-block !important;
 }
+
+.valign-top {
+    vertical-align: top !important;
+}
+
+.valign-bottom {
+    vertical-align: bottom !important;
+}
+
+.valign-middle {
+    vertical-align: middle !important;
+}
+
+.avatar-img {
+    border-radius: 500px;
+    border: 10px solid white;
+    margin: auto !important;
+}
+
+.avatar-male {
+    border-color: #0088cc;
+}
+
+.avatar-female {
+    border-color: #cc00b1;
+}
+
+.user-info-menu .dropdown-mega-sub-nav {
+    font-size: 24px;
+}
+
+#header .header-nav-main nav > ul li.dropdown.opened > .dropdown-menu {
+    margin-left: 0;
+}
+
+#header .header-nav-main nav > ul li.dropdown-mega .dropdown-mega-sub-nav {
+    margin: 0;
+}
+
+.user-info-menu .dropdown-mega-sub-nav ul {
+    margin-left: 0 !important;
+}
+
+.user-info-menu .dropdown-mega-sub-nav li {
+    line-height: 40px;
+}

@@ -1,4 +1,5 @@
-@inject('bannersService', "App\Models\Banners\BannersService")
+@inject('bannersService', "Models\Banners\BannersService")
+@inject('pricingService', "Models\Pricing\PricingService")
 
 <!DOCTYPE html>
 <html class="dark">
@@ -128,7 +129,47 @@
                                                 </ul>
                                             </li>
 
-                                            @if ( ! Auth::check())
+                                            @if (Auth::check())
+                                                <li class="dropdown dropdown-mega">
+                                                    <a class="dropdown-toggle" href="#">
+                                                        <i class="fas fa-user"></i> {{ Auth::user()->name }}
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <div class="dropdown-mega-content user-info-menu">
+                                                                <div class="row mt-md">
+                                                                    <div class="col-md-4 text-center">
+                                                                        <img class="img-responsive margin-auto avatar-img {{ Auth::user()->isMale() ? 'avatar-male' : 'avatar-female' }}" src="{{ asset(Auth::user()->formatted_avatar) }}" />
+                                                                        <span class="dropdown-mega-sub-title"><img class="valign-top" src="{{ asset(Auth::user()->flag_icon) }}" width="32"/> {{ Auth::user()->nickname }}</span>
+                                                                    </div>
+                                                                    <div class="col-md-8 mt-md">
+                                                                        <h2 class="text-center">My Balance</h2>
+                                                                        <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->credits) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits(Auth::user()->credits, Auth::user()->currency_code), Auth::user()->currency_code)</h3>
+                                                                        <hr>
+                                                                        <ul class="dropdown-mega-sub-nav text-center">
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <i class="fas fa-plus-circle"></i> Add Money
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <i class="fas fa-minus-circle"></i> Withdraw Money
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="{{ route('home.logout') }}">
+                                                                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            @else
                                                 <li class="{{ set_active('home.login') }}">
                                                     <a href="{{ route('home.login') }}">
                                                         <i class="fas fa-user"></i> Login
