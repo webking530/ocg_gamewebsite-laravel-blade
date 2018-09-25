@@ -26,6 +26,8 @@ return [
         'Three Card Poker',
         'Spin and Win',
         'Plinko',
+        'Roulette Royale',
+        'American Roulette Royale',
     ],
     'type' => [
         'Regular Game',
