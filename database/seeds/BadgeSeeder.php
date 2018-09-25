@@ -30,7 +30,8 @@ class BadgeSeeder extends Seeder
             foreach ($badges as $badge) {
                 DB::table('badge_user')->insert([
                     'badge_id' => $badge->id,
-                    'user_id' => $user->id
+                    'user_id' => $user->id,
+                    'created_at' => \Carbon\Carbon::now()
                 ]);
             }
         }

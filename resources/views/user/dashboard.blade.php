@@ -51,7 +51,12 @@
                                                     <img width="64" class="img-responsive margin-auto" src="{{ asset($badge->image_url) }}" alt="{{ $badge->name }}">
                                                     <h4 class="text-uppercase">{{ $badge->name }}</h4>
                                                     <p class="text-light">{{ $badge->description }}</p>
-                                                    <p class="new-badge mb-none"><i class="fas fa-award"></i> NEW</p>
+
+                                                    @if ($badge->pivot->created_at->diffInDays(\Carbon\Carbon::now()) <= 1)
+                                                        <p class="new-badge mb-none"><i class="fas fa-award"></i> NEW</p>
+                                                    @else
+                                                        <span class="new-placeholder"></span>
+                                                    @endif
                                                 </div>
                                             @empty
                                                 <div class="alert alert-info text-center">You have not earned any badges yet!</div>

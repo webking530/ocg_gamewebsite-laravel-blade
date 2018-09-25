@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     public function badges() {
-        return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id')->orderBy('relevance', 'DESC');
+        return $this->belongsToMany(Badge::class, 'badge_user', 'user_id', 'badge_id')->orderBy('relevance', 'DESC')->withPivot(['created_at']);
     }
 
     public function gameSessions() {
