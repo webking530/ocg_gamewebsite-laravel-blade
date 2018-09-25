@@ -49,7 +49,7 @@ class Game extends Model
     }
 
     public function isPopular() {
-        $populars = self::orderBy('sessions_opened', 'DESC')->take(self::POPULAR_GAMES_AMOUNT)->pluck('id')->all();
+        $populars = self::enabled()->orderBy('sessions_opened', 'DESC')->take(self::POPULAR_GAMES_AMOUNT)->pluck('id')->all();
 
         return in_array($this->id, $populars);
     }
