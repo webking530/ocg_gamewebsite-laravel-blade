@@ -157,4 +157,34 @@ class User extends Authenticatable
 
         return $query[0]->ranking;
     }
+
+    public function closeGameSession(Game $game) {
+        $credits = $this->gameSessions()->where('game_id', $game->id)->first()->pivot->credits;
+
+        DB::beginTransaction();
+
+        $this->credits += $credits;
+        $this->save();
+
+        $this->gameSessions()->detach($game->id);
+
+        DB::commit();
+    }
+
+    public function closeAllGameSessions() {
+        $credits = 0;
+
+        foreach ($this->gameSessions as $game) {
+            $credits += $game->pivot->credits;
+        }
+
+        DB::beginTransaction();
+
+        $this->credits += $credits;
+        $this->save();
+
+        $this->gameSessions()->detach();
+
+        DB::commit();
+    }
 }

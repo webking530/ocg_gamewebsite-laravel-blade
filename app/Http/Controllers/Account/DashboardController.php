@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Auth\User;
@@ -18,7 +19,7 @@ class DashboardController extends Controller
     }
 
     public function closeSession(Game $game) {
-        $this->user->gameSessions()->detach($game->id);
+        $this->user->closeGameSession($game);
 
         $this->flashNotifier->success(trans('app.common.operation_success'));
 
@@ -26,7 +27,7 @@ class DashboardController extends Controller
     }
 
     public function closeAllSessions() {
-        $this->user->gameSessions()->detach();
+        $this->user->closeAllGameSessions();
 
         $this->flashNotifier->success(trans('app.common.operation_success'));
 
