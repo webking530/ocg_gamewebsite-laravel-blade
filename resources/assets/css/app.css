@@ -160,3 +160,11 @@ body {
 .user-info-menu .dropdown-mega-sub-nav li {
     line-height: 40px;
 }
+
+#flash-notifier {
+    position: fixed;
+    width: 300px;
+    top: 115px;
+    right: 15px;
+    z-index: 9999;
+}

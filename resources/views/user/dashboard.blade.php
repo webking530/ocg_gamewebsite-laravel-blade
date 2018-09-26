@@ -74,46 +74,54 @@
                                         <h4 class="heading-primary text-uppercase mb-md"><i class="fas fa-gamepad"></i> Game Sessions</h4>
                                         <hr>
 
-                                        <div class="table-responsive">
-                                            <table class="table table-condensed">
-                                                <thead>
+                                        @if ($user->gameSessions->count() > 0)
+                                            <div class="alert alert-info">
+                                                <p>Here you can manage your open game sessions.</p>
+                                                <p>To retrieve your credits deposited to each game back to your balance, you can close its corresponding session from
+                                                    here.</p>
+
+                                                <p>You can do it while in-game too. After you finished playing the game, click on the "Quit" or "X" button.</p>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-condensed">
+                                                    <thead>
                                                     <tr>
                                                         <th>Game</th>
                                                         <th>Credits</th>
                                                         <th>Opened at</th>
                                                         <th>Actions</th>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                @forelse ($user->gameSessions as $game)
-                                                    <tr>
-                                                        <td class="valign-middle"><img src="{{ asset($game->small_icon) }}" width="48"> {{ $game->name }}</td>
-                                                        <td class="valign-middle"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($game->pivot->credits) }}</span></td>
-                                                        <td class="valign-middle">@datetime($game->pivot->created_at)</td>
-                                                        <td class="valign-middle">
-                                                            <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Play Demo</a>
-                                                            <a href="#" class="btn btn-warning btn-sm">Play Live</a>
-                                                            <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Close Session</a>
-                                                        </td>
-                                                    </tr>
-                                                @empty
-                                                    <tr class="text-center warning">
-                                                        <td colspan="4">No active game sessions</td>
-                                                    </tr>
-                                                @endforelse
-                                                </tbody>
-                                                <tfoot>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach ($user->gameSessions as $game)
+                                                        <tr>
+                                                            <td class="valign-middle"><img src="{{ asset($game->small_icon) }}" width="48"> {{ $game->name }}</td>
+                                                            <td class="valign-middle"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($game->pivot->credits) }}</span></td>
+                                                            <td class="valign-middle">@datetime($game->pivot->created_at)</td>
+                                                            <td class="valign-middle">
+                                                                <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Play Demo</a>
+                                                                <a href="#" class="btn btn-warning btn-sm">Play Live</a>
+                                                                <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-sm confirm-click"><i class="fas fa-sign-out-alt"></i> Close Session</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                    <tfoot>
                                                     <tr>
                                                         <th class="text-right">Total Credits</th>
                                                         <th><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->gameSessionsCreditSum()) }}</span></th>
                                                         <th></th>
                                                         <th>
-                                                            <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Close All Sessions</a>
+                                                            <a href="{{ route('user.session.close_all') }}" class="btn btn-danger btn-sm confirm-click"><i class="fas fa-sign-out-alt"></i> Close All Sessions</a>
                                                         </th>
                                                     </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        @else
+                                            <div class="alert alert-info text-center">No active game sessions</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

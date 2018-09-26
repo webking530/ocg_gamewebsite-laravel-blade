@@ -40,6 +40,9 @@ Route::get('policy', 'HomeController@policy')->name('home.policy');
 // User pages
 Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () {
     Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');
+
+    Route::get('session/{game}/close', 'Account\DashboardController@closeSession')->name('user.session.close');
+    Route::get('session/close-all', 'Account\DashboardController@closeAllSessions')->name('user.session.close_all');
 });
 
 // Admin pages
