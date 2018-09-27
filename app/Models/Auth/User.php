@@ -155,6 +155,7 @@ class User extends Authenticatable
         WHERE r.user_id = {$this->id}
         ");
 
+
         return $query[0]->ranking;
     }
 
