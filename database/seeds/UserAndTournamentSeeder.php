@@ -221,6 +221,7 @@ class UserAndTournamentSeeder extends Seeder
                     'prizes' => [mt_rand(2500, 3000), mt_rand(1500, 2000), mt_rand(500, 1000)],
                     'date_from' => $dateFrom,
                     'date_to' => $dateTo,
+                    'status' => Tournament::STATUS_FINISHED
                 ]);
 
                 foreach ($games as $game) {

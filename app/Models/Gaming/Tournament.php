@@ -20,6 +20,10 @@ class Tournament extends Model
         'prizes' => 'array'
     ];
 
+    const STATUS_PENDING = 0;
+    const STATUS_FINISHED = 1;
+    const STATUS_CANCELLED = -1;
+
     public function games() {
         return $this->belongsToMany(Game::class, 'tournament_game', 'tournament_id', 'game_id');
     }
