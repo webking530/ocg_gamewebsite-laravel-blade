@@ -188,4 +188,12 @@ class User extends Authenticatable
 
         DB::commit();
     }
+
+    public function isLowOnBalance() {
+        if ($this->low_balance_threshold <= 0) {
+            return false;
+        }
+
+        return $this->credits <= $this->low_balance_threshold;
+    }
 }

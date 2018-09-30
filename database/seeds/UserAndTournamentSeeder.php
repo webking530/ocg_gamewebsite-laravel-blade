@@ -25,7 +25,7 @@ class UserAndTournamentSeeder extends Seeder
             'credits' => 150,
             'country_code' => 'DE',
             'currency_code' => 'EUR',
-            'low_balance_threshold' => 0,
+            'low_balance_threshold' => 200,
             'role' => User::ROLE_USER,
             'locale' => 'en',
             'verified_identification' => true,

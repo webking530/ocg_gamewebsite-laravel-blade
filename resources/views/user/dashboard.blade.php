@@ -34,7 +34,10 @@
                                             <a href="#" class="btn btn-success btn-xlg"><i class="fas fa-plus-circle"></i> Add Money</a>
                                             <a href="#" class="btn btn-warning btn-xlg"><i class="fas fa-minus-circle"></i> Withdraw Money</a>
                                         </div>
-                                        <div class="alert alert-warning text-center"><i class="fas fa-exclamation-circle"></i> LOW BALANCE</div>
+
+                                        @if ($user->isLowOnBalance())
+                                            <div class="alert alert-warning text-center"><i class="fas fa-exclamation-circle"></i> LOW BALANCE</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
