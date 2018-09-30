@@ -28,7 +28,10 @@ Route::get('lottery/tab-content', 'LotteryController@getTabContent')->name('lott
 
 Route::get('lottery/{lottery}/watch', 'LotteryController@watch')->name('lottery.watch');
 
-Route::get('tournaments', 'HomeController@tournaments')->name('home.tournaments');
+Route::get('tournaments', 'TournamentController@tournaments')->name('home.tournaments');
+Route::get('tournaments-history/{group?}', 'TournamentController@history')->name('tournaments.history');
+Route::get('tournament/{tournament}/details', 'TournamentController@details')->name('tournaments.details');
+
 Route::get('bonuses', 'HomeController@bonuses')->name('home.bonuses');
 Route::get('profile/{username}', 'HomeController@userProfile')->name('home.user.profile');
 

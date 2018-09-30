@@ -190,5 +190,56 @@ class UserAndTournamentSeeder extends Seeder
             'user_id' => $user5->id,
             'total_win' => 500
         ]);
+
+        // Past tournaments
+        $users = [$user1,$user2,$user3,$user4,$user5];
+
+        foreach (Game::GROUP_LIST as $group) {
+            if ($group == Game::GROUP_OTHER) {
+                continue; // Skip this one for testing
+            }
+
+            /**
+             * @var \Carbon\Carbon $lastTournament
+             */
+            $lastTournament = null;
+
+            for ($i = 0; $i < 3; $i++) {
+                $games = Game::enabled()->where('group', $group)->orderByRaw('RAND()')->take(mt_rand(2,5))->get();
+
+                if ($lastTournament == null) {
+                    $dateFrom = \Carbon\Carbon::now()->subMonth();
+                    $dateTo = \Carbon\Carbon::now()->subMonth()->addDays(mt_rand(3,7));
+                } else {
+                    $dateFrom = $lastTournament->addDay();
+                    $dateTo = clone $dateFrom;
+                    $dateTo = $dateTo->addDays(mt_rand(3,7));
+                }
+
+                $tournament = Tournament::create([
+                    'group' => $group,
+                    'prizes' => [mt_rand(2500, 3000), mt_rand(1500, 2000), mt_rand(500, 1000)],
+                    'date_from' => $dateFrom,
+                    'date_to' => $dateTo,
+                ]);
+
+                foreach ($games as $game) {
+                    DB::table('tournament_game')->insert([
+                        'tournament_id' => $tournament->id,
+                        'game_id' => $game->id
+                    ]);
+                }
+
+                foreach ($users as $user) {
+                    DB::table('tournament_user')->insert([
+                        'tournament_id' => $tournament->id,
+                        'user_id' => $user->id,
+                        'total_win' => mt_rand(10, 1500)
+                    ]);
+                }
+
+                $lastTournament = clone $dateTo;
+            }
+        }
     }
 }

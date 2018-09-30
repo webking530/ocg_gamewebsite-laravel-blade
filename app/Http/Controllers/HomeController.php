@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Models\Bonuses\Bonus;
 use Models\Gaming\Game;
 use Models\Gaming\Jackpot;
-use Models\Gaming\Tournament;
 use Illuminate\Http\Request;
 use Models\Auth\User;
 
@@ -25,12 +24,6 @@ class HomeController extends Controller
         $game = Game::whereSlug($slug)->firstOrFail();
 
         return view('frontend.game', compact('game'));
-    }
-
-    public function tournaments() {
-        $tournaments = Tournament::orderBy('group', 'ASC')->get();
-
-        return view('frontend.tournaments', compact('tournaments'));
     }
 
     public function bonuses() {

@@ -1,3 +1,4 @@
+@inject('gameService', "Models\Gaming\GameService")
 @inject('statsService', "Models\Statistics\StatisticsService")
 @extends('frontend.layout.app')
 
@@ -157,11 +158,11 @@
                         <p class="lead">Click on any game <span class="alternative-font font-size-xl">...and play for free!</span></p>
 
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter btn-filter-active" data-group="-1">ALL GAMES</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_SLOT }}" data-show-board="1">SLOT</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_CARD }}">CARD</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_ROULETTE }}">ROULETTE</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_BINGO }}">BINGO</button>
-                        <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ \Models\Gaming\Game::GROUP_OTHER }}">OTHER</button>
+
+                        @foreach ($gameService->getGroupsList() as $group => $name)
+                            <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="{{ $group }}" @if ($group == \Models\Gaming\Game::GROUP_SLOT) data-show-board="1" @endif>{{ mb_strtoupper($name) }}</button>
+                        @endforeach
+
                         <button class="btn btn-3d btn-xlg btn-quaternary mt-md mb-xlg btn-filter" data-group="popular"><i class="fas fa-star"></i> POPULAR</button>
                     </div>
                 </div>

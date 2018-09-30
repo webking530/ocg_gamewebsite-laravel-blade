@@ -18,6 +18,14 @@ class Game extends Model
     const GROUP_BINGO = 3;
     const GROUP_OTHER = 4;
 
+    const GROUP_LIST = [
+        self::GROUP_SLOT,
+        self::GROUP_ROULETTE,
+        self::GROUP_CARD,
+        self::GROUP_BINGO,
+        self::GROUP_OTHER
+    ];
+
     const POPULAR_GAMES_AMOUNT = 8;
 
     public function winnings() {

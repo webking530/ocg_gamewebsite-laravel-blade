@@ -81,9 +81,9 @@
                                                         Lottery
                                                     </a>
                                                 </li>
-                                                <li class="{{ set_active('home.tournaments') }}">
+                                                <li class="{{ set_active('*tournaments*') }}">
                                                     <a href="{{ route('home.tournaments') }}">
-                                                        Tournament
+                                                        {{ trans('frontend/tournaments.meta.title') }}
                                                     </a>
                                                 </li>
                                                 <li class="{{ set_active('home.bonuses') }}">
@@ -107,9 +107,9 @@
                                                         Lottery
                                                     </a>
                                                 </li>
-                                                <li class="{{ set_active('home.tournaments') }}">
+                                                <li class="{{ set_active('*tournaments*') }}">
                                                     <a href="{{ route('home.tournaments') }}">
-                                                        Tournament
+                                                        {{ trans('frontend/tournaments.meta.title') }}
                                                     </a>
                                                 </li>
                                                 <li class="{{ set_active('home.bonuses') }}">

@@ -90,6 +90,18 @@ body {
     background-color: #a5612a;
 }
 
+.color-gold {
+    color: gold;
+}
+
+.color-silver {
+    color: silver;
+}
+
+.color-bronze {
+    color: #a5612a;
+}
+
 @media screen and (max-width: 767px) {
     .table-responsive {
         border: none;
@@ -167,4 +179,29 @@ body {
     top: 115px;
     right: 15px;
     z-index: 9999;
+}
+
+.white-space-normal {
+    white-space: normal !important;
+}
+
+.list-group-dark .list-group-item {
+    background-color: #1d2127;
+    border: 1px solid #2e353e;
+}
+
+.list-group-dark a.list-group-item,
+.list-group-dark button.list-group-item {
+    color: #fff;
+}
+
+.list-group-dark .list-group-item.active,
+.list-group-dark .list-group-item.active:focus,
+.list-group-dark .list-group-item.active:hover {
+    background-color: #337ab7;
+}
+
+.list-group-dark a.list-group-item:hover,
+.list-group-dark a.list-group-item:focus {
+    background-color: #383e48;
 }

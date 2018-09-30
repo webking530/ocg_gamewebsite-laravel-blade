@@ -15,9 +15,12 @@
     <div role="main" class="main">
         <div class="container">
 
-            <div class="row mt-lg">
-                <div class="col-md-12 center">
+            <div class="row mt-lg mb-xlg">
+                <div class="col-md-6 center">
                     <h2 class="mb-sm"><strong>{{ trans('frontend/tournaments.meta.title') }}</strong></h2>
+                </div>
+                <div class="col-md-6 center">
+                    <a href="{{ route('tournaments.history') }}" class="btn btn-xlg btn-quaternary white-space-normal"><i class="fas fa-calendar-alt"></i> {{ trans('frontend/tournaments.check_past_tournaments') }}</a>
                 </div>
             </div>
 
@@ -25,15 +28,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-pills nav-justified" role="tablist">
-                            @foreach ($tournaments as $tournament)
-                                <li role="presentation" class="@if ($tournament->group == \Models\Gaming\Game::GROUP_SLOT) active @endif"><a href="#tournament_{{ $tournament->group }}" aria-controls="home" role="tab" data-toggle="tab">{{ $tournament->formattedGroup }}</a></li>
+                            @foreach ($tournaments as $key => $tournament)
+                                <li role="presentation" class="@if ($key == 0) active @endif"><a href="#tournament_{{ $tournament->group }}" aria-controls="home" role="tab" data-toggle="tab">{{ $tournament->formattedGroup }}</a></li>
                             @endforeach
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            @foreach ($tournaments as $tournament)
-                                <div role="tabpanel" class="tab-pane @if ($tournament->group == \Models\Gaming\Game::GROUP_SLOT) active @endif" id="tournament_{{ $tournament->group }}">
+                            @foreach ($tournaments as $key => $tournament)
+                                <div role="tabpanel" class="tab-pane @if ($key == 0) active @endif" id="tournament_{{ $tournament->group }}">
 
                                     <h3 class="text-center"><i class="fas fa-clock"></i> Tournament ends on <abbr data-toggle="tooltip" data-original-title="{{ $tournament->date_to->format('l, F j, Y, g:i a') }}">{{ $tournament->date_to->diffForHumans() }}</abbr></h3>
 
@@ -58,22 +61,7 @@
                                         <div class="col-md-6">
                                             <div class="table-responsive">
                                                 <h3 class="heading-primary alternative-font"><i class="fas fa-users"></i> USERS PARTICIPATING <span class="badge" style="font-size:20px">{{ $tournament->users()->count() }}</span></h3>
-                                                <table class="table table-striped table-hover text-light" style="margin:auto">
-                                                    <thead>
-                                                    <tr>
-                                                        <th style="width: 50px">No.</th>
-                                                        <th style="width: 200px">Username</th>
-                                                        <th style="width: 200px">Total Win</th>
-                                                    </tr>
-                                                    @foreach ($tournament->users as $position => $user)
-                                                        <tr>
-                                                            <td>{{ $position + 1 }}</td>
-                                                            <td>@include('frontend.partials.username', ['user' => $user])</td>
-                                                            <td><i class="fas fa-coins money-earned"></i> {{ number_format($user->pivot->total_win) }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </thead>
-                                                </table>
+                                                @include('frontend.tournaments.partials.users_table')
                                             </div>
                                         </div>
 
