@@ -81,7 +81,7 @@
                                                             </td>
                                                             <td>
                                                                 <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Demo</a>
-                                                                <a href="#" class="btn btn-warning btn-sm">Live</a>
+                                                                <a href="{{ route('user.game.play_live', ['slug' => $game->slug]) }}" class="btn btn-warning btn-sm">Live</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

@@ -104,7 +104,7 @@
                                                             <td class="valign-middle">@datetime($game->pivot->created_at)</td>
                                                             <td class="valign-middle">
                                                                 <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Play Demo</a>
-                                                                <a href="#" class="btn btn-warning btn-sm">Play Live</a>
+                                                                <a href="{{ route('user.game.play_live', ['slug' => $game->slug]) }}" class="btn btn-warning btn-sm">Play Live</a>
                                                                 <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-sm confirm-click"><i class="fas fa-sign-out-alt"></i> Close Session</a>
                                                             </td>
                                                         </tr>

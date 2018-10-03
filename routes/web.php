@@ -44,6 +44,10 @@ Route::get('policy', 'HomeController@policy')->name('home.policy');
 Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () {
     Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');
 
+    Route::get('game/live/{slug}', 'Account\GameController@playLive')->name('user.game.play_live');
+
+    Route::get('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTickets')->name('user.lottery.buy_tickets');
+
     Route::get('session/{game}/close', 'Account\DashboardController@closeSession')->name('user.session.close');
     Route::get('session/close-all', 'Account\DashboardController@closeAllSessions')->name('user.session.close_all');
 });
