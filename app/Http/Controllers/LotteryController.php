@@ -18,7 +18,24 @@ class LotteryController extends Controller
             'high_stake' => $highStake
         ];
 
-        return view('frontend.lottery', compact('lotteries'));
+        $lowStakeLatest = Lottery::getLatestWin(Lottery::TYPE_LOW_STAKE);
+        $lowStakeHighest = Lottery::getHighestWin(Lottery::TYPE_LOW_STAKE);
+
+        $midStakeLatest = Lottery::getLatestWin(Lottery::TYPE_MID_STAKE);
+        $midStakeHighest = Lottery::getHighestWin(Lottery::TYPE_MID_STAKE);
+
+        $highStakeLatest = Lottery::getLatestWin(Lottery::TYPE_HIGH_STAKE);
+        $highStakeHighest = Lottery::getHighestWin(Lottery::TYPE_HIGH_STAKE);
+
+        return view('frontend.lottery', compact(
+            'lotteries',
+            'lowStakeLatest',
+            'lowStakeHighest',
+            'midStakeLatest',
+            'midStakeHighest',
+            'highStakeLatest',
+            'highStakeHighest'
+        ));
     }
 
     public function getCountdown(Request $request) {

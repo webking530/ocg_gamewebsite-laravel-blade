@@ -30,6 +30,10 @@ class Lottery extends Model
         return $this->hasMany(LotteryTicket::class, 'lottery_id');
     }
 
+    public function unsoldTickets() {
+        return $this->hasMany(LotteryTicket::class, 'lottery_id')->whereNull('user_id')->orderByRaw('RAND()');
+    }
+
     public function isActive() {
         return (int)$this->status === self::STATUS_ACTIVE;
     }
@@ -48,6 +52,25 @@ class Lottery extends Model
 
     public function getDateEndAttribute() {
         return $this->date_begin->addHours(24);
+    }
+
+    public function getDaysSinceAttribute() {
+        $days = $this->date_begin->diffInDays(Carbon::now());
+        $days = $days == 0 ? 1 : $days;
+
+        return $days;
+    }
+
+    public function getStakeTextAttribute() {
+        switch ($this->type) {
+            default:
+            case self::TYPE_LOW_STAKE:
+                return 'low_stake';
+            case self::TYPE_MID_STAKE:
+                return 'mid_stake';
+            case self::TYPE_HIGH_STAKE:
+                return 'high_stake';
+        }
     }
 
     public function isSoldOut() {
@@ -98,5 +121,24 @@ class Lottery extends Model
 
     public function getPotSize() {
         return (int)($this->tickets()->whereNotNull('user_id')->count() * $this->ticket_price * 0.5);
+    }
+
+    public function canDisplayPrize() {
+        return $this->getPotSize() >= $this->prize;
+    }
+
+    public static function getLatestWin($stake) {
+        return self::where('type', $stake)->where('status', self::STATUS_FINALIZED)->latest()->first();
+    }
+
+    public static function getHighestWin($stake) {
+        return  self::join('lottery_ticket', 'lotteries.id', '=', 'lottery_ticket.lottery_id')
+                ->where('lotteries.type', $stake)
+                ->where('lotteries.status', self::STATUS_FINALIZED)
+                ->whereNotNull('lottery_ticket.user_id')
+                ->groupBy('lotteries.id')
+                ->orderByRaw('COUNT(lottery_ticket.id) DESC')
+                ->select('lotteries.*')
+                ->first();
     }
 }

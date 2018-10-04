@@ -32,11 +32,27 @@
 </head>
 <body>
 @if (Session::has('flash_message'))
-    <div id="flash-notifier" class="alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
+    <div class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <p><i class="fas {{ Session::get('flash_icon') }}"></i> {{ Session::get('flash_message') }}</p>
     </div>
 @endif
+
+<div id="success-notifier" class="flash-notifier alert alert-success" role="alert" style="display: none">
+    <p><i class="fas fa-check"></i> <span class="notifier-text-content"></span></p>
+</div>
+
+<div id="info-notifier" class="flash-notifier alert alert-info" role="alert" style="display: none">
+    <p><i class="fas fa-info-circle"></i> <span class="notifier-text-content"></span></p>
+</div>
+
+<div id="warning-notifier" class="flash-notifier alert alert-warning" role="alert" style="display: none">
+    <p><i class="fas fa-info-circle"></i> <span class="notifier-text-content"></span></p>
+</div>
+
+<div id="danger-notifier" class="flash-notifier alert alert-danger" role="alert" style="display: none">
+    <p><i class="fas fa-times"></i> <span class="notifier-text-content"></span></p>
+</div>
 
 <div class="body">
     <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 0, 'stickySetTop': '0px', 'stickyChangeLogo': false}">

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.42 on 2018-08-26 15:46:14.
+ * Generated for Laravel 5.5.42 on 2018-10-04 02:58:04.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1647,7 +1647,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \Models\Auth\User|null 
          * @static 
          */ 
         public static function user()
@@ -1682,7 +1682,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\User|false 
+         * @return \Models\Auth\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1746,7 +1746,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User|false 
+         * @return \Models\Auth\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1793,7 +1793,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \Models\Auth\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1895,7 +1895,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \Models\Auth\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1941,7 +1941,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \App\User 
+         * @return \Models\Auth\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -15581,6 +15581,36 @@ namespace Mcamara\LaravelLocalization\Facades {
  
 }
 
+namespace Laracasts\Utilities\JavaScript { 
+
+    class JavaScriptFacade {
+        
+        /**
+         * Bind the given array of variables to the view.
+         *
+         * @static 
+         */ 
+        public static function put()
+        {
+            return \Laracasts\Utilities\JavaScript\Transformers\Transformer::put();
+        }
+        
+        /**
+         * Translate the array of PHP variables to a JavaScript syntax.
+         *
+         * @param array $variables
+         * @return array 
+         * @static 
+         */ 
+        public static function constructJavaScript($variables)
+        {
+            return \Laracasts\Utilities\JavaScript\Transformers\Transformer::constructJavaScript($variables);
+        }
+         
+    }
+ 
+}
+
 namespace Monarobase\CountryList { 
 
     class CountryListFacade {
@@ -17799,6 +17829,8 @@ namespace  {
     class Input extends \Illuminate\Support\Facades\Input {}
 
     class LaravelLocalization extends \Mcamara\LaravelLocalization\Facades\LaravelLocalization {}
+
+    class JavaScript extends \Laracasts\Utilities\JavaScript\JavaScriptFacade {}
 
     class Countries extends \Monarobase\CountryList\CountryListFacade {}
  

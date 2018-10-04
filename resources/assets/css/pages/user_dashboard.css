@@ -22,31 +22,8 @@
     color: black;
     border-radius: 100px;
 }
-/*
-.dashboard-badges::-webkit-scrollbar {
-    width: 12px;
-}
 
-.dashboard-badges::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgb(55, 80, 191);;
-    border-radius: 10px;
 
-}
-
-.dashboard-badges::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    background: #4489cb;
-}
-*/
-
-.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y, .ps__thumb-y {
-    background-color: #4489cb;
-}
-
-.ps .ps__rail-x:hover, .ps .ps__rail-y:hover, .ps .ps__rail-x:focus, .ps .ps__rail-y:focus, .ps .ps__rail-x.ps--clicking, .ps .ps__rail-y.ps--clicking {
-    background-color: #1d2127ab;
-}
 
 .new-placeholder {
     display: block;

@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    const ps = new PerfectScrollbar('.custom-scroll');
+    //const ps = new PerfectScrollbar('.custom-scroll');
 });

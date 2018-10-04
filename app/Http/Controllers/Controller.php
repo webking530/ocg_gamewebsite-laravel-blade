@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use JavaScript;
 use Models\Auth\User;
+use Models\Gaming\LotteryTicket;
 use Models\Notifier\FlashNotifier;
 
 class Controller extends BaseController
@@ -45,7 +46,8 @@ class Controller extends BaseController
                 'confirmYes' => trans('app.common.confirm_text'),
                 'confirmNo' => trans('app.common.cancel_text'),
                 'confirmTitle' => trans('app.common.are_you_sure'),
-                'confirmContent' => trans('app.common.action_cannot_undone')
+                'confirmContent' => trans('app.common.action_cannot_undone'),
+                'TICKET_RESERVATION_TIME_MINUTES' => LotteryTicket::RESERVATION_TIME_MINUTES
             ]);
 
             return $next($request);

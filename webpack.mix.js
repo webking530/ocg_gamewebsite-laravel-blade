@@ -5,12 +5,14 @@ mix.styles([
     'resources/assets/vendor/bootstrap/css/bootstrap.min.css',
     'resources/assets/vendor/fontawesome-5.2.0/all.min.css',
     'resources/assets/vendor/jquery-confirm/jquery-confirm.min.css',
+    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.css',
 ], 'public/compiled/css/shared.css');
 
 mix.scripts([
     'resources/assets/vendor/jquery-3.3.1/jquery-3.3.1.js',
     'resources/assets/vendor/bootstrap/js/bootstrap.min.js',
     'resources/assets/vendor/jquery-confirm/jquery-confirm.min.js',
+    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
     'resources/assets/js/app.js',
 ], 'public/compiled/js/shared.js');
 
@@ -73,14 +75,16 @@ mix.scripts([
 ], 'public/compiled/js/pages/lottery.js');
 
 mix.styles([
-    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.css',
     'resources/assets/css/pages/user_dashboard.css',
 ], 'public/compiled/css/pages/user_dashboard.css');
 
 mix.scripts([
-    'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
     'resources/assets/js/pages/user_dashboard.js',
 ], 'public/compiled/js/pages/user_dashboard.js');
+
+mix.scripts([
+    'resources/assets/js/pages/buy_tickets.js',
+], 'public/compiled/js/pages/buy_tickets.js');
 
 // Lumino Admin Template
 mix.styles([

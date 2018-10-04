@@ -173,7 +173,7 @@ body {
     line-height: 40px;
 }
 
-#flash-notifier {
+.flash-notifier {
     position: fixed;
     width: 300px;
     top: 115px;
@@ -204,4 +204,12 @@ body {
 .list-group-dark a.list-group-item:hover,
 .list-group-dark a.list-group-item:focus {
     background-color: #383e48;
+}
+
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y, .ps__thumb-y {
+    background-color: #4489cb;
+}
+
+.ps .ps__rail-x:hover, .ps .ps__rail-y:hover, .ps .ps__rail-x:focus, .ps .ps__rail-y:focus, .ps .ps__rail-x.ps--clicking, .ps .ps__rail-y.ps--clicking {
+    background-color: #1d2127ab;
 }

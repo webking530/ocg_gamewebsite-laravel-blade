@@ -5,6 +5,11 @@ return [
         'keywords' => 'lottery',
         'description' => 'Participate in our lottery and earn big prizes!'
     ],
+    'meta_buy_tickets' => [
+        'title' => 'Buy Lottery Tickets',
+        'keywords' => 'Buy Lottery Tickets',
+        'description' => 'Buy Lottery Tickets'
+    ],
     'stakes' => 'Stakes',
     'low_stake' => 'Low Stake Lottery',
     'mid_stake' => 'Mid Stake Lottery',
@@ -32,5 +37,10 @@ return [
     'winner' => 'WINNER',
     'congratulations' => 'Congratulations',
     'prize_won' => 'Prize Won',
-    'sold_out' => 'Tickets Sold Out!'
+    'sold_out' => 'Tickets Sold Out!',
+
+    'buy_tickets' => [
+        'ticket_taken' => 'This ticket is already taken',
+        'max_reservations' => 'Max reservations reached. You can only reserve a max of :max tickets at a time.'
+    ]
 ];

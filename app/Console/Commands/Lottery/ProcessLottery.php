@@ -40,6 +40,14 @@ class ProcessLottery extends Command
      */
     public function handle()
     {
+        $this->processPendingLotteries();
+        $this->processActiveLotteries();
+    }
+
+    /**
+     * When the lottery time comes, choose a random winning ticket and pay the prize to the user
+     */
+    private function processPendingLotteries() {
         $now = Carbon::now();
         $lotteries = Lottery::whereStatus(Lottery::STATUS_PENDING)->get();
 
@@ -64,10 +72,30 @@ class ProcessLottery extends Command
             $ticket->save();
 
             // after selecting the winning ticket, add the lottery prize to the user balance
-            $ticket->user->credits += $lottery->prize;
+            $ticket->user->credits += $lottery->getPotSize();
             $ticket->user->save();
 
             DB::commit();
+        }
+    }
+
+    /**
+     * Lotteries stay active for 24 hours, then they are finalized
+     */
+    private function processActiveLotteries() {
+        $now = Carbon::now();
+        $lotteries = Lottery::whereStatus(Lottery::STATUS_ACTIVE)->get();
+
+        /**
+         * @var Lottery $lottery
+         */
+        foreach ($lotteries as $lottery) {
+            if ($now->diffInHours($lottery->date_begin, false) < 24) {
+                continue;
+            }
+
+            $lottery->status = Lottery::STATUS_FINALIZED;
+            $lottery->save();
         }
     }
 }

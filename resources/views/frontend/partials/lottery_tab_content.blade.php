@@ -13,12 +13,17 @@
             <hr>
             <div class="text-center mb-md">
                 <h2 style="font-size:50px" class="alternative-font text-blue mb-lg mt-lg">{{ trans('frontend/lottery.prize') }}</h2>
-                <h3 class="money-earned"><i class="fas fa-coins"></i> {{ number_format($lottery->getPotSize()) }}</h3>
+
+                @if ($lottery->canDisplayPrize())
+                    <h3 class="money-earned"><i class="fas fa-coins"></i> {{ number_format($lottery->getPotSize()) }}</h3>
+                @else
+                    <h3 class="money-earned"><i class="fas fa-spin fa-spinner"></i> Calculating</h3>
+                @endif
 
                 @if ($lottery->isSoldOut())
                     <h3 class="label label-danger" style="font-size:25px"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.sold_out') }}</h3>
                 @else
-                    <a href="#" class="btn btn-success btn-lg"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets_now') }}</a>
+                    <a href="{{ route('user.lottery.buy_tickets', ['lottery' => $lottery]) }}" class="btn btn-success btn-lg"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets_now') }}</a>
                 @endif
             </div>
         </div>
@@ -45,7 +50,7 @@
 
             <div class="lottery-numbers">
                 @foreach ($lottery->getWinningTicket()->numbers as $number)
-                    <span>{{ $number }}</span>
+                    <span>{{ sprintf("%02d", $number) }}</span>
                 @endforeach
             </div>
 
@@ -56,9 +61,11 @@
 
         <hr>
 
-        <div class="text-center">
-            <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
-        </div>
+        @if (Auth::check())
+            <div class="text-center">
+                <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
+            </div>
+        @endif
     @else
         <div class="">
             <h2 style="font-size:30px" class="alternative-font text-center">

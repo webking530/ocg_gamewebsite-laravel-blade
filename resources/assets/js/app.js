@@ -1,4 +1,23 @@
+Number.prototype.pad = function(size) {
+    var s = String(this);
+    while (s.length < (size || 2)) {s = "0" + s;}
+    return s;
+}
+
+function showNotifier(type, content) {
+    var $notifier = $('#'+type+'-notifier');
+
+    $notifier.find('.notifier-text-content').html(content);
+    $notifier.fadeIn(1500);
+
+    setTimeout(function() {
+        $notifier.fadeOut(1500);
+    }, 3000);
+}
+
 $(document).ready(function() {
+    const ps = new PerfectScrollbar('.custom-scroll');
+
     $('[data-toggle="tooltip"]').tooltip({html:true});
 
     $('#flash-notifier').fadeIn(1500);

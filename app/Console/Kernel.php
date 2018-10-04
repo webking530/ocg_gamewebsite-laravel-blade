@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\Pricing\ExchangeUpdate::class,
         Commands\Pricing\Notification::class,
         Commands\Lottery\ProcessLottery::class,
+        Commands\Lottery\ResetTicketReservations::class,
         Commands\Jackpot\JackpotStats::class,
         Commands\Tournament\ProcessFinishedTournaments::class,
     ];
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('pricing:notification')->environments('production')->hourly()->withoutOverlapping();
 
         $schedule->command('lottery:process')->environments('production')->everyMinute()->withoutOverlapping();
+        $schedule->command('lottery:reset-ticket-reservations')->environments('production')->everyMinute()->withoutOverlapping();
 
         $schedule->command('tournaments:process')->environments('production')->everyMinute()->withoutOverlapping();
 

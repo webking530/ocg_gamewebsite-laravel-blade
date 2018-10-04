@@ -24,3 +24,57 @@ iframe.lottery-frame {
     border-radius: 10px;
     overflow: hidden;
 }
+
+.lottery-tickets-container {
+    overflow: hidden;
+    height: 600px;
+    position:relative;
+    background: #1d2127;
+    margin-top: 20px;
+    padding: 2%;
+}
+
+.lottery-tickets-container > div.numbers {
+    display: inline-block;
+    width: 47%;
+    min-height: 90px;
+    margin: 3% 1% 3%;
+    border: 5px solid #4e4e4e;
+    cursor: pointer;
+}
+
+.lottery-tickets-container > div.numbers:hover {
+    border: 5px solid #4489cb;
+}
+
+.lottery-tickets-container > div.numbers.active,
+.lottery-tickets-container > div.numbers:active {
+    border: 5px solid #4aa447;
+}
+
+.lottery-tickets-container > div.numbers.reserved {
+    border: 5px solid #b60018;
+    cursor: not-allowed;
+}
+
+.lottery-tickets-container > div.numbers span {
+    color: white;
+    font: bold 40px/80px verdana, helvetica, sans-serif;
+    background: #ed9c27;
+    padding: 10px;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+
+.ticket-legend span {
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+#clock-reservation {
+    font-weight: bold;
+    font-size:60px;
+    margin-top: 25px;
+    display: inline-block;
+}

@@ -64,6 +64,21 @@ class LotterySeeder extends Seeder
             'winner' => false
         ]);
 
+        for ($ticket = 0; $ticket < 50; $ticket++) {
+            LotteryTicket::create([
+                'lottery_id' => $lotteryLow->id,
+                'numbers' => [
+                    mt_rand(1, 36),
+                    mt_rand(1, 36),
+                    mt_rand(1, 36),
+                    mt_rand(1, 36),
+                    mt_rand(1, 36),
+                    mt_rand(1, 36),
+                ],
+                'winner' => false
+            ]);
+        }
+
         LotteryTicket::create([
             'lottery_id' => $lotteryMid->id,
             'user_id' => 1,
@@ -88,5 +103,62 @@ class LotterySeeder extends Seeder
             'numbers' => [20,21,22,23,24,25],
             'winner' => false
         ]);
+
+        /*
+         * Create 2 finalized lotteries for each stake, to test out Last and Highest winner
+         */
+
+
+        $stakes = [Lottery::TYPE_LOW_STAKE, Lottery::TYPE_MID_STAKE, Lottery::TYPE_HIGH_STAKE];
+
+        foreach ($stakes as $stake) {
+            for ($i = 1; $i <= 2; $i++) {
+                $lottery = Lottery::create([
+                    'prize' => 100 * pow(10, $stake),
+                    'date_open' => \Carbon\Carbon::now()->subMonth($i),
+                    'date_close' => \Carbon\Carbon::now()->subMonth($i)->addDays(7),
+                    'date_begin' => \Carbon\Carbon::now()->subMonth($i)->addDays(8),
+                    'status' => Lottery::STATUS_FINALIZED,
+                    'type' => $stake,
+                    'ticket_price' => 10 * pow(10, $stake)
+                ]);
+
+                $users = \Models\Auth\User::take(mt_rand(3, 5))->orderByRaw('RAND()')->get();
+
+                foreach ($users as $key => $user) {
+                    LotteryTicket::create([
+                        'lottery_id' => $lottery->id,
+                        'user_id' => $user->id,
+                        'numbers' => [
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                        ],
+                        'winner' => $key == 0 ? true : false
+                    ]);
+                }
+
+                // Unsold tickets
+                $extraTickets = mt_rand(5, 10);
+                for ($j = 0; $j < $extraTickets; $j++) {
+                    LotteryTicket::create([
+                        'lottery_id' => $lottery->id,
+                        'user_id' => null,
+                        'numbers' => [
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                            mt_rand(1, 36),
+                        ],
+                        'winner' => false
+                    ]);
+                }
+            }
+        }
     }
 }
