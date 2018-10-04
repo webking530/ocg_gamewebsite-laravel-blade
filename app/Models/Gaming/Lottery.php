@@ -136,7 +136,7 @@ class Lottery extends Model
                 ->where('lotteries.type', $stake)
                 ->where('lotteries.status', self::STATUS_FINALIZED)
                 ->whereNotNull('lottery_ticket.user_id')
-                ->groupBy('lotteries.id')
+                ->groupBy(['lotteries.id', 'lotteries.date_begin', 'lotteries.type', 'lotteries.status', 'lotteries.ticket_price'])
                 ->orderByRaw('COUNT(lottery_ticket.id) DESC')
                 ->selectRaw('lotteries.id, lotteries.date_begin, lotteries.type, lotteries.status, lotteries.ticket_price')
                 ->first();
