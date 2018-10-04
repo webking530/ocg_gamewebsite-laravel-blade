@@ -12,12 +12,15 @@ function updateReservationClock(reservationTime) {
     $('#clock-reservation').html(mins.pad(2) + ':' + secs.pad(2));
 }
 
+
+
 $(document).ready(function() {
     var $totalPriceElem = $('#totalPrice');
     var $buyButton = $('#buyBtn');
     var reserveRoute = $('[data-reserve-route]').data('reserve-route');
     var checkTicketsRoute = $('[data-check-route]').data('check-route');
     var ticketPrice = parseInt($('[data-ticket-price]').data('ticket-price'));
+    var $ticketsContainer = $('.lottery-tickets-container');
 
     var totalPrice = 0;
 
@@ -46,11 +49,13 @@ $(document).ready(function() {
 
             if (action === 'add_reserve') {
                 $this.addClass('active');
+                $this.removeClass('available');
                 $this.find('input').prop('checked', true);
 
                 totalPrice += ticketPrice;
             } else {
                 $this.removeClass('active');
+                $this.addClass('available');
                 $this.find('input').prop('checked', false);
 
                 totalPrice -= ticketPrice;
@@ -65,21 +70,49 @@ $(document).ready(function() {
         updateReservationClock(reservationTime);
 
         $.get(checkTicketsRoute, null, function(tickets) {
-            $.each($('.numbers'), function(k, number) {
-                if ($(number).hasClass('active')) {
-                    return true;
-                }
-
+            $.each($('.numbers.available'), function(k, number) {
                 var ticketId = $(number).data('ticket-id');
 
                 if (tickets.indexOf(ticketId) !== -1) {
                     $(number).addClass('reserved');
+                    $(number).removeClass('available');
                 } else {
                     $(number).removeClass('reserved');
+                    $(number).addClass('available');
                 }
 
                 $(number).find('input').prop('checked', false);
             });
         });
     }, 1000);
+
+    $('#pickRandom').on('click', function() {
+        var $availableNumbers = $('.numbers.available');
+        var totalTickets = $availableNumbers.length;
+        var random = Math.floor(Math.random() * totalTickets) + 1;
+
+        $('html, body').stop().animate({
+            scrollTop: $ticketsContainer.offset().top - 120
+        }, 500, function() {
+            $ticketsContainer.stop().animate({scrollTop: 0}, 0, function() {
+                $.each($availableNumbers, function(k, number) {
+                    if (k === random) {
+                        $(number).trigger('click');
+
+                        $ticketsContainer.stop().animate({scrollTop: $(number).position().top}, function() {
+                            $(number).animate({ 'zoom': 1.05 }, 400, function() {
+                                $(number).animate({ 'zoom': 1 }, 400);
+                            });
+                        });
+
+                        return false;
+                    }
+                });
+            });
+        });
+
+
+
+
+    });
 });

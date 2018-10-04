@@ -64,7 +64,7 @@
                                     <h3 class="mb-sm"><i class="fas fa-ticket-alt"></i> Ticket Price</h3>
                                     <h2 class="money-earned"><i class="fas fa-coins"></i> {{ number_format($lottery->ticket_price) }}</h2>
 
-                                    {{--<button class="btn btn-primary btn-lg white-space-normal mb-sm"><i class="fas fa-question-circle"></i> Pick a random one for me</button>--}}
+                                    <button type="button" id="pickRandom" class="btn btn-primary btn-lg white-space-normal mb-sm"><i class="fas fa-question-circle"></i> Pick a random one for me</button>
                                     <a href="{{ route('user.lottery.buy_tickets', ['lottery' => $lottery]) }}" class="btn btn-warning btn-lg white-space-normal mb-sm"><i class="fas fa-eraser"></i> Clear All Selections</a>
 
                                     <button id="buyBtn" type="submit" class="btn btn-success btn-lg white-space-normal mb-sm" disabled><i class="fas fa-shopping-cart"></i> Buy Selected Tickets (<i class="fas fa-coins money-earned"></i> <span id="totalPrice">0</span>)</button>
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-12 custom-scroll lottery-tickets-container" data-ticket-price="{{ $lottery->ticket_price }}" data-reserve-route="{{ route('user.lottery.reserve_ticket') }}" data-check-route="{{ route('user.lottery.check_ticket_reservation', ['lottery' => $lottery]) }}">
                                         @foreach ($lottery->unsoldTickets as $ticket)
-                                            <div class="numbers" data-ticket-id="{{ $ticket->id }}">
+                                            <div class="numbers available" data-ticket-id="{{ $ticket->id }}">
                                             @foreach ($ticket->numbers as $number)
                                                 <span>{{ sprintf("%02d", $number) }}</span>
                                             @endforeach
