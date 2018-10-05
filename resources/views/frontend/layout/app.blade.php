@@ -92,7 +92,7 @@
                                                         Casino Games
                                                     </a>
                                                 </li>
-                                                <li class="{{ set_active('lottery.index') }}">
+                                                <li class="{{ set_active('*lottery*') }}">
                                                     <a href="{{ route('lottery.index') }}">
                                                         Lottery
                                                     </a>
