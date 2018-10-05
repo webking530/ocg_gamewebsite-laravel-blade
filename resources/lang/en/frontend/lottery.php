@@ -55,7 +55,7 @@ return [
         'max_reservations' => 'Max reservations reached. You can only reserve a max of :max tickets at a time.',
         'must_select_to_buy' => 'You must select at least 1 ticket to buy',
         'one_selected_ticket_not_available' => 'One of the tickets you selected is not available for sale. It may have been bought already or your reservation on it expired.',
-        'buy_confirm_content' => 'By proceeding with this purchase the credits will automatically be deducted from your account balance.',
+        'buy_confirm_content' => 'By proceeding with this purchase, the credits will automatically be deducted from your account balance.',
         'see_my_bought_tickets' => 'See my bought tickets',
         'reservations_closed' => 'Reservations for this lottery are closed'
     ],
