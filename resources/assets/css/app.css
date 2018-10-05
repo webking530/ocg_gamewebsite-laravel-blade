@@ -2,6 +2,10 @@ body {
     color: #aaa;
 }
 
+.inline-block {
+    display: inline-block;
+}
+
 .btn-play {
     width: 92px;
 }

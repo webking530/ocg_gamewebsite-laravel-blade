@@ -10,6 +10,16 @@ return [
         'keywords' => 'Buy Lottery Tickets',
         'description' => 'Buy Lottery Tickets'
     ],
+    'meta_my_tickets' => [
+        'title' => 'My Lottery Tickets',
+        'keywords' => 'My Lottery Tickets',
+        'description' => 'My Lottery Tickets'
+    ],
+    'meta_cancelled' => [
+        'title' => 'Cancelled Lotteries',
+        'keywords' => 'Cancelled Lotteries',
+        'description' => 'Cancelled Lotteries'
+    ],
     'stakes' => 'Stakes',
     'low_stake' => 'Low Stake Lottery',
     'mid_stake' => 'Mid Stake Lottery',
@@ -32,6 +42,7 @@ return [
 
     'lottery_in_progress' => 'Lottery is COMPLETED!',
     'lottery_starting' => 'Lottery is about to start, please wait while load the necessary info',
+    'lottery_cancelled' => 'Lottery was CANCELLED!',
 
     'watch_results' => 'Watch Lottery Results',
     'winner' => 'WINNER',
@@ -41,6 +52,14 @@ return [
 
     'buy_tickets' => [
         'ticket_taken' => 'This ticket is already taken',
-        'max_reservations' => 'Max reservations reached. You can only reserve a max of :max tickets at a time.'
-    ]
+        'max_reservations' => 'Max reservations reached. You can only reserve a max of :max tickets at a time.',
+        'must_select_to_buy' => 'You must select at least 1 ticket to buy',
+        'one_selected_ticket_not_available' => 'One of the tickets you selected is not available for sale. It may have been bought already or your reservation on it expired.',
+        'buy_confirm_content' => 'By proceeding with this purchase the credits will automatically be deducted from your account balance.',
+        'see_my_bought_tickets' => 'See my bought tickets',
+        'reservations_closed' => 'Reservations for this lottery are closed'
+    ],
+    'view_cancelled_lotteries' => 'View Cancelled Lotteries',
+    'cancelled_lotteries_explanation' => 'The following lotteries were cancelled due to insufficient funds. All credits spent on tickets were automatically refunded to your account balance.',
+    'last_lottery_cancelled' => 'Last lottery was cancelled due to insufficient funds.'
 ];

@@ -34,12 +34,24 @@ class Lottery extends Model
         return $this->hasMany(LotteryTicket::class, 'lottery_id')->whereNull('user_id')->orderByRaw('RAND()');
     }
 
+    public function scopeCancelled($query) {
+        return $query->where('status', Lottery::STATUS_CANCELLED);
+    }
+
     public function isActive() {
         return (int)$this->status === self::STATUS_ACTIVE;
     }
 
     public function isPending() {
         return (int)$this->status === self::STATUS_PENDING;
+    }
+
+    public function isCancelled() {
+        return (int)$this->status === self::STATUS_CANCELLED;
+    }
+
+    public function isCompleted() {
+        return (int)$this->status === self::STATUS_FINALIZED;
     }
 
     public function getWinningTicket() {

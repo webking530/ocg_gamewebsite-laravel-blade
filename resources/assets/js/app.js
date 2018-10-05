@@ -16,11 +16,40 @@ function showNotifier(type, content) {
 }
 
 $(document).ready(function() {
-    const ps = new PerfectScrollbar('.custom-scroll');
+    if ($('.custom-scroll').length > 0) {
+        const ps = new PerfectScrollbar('.custom-scroll');
+    }
 
     $('[data-toggle="tooltip"]').tooltip({html:true});
 
     $('#flash-notifier').fadeIn(1500);
+
+    $('.confirm-submit').on('submit', function(ev) {
+        ev.preventDefault();
+        var $form = $(this);
+
+        $.confirm({
+            title: confirmTitle,
+            content: $form.data('confirm-content') === undefined ? confirmContent : $form.data('confirm-content'),
+            theme: 'material',
+            type: 'blue',
+            icon: 'fas fa-info-circle',
+            closeIcon: true,
+            closeIconClass: 'fas fa-times',
+            buttons: {
+                confirm: {
+                    text: confirmYes,
+                    action: function () {
+                        $form.unbind('submit');
+                        $form.submit();
+                    }
+                },
+                cancel: {
+                    text: confirmNo
+                },
+            }
+        });
+    });
 
     $('.confirm-click').on('click', function(ev) {
         ev.preventDefault();

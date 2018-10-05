@@ -113,6 +113,17 @@ class LotterySeeder extends Seeder
 
         foreach ($stakes as $stake) {
             for ($i = 1; $i <= 2; $i++) {
+                // Some cancelled lotteries for testing
+                Lottery::create([
+                    'prize' => 100 * pow(10, $stake),
+                    'date_open' => \Carbon\Carbon::now()->subMonth($i),
+                    'date_close' => \Carbon\Carbon::now()->subMonth($i)->addDays(7),
+                    'date_begin' => \Carbon\Carbon::now()->subMonth($i)->addDays(8),
+                    'status' => Lottery::STATUS_CANCELLED,
+                    'type' => $stake,
+                    'ticket_price' => 10 * pow(10, $stake)
+                ]);
+
                 $lottery = Lottery::create([
                     'prize' => 100 * pow(10, $stake),
                     'date_open' => \Carbon\Carbon::now()->subMonth($i),

@@ -23,5 +23,6 @@ return [
         'action_cannot_undone' => 'This action cannot be undone.'
     ],
     'days' => ':days day ago|:days days ago',
-    'since_date' => 'Since :date'
+    'since_date' => 'Since :date',
+    'not_enough_credits' => 'You do not have enough credits to perform this operation'
 ];

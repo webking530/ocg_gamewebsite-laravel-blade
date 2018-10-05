@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Models\Gaming\Lottery;
 use Illuminate\Http\Request;
 
 class LotteryController extends Controller
 {
     public function index() {
-        $lowStake = Lottery::whereType(Lottery::TYPE_LOW_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first();
-        $midStake = Lottery::whereType(Lottery::TYPE_MID_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first();
-        $highStake = Lottery::whereType(Lottery::TYPE_HIGH_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first();
-
         $lotteries = [
-            'low_stake' => $lowStake,
-            'mid_stake' => $midStake,
-            'high_stake' => $highStake
+            'low_stake' => Lottery::whereType(Lottery::TYPE_LOW_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first(),
+            'mid_stake' => Lottery::whereType(Lottery::TYPE_MID_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first(),
+            'high_stake' => Lottery::whereType(Lottery::TYPE_HIGH_STAKE)->whereIn('status', [Lottery::STATUS_ACTIVE, Lottery::STATUS_PENDING])->first()
+        ];
+
+        $sevenDaysAgo = Carbon::now()->subDays(7);
+        $cancelledLotteries = [
+            'low_stake' => Lottery::whereType(Lottery::TYPE_LOW_STAKE)->cancelled()->where('updated_at', '>=', $sevenDaysAgo)->orderBy('updated_at', 'DESC')->first(),
+            'mid_stake' => Lottery::whereType(Lottery::TYPE_MID_STAKE)->cancelled()->where('updated_at', '>=', $sevenDaysAgo)->orderBy('updated_at', 'DESC')->first(),
+            'high_stake' => Lottery::whereType(Lottery::TYPE_HIGH_STAKE)->cancelled()->where('updated_at', '>=', $sevenDaysAgo)->orderBy('updated_at', 'DESC')->first(),
         ];
 
         $lowStakeLatest = Lottery::getLatestWin(Lottery::TYPE_LOW_STAKE);
@@ -29,6 +33,7 @@ class LotteryController extends Controller
 
         return view('frontend.lottery', compact(
             'lotteries',
+            'cancelledLotteries',
             'lowStakeLatest',
             'lowStakeHighest',
             'midStakeLatest',

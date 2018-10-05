@@ -15,10 +15,15 @@
     <div role="main" class="main">
         <div class="container">
 
-            <div class="row mt-lg">
-                <div class="col-md-12 center">
+            <div class="row mt-lg mb-xlg">
+                <div class="{{ Auth::check() ? 'col-md-6' : 'col-md-12' }} center">
                     <h2 class="mb-sm"><strong>{{ trans('frontend/lottery.meta.title') }}</strong></h2>
                 </div>
+                @if (Auth::check())
+                <div class="col-md-6 center">
+                    <a href="{{ route('user.lottery.cancelled') }}" class="btn btn-xlg btn-quaternary white-space-normal"><i class="fas fa-ban"></i> {{ trans('frontend/lottery.view_cancelled_lotteries') }}</a>
+                </div>
+                @endif
             </div>
 
             <div class="row">

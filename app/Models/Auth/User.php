@@ -5,6 +5,7 @@ namespace Models\Auth;
 use DB;
 use Models\Gaming\Badge;
 use Models\Gaming\Game;
+use Models\Gaming\Lottery;
 use Models\Location\HasCountry;
 use Models\Pricing\HasCurrency;
 use Illuminate\Notifications\Notifiable;
@@ -195,5 +196,9 @@ class User extends Authenticatable
         }
 
         return $this->credits <= $this->low_balance_threshold;
+    }
+
+    public function getBoughtLotteryTickets(Lottery $lottery) {
+        return $lottery->tickets()->where('user_id', $this->id)->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Gaming\Lottery;
@@ -18,6 +19,56 @@ class LotteryController extends Controller
         ]);
 
         return view('user.lottery.buy_tickets', compact('lottery'));
+    }
+
+    public function buyTicketsPost(Request $request, Lottery $lottery) {
+        $tickets = $request->get('tickets');
+
+        if (count($tickets) <= 0) {
+            $this->flashNotifier->error(trans('frontend/lottery.buy_tickets.must_select_to_buy'));
+
+            return redirect()->back();
+        }
+
+        $availableToBuy = $lottery->tickets()->whereIn('id', $tickets)->where(function($q) {
+            $q->whereNotNull('user_id')->orWhere('reserver_id', '!=', $this->user->id)->orWhereNull('reserver_id');
+        })->count() == 0;
+
+        if ( ! $availableToBuy) {
+            $this->flashNotifier->error(trans('frontend/lottery.buy_tickets.one_selected_ticket_not_available'));
+
+            return redirect()->back();
+        }
+
+
+        $totalPrice = $lottery->ticket_price * count($tickets);
+
+        if ($this->user->credits < $totalPrice) {
+            $this->flashNotifier->error(trans('app.not_enough_credits'));
+
+            return redirect()->back();
+        }
+
+        DB::beginTransaction();
+
+        $this->user->credits -= $totalPrice;
+        $this->user->save();
+
+        $lottery->tickets()->whereIn('id', $tickets)->update([
+            'user_id' => $this->user->id
+        ]);
+
+        DB::commit();
+
+        $this->flashNotifier->success(trans('app.common.operation_success'));
+
+        return redirect()->route('user.lottery.my_tickets', ['lottery' => $lottery]);
+    }
+
+    public function myTickets(Lottery $lottery) {
+        $myTickets = $this->user->getBoughtLotteryTickets($lottery);
+
+        return view('user.lottery.my_tickets', compact('lottery', 'myTickets'));
     }
 
     public function reserveTicket(Request $request) {
@@ -70,5 +121,11 @@ class LotteryController extends Controller
 
     public function checkTicketReservation(Lottery $lottery) {
         return $lottery->tickets()->where('reserver_id', '!=', $this->user->id)->pluck('id')->all();
+    }
+
+    public function cancelled() {
+        $lotteries = Lottery::where('status', Lottery::STATUS_CANCELLED)->orderBy('updated_at', 'DESC')->paginate(50);
+
+        return view('user.lottery.cancelled', compact('lotteries'));
     }
 }

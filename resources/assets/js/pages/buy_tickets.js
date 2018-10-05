@@ -110,9 +110,5 @@ $(document).ready(function() {
                 });
             });
         });
-
-
-
-
     });
 });

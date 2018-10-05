@@ -4,6 +4,22 @@
             <i style="font-size:70px" class="fas fa-clock mt-md mb-md"></i><br>
             {!! trans('frontend/lottery.no_scheduled_lottery') !!}
         </h2>
+
+        @if ($cancelledLotteries[$type] != null)
+            <hr>
+
+            <div class="alert alert-warning text-center">
+                <i class="fas fa-info-circle"></i> {{ trans('frontend/lottery.last_lottery_cancelled') }}
+            </div>
+
+            @if (Auth::check())
+                <div class="row">
+                    <div class="col-md-12 center">
+                        <a href="{{ route('user.lottery.cancelled') }}" class="btn btn-xlg btn-quaternary white-space-normal"><i class="fas fa-ban"></i> {{ trans('frontend/lottery.view_cancelled_lotteries') }}</a>
+                    </div>
+                </div>
+            @endif
+        @endif
     </div>
 @else
     @if ($lottery->isPending())
@@ -24,6 +40,10 @@
                     <h3 class="label label-danger" style="font-size:25px"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.sold_out') }}</h3>
                 @else
                     <a href="{{ route('user.lottery.buy_tickets', ['lottery' => $lottery]) }}" class="btn btn-success btn-lg"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets_now') }}</a>
+                @endif
+
+                @if (Auth::check())
+                    <a href="{{ route('user.lottery.my_tickets', ['lottery' => $lottery]) }}" class="btn btn-xlg btn-primary white-space-normal"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets.see_my_bought_tickets') }}</a>
                 @endif
             </div>
         </div>
