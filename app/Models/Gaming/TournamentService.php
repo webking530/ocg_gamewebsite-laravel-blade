@@ -65,7 +65,7 @@ class TournamentService
         }
     }
 
-    private function createTournament($group, $level) {
+    public function createTournament($group, $level) {
         $now = Carbon::now();
 
         $tournament = Tournament::create([
