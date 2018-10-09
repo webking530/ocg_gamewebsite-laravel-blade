@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         Commands\Tournament\ProcessFinishedTournaments::class,
         Commands\Tournament\InitTournaments::class,
         Commands\Tournament\CheckPendingTournaments::class,
+        Commands\Tournament\EnrollNewUsersToTournaments::class,
     ];
 
     /**
@@ -37,6 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('lottery:process')->environments('production')->everyMinute()->withoutOverlapping();
         $schedule->command('lottery:reset-ticket-reservations')->environments('production')->everyMinute()->withoutOverlapping();
 
+        $schedule->command('tournaments:enroll-new-users')->environments('production')->hourly()->withoutOverlapping();
         $schedule->command('tournaments:check-pending')->environments('production')->everyMinute()->withoutOverlapping();
         $schedule->command('tournaments:process')->environments('production')->everyMinute()->withoutOverlapping();
 

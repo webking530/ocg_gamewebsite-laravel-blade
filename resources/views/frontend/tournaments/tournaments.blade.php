@@ -39,7 +39,7 @@
                                 <div role="tabpanel" class="tab-pane @if ($key == 0) active @endif" id="tournament_{{ $tournament->group }}">
 
                                     @if ($tournament->isExtended())
-                                        <div class="alert alert-warning text-center"><i class="fas fa-info-circle"></i> {!! trans('frontend/tournaments.tournament_extended', ['date' => $tournament->extended_at->format('l, F j, Y, g:i a')]) !!}</div>
+                                        <div class="alert alert-warning text-center"><i class="fas fa-info-circle"></i> {!! trans('frontend/tournaments.tournament_extended', ['date_to' => $tournament->date_to->format('l, F j, Y, g:i a'), 'date_extended' => $tournament->extended_at->format('l, F j, Y, g:i a')]) !!}</div>
                                     @endif
 
                                     <h3 class="text-center"><i class="fas fa-clock"></i> Tournament ends on <abbr data-toggle="tooltip" data-original-title="{{ $tournament->date_to->format('l, F j, Y, g:i a') }}">{{ $tournament->date_to->diffForHumans() }}</abbr></h3>

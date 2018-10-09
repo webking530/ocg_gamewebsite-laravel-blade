@@ -44,6 +44,27 @@ class TournamentService
         $this->createTournament($tournament->group, $tournament->level + 1);
     }
 
+    // Enrolls newly registered users, or users who recently met the requirements to enter a tournament
+    public function enrollNewUsers(Tournament $tournament) {
+        $now = Carbon::now();
+
+        $users = User::users()->enabled()->verified()->hasCredits()
+                ->whereNotIn('id', function($query) use ($tournament) {
+                    $query->select('user_id')->from('tournament_user')->where('tournament_id', $tournament->id);
+                })->get();
+
+        foreach ($users as $user) {
+            DB::table('tournament_user')->insert([
+                'tournament_id' => $tournament->id,
+                'user_id' => $user->id,
+                'total_win' => 0,
+                'total_lose' => 0,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]);
+        }
+    }
+
     private function createTournament($group, $level) {
         $now = Carbon::now();
 
@@ -74,6 +95,7 @@ class TournamentService
                 'tournament_id' => $tournament->id,
                 'user_id' => $user->id,
                 'total_win' => 0,
+                'total_lose' => 0,
                 'created_at' => $now,
                 'updated_at' => $now
             ]);
