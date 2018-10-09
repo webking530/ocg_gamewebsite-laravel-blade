@@ -26,7 +26,8 @@ var matchTextDisplay = 'MATCH [NUMBER]'; //match text display
 var scoreTextDisplay = '[NUMBER] COINS'; //prize score text display
 
 //score points array and also the total number to reveal
-var score_arr = [0,0,0,0,0,100000];
+// This was moved to the game.blade.php template
+//var score_arr = [0,0,0,0,0,0];
 
 var bonusBall = false; //toggle bonus ball
 var bonusTextDisplay = 'MATCH [NUMBER] + BONUS'; //match bonus text display
@@ -271,7 +272,8 @@ function startGame(){
  * 
  */
 function startSpin(){
-	gameData.selectArray = [12,25,10,3,5,15];
+	gameData.selectArray = USER_NUMBERS;
+    //gameData.selectArray = [12,25,10,3,5,15];
 	/*for(var n = 0; n<totalBall; n++){
 		var targetNumber = gameData.buttonArray[n];
 		if(targetNumber.highlight.visible){

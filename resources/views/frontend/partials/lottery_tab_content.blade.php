@@ -42,7 +42,7 @@
                     <a href="{{ route('user.lottery.buy_tickets', ['lottery' => $lottery]) }}" class="btn btn-success btn-lg"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets_now') }}</a>
                 @endif
 
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user()->isParticipatingInLottery($lottery))
                     <a href="{{ route('user.lottery.my_tickets', ['lottery' => $lottery]) }}" class="btn btn-xlg btn-primary white-space-normal"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets.see_my_bought_tickets') }}</a>
                 @endif
             </div>
@@ -79,9 +79,13 @@
             {{--<h2 class="alternative-font text-blue" style="font-size:60px">{{ trans('frontend/lottery.congratulations') }}<i class="fas fa-exclamation"></i></h2>--}}
         </div>
 
-        <hr>
+        @if (Auth::check() && Auth::user()->isParticipatingInLottery($lottery))
+            <hr>
 
-        @if (Auth::check())
+            <div class="text-center mb-md">
+                <a href="{{ route('user.lottery.my_tickets', ['lottery' => $lottery]) }}" class="btn btn-xlg btn-primary white-space-normal"><i class="fas fa-ticket-alt"></i> {{ trans('frontend/lottery.buy_tickets.see_my_bought_tickets') }}</a>
+            </div>
+
             <div class="text-center">
                 <iframe class="lottery-frame" scrolling="no" src="{{ route('lottery.watch', ['lottery' => $lottery]) }}"></iframe>
             </div>

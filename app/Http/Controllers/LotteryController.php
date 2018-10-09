@@ -72,8 +72,20 @@ class LotteryController extends Controller
     }
 
     public function watch(Lottery $lottery) {
-        $winningNumber = json_encode($lottery->getWinningTicket()->formatted_numbers_for_game);
+        $winningTicket = $lottery->getWinningTicket();
 
-        return view('frontend.lottery.game', compact('winningNumber'));
+        $winningTicketNumbers = json_encode($winningTicket->formatted_numbers_for_game);
+        $prize = $lottery->getPotSize();
+
+        if ($winningTicket->user_id == $this->user->id) {
+            // No matter if the user bought multiple tickets, we will only compare with the winning one
+            $userTicketNumbers = $winningTicketNumbers;
+        } else {
+            // This user is not a winner, so there's no point in comparing with all tickets.
+            // Just compare with the first one
+            $userTicketNumbers = json_encode($lottery->tickets()->where('user_id', $this->user->id)->first()->formatted_numbers_for_game);
+        }
+
+        return view('frontend.lottery.game', compact('winningTicketNumbers', 'prize', 'userTicketNumbers'));
     }
 }

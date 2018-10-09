@@ -217,4 +217,8 @@ class User extends Authenticatable
     public function getBoughtLotteryTickets(Lottery $lottery) {
         return $lottery->tickets()->where('user_id', $this->id)->get();
     }
+
+    public function isParticipatingInLottery(Lottery $lottery) {
+        return $lottery->tickets()->where('user_id', $this->id)->count() > 0;
+    }
 }

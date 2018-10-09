@@ -71,7 +71,9 @@
 <script>
     $(document).ready(function() {
         // Define vars for numbers here
-        LOTTERY_NUMBERS = {{ $winningNumber }};
+        LOTTERY_NUMBERS = {{ $winningTicketNumbers }};
+        USER_NUMBERS = {{ $userTicketNumbers }};
+        score_arr = [0,0,0,0,0,{{ $prize }}];
     });
 </script>
 
