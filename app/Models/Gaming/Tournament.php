@@ -23,7 +23,7 @@ class Tournament extends Model
 
     const STATUS_PENDING = 0;
     const STATUS_FINISHED = 1;
-    const STATUS_CANCELLED = -1;
+    const STATUS_CANCELLED = 2;
 
     const MAX_LEVEL = 5; // 0 to 5 (6 levels)
 
@@ -65,5 +65,13 @@ class Tournament extends Model
         }
 
         return $tpa;
+    }
+
+    public function isCancelled() {
+        return (int)$this->status === self::STATUS_CANCELLED;
+    }
+
+    public function getFormattedStatusAttribute() {
+        return trans("frontend/tournaments.status.{$this->status}");
     }
 }

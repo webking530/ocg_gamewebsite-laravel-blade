@@ -55,6 +55,7 @@
                                                         <p><a href="{{ route('tournaments.details', ['tournament' => $tournament]) }}"><i class="fas fa-calendar-check"></i> {{ $tournament->date_from->format('d M Y') }} &mdash; {{ $tournament->date_to->format('d M Y') }}</a></p>
                                                         <p class="text-light"><i class="fas fa-user"></i> Participants: <span class="badge">{{ $tournament->users()->count() }}</span></p>
                                                         <p class="text-light"><i class="fas fa-clock"></i> Duration: <span class="badge">{{ trans_choice('frontend/tournaments.days', $tournament->getDurationInDays(), ['days' => $tournament->getDurationInDays()]) }}</span></p>
+                                                        <p class="text-light"><i class="fas fa-info-circle"></i> {{ trans('app.status') }}: {{ $tournament->formatted_status }}</p>
                                                     </td>
                                                     <td>
                                                         <p><i class="fas fa-medal color-gold"></i> &mdash; <span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($tournament->prizes[0]) }}</span></p>

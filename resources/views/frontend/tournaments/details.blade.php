@@ -32,6 +32,7 @@
                     <div class="featured-box featured-box-primary align-left mt-xlg">
                         <div class="box-content">
                             <h4 class="heading-primary text-uppercase mb-md"><i class="fas fa-calendar-alt"></i> Tournament held from <span class="text-light">{{ $tournament->date_from->format('d M Y') }}</span> to <span class="text-light">{{ $tournament->date_to->format('d M Y') }}</span></h4>
+                            <h5><i class="fas fa-info-circle"></i> {{ trans('app.status') }}: {{ $tournament->formatted_status }}</h5>
                             <hr>
 
                             <a class="btn btn-default" href="{{ route('tournaments.history', ['group' => $group]) }}"><i class="fas fa-list"></i> Back to List</a>

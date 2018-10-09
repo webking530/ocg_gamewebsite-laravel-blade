@@ -24,5 +24,6 @@ return [
     ],
     'days' => ':days day ago|:days days ago',
     'since_date' => 'Since :date',
-    'not_enough_credits' => 'You do not have enough credits to perform this operation'
+    'not_enough_credits' => 'You do not have enough credits to perform this operation',
+    'status' => 'Status',
 ];

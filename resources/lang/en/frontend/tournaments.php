@@ -16,5 +16,10 @@ return [
     'select_tournament_type' => 'Please select a tournament type first',
     'days' => ':days day|:days days',
     'no_tournaments_category' => 'No tournaments have been held in this category yet.',
-    'tournament_extended' => 'This tournament has been extended to <strong>:date_to</strong> from <strong>:date_extended</strong> due to not enough participation.'
+    'tournament_extended' => 'This tournament has been extended to <strong>:date_to</strong> from <strong>:date_extended</strong> due to not enough participation.',
+    'status' => [
+        0 => 'Pending',
+        1 => 'Finished',
+        2 => 'Cancelled'
+    ]
 ];
