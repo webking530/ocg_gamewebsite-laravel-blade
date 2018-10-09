@@ -39,7 +39,7 @@ class CheckPendingTournaments extends Command
     public function handle()
     {
         $tpaLevels = json_decode(settings('tournament_tpa_levels'));
-        $minutesBeforeEnding = 5;
+        $minutesBeforeEnding = 3;
 
         // Check tournaments X minutes before ending and see if they meet the TPA
         $tournaments = Tournament::where('status', Tournament::STATUS_PENDING)
