@@ -62,7 +62,7 @@
                     <div class="header-column">
                         <div class="header-logo">
                             <a href="{{ route('home') }}">
-                                <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
+                                <img alt="{{ trans('app.meta.short_title') }}" height="30" data-sticky-height="40" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
                             </a>
                         </div>
                     </div>
