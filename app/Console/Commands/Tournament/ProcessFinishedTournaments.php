@@ -13,6 +13,7 @@ use DB;
 use Illuminate\Console\Command;
 use Models\Auth\User;
 use Models\Gaming\Tournament;
+use Models\Gaming\TournamentService;
 
 class ProcessFinishedTournaments extends Command
 {
@@ -69,6 +70,8 @@ class ProcessFinishedTournaments extends Command
                 $user->credits += (int)$tournament->prizes[$place];
                 $user->save();
             }
+
+            (new TournamentService())->createTournamentFromPrevious($tournament);
 
             DB::commit();
         }

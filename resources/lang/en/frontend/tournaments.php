@@ -15,5 +15,6 @@ return [
     'no_scheduled_tournaments' => 'We do not have any scheduled tournaments at the moment. Please check back later.',
     'select_tournament_type' => 'Please select a tournament type first',
     'days' => ':days day|:days days',
-    'no_tournaments_category' => 'No tournaments have been held in this category yet.'
+    'no_tournaments_category' => 'No tournaments have been held in this category yet.',
+    'tournament_extended' => 'This tournament has been extended on <strong>:date</strong> due to not enough participation.'
 ];

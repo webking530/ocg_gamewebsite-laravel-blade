@@ -19,6 +19,8 @@ class Kernel extends ConsoleKernel
         Commands\Lottery\ResetTicketReservations::class,
         Commands\Jackpot\JackpotStats::class,
         Commands\Tournament\ProcessFinishedTournaments::class,
+        Commands\Tournament\InitTournaments::class,
+        Commands\Tournament\CheckPendingTournaments::class,
     ];
 
     /**
@@ -35,6 +37,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('lottery:process')->environments('production')->everyMinute()->withoutOverlapping();
         $schedule->command('lottery:reset-ticket-reservations')->environments('production')->everyMinute()->withoutOverlapping();
 
+        $schedule->command('tournaments:check-pending')->environments('production')->everyMinute()->withoutOverlapping();
         $schedule->command('tournaments:process')->environments('production')->everyMinute()->withoutOverlapping();
 
         $schedule->command('jackpot:process-stats')->environments('production')->daily()->withoutOverlapping();

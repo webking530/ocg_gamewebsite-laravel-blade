@@ -57,6 +57,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'created_at']);
     }
 
+    public function scopeUsers($query) {
+        return $query->where('role', self::ROLE_USER);
+    }
+
+    public function scopeEnabled($query) {
+        return $query->whereNull('verification_pin');
+    }
+
+    public function scopeVerified($query) {
+        return $query->where('verified_identification', true);
+    }
+
+    public function scopeHasCredits($query) {
+        return $query->where('credits', '>', 0);
+    }
+
     public function gameSessionsCreditSum() {
         $sum = 0;
 

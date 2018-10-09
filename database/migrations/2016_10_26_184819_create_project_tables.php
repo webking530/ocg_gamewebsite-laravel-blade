@@ -158,7 +158,8 @@ class CreateProjectTables extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->integer('total_win');
+            $table->integer('total_win')->default(0);
+            $table->integer('total_lose')->default(0);
 
             $table->timestamps();
         });
