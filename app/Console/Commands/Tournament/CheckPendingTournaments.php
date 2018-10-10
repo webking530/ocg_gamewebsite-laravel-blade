@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Tournament;
 
+use App\Models\Gaming\CustomGameGroup;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Models\Gaming\Tournament;
@@ -43,6 +44,7 @@ class CheckPendingTournaments extends Command
 
         // Check tournaments X minutes before ending and see if they meet the TPA
         $tournaments = Tournament::where('status', Tournament::STATUS_PENDING)
+                        ->notCustom()
                         ->where('date_to', '<=', Carbon::now()->addMinutes($minutesBeforeEnding))
                         ->get();
 
@@ -50,7 +52,7 @@ class CheckPendingTournaments extends Command
          * @var Tournament $tournament
          */
         foreach ($tournaments as $tournament) {
-            if ($tournament->getTotalPlayAmount() < $tpaLevels[$tournament->level]['tpa']) {
+            if ($tournament->getTotalPlayAmount() < (int)$tpaLevels[$tournament->level]->tpa) {
                 $tournament->date_to = $tournament->date_to->addDays(settings('tournament_base_days'));
                 $tournament->extended_at = Carbon::now();
                 $tournament->save();

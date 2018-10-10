@@ -8,6 +8,8 @@
 
 namespace Models\Gaming;
 
+use App\Models\Gaming\CustomGameGroup;
+
 class GameService
 {
     public function getGroupsList() {
@@ -18,5 +20,14 @@ class GameService
         }
 
         return $groups;
+    }
+
+    public function getExtendedGroupsList() {
+        $baseGroups = $this->getGroupsList();
+        $language = \App::getLocale();
+
+        $customGroups = CustomGameGroup::where('locale', $language)->orderBy('group', 'DESC')->pluck('name', 'group')->all();
+
+        return $customGroups + $baseGroups;
     }
 }

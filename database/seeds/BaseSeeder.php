@@ -35,6 +35,14 @@ class BaseSeeder extends Seeder
             'code' => 'en'
         ]);
 
+        DB::table('languages')->insert([
+            'code' => 'es'
+        ]);
+
+        DB::table('languages')->insert([
+            'code' => 'tr'
+        ]);
+
         \Models\Location\Country::create([
             'code' => 'DE',
             'currency_code' => 'EUR',

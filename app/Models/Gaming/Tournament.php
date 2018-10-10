@@ -2,6 +2,7 @@
 
 namespace Models\Gaming;
 
+use App\Models\Gaming\CustomGameGroup;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Models\Auth\User;
@@ -36,6 +37,10 @@ class Tournament extends Model
     }
 
     public function getFormattedGroupAttribute() {
+        if ($this->group >= CustomGameGroup::CUSTOM_GROUP_START_ID) {
+            return CustomGameGroup::getTransName($this->group, \App::getLocale());
+        }
+
         return trans('games.group.' . $this->group);
     }
 
@@ -47,6 +52,14 @@ class Tournament extends Model
         $now = Carbon::now();
 
         return $query->where('date_from', '<=', $now)->where('date_to', '>=', $now);
+    }
+
+    public function scopeCustom($query) {
+        return $query->where('group', '>=', CustomGameGroup::CUSTOM_GROUP_START_ID);
+    }
+
+    public function scopeNotCustom($query) {
+        return $query->where('group', '<', CustomGameGroup::CUSTOM_GROUP_START_ID);
     }
 
     public function getDurationInDays() {
@@ -73,5 +86,9 @@ class Tournament extends Model
 
     public function getFormattedStatusAttribute() {
         return trans("frontend/tournaments.status.{$this->status}");
+    }
+
+    public function isCustom() {
+        return $this->group >= CustomGameGroup::CUSTOM_GROUP_START_ID;
     }
 }

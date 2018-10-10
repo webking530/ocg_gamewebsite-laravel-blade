@@ -7,7 +7,7 @@
             <hr>
 
             <div class="list-group list-group-dark">
-                @foreach ($gameService->getGroupsList() as $groupIndex => $name)
+                @foreach ($gameService->getExtendedGroupsList() as $groupIndex => $name)
                     <a href="{{ route('tournaments.history', ['group' => $groupIndex]) }}" class="list-group-item @if ($group !== null && $group == $groupIndex) active @endif">{{ mb_strtoupper($name) }}</a>
                 @endforeach
             </div>

@@ -7,6 +7,7 @@ use Models\Pricing\HasCurrency;
 class Country extends Model
 {
     use HasCurrency;
+    use HasLanguage;
 
     protected $primaryKey = 'code';
     public $incrementing = false;

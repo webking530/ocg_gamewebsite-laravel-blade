@@ -8,6 +8,7 @@
 
 namespace App\Console\Commands\Tournament;
 
+use App\Models\Gaming\CustomGameGroup;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Console\Command;
@@ -71,7 +72,9 @@ class ProcessFinishedTournaments extends Command
                 $user->save();
             }
 
-            (new TournamentService())->createTournamentFromPrevious($tournament);
+            if ( ! $tournament->isCustom()) {
+                (new TournamentService())->createTournamentFromPrevious($tournament);
+            }
 
             DB::commit();
         }

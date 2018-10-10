@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gaming\CustomGameGroup;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Models\Gaming\Tournament;
@@ -9,7 +10,12 @@ use Models\Gaming\Tournament;
 class TournamentController extends Controller
 {
     public function tournaments() {
-        $tournaments = Tournament::active()->orderBy('group', 'ASC')->get();
+        $customGroup = CustomGameGroup::CUSTOM_GROUP_START_ID;
+
+        $tournaments = Tournament::active()->orderByRaw(
+            "(CASE WHEN `group` >= $customGroup THEN `group` END) DESC,
+            (CASE WHEN `group` < $customGroup THEN `group` END) ASC"
+        )->get();
 
         return view('frontend.tournaments.tournaments', compact('tournaments'));
     }

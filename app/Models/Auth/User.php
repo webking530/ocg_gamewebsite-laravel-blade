@@ -7,6 +7,7 @@ use Models\Gaming\Badge;
 use Models\Gaming\Game;
 use Models\Gaming\Lottery;
 use Models\Location\HasCountry;
+use Models\Location\HasLanguage;
 use Models\Pricing\HasCurrency;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,6 +17,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasCurrency;
     use HasCountry;
+    use HasLanguage;
 
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;

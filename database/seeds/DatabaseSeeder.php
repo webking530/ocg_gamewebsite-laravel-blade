@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GameUserWinningsSeeder::class);
         $this->call(GameSessionSeeder::class);
         $this->call(ExchangeRatesSeeder::class);
+        $this->call(CustomGroupSeeder::class);
     }
 }

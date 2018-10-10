@@ -65,19 +65,21 @@ class TournamentService
         }
     }
 
-    public function createTournament($group, $level) {
+    public function createTournament($group, $level, $games = null) {
         $now = Carbon::now();
 
         $tournament = Tournament::create([
             'group' => $group,
-            'prizes' => $this->tpaLevels[$level]['prizes'],
+            'prizes' => $this->tpaLevels[$level]->prizes,
             'date_from' => Carbon::now(),
             'date_to' => Carbon::now()->addDays(settings('tournament_base_days')),
             'status' => Tournament::STATUS_PENDING,
             'level' => $level,
         ]);
 
-        $games = Game::enabled()->where('group', $group)->select('id')->get();
+        if ($games == null) {
+            $games = Game::enabled()->where('group', $group)->select('id')->get();
+        }
 
         foreach ($games as $game) {
             DB::table('tournament_game')->insert([
