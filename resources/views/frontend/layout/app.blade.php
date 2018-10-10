@@ -87,9 +87,9 @@
                                                         Money
                                                     </a>
                                                 </li>
-                                                <li class="">
-                                                    <a href="#">
-                                                        Casino Games
+                                                <li class="{{ set_active('*game*') }}">
+                                                    <a href="{{ route('user.games.index') }}">
+                                                        {{ trans('frontend/game.casino_games') }}
                                                     </a>
                                                 </li>
                                                 <li class="{{ set_active('*lottery*') }}">
@@ -115,7 +115,7 @@
                                             @else
                                                 <li class="">
                                                     <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
-                                                        Casino Games
+                                                        {{ trans('frontend/game.casino_games') }}
                                                     </a>
                                                 </li>
                                                 <li class="{{ set_active('lottery.index') }}">

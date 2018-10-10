@@ -58,9 +58,13 @@ mix.styles([
     'resources/assets/css/pages/home.css',
 ], 'public/compiled/css/pages/home.css');
 
+mix.styles([
+    'resources/assets/css/pages/game_grid.css',
+], 'public/compiled/css/pages/game_grid.css');
+
 mix.scripts([
-    'resources/assets/js/pages/home.js',
-], 'public/compiled/js/pages/home.js');
+    'resources/assets/js/pages/game_grid.js',
+], 'public/compiled/js/pages/game_grid.js');
 
 mix.styles([
     'resources/assets/css/pages/public_profile.css',
