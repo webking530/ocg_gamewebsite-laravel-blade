@@ -37,7 +37,7 @@
 
                 led_anim_lose_duration: 5000,        //Duration (in ms) of led lose animation, before it change with the idle.
 
-                show_credits:true,                   //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
+                show_credits:false,                   //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
                 fullscreen:true,                     //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
                 check_orientation:true,              //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
 
