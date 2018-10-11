@@ -38,8 +38,8 @@
 
                                                     <div class="row mt-lg">
                                                         <div class="col-md-12">
-                                                            <a href="{{ route('user.games.resume_session', ['game' => $game]) }}" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Keep Playing</a>
-                                                            <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-lg confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund') }}"><i class="fas fa-sign-out-alt"></i> Close Session</a>
+                                                            <a href="{{ route('user.games.resume_session', ['game' => $game]) }}" class="btn btn-success btn-lg mb-md"><i class="fas fa-play"></i> Keep Playing</a>
+                                                            <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-lg mb-md confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund') }}"><i class="fas fa-sign-out-alt"></i> Close Session</a>
                                                         </div>
                                                     </div>
                                                 </div>
