@@ -43,7 +43,9 @@ class GameController extends Controller
             return redirect()->back();
         }
 
+        // TODO: Create the session, deduct credits from user balance, pass game settings, credits, etc.
 
+        return view("user.live-games.{$game->slug}", compact('game'));
     }
 
     public function resumeSession(Game $game) {
