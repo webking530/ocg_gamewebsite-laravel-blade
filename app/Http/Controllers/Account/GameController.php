@@ -19,9 +19,20 @@ class GameController extends Controller
         return view('user.game.index', compact('games', 'currentJackpot', 'highestJackpot', 'latestJackpot'));
     }
 
-    public function playLive($slug) {
+    public function manageSession($slug) {
         $game = Game::whereSlug($slug)->firstOrFail();
+        $user = $this->user;
+        $gameSession = $user->getOpenSession($game);
+        $hasOpenSession = $gameSession !== null;
 
-        return view('user.game.play_live', compact('game'));
+        return view('user.game.manage_session', compact('game', 'user', 'hasOpenSession', 'gameSession'));
+    }
+
+    public function playLive(Request $request, Game $game) {
+
+    }
+
+    public function resumeSession(Game $game) {
+
     }
 }

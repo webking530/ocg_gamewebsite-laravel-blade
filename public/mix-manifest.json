@@ -12,6 +12,7 @@
     "/compiled/css/pages/user_dashboard.css": "/compiled/css/pages/user_dashboard.css",
     "/compiled/js/pages/user_dashboard.js": "/compiled/js/pages/user_dashboard.js",
     "/compiled/js/pages/buy_tickets.js": "/compiled/js/pages/buy_tickets.js",
+    "/compiled/js/pages/manage_session.js": "/compiled/js/pages/manage_session.js",
     "/compiled/lumino/lumino.css": "/compiled/lumino/lumino.css",
     "/compiled/lumino/lumino.js": "/compiled/lumino/lumino.js"
 }

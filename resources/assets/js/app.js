@@ -54,10 +54,11 @@ $(document).ready(function() {
     $('.confirm-click').on('click', function(ev) {
         ev.preventDefault();
         var route = $(this).attr('href');
+        var $button = $(this);
 
         $.confirm({
             title: confirmTitle,
-            content: confirmContent,
+            content: $button.data('confirm-content') === undefined ? confirmContent : $button.data('confirm-content'),
             theme: 'material',
             type: 'blue',
             icon: 'fas fa-info-circle',

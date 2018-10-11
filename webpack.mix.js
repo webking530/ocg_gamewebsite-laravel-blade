@@ -90,6 +90,10 @@ mix.scripts([
     'resources/assets/js/pages/buy_tickets.js',
 ], 'public/compiled/js/pages/buy_tickets.js');
 
+mix.scripts([
+    'resources/assets/js/pages/manage_session.js',
+], 'public/compiled/js/pages/manage_session.js');
+
 // Lumino Admin Template
 mix.styles([
     'resources/assets/vendor/lumino/css/datepicker3.css',

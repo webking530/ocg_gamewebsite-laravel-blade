@@ -45,7 +45,10 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
     Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');
 
     Route::get('games', 'Account\GameController@games')->name('user.games.index');
-    Route::get('game/live/{slug}', 'Account\GameController@playLive')->name('user.game.play_live');
+    Route::get('game/session/{slug}', 'Account\GameController@manageSession')->name('user.game.manage_session');
+
+    Route::post('game/live/{game}', 'Account\GameController@playLive')->name('user.games.play_live');
+    Route::get('game/resume-session/{game}', 'Account\GameController@resumeSession')->name('user.games.resume_session');
 
     Route::get('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTickets')->name('user.lottery.buy_tickets');
     Route::post('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTicketsPost')->name('user.lottery.buy_tickets.post');

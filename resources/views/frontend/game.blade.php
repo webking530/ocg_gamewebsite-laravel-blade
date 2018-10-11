@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col-md-3 text-right">
                                         <p class="align-right p-lg pb-none">
-                                            <a class="btn btn-warning btn-lg font-size-sm text-uppercase mb-md btn-play" href="{{ route('user.game.play_live', ['slug' => $game->slug]) }}">PLAY LIVE</a>
+                                            <a class="btn btn-warning btn-lg font-size-sm text-uppercase mb-md btn-play" href="{{ route('user.game.manage_session', ['slug' => $game->slug]) }}">PLAY LIVE</a>
                                         </p>
                                     </div>
                                 </span>

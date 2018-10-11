@@ -221,3 +221,18 @@ body {
 .ps .ps__rail-x:hover, .ps .ps__rail-y:hover, .ps .ps__rail-x:focus, .ps .ps__rail-y:focus, .ps .ps__rail-x.ps--clicking, .ps .ps__rail-y.ps--clicking {
     background-color: #1d2127ab;
 }
+
+.deposit-coins {
+    color: yellow;
+    text-align: center;
+    font-size: 40px;
+    height: 60px;
+    font-weight: bold;
+    -moz-appearance:textfield;
+}
+
+.deposit-coins::-webkit-inner-spin-button,
+.deposit-coins::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -223,4 +223,8 @@ class User extends Authenticatable
     public function isParticipatingInLottery(Lottery $lottery) {
         return $lottery->tickets()->where('user_id', $this->id)->count() > 0;
     }
+
+    public function getOpenSession(Game $game) {
+        return $this->gameSessions()->where('game_id', $game->id)->first();
+    }
 }

@@ -1,4 +1,3 @@
-@inject('pricingService', "Models\Pricing\PricingService")
 @extends('frontend.layout.app')
 
 @section('meta')
@@ -27,8 +26,7 @@
                                     <div class="box-content">
                                         <h4 class="heading-primary text-uppercase mb-md"><i class="fas fa-money-bill-alt"></i> Money</h4>
                                         <hr>
-                                        <h2 class="text-center">My Balance</h2>
-                                        <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->credits) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($user->credits, $user->currency_code), $user->currency_code)</h3>
+                                        @include('user.partials.balance')
                                         <hr>
                                         <div class="text-center mb-xlg">
                                             <a href="#" class="btn btn-success btn-xlg"><i class="fas fa-plus-circle"></i> Add Money</a>
@@ -84,6 +82,8 @@
                                                     here.</p>
 
                                                 <p>You can do it while in-game too. After you finished playing the game, click on the "Quit" or "X" button.</p>
+
+                                                <p><strong>Take advantage of multiple sessions, you can play multiple games in different tabs by distributing your balance between them!</strong></p>
                                             </div>
 
                                             <div class="table-responsive">
@@ -104,8 +104,8 @@
                                                             <td class="valign-middle">@datetime($game->pivot->created_at)</td>
                                                             <td class="valign-middle">
                                                                 <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Play Demo</a>
-                                                                <a href="{{ route('user.game.play_live', ['slug' => $game->slug]) }}" class="btn btn-warning btn-sm">Play Live</a>
-                                                                <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-sm confirm-click"><i class="fas fa-sign-out-alt"></i> Close Session</a>
+                                                                <a href="{{ route('user.game.manage_session', ['slug' => $game->slug]) }}" class="btn btn-warning btn-sm">Play Live</a>
+                                                                <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-sm confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund') }}"><i class="fas fa-sign-out-alt"></i> Close Session</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -116,7 +116,7 @@
                                                         <th><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->gameSessionsCreditSum()) }}</span></th>
                                                         <th></th>
                                                         <th>
-                                                            <a href="{{ route('user.session.close_all') }}" class="btn btn-danger btn-sm confirm-click"><i class="fas fa-sign-out-alt"></i> Close All Sessions</a>
+                                                            <a href="{{ route('user.session.close_all') }}" class="btn btn-danger btn-sm confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund_all') }}"><i class="fas fa-sign-out-alt"></i> Close All Sessions</a>
                                                         </th>
                                                     </tr>
                                                     </tfoot>
