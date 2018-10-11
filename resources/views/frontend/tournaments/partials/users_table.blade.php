@@ -9,7 +9,7 @@
         <tr>
             <td>{{ $position + 1 }}</td>
             <td>@include('frontend.partials.username', ['user' => $user])</td>
-            <td><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->pivot->total_win) }}</span></td>
+            <td><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->pivot->total_win, 2) }}</span></td>
         </tr>
     @endforeach
     </thead>

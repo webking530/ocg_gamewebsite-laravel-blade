@@ -9,7 +9,7 @@ $(document).ready(function() {
             coins = 0;
         }
 
-        let amount = parseInt(coins) * rate;
+        let amount = parseFloat(coins) * rate;
 
         $inputMoney.show();
         $inputMoney.find('span').html(amount.toFixed(2));

@@ -100,7 +100,7 @@
                                                     @foreach ($user->gameSessions as $game)
                                                         <tr>
                                                             <td class="valign-middle"><img src="{{ asset($game->small_icon) }}" width="48"> {{ $game->name }}</td>
-                                                            <td class="valign-middle"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($game->pivot->credits) }}</span></td>
+                                                            <td class="valign-middle"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($game->pivot->credits, 2) }}</span></td>
                                                             <td class="valign-middle">@datetime($game->pivot->created_at)</td>
                                                             <td class="valign-middle">
                                                                 <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm">Play Demo</a>
@@ -113,7 +113,7 @@
                                                     <tfoot>
                                                     <tr>
                                                         <th class="text-right">Total Credits</th>
-                                                        <th><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->gameSessionsCreditSum()) }}</span></th>
+                                                        <th><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($user->gameSessionsCreditSum(), 2) }}</span></th>
                                                         <th></th>
                                                         <th>
                                                             <a href="{{ route('user.session.close_all') }}" class="btn btn-danger btn-sm confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund_all') }}"><i class="fas fa-sign-out-alt"></i> Close All Sessions</a>

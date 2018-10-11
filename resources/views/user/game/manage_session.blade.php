@@ -32,7 +32,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h2 class="text-center">Credits in Session</h2>
-                                                    <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)</h3>
+                                                    <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)</h3>
 
                                                     <h4>Session opened @datetime($gameSession->pivot->created_at)</h4>
 
@@ -62,7 +62,7 @@
                                                     <h4>Input the amount in coins <i class="fas fa-coins money-earned"></i></h4>
                                                     <div class="row mt-md mb-md">
                                                         <div class="col-md-offset-3 col-md-6 text-center">
-                                                            <input type="number" name="credits" class="form-control deposit-coins" required="required" step="1" min="1" max="{{ $user->credits }}" placeholder="&middot; &middot; &middot;">
+                                                            <input type="number" name="credits" class="form-control deposit-coins" required="required" step="0.01" min="1" max="{{ $user->credits }}" placeholder="&middot; &middot; &middot;">
                                                         </div>
                                                     </div>
                                                     <h3 id="inputMoney" style="display: none" data-rate="{{ $pricingService->rate('USD', $user->currency_code) }}">{{ $user->currency->symbol }}<span>0.00</span> {{ $user->currency_code }}</h3>

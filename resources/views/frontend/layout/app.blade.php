@@ -175,7 +175,7 @@
                                                                     </div>
                                                                     <div class="col-md-8 mt-md">
                                                                         <h2 class="text-center">My Balance</h2>
-                                                                        <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->credits) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits(Auth::user()->credits, Auth::user()->currency_code), Auth::user()->currency_code)</h3>
+                                                                        <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits(Auth::user()->credits, Auth::user()->currency_code), Auth::user()->currency_code)</h3>
                                                                         <hr>
                                                                         <ul class="dropdown-mega-sub-nav text-center">
                                                                             <li>
