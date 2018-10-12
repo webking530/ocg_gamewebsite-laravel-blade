@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="{!! mix('compiled/lumino/lumino.css') !!}">
 
     <!--Custom Font-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span></button>
@@ -28,9 +30,12 @@
                             <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
                                     <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
                                 </a>
-                                <div class="message-body"><small class="pull-right">3 mins ago</small>
+                                <div class="message-body">
+                                    <small class="pull-right">3 mins ago</small>
                                     <a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
-                                    <br /><small class="text-muted">1:24 pm - 25/03/2015</small></div>
+                                    <br/>
+                                    <small class="text-muted">1:24 pm - 25/03/2015</small>
+                                </div>
                             </div>
                         </li>
                         <li class="divider"></li>
@@ -38,9 +43,12 @@
                             <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
                                     <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
                                 </a>
-                                <div class="message-body"><small class="pull-right">1 hour ago</small>
+                                <div class="message-body">
+                                    <small class="pull-right">1 hour ago</small>
                                     <a href="#">New message from <strong>Jane Doe</strong>.</a>
-                                    <br /><small class="text-muted">12:27 pm - 25/03/2015</small></div>
+                                    <br/>
+                                    <small class="text-muted">12:27 pm - 25/03/2015</small>
+                                </div>
                             </div>
                         </li>
                         <li class="divider"></li>
@@ -93,16 +101,14 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a></li>
-         <li><a href="{{ route('admin.getUsers') }}"><em class="fa fa-user">&nbsp;</em>User</a></li>
+        <li class="active"><a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
+        </li>
     </ul>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-   
-    @include('admin.layout.flash-mesages')
     @yield('content')
-</div>	<!--/.main-->
+</div>    <!--/.main-->
 
 <script src="{!! mix('compiled/js/shared.js') !!}"></script>
 <script src="{!! mix('compiled/lumino/lumino.js') !!}"></script>

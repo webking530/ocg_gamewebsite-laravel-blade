@@ -66,9 +66,5 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
 // Admin pages
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
-    Route::post('paymentsbydate', 'Admin\AdminController@paymentsByDate')->name('admin.paymentsbydate');
-    Route::get('users','Admin\AdminController@userListing')->name('admin.getUsers');
-    Route::get('addUser','Admin\AdminController@addUser')->name('admin.adduser');
-    Route::post('saveUser','Admin\AdminController@saveUser')->name('admin.saveUser');
 });
 
