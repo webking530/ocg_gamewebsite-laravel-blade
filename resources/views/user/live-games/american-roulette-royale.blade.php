@@ -4,27 +4,49 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CRouletteSettings.js',
+                    'CFichesController.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CFicheBut.js',
+                    'CBetTableButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CMsgBox.js',
+                    'CTweenController.js',
+                    'CSeat.js',
+                    'CTableController.js',
+                    'CEnlight.js',
+                    'CFiche.js',
+                    'CHistoryRow.js',
+                    'CWheelAnim.js',
+                    'CFinalBetPanel.js',
+                    'CNeighborsPanel.js',
+                    'CGameOver.js',
+                    'CCreditsPanel.js',
+                    'CHistory.js',
+                    'CRollingTextController.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                money: 1000,         //STARING CREDIT FOR THE USER
-                min_bet: 0.1,       //MINIMUM BET
-                max_bet: 1000,      //MAXIMUM BET
-                time_bet: 0,        //TIME TO WAIT FOR A BET IN MILLISECONDS. SET 0 IF YOU DON'T WANT BET LIMIT
-                time_winner: 1500,  //TIME FOR WINNER SHOWING IN MILLISECONDS
-                win_occurrence:40, //Win occurrence percentage (100 = always win if there is enough cash).
-                //SET THIS VALUE TO -1 IF YOU WANT WIN OCCURRENCE STRICTLY RELATED TO PLAYER BET ( SEE DOCUMENTATION)
-                casino_cash:1000,   //The starting casino cash that is recharged by the money lost by the user
-                fullscreen:true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT
-                show_credits:false,                     //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
-                num_hand_before_ads:10                 //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("recharge", function(evt) {

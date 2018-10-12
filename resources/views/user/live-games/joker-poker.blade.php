@@ -4,29 +4,39 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CGameSettings.js',
+                    'CCard.js',
+                    'CAlertPanel.js',
+                    'CPayTable.js',
+                    'CPayTableSettings.js',
+                    'CHandEvaluator.js',
+                    'CDoubleUpPanel.js',
+                    'CCreditsPanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                win_occurrence: 40,                    //WIN OCCURRENCE PERCENTAGE
-                double_occurrence:30,                  //OCCURRENCE FOR DOUBLE BET
-                double_half_occurrence:60,             //OCCURRENCE FOR DOUBLE HALF BET
-                game_cash: 100,                        //MONEY IN GAME CASH. IF THE GAME DOESN'T HAVE ENOUGHT MONEY, THE PLAYER MUST LOSE.
-                bets: [0.2,0.3,0.5,1,2,3,5],           //ALL THE AVAILABLE BETS FOR THE PLAYER
-                combo_prizes: [250,200,100,50,17,7,5,3,2,1,1], //WINS FOR FIRST COLUMN: Natural Royal Flush,
-                                                               //5 of a Kind, Royal Flush,Straight Flush, Four of a Kind, Full House,
-                                                               //Flush, Straight, Three of a Kind,Two Pair,Kings or Better
-                money: 100,                            //STARING CREDIT FOR THE USER
-                recharge:true,                         //RECHARGE WHEN MONEY IS ZERO. SET THIS TO FALSE TO AVOID AUTOMATIC RECHARGE
-                fullscreen:true,                       //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,                //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                show_credits:false,                     //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
-                num_hand_before_ads:10                 //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
             $(oMain).on("recharge", function(evt) {
                 //alert("recharge");

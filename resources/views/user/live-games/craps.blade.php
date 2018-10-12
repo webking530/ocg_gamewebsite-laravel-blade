@@ -4,25 +4,48 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-2.0.3.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CGameSettings.js',
+                    'CFichesController.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CFicheBut.js',
+                    'CBetTableButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CMsgBox.js',
+                    'CTweenController.js',
+                    'CSeat.js',
+                    'CTableController.js',
+                    'CEnlight.js',
+                    'CFiche.js',
+                    'CDicesAnim.js',
+                    'CGameOver.js',
+                    'CCreditsPanel.js',
+                    'CRollingTextController.js',
+                    'CPuck.js',
+                    'CDicesTopDownView.js',
+                    'CAreYouSurePanel.js',
+                    'CScoreText.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                money: 1000,        //STARING CREDIT FOR THE USER
-                min_bet: 1,       //MINIMUM BET
-                max_bet: 100,      //MAXIMUM BET
-                win_occurrence: 30,//Win occurrence percentage (100 = always win).
-                time_show_dice_result: 3000, //TIME IN MILLISECONDS OF DICE RESULT SHOWING.
-                casino_cash:400,   //The starting casino cash that is recharged by the money lost by the user
-                show_credits:false, //SET THIS VALUE TO FALSE IF YOU DON'T TO SHOW CREDITS BUTTON
-                fullscreen:false, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                num_hand_before_ads:10    //NUMBER OF DICE ROLLING TO COMPLETE, BEFORE TRIGGERING SAVE_SCORE EVENT. USEFUL FOR INTER-LEVEL AD EVENTUALLY.
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("recharge", function(evt) {

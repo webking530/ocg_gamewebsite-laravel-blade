@@ -4,31 +4,43 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CToggle.js',
+                    'CGfxButton.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CCreditsPanel.js',
+                    'CAreYouSurePanel.js',
+                    'CEndPanel.js',
+                    'CGridMapping.js',
+                    'CCell.js',
+                    'CBall.js',
+                    'CBallGenerator.js',
+                    'CInsertTubeController.js',
+                    'CSlot.js',
+                    'CScoreBasketController.js',
+                    'CBasket.js',
+                    'CGUIExpandible.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                start_credit: 100,      //Starting credits value
-                start_bet: 10,          //Base starting bet. Will increment with multiplier in game
-                max_multiplier: 5,      //Max multiplier value
-
-                bank_cash : 100,       //Starting credits owned by the bank. When a player win, founds will be subtract from here. When a player lose or bet, founds will be added here. If bank is 0, players always lose, in order to fill the bank.
-
-                prize: [0,20,100,50,0,10],  //THE AMOUNT WON BY THE PLAYER;
-                prize_probability: [10,8,1,4,10,10], //THE OCCURENCY WIN OF THAT PRIZE. THE RATIO IS CALCULATED BY THE FORMULA: (single win occurrence/sum of all occurrence). For instance, in this case, prize 100 have 1/43 chance. Prize 50 have 4/43 chance.
-
-                show_credits:false,          //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
-                fullscreen:true,            //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-
-                //////////////////////////////////////////////////////////////////////////////////////////
-                ad_show_counter: 5     //NUMBER OF BALL PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421?s_phrase=&s_rank=27 ///////////
-
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("start_session", function(evt) {

@@ -61,4 +61,21 @@ class Game extends Model
 
         return in_array($this->id, $populars);
     }
+
+    public function getDynamicSettings() {
+        $settings = json_decode($this->settings);
+
+        $userCashKey = $settings->user_cash_key;
+        $gameCashKey = $settings->game_cash_key;
+
+        $userCash = 555; // TODO: Get logged user current session credits
+        $gameCash = (float)$this->credits; // TODO: Get summed credits (create new method) from same group games
+
+        $settings->live->{$userCashKey} = $userCash;
+        $settings->live->{$gameCashKey} = $gameCash;
+
+        return json_encode($settings->live);
+    }
+
+
 }

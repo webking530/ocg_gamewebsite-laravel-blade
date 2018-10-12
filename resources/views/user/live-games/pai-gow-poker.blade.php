@@ -4,26 +4,42 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-2.0.3.min.js',
+                    'createjs-2013.12.12.min.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CTweenController.js',
+                    'CSeat.js',
+                    'CFichesController.js',
+                    'CVector2.js',
+                    'CGameSettings.js',
+                    'CEasing.js',
+                    'CCard.js',
+                    'CGameOver.js',
+                    'CMsgBox.js',
+                    'CHandEvaluator.js',
+                    'CAnimText.js',
+                    'CHelpCursor.js',
+                    'CCreditsPanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                win_occurrence: 40,          //WIN OCCURRENCE PERCENTAGE. VALUES BETWEEN 0-100
-                min_bet: 1,                //MIN BET PLAYABLE BY USER. DEFAULT IS 0.1$
-                max_bet: 300,                //MAX BET PLAYABLE BY USER.
-                money: 100,                  //STARING CREDIT FOR THE USER
-                game_cash: 100,             //GAME CASH AVAILABLE WHEN GAME STARTS
-                time_show_hand: 1500,          //TIME (IN MILLISECONDS) SHOWING LAST HAND
-                fullscreen:true,               //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                show_credits:false,                     //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
-                //////////////////////////////////////////////////////////////////////////////////////////
-                ad_show_counter: 10           //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
 

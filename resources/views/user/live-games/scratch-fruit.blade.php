@@ -4,63 +4,39 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CToggle.js',
+                    'CGfxButton.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CVector2.js',
+                    'CInterface.js',
+                    'CHelpPanel.js',
+                    'CEndPanel.js',
+                    'CRow.js',
+                    'CShowResult.js',
+                    'CTextToggle.js',
+                    'CCreditsPanel.js',
+                    'CAreYouSurePanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-
-                fullscreen:true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                show_credits:false,          //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
-
-                bet_to_play:[1,2,3],   //BET TO PLAY A GAME
-                player_credit:10, //PLAYER'S CREDIT
-
-                cash_credit: 1000, //TOTAL CREDIT IN CASH. PLAYER BET WILL INCREASE THE CASH, AND PLAYER WIN WILL DECREASE THE CASH.
-                ///A PLAYER WILL NEVER WIN MORE THEN CURRENT CASH.
-
-                //// PRIZE WIN BY THE PLAYER. THE PRIZE IS MULTIPLIED BY THE BET PLAYED
-                prize:[ 1.00,     //PRIZE FOR COMBO 1
-                    2.50,     //PRIZE FOR COMBO 2
-                    5.00,     //PRIZE FOR COMBO 2
-                    15.00,    //PRIZE FOR COMBO 3
-                    40.00,    //PRIZE FOR COMBO 4
-                    90.00,   //PRIZE FOR COMBO 5
-                    170.00,   //PRIZE FOR COMBO 6
-                    400.00,  //PRIZE FOR COMBO 7
-                    1000.00], //PRIZE FOR COMBO 8
-
-                prizeprob:[ 30,   //OCCURENCE PERCENTAGE FOR PRIZE 1
-                    22,   //OCCURENCE PERCENTAGE FOR PRIZE 2
-                    17,   //OCCURENCE PERCENTAGE FOR PRIZE 3
-                    10,   //OCCURENCE PERCENTAGE FOR PRIZE 4
-                    8,    //OCCURENCE PERCENTAGE FOR PRIZE 5
-                    6,    //OCCURENCE PERCENTAGE FOR PRIZE 6
-                    4,    //OCCURENCE PERCENTAGE FOR PRIZE 7
-                    2,    //OCCURENCE PERCENTAGE FOR PRIZE 8
-                    1],    //OCCURENCE PERCENTAGE FOR PRIZE 9
-
-                win_occurrence: 30,
-
-                //winpercentage MANAGES MULTIPLE WIN OCCURENCE PERCENTAGE FOR EACH GAME
-                multiple_win_percentage:
-                    [
-                        70,  //WIN IN 1 ROW
-                        25,  //WIN IN 2 ROWS
-                        5    //WIN IN 3 ROWS
-                    ],
-
-                scratch_tolerance_per_cell : 50, //AREA PERCENTAGE TO SCRATCH (FOR EACH SYMBOL) TO SHOW FINAL RESULT IN THE FRUIT ROW
-
-                //////////////////////////////////////////////////////////////////////////////////////////
-                ad_show_counter: 5     //NUMBER OF CARDS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421///////////
-
-
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("start_session", function(evt) {

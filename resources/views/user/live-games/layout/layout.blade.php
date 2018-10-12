@@ -21,9 +21,7 @@
         GAME_PATH = '/live-games/{{ $game->slug }}';
     </script>
 
-    @foreach ($gameService->getScripts($game->slug) as $script)
-        <script type="text/javascript" src="{{ asset("live-games/{$game->slug}/js/$script") }}"></script>
-    @endforeach
+    @yield('scripts')
 </head>
 <body ondragstart="return false;" ondrop="return false;" >
     <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>

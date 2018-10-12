@@ -4,54 +4,42 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CToggle.js',
+                    'CGfxButton.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CFormatText.js',
+                    'CInterface.js',
+                    'CHelpPanel.js',
+                    'CEndPanel.js',
+                    'CWheel.js',
+                    'CReel.js',
+                    'CLeds.js',
+                    'CCircularList.js',
+                    'CComplexFrame.js',
+                    'CLoadingPanel.js',
+                    'CCreditsPanel.js',
+                    'CAreYouSurePanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                start_credit: 200,      //Starting credits value
-                start_bet: 10,          //Base starting bet. Will increment with multiplier in game
-                max_multiplier: 5,      //Max multiplier value
-
-                bank_cash : 4000,       //Starting credits owned by the bank. When a player win, founds will be subtract from here. When a player lose or bet, founds will be added here. If bank is 0, players always lose, in order to fill the bank.
-
-                wheel_spin_time: 12,    //Time (in seconds) of a spin
-
-                //MONEY_WHEEL_SETTINGS sets the values and probability of each prize in the wheel. Value*max_multiplier shouldn't exceed 9999999.
-                //      -prize: THE AMOUNT WON BY THE PLAYER; IN CASE OF FREE SPIN, the "prize" MEAN NUM OF FREE SPINS.
-                //      -type: POINT IF THE PRIZE IS A MULTI-FREESPINS OR A STANDARD PRIZE
-                //      -background: THE BACKGROUND IMAGE NAME IN sprites/money_prize_images FOLDER
-                //      -textcolor: THE COLOR OF THE PRIZE TEXT
-                //      -textcolorstroke: THE COLOR STROKE OF THE PRIZE TEXT
-                //      -win_occurrence: THE OCCURENCY WIN OF THAT PRIZE. THE RATIO IS CALCULATED BY THE FORMULA: (single win occurrence/sum of all occurrence). For instance, the 1000 dollars prize here, have occurrence 1/116 because the sum of all slices occurrences is 116.
-                money_wheel_settings: [
-                    {prize: 1000,   type: "prize", background: "bg_0", textcolor: "#ff7800",   textstrokecolor: "#FFFFFF",    win_occurrence:1},
-                    {prize: 0,      type: "prize", background: "bg_1", textcolor: "#FFFFFF",   textstrokecolor: "#a20303",    win_occurrence:16},
-                    {prize: 30,     type: "prize", background: "bg_2", textcolor: "#FFFFFF",   textstrokecolor: "#c203e3",    win_occurrence:4},
-                    {prize: 50,     type: "prize", background: "bg_3", textcolor: "#FFFFFF",   textstrokecolor: "#6a25c9",    win_occurrence:2},
-                    {prize: 0,      type: "prize", background: "bg_1", textcolor: "#FFFFFF",   textstrokecolor: "#a20303",    win_occurrence:16},
-                    {prize: 5,      type: "freespin", background: "bg_0", textcolor: "#a20303",   textstrokecolor: "#FFFFFF",    win_occurrence:16},
-                    {prize: 10,     type: "prize", background: "bg_4", textcolor: "#FFFFFF",   textstrokecolor: "#018ab9",    win_occurrence:12},
-                    {prize: 20,     type: "prize", background: "bg_5", textcolor: "#FFFFFF",   textstrokecolor: "#0b8a02",    win_occurrence:7},
-                    {prize: 0,      type: "prize", background: "bg_1", textcolor: "#FFFFFF",   textstrokecolor: "#a20303",    win_occurrence:16},
-                    {prize: 15,     type: "prize", background: "bg_6", textcolor: "#FFFFFF",   textstrokecolor: "#cf6906",    win_occurrence:10},
-                    {prize: 0,      type: "prize", background: "bg_1", textcolor: "#FFFFFF",   textstrokecolor: "#a20303",    win_occurrence:16}
-                    /////////ADD HERE MORE SLOT IF YOU WANT
-                ],
-                total_money_backgrounds_in_folder: 7,  ////SET HERE THE EXACT NUMBER OF BACKGROUND IMAGES IN GAME FOLDER IF YOU WANT ADD MORE DIFFERENT IMAGES
-
-
-                show_credits:false,                      //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
-                fullscreen:true,                        //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,                 //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-
-                //////////////////////////////////////////////////////////////////////////////////////////
-                ad_show_counter: 5     //NUMBER OF SPIN BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421?s_phrase=&s_rank=27 ///////////
-
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("start_session", function(evt) {

@@ -4,25 +4,38 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs.min.js',
+                    'screenfull.js',
+                    'howler.min.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CGameSettings.js',
+                    'CCard.js',
+                    'CGameOver.js',
+                    'CPayTable.js',
+                    'CPayTableSettings.js',
+                    'CHandEvaluator.js',
+                    'CCreditsPanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                win_occurrence: 40,                    //WIN OCCURRENCE PERCENTAGE
-                game_cash: 100,                        //MONEY IN GAME CASH. IF THE GAME DOESN'T HAVE ENOUGHT MONEY, THE PLAYER MUST LOSE.
-                bets: [0.2,0.3,0.5,1,2,3,5],           //ALL THE AVAILABLE BETS FOR THE PLAYER
-                combo_prizes: [250,50,25,9,6,4,3,2,1], //WINS FOR FIRST COLUMN
-                money: 100,                            //STARING CREDIT FOR THE USER
-                recharge:true,                         //RECHARGE WHEN MONEY IS ZERO. SET THIS TO FALSE TO AVOID AUTOMATIC RECHARGE
-                fullscreen:true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                show_credits:false,                     //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
-                num_hand_before_ads:10     //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
             $(oMain).on("recharge", function(evt) {
                 //alert("recharge");

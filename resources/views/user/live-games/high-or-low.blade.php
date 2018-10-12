@@ -4,34 +4,38 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-2.0.3.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CToggle.js',
+                    'CGfxButton.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CHelpPanel.js',
+                    'CEndPanel.js',
+                    'CCard.js',
+                    'CGameSettings.js',
+                    'CFichesController.js',
+                    'CWinText.js',
+                    'CGiveupPanel.js',
+                    'CCreditsPanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-
-                win_occurrence: 40, //Win occurrence percentage (100 = always win)
-
-                starting_money: 100, //STARING CREDIT FOR THE USER
-                starting_cash:500,   //GAME CASH AVAILABLE WHEN GAME STARTS
-                fiches_value: [ 1,  //Value of first fiche
-                    5,  //Value of second fiche
-                    10, //Value of third fiche
-                    25, //Value of fourth fiche
-                    100 //Value of fifth fiche
-                ],
-
-                turn_card_speed: 400, //Time speed to completely turn a card (in ms)
-                showtext_timespeed: 3500, // Time speed duration of win/lose text (in ms)
-                show_credits:false, //SET THIS VALUE TO FALSE IF YOU DON'T TO SHOW CREDITS BUTTON
-                fullscreen:true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true,     //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                //////////////////////////////////////////////////////////////////////////////////////////
-                ad_show_counter: 10     //NUMBER OF TURNS PLAYED BEFORE AD SHOWN
-                //
-                //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-                /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-                // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421?s_phrase=&s_rank=27 ///////////
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("start_session", function(evt) {

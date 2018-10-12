@@ -26,7 +26,7 @@
                                 <div class="featured-box featured-box-primary mt-xlg">
                                     <div class="box-content">
                                         @if ($hasOpenSession)
-                                            <h2>You already have a session open, choose what do you want to do</h2>
+                                            <h2>You already have an open session, choose what do you want to do</h2>
                                             <hr>
 
                                             <div class="row">

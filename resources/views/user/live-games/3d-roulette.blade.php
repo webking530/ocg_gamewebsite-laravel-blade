@@ -4,23 +4,49 @@
 
 @endsection
 
+@section('scripts')
+    @include('user.live-games.partials.scripts', ['scripts' => [
+                    'jquery-3.2.1.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'ctl_utils.js',
+                    'sprite_lib.js',
+                    'settings.js',
+                    'CRouletteSettings.js',
+                    'CFichesController.js',
+                    'CLang.js',
+                    'CPreloader.js',
+                    'CMain.js',
+                    'CTextButton.js',
+                    'CGfxButton.js',
+                    'CFicheBut.js',
+                    'CBetTableButton.js',
+                    'CBetTextButton.js',
+                    'CToggle.js',
+                    'CMenu.js',
+                    'CGame.js',
+                    'CInterface.js',
+                    'CMsgBox.js',
+                    'CTweenController.js',
+                    'CSeat.js',
+                    'CTableController.js',
+                    'CEnlight.js',
+                    'CWheelTopAnim.js',
+                    'CFiche.js',
+                    'CHistoryRow.js',
+                    'CWheelAnim.js',
+                    'CFinalBetPanel.js',
+                    'CNeighborsPanel.js',
+                    'CGameOver.js',
+                    'CCreditsPanel.js',
+                ]])
+@endsection
+
 @section('game')
     <script>
         $(document).ready(function(){
-            var oMain = new CMain({
-                money: 1000,      //STARING CREDIT FOR THE USER
-                min_bet: 0.1,     //MINIMUM BET
-                max_bet: 1000,     //MAXIMUM BET
-                time_bet: 0,  //TIME TO WAIT FOR A BET IN MILLISECONDS. SET 0 IF YOU DON'T WANT BET LIMIT
-                time_winner: 3000, //TIME FOR WINNER SHOWING IN MILLISECONDS
-                win_occurrence: 30, //Win occurrence percentage (100 = always win).
-                                    //SET THIS VALUE TO -1 IF YOU WANT WIN OCCURRENCE STRICTLY RELATED TO PLAYER BET ( SEE DOCUMENTATION)
-                casino_cash:4000,    //The starting casino cash that is recharged by the money lost by the user
-                fullscreen:true,     //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-                check_orientation:true, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-                show_credits:false,           //SET THIS VALUE TO FALSE IF YOU DON'T TO SHOW CREDITS BUTTON
-                num_hand_before_ads:10  //NUMBER OF HANDS TO COMPLETE, BEFORE TRIGGERING SAVE_SCORE EVENT. USEFUL FOR INTER-LEVEL AD EVENTUALLY.
-            });
+            var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
 
             $(oMain).on("recharge", function(evt) {
