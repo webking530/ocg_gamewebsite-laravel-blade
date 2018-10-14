@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Account;
 
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Gaming\Game;
@@ -28,7 +30,7 @@ class GameController extends Controller
         return view('user.game.manage_session', compact('game', 'user', 'hasOpenSession', 'gameSession'));
     }
 
-    public function playLive(Request $request, Game $game) {
+    public function depositToGame(Request $request, Game $game) {
         $credits = (float)$request->get('credits');
 
         if ( ! $game->enabled) {
@@ -43,12 +45,33 @@ class GameController extends Controller
             return redirect()->back();
         }
 
-        // TODO: Create the session, deduct credits from user balance, pass game settings, credits, etc.
+        $gameSession = $this->user->getOpenSession($game);
 
-        return view("user.live-games.{$game->slug}", compact('game'));
+        if ($gameSession !== null) {
+            $this->flashNotifier->error(trans('frontend/game.session_already_open'));
+
+            return redirect()->back();
+        }
+
+        $now = Carbon::now();
+
+        DB::beginTransaction();
+
+        $this->user->gameSessions()->attach($game->id, [
+            'credits' => $credits,
+            'created_at' => $now,
+            'updated_at' => $now
+        ]);
+
+        $this->user->credits -= $credits;
+        $this->user->save();
+
+        DB::commit();
+
+        return redirect()->route('user.games.play_live', ['game' => $game]);
     }
 
-    public function resumeSession(Game $game) {
+    public function playLive(Game $game) {
         $gameSession = $this->user->getOpenSession($game);
 
         if ($gameSession === null) {
@@ -71,6 +94,36 @@ class GameController extends Controller
             return redirect()->back();
         }
 
+        // Create a new token every time the user decides to play. This will later be checked in-game
+        // to prevent having multiple tabs with the same game open
+        $now = Carbon::now();
+        $token = substr(hash('sha256', "{$now->timestamp}.{$game->id}.{$this->user->id}." . uniqid()), 0, 6);
 
+        $this->user->gameSessions()->updateExistingPivot($game->id, [
+            'token' => $token,
+            'updated_at' => $now
+        ]);
+
+        return view("user.live-games.{$game->slug}", compact('game', 'token'));
+    }
+
+    public function checkToken(Request $request, Game $game) {
+        $token = $request->get('token');
+        $session = $this->user->gameSessions()->where('game_id', $game->id)->first();
+
+        if ($session === null || $session->pivot->token !== $token) {
+            return 'invalid';
+        }
+
+        return 'ok';
+    }
+
+    public function closeSession(Game $game) {
+        try {
+            $this->user->closeGameSession($game);
+            return 'ok';
+        } catch (\Exception $ex) {
+            return 'error';
+        }
     }
 }

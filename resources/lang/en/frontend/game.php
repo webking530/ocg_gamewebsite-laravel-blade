@@ -10,6 +10,8 @@ return [
     'this_will_refund_all' => 'Refund remaining credits in all open sessions back to your balance.',
     'invalid_credits' => 'The amount you tried to deposit was declined. Please try again with another amount.',
     'game_disabled' => 'This game was temporarily disabled for playing.',
-    'invalid_session' => 'The session you tried to resume is invalid.',
-    'session_no_credits' => 'This session had no credits left, so it was closed. Please open a new session.'
+    'invalid_session' => 'You do not have an open live session in this game.',
+    'session_no_credits' => 'This session had no credits left, so it was closed. Please open a new session.',
+    'session_already_open' => 'You already have an open session in this game.',
+    'session_not_closed_properly' => 'An unexpected error occurred while closing your session. You will be redirected to the website to try again.'
 ];

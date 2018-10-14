@@ -47,8 +47,10 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
     Route::get('games', 'Account\GameController@games')->name('user.games.index');
     Route::get('game/session/{slug}', 'Account\GameController@manageSession')->name('user.game.manage_session');
 
-    Route::post('game/live/{game}', 'Account\GameController@playLive')->name('user.games.play_live');
-    Route::get('game/resume-session/{game}', 'Account\GameController@resumeSession')->name('user.games.resume_session');
+    Route::post('game/deposit/{game}', 'Account\GameController@depositToGame')->name('user.games.deposit');
+    Route::get('game/live/{game}', 'Account\GameController@playLive')->name('user.games.play_live');
+    Route::get('game/check-token/{game}', 'Account\GameController@checkToken')->name('user.games.check_token');
+    Route::get('session/{game}/close-ajax', 'Account\GameController@closeSession')->name('user.session.close_ajax');
 
     Route::get('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTickets')->name('user.lottery.buy_tickets');
     Route::post('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTicketsPost')->name('user.lottery.buy_tickets.post');

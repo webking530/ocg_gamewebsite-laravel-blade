@@ -34,11 +34,11 @@
                                                     <h2 class="text-center">Credits in Session</h2>
                                                     <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)</h3>
 
-                                                    <h4>Session opened @datetime($gameSession->pivot->created_at)</h4>
+                                                    <h4>Session opened @datetime($gameSession->pivot->updated_at)</h4>
 
                                                     <div class="row mt-lg">
                                                         <div class="col-md-12">
-                                                            <a href="{{ route('user.games.resume_session', ['game' => $game]) }}" class="btn btn-success btn-lg mb-md"><i class="fas fa-play"></i> Keep Playing</a>
+                                                            <a href="{{ route('user.games.play_live', ['game' => $game]) }}" class="btn btn-success btn-lg mb-md"><i class="fas fa-play"></i> Keep Playing</a>
                                                             <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-lg mb-md confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund') }}"><i class="fas fa-sign-out-alt"></i> Close Session</a>
                                                         </div>
                                                     </div>
@@ -51,7 +51,7 @@
                                             <h2>Choose how much from your balance you want to deposit for this game session</h2>
                                             <hr>
 
-                                            {!! Form::open(['route' => ['user.games.play_live', $game]]) !!}
+                                            {!! Form::open(['route' => ['user.games.deposit', $game]]) !!}
 
                                             <div class="row">
                                                 <div class="col-md-6">

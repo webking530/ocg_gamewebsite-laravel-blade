@@ -18,10 +18,38 @@
     @yield('head')
 
     <script>
+        function checkToken() {
+            $.get('{{ route('user.games.check_token', ['game' => $game]) }}', {
+                token: '{{ $token }}'
+            }, function (response) {
+                if (response !== 'ok') {
+                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
+                }
+            });
+        }
+        
+        function closeGameSession() {
+            $.get('{{ route('user.session.close_ajax', ['game' => $game]) }}', function(response) {
+                if (response !== 'ok') {
+                    alert('{{ trans('frontend/game.session_not_closed_properly') }}');
+                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
+                }
+
+                // By default, when the game does not detect an open session. The check token method will auto-redirect...
+                // So nothing else to do here
+            });
+        }
+
         GAME_PATH = '/live-games/{{ $game->slug }}';
     </script>
 
     @yield('scripts')
+
+    <script>
+        $(document).ready(function() {
+            setInterval(checkToken, 1000);
+        });
+    </script>
 </head>
 <body ondragstart="return false;" ondrop="return false;" >
     <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>

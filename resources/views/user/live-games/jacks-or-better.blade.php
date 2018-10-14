@@ -52,7 +52,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeEndSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                closeGameSession();
             });
 
             $(oMain).on("bet_placed", function (evt, iBet) {
