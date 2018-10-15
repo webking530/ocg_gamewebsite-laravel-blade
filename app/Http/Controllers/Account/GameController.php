@@ -7,10 +7,20 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Gaming\Game;
+use Models\Gaming\GameService;
+use Models\Gaming\GameUserWinning;
 use Models\Gaming\Jackpot;
 
 class GameController extends Controller
 {
+    private $gameService;
+
+    public function __construct(GameService $gameService) {
+        parent::__construct();
+
+        $this->gameService = $gameService;
+    }
+
     public function games() {
         $games = Game::enabled()->orderBy('slug')->get();
 
@@ -109,9 +119,8 @@ class GameController extends Controller
 
     public function checkToken(Request $request, Game $game) {
         $token = $request->get('token');
-        $session = $this->user->gameSessions()->where('game_id', $game->id)->first();
 
-        if ($session === null || $session->pivot->token !== $token) {
+        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
             return 'invalid';
         }
 
@@ -125,5 +134,41 @@ class GameController extends Controller
         } catch (\Exception $ex) {
             return 'error';
         }
+    }
+
+    public function saveCreditsToSession(Request $request, Game $game) {
+        $token = $request->get('token');
+
+        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+            return 'invalid';
+        }
+
+        $session = $this->user->getOpenSession($game);
+        $credits = (float)$request->get('credits');
+
+        $earning = $credits - $session->pivot->credits;
+
+        DB::beginTransaction();
+
+        $this->user->gameSessions()->updateExistingPivot($game->id, [
+            'credits' => $credits,
+            'updated_at' => Carbon::now()
+        ]);
+
+        if ($earning > 0) {
+            GameUserWinning::create([
+                'game_id' => $game->id,
+                'user_id' => $this->user->id,
+                'win_amount' => $earning
+            ]);
+        }
+
+        // TODO: Check for tournament and add score to the table too
+        // TODO: Check for jackpot
+        // TODO: Register in game_user_bets_open (Just to keep track of them)
+
+        DB::commit();
+
+        return 'ok';
     }
 }

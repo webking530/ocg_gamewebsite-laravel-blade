@@ -86,11 +86,11 @@ class User extends Authenticatable
     }
 
     public function betsOpen() {
-        return $this->belongsToMany(Game::class, 'game_user_bets_open', 'user_id', 'game_id')->withPivot(['bet_amount']);
+        return $this->belongsToMany(Game::class, 'game_user_bets_open', 'user_id', 'game_id')->withPivot(['bet_amount', 'created_at', 'updated_at']);
     }
 
     public function winnings() {
-        return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount']);
+        return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount', 'created_at', 'updated_at']);
     }
 
     public function isUser() {

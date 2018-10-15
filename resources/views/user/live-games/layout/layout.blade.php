@@ -45,6 +45,17 @@
             window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
         }
 
+        function registerResult(credits) {
+            $.get('{{ route('user.session.save_credits', ['game' => $game]) }}', {
+                token: '{{ $token }}',
+                credits: credits
+            }, function (response) {
+                if (response !== 'ok') {
+                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
+                }
+            });
+        }
+
         GAME_PATH = '/live-games/{{ $game->slug }}';
     </script>
 

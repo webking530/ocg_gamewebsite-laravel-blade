@@ -64,7 +64,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeSaveScore({score:iMoney});
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                registerResult(iMoney);
             });
 
             $(oMain).on("show_preroll_ad", function (evt) {
