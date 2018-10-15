@@ -34,7 +34,7 @@
                                                     <h2 class="text-center">Credits in Session</h2>
                                                     <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)</h3>
 
-                                                    <h4>Session opened @datetime($gameSession->pivot->updated_at)</h4>
+                                                    <h4>Session opened @datetime($gameSession->pivot->created_at)</h4>
 
                                                     <div class="row mt-lg">
                                                         <div class="col-md-12">

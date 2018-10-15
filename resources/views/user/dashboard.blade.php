@@ -101,7 +101,7 @@
                                                         <tr>
                                                             <td class="valign-middle"><img src="{{ asset($game->small_icon) }}" width="48"> {{ $game->name }}</td>
                                                             <td class="valign-middle"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($game->pivot->credits, 2) }}</span></td>
-                                                            <td class="valign-middle">@datetime($game->pivot->updated_at)</td>
+                                                            <td class="valign-middle">@datetime($game->pivot->created_at)</td>
                                                             <td class="valign-middle">
                                                                 <a href="{{ route('user.game.manage_session', ['slug' => $game->slug]) }}" class="btn btn-success btn-sm"><i class="fas fa-play"></i> Play Live</a>
                                                                 <a href="{{ route('home.game.demo', ['slug' => $game->slug]) }}" class="btn btn-warning btn-sm">Play Demo</a>
