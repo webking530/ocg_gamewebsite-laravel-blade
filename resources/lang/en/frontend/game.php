@@ -13,5 +13,6 @@ return [
     'invalid_session' => 'You do not have an open live session in this game.',
     'session_no_credits' => 'This session had no credits left, so it was closed. Please open a new session.',
     'session_already_open' => 'You already have an open session in this game.',
-    'session_not_closed_properly' => 'An unexpected error occurred while closing your session. You will be redirected to the website to try again.'
+    'session_not_closed_properly' => 'An unexpected error occurred while closing your session. You will be redirected to the website to try again.',
+    'out_of_money' => 'You do not have any credits left to play. You will be redirected to reload your balance.'
 ];

@@ -40,6 +40,11 @@
             });
         }
 
+        function redirectOnRecharge() {
+            //alert('{{ trans('frontend/game.out_of_money') }}');
+            window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
+        }
+
         GAME_PATH = '/live-games/{{ $game->slug }}';
     </script>
 

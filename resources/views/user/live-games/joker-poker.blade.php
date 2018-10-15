@@ -39,7 +39,7 @@
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
             $(oMain).on("recharge", function(evt) {
-                //alert("recharge");
+                redirectOnRecharge();
             });
 
             $(oMain).on("start_session", function(evt) {

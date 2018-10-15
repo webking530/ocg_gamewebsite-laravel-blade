@@ -43,7 +43,7 @@
         var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
         $(oMain).on("recharge", function(evt) {
-            alert("add your recharge script in index.html");
+            redirectOnRecharge();
         });
 
         $(oMain).on("bet_placed", function (evt, iTotBet) {

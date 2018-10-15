@@ -50,7 +50,7 @@
 
 
             $(oMain).on("recharge", function(evt) {
-                //alert("recharge");
+                redirectOnRecharge();
             });
 
             $(oMain).on("start_session", function(evt) {

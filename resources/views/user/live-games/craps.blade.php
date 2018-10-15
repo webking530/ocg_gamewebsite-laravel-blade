@@ -49,7 +49,7 @@
 
 
             $(oMain).on("recharge", function(evt) {
-                //alert("recharge");
+                redirectOnRecharge();
             });
 
             $(oMain).on("bet_placed", function (evt, iTotBet) {
