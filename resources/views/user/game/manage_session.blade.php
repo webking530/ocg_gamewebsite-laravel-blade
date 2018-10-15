@@ -78,7 +78,7 @@
                                                 <div class="col-md-12 text-center">
                                                     <div class="alert alert-warning"><i class="fas fa-info-circle"></i> <strong>NOTICE:</strong> By clicking play, the amount you typed in above will be temporarily deducted from your
                                                         balance into the game session. Any earnings or losses through the game will affect the final amount you will be able to retrieve.</div>
-                                                    <button type="submit" class="btn btn-xlg btn-warning"><i class="fas fa-play"></i> PLAY LIVE NOW</button>
+                                                    <button type="submit" class="btn btn-xlg btn-primary"><i class="fas fa-play"></i> PLAY LIVE NOW</button>
                                                 </div>
                                             </div>
 
