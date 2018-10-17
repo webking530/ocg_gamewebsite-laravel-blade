@@ -38,7 +38,7 @@
 
                                                     <div class="row mt-lg">
                                                         <div class="col-md-12">
-                                                            <a href="{{ route('user.games.resume_session', ['game' => $game]) }}" class="btn btn-success btn-lg mb-md"><i class="fas fa-play"></i> Keep Playing</a>
+                                                            <a href="{{ route('user.games.play_live', ['game' => $game]) }}" class="btn btn-success btn-lg mb-md"><i class="fas fa-play"></i> Keep Playing</a>
                                                             <a href="{{ route('user.session.close', ['game' => $game]) }}" class="btn btn-danger btn-lg mb-md confirm-click" data-confirm-content="{{ trans('frontend/game.this_will_refund') }}"><i class="fas fa-sign-out-alt"></i> Close Session</a>
                                                         </div>
                                                     </div>
@@ -51,7 +51,7 @@
                                             <h2>Choose how much from your balance you want to deposit for this game session</h2>
                                             <hr>
 
-                                            {!! Form::open(['route' => ['user.games.play_live', $game]]) !!}
+                                            {!! Form::open(['route' => ['user.games.deposit', $game]]) !!}
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -78,7 +78,7 @@
                                                 <div class="col-md-12 text-center">
                                                     <div class="alert alert-warning"><i class="fas fa-info-circle"></i> <strong>NOTICE:</strong> By clicking play, the amount you typed in above will be temporarily deducted from your
                                                         balance into the game session. Any earnings or losses through the game will affect the final amount you will be able to retrieve.</div>
-                                                    <button type="submit" class="btn btn-xlg btn-warning"><i class="fas fa-play"></i> PLAY LIVE NOW</button>
+                                                    <button type="submit" class="btn btn-xlg btn-primary"><i class="fas fa-play"></i> PLAY LIVE NOW</button>
                                                 </div>
                                             </div>
 

@@ -43,7 +43,7 @@
         var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
         $(oMain).on("recharge", function(evt) {
-            alert("add your recharge script in index.html");
+            redirectOnRecharge();
         });
 
         $(oMain).on("bet_placed", function (evt, iTotBet) {
@@ -61,7 +61,8 @@
             if(getParamValue('ctl-arcade') === "true"){
                 parent.__ctlArcadeEndSession();
             }
-            //...ADD YOUR CODE HERE EVENTUALLY
+
+            closeGameSession();
         });
 
 
@@ -69,7 +70,8 @@
             if(getParamValue('ctl-arcade') === "true"){
                 parent.__ctlArcadeSaveScore({score:iScore});
             }
-            //...ADD YOUR CODE HERE EVENTUALLY
+
+            registerResult(iScore);
         });
 
         $(oMain).on("show_interlevel_ad", function(evt) {

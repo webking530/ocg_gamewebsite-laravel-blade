@@ -49,7 +49,7 @@
 
 
             $(oMain).on("recharge", function(evt) {
-                //alert("recharge");
+                redirectOnRecharge();
             });
 
             $(oMain).on("bet_placed", function (evt, iTotBet) {
@@ -72,14 +72,16 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeEndSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                closeGameSession();
             });
 
             $(oMain).on("save_score", function(evt,iMoney) {
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeSaveScore({score:iMoney});
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                registerResult(iMoney);
             });
 
             $(oMain).on("show_interlevel_ad", function(evt) {

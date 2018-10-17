@@ -54,7 +54,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeEndSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                closeGameSession();
             });
 
             $(oMain).on("restart_level", function(evt, iLevel) {
@@ -68,7 +69,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeSaveScore({score:iScore, mode: szMode});
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                registerResult(iScore);
             });
 
             $(oMain).on("start_level", function(evt, iLevel) {

@@ -3,6 +3,7 @@
 namespace Models\Gaming;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Models\Auth\User;
 
 class Game extends Model
@@ -68,8 +69,10 @@ class Game extends Model
         $userCashKey = $settings->user_cash_key;
         $gameCashKey = $settings->game_cash_key;
 
-        $userCash = 555; // TODO: Get logged user current session credits
-        $gameCash = (float)$this->credits; // TODO: Get summed credits (create new method) from same group games
+        $userSession = Auth::user()->gameSessions()->where('game_id', $this->id)->first();
+
+        $userCash = $userSession === null ? 0.0 : (float)$userSession->pivot->credits;
+        $gameCash = (float)$this->credits;
 
         $settings->live->{$userCashKey} = $userCash;
         $settings->live->{$gameCashKey} = $gameCash;
