@@ -227,4 +227,25 @@ class User extends Authenticatable
     public function getOpenSession(Game $game) {
         return $this->gameSessions()->where('game_id', $game->id)->first();
     }
+
+    /*
+    |------------------------------------------------------------------------------------
+    | Validations
+    |------------------------------------------------------------------------------------
+    */
+    public static function rules($update = false, $id = null)
+    {
+        $commun = [
+            'name' => 'required|min:2',
+            'email'    => "required|email|unique:users,email,$id",
+        ];
+
+        if ($update) {
+            return $commun;
+        }
+
+        return array_merge($commun, [
+            'email'    => 'required|email|max:255|unique:users',
+        ]);
+    }
 }
