@@ -69,5 +69,11 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
 // Admin pages
 Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
+    Route::get('user/showdata','Admin\UserController@showdata');
+    Route::get( 'user/switch/{user}', 'Admin\UserController@switchUser' );
+    Route::get( 'user/suspend/{user}', 'Admin\UserController@suspendUser' );
+    Route::get( 'user/resumeuser/{user}', 'Admin\UserController@resumeUser' );
+    Route::get( 'user/switchback/stop', 'Admin\UserController@switchBack' );
+    Route::resource('user','Admin\UserController');
 });
 

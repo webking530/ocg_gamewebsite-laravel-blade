@@ -18,6 +18,8 @@ mix.scripts([
 
 mix.copyDirectory('resources/assets/vendor/fontawesome-5.2.0/webfonts', 'public/compiled/webfonts');
 
+mix.copyDirectory('resources/assets/vendor/bootstrap/fonts/', 'public/compiled/fonts');
+
 // Porto Template
 mix.styles([
     'resources/assets/vendor/porto/vendor/animate/animate.min.css',

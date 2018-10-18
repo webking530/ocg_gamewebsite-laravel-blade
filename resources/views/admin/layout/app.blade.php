@@ -10,6 +10,7 @@
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
+    @yield('css')
 </head>
 <body>
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -100,8 +101,12 @@
             <input type="text" class="form-control" placeholder="Search">
         </div>
     </form>
+    <?php $r = \Route::current()->getAction() ?>
+    <?php $route = (isset($r['as'])) ? $r['as'] : ''; ?>
     <ul class="nav menu">
-        <li class="active"><a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
+        <li class="<?php echo (starts_with($route, 'admin.home')) ? "active" : '' ?>"><a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
+        </li>
+        <li class="<?php echo (starts_with($route, 'user')) ? "active" : '' ?>"><a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
         </li>
     </ul>
 </div><!--/.sidebar-->
@@ -112,7 +117,6 @@
 
 <script src="{!! mix('compiled/js/shared.js') !!}"></script>
 <script src="{!! mix('compiled/lumino/lumino.js') !!}"></script>
-
 <script>
     window.onload = function () {
         var chart1 = document.getElementById("line-chart").getContext("2d");
@@ -124,6 +128,7 @@
         });
     }
 </script>
+@yield('js')
 
 </body>
 </html>
