@@ -141,6 +141,8 @@ function CMain(oData){
     this.gotoMenu = function(){
         _oMenu = new CMenu();
         _iState = STATE_MENU;
+
+        _oMenu._onButPlayRelease();
     };
     
     this.gotoGame = function(){

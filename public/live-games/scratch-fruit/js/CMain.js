@@ -133,11 +133,15 @@ function CMain(oData){
         if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
             this._initSounds();
         }
+
+        this._onRemovePreloader();
     };
     
     this.gotoMenu = function(){
         _oMenu = new CMenu();
         _iState = STATE_MENU;
+
+        _oMenu._onButPlayRelease();
     };
 
     this.gotoGame = function(){

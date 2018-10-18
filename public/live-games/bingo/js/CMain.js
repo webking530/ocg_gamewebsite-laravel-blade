@@ -60,6 +60,7 @@ function CMain(oData){
                 s_oSoundTrack = createjs.Sound.play("soundtrack",{ loop:-1});
             }
             this.gotoMenu();
+             _oMenu._onButPlayRelease();
          }
     };
     
@@ -147,6 +148,7 @@ function CMain(oData){
             }
             
             this.gotoMenu();
+            _oMenu._onButPlayRelease();
         }
     };
     

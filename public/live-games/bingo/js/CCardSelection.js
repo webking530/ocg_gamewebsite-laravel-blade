@@ -377,7 +377,9 @@ function CCardSelection(iMoney,oParentContainer){
     
     this._onExit = function(){
         s_oCardSelection.unload();
-        s_oMain.gotoMenu();  
+        s_oMain.gotoMenu();
+
+        s_oGame.onExit();
     };
     
     this._onFullscreenRelease = function(){
