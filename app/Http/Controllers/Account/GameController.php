@@ -156,11 +156,15 @@ class GameController extends Controller
         ]);
 
         if ($earning > 0) {
+            $game->subCredits($earning);
+
             GameUserWinning::create([
                 'game_id' => $game->id,
                 'user_id' => $this->user->id,
                 'win_amount' => $earning
             ]);
+        } else {
+            $game->addCredits(abs($earning));
         }
 
         // TODO: Check for tournament and add score to the table too

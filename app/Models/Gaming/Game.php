@@ -80,5 +80,13 @@ class Game extends Model
         return json_encode($settings->live);
     }
 
+    public function addCredits($credits) {
+        $this->credits += $credits;
+        $this->save();
+    }
 
+    public function subCredits($credits) {
+        $this->credits -= $credits;
+        $this->save();
+    }
 }
