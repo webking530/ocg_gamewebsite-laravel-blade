@@ -47,7 +47,7 @@ function CInterface(iMoney){
             _fRequestFullScreen = false;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             oSprite = s_oSpriteLibrary.getSprite('but_fullscreen');
             if(_oAudioToggle === null){
                 _pStartPosFullscreen = {x:_oButExit.getX() - oSprite.width/2 - 10,y:oSprite.height/2 + 10};
@@ -187,7 +187,7 @@ function CInterface(iMoney){
             _oAudioToggle = null;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.unload();
         }
         
@@ -203,7 +203,7 @@ function CInterface(iMoney){
         if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
             _oAudioToggle.setPosition(_pStartPosAudio.x - iNewX,iNewY + _pStartPosAudio.y);
         }
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.setPosition(_pStartPosFullscreen.x - iNewX,_pStartPosFullscreen.y + iNewY);
         }
         _oPaytable.refreshButtonPos(iNewX,iNewY);
@@ -334,25 +334,28 @@ function CInterface(iMoney){
     };
     
     this._onExit = function(){
-        //s_oGame.onExit();  
         new CAreYouSurePanel(s_oGame.onExit);
     };
     
     this._onAudioToggle = function(){
-        createjs.Sound.setMute(s_bAudioActive);
+        Howler.mute(s_bAudioActive);
         s_bAudioActive = !s_bAudioActive;
     };
     
+    this.resetFullscreenBut = function(){
+	if (_fRequestFullScreen && screenfull.enabled){
+		_oButFullscreen.setActive(s_bFullscreen);
+	}
+    };
+
     this._onFullscreenRelease = function(){
-        if(s_bFullscreen) { 
-            _fCancelFullScreen.call(window.document);
-            s_bFullscreen = false;
-        }else{
-            _fRequestFullScreen.call(window.document.documentElement);
-            s_bFullscreen = true;
-        }
-        
-        sizeHandler();
+	if(s_bFullscreen) { 
+		_fCancelFullScreen.call(window.document);
+	}else{
+		_fRequestFullScreen.call(window.document.documentElement);
+	}
+	
+	sizeHandler();
     };
     
     this.getFicheSelected = function(){

@@ -214,7 +214,9 @@ function sizeHandler() {
             $("#canvas").css("top","0px");
         }
         
-        $("#canvas").css("left",fOffsetX+"px");      
+        $("#canvas").css("left",fOffsetX+"px");     
+        
+        fullscreenHandler();
 };
 
 function _checkOrientation(iWidth,iHeight){
@@ -236,14 +238,6 @@ function _checkOrientation(iWidth,iHeight){
                 s_oMain.stopUpdate();
             }   
         }
-    }
-}
-
-function inIframe() {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
     }
 }
 
@@ -393,30 +387,35 @@ onTouchEnd: function(e) {
 
 };
 
-function playSound(szSound, iVolume, iLoop){
-    if (DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-        var oPointer = createjs.Sound.play(szSound, {loop: iLoop, volume:iVolume});
-        return oPointer;
+function playSound(szSound,iVolume,bLoop){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+
+        s_aSounds[szSound].play();
+        s_aSounds[szSound].volume(iVolume);
+
+        s_aSounds[szSound].loop(bLoop);
+
+        return s_aSounds[szSound];
     }
     return null;
 }
 
-function stopSound(oPointer){
-    if (DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-        oPointer.stop();
+function stopSound(szSound){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].stop();
     }
-}
+}   
 
-function setVolume(oPointer, iVolume){
-   if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-       oPointer.volume= iVolume;
-   }
+function setVolume(szSound, iVolume){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].volume(iVolume);
+    }
 }  
 
-function setMute(oPointer, bMute){
-   if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-       oPointer.setMute(bMute);
-   }
+function setMute(szSound, bMute){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].mute(bMute);
+    }
 }
 
 function ctlArcadeResume(){
@@ -441,4 +440,40 @@ function getParamValue(paramName){
             if (pArr[0] == paramName) 
                     return pArr[1];
     }
+}
+
+
+function fullscreenHandler(){
+	if (!ENABLE_FULLSCREEN || screenfull.enabled === false){
+       return;
+    }
+	
+    if(screen.height < window.innerHeight+3 && screen.height > window.innerHeight-3){
+        s_bFullscreen = true;
+    }else{
+        s_bFullscreen = false;
+    }
+
+    if (s_oInterface !== null){
+        s_oInterface.resetFullscreenBut();
+    }
+
+    if (s_oMenu !== null){
+        s_oMenu.resetFullscreenBut();
+    }
+}
+
+
+if (screenfull.enabled) {
+    screenfull.on('change', function(){
+            s_bFullscreen = screenfull.isFullscreen;
+
+            if (s_oInterface !== null){
+                s_oInterface.resetFullscreenBut();
+            }
+
+            if (s_oMenu !== null){
+                s_oMenu.resetFullscreenBut();
+            }
+    });
 }

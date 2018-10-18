@@ -1,13 +1,17 @@
 @extends('user.live-games.layout.layout')
 
 @section('head')
-
+    <link rel="stylesheet" href="{{ asset("live-games/{$game->slug}/css/ios_fullscreen.css") }}" type="text/css">
 @endsection
 
 @section('scripts')
     @include('user.live-games.partials.scripts', ['scripts' => [
-                    'jquery-2.0.3.min.js',
-                    'createjs-2013.12.12.min.js',
+                    'jquery-3.1.1.min.js',
+                    'createjs-2015.11.26.min.js',
+                    'howler.min.js',
+                    'screenfull.js',
+                    'platform.js',
+                    'ios_fullscreen.js',
                     'ctl_utils.js',
                     'sprite_lib.js',
                     'settings.js',
@@ -100,6 +104,12 @@
         });
 
     </script>
+
+    <div class="check-fonts">
+        <p class="check-font-1">test 1</p>
+        <p class="check-font-2">test 2</p>
+    </div>
+
     <canvas id="canvas" class='ani_hack' width="1700" height="768"> </canvas>
     <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
 @endsection

@@ -101,10 +101,6 @@ function CGame(oData){
     
     this.unload = function(){
 	_bUpdate = false;
-        
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.stop();
-        }
 
         for(var i=0;i<_aCardsDealing.length;i++){
             _aCardsDealing[i].unload();
@@ -188,9 +184,9 @@ function CGame(oData){
         }
 
         if(_szHandResult === "player"){
-            playSound("win", 1, 0);
+            playSound("win", 1, false);
         }else{
-            playSound("lose", 1, 0);
+            playSound("lose", 1, false);
         }
         
         this.changeState(STATE_GAME_DISTRIBUTE_FICHES);
@@ -286,7 +282,7 @@ function CGame(oData){
 
                 oCard.addEventListener(ON_CARD_ANIMATION_ENDING,this.cardFromDealerArrived);
 
-                playSound("card", 1, 0); 
+                playSound("card", 1, false); 
         }else{
             setTimeout(function(){
                                     s_oGame.changeState(STATE_GAME_PLAYER_TURN);
@@ -308,7 +304,7 @@ function CGame(oData){
         _iTimeElaps=0;
         s_oGame.changeState(STATE_GAME_SHOW_WINNER);
 
-        playSound("fiche_collect", 1, 0);
+        playSound("fiche_collect", 1, false);
         
         _iAdsCounter++;
         if(_iAdsCounter === AD_SHOW_COUNTER){
@@ -507,9 +503,9 @@ function CGame(oData){
         }
 
         _oSeat.setPrevBet();
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.play("card");
-        }
+        
+        playSound("card",1,false);
+        
         
 	_bFold = false;
         this.changeState(STATE_GAME_DEALING);

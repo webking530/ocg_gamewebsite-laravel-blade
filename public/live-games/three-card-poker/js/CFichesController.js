@@ -89,7 +89,7 @@ function CFichesController(){
                 _iValue+=aFiches[i].value;
         }
         
-        playSound("chip", 1, 0);
+        playSound("chip", 1, false);
         
         
         _oBetAmountText.x = iXPos;

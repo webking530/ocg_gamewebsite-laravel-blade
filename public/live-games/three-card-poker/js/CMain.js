@@ -37,8 +37,8 @@ function CMain(oData){
         s_oGameSettings=new CGameSettings();
         _bUpdate = true;
     };
-	
-	this.preloaderReady = function(){
+    
+    this.preloaderReady = function(){
         this._loadImages();
 		
 	if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
@@ -51,42 +51,32 @@ function CMain(oData){
 	var iPerc = Math.floor(_iCurResource/RESOURCE_TO_LOAD *100);
 
         _oPreloader.refreshLoader(iPerc);
-		
-        if(_iCurResource === RESOURCE_TO_LOAD){
-            _oPreloader.unload();
-            
-            this.gotoMenu();
-        }
     };
+
     
     this._initSounds = function(){
-         if (!createjs.Sound.initializeDefaultPlugins()) {
-             return;
-         }
-
-        if(navigator.userAgent.indexOf("Opera")>0 || navigator.userAgent.indexOf("OPR")>0){
-                createjs.Sound.alternateExtensions = ["mp3"];
-                createjs.Sound.addEventListener("fileload", createjs.proxy(this.soundLoaded, this));
-
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/card.ogg", "card");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/chip.ogg", "chip");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/fiche_collect.ogg", "fiche_collect");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/press_but.ogg", "press_but");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win.ogg", "win");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/lose.ogg", "lose");
-        }else{
-                createjs.Sound.alternateExtensions = ["ogg"];
-                createjs.Sound.addEventListener("fileload", createjs.proxy(this.soundLoaded, this));
-
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/card.mp3", "card",4);
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/chip.mp3", "chip",4);
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/fiche_collect.mp3", "fiche_collect");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/press_but.mp3", "press_but");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win.mp3", "win");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/lose.mp3", "lose");
-        }
-        RESOURCE_TO_LOAD += 6;
+        var aSoundsInfo = new Array();
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'card',loop:false,volume:1, ingamename: 'card'});
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'chip',loop:false,volume:1, ingamename: 'chip'});
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'fiche_collect',loop:false,volume:1, ingamename: 'fiche_collect'});
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'press_but',loop:false,volume:1, ingamename: 'press_but'});
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'win',loop:false,volume:1, ingamename: 'win'});
+        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'lose',loop:false,volume:1, ingamename: 'lose'});
         
+        RESOURCE_TO_LOAD += aSoundsInfo.length;
+
+        s_aSounds = new Array();
+        for(var i=0; i<aSoundsInfo.length; i++){
+            s_aSounds[aSoundsInfo[i].ingamename] = new Howl({ 
+                                                            src: [aSoundsInfo[i].path+aSoundsInfo[i].filename+'.mp3'],
+                                                            autoplay: false,
+                                                            preload: true,
+                                                            loop: aSoundsInfo[i].loop, 
+                                                            volume: aSoundsInfo[i].volume,
+                                                            onload: s_oMain.soundLoaded
+                                                        });
+        }
+
     };
     
     this._loadImages = function(){
@@ -134,20 +124,16 @@ function CMain(oData){
         var iPerc = Math.floor(_iCurResource/RESOURCE_TO_LOAD *100);
 
         _oPreloader.refreshLoader(iPerc);
-        
-        if(_iCurResource === RESOURCE_TO_LOAD){
-            _oPreloader.unload();
-            
-            this.gotoMenu();
-        }
     };
     
     this._onAllImagesLoaded = function(){
         
     };
     
-    this.onAllPreloaderImagesLoaded = function(){
-        this._loadImages();
+    this._onRemovePreloader = function(){
+        _oPreloader.unload();
+
+        this.gotoMenu();
     };
     
     this.gotoMenu = function(){
@@ -170,7 +156,11 @@ function CMain(oData){
         _bUpdate = false;
         createjs.Ticker.paused = true;
         $("#block_game").css("display","block");
-	createjs.Sound.setMute(true);
+        
+        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+            Howler.mute(true);
+        }
+        
     };
 
     this.startUpdate = function(){
@@ -178,10 +168,13 @@ function CMain(oData){
         _bUpdate = true;
         createjs.Ticker.paused = false;
         $("#block_game").css("display","none");
-
-        if(s_bAudioActive){
-                createjs.Sound.setMute(false);
+        
+        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+            if(s_bAudioActive){
+                Howler.mute(false);
+            }
         }
+        
     };
     
     this._update = function(event){

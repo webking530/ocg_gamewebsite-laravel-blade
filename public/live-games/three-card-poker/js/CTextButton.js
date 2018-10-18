@@ -4,6 +4,9 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oContai
     var _iHeight;
     var _aCbCompleted;
     var _aCbOwner;
+    var _oListenerDown;
+    var _oListenerUp;
+    
     var _oButton;
     var _oButtonBg;
     var _oTextBack;
@@ -48,8 +51,8 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oContai
     };
     
     this.unload = function(){
-       _oButton.off("mousedown");
-       _oButton.off("pressup");
+       _oButton.off("mousedown", _oListenerDown);
+       _oButton.off("pressup" , _oListenerUp); 
        
        _oContainer.removeChild(_oButton);
     };
@@ -61,7 +64,7 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oContai
     this.enable = function(){
         _bDisable = false;
 
-		_oText.color = "#fff";
+	_oText.color = "#fff";
     };
     
     this.disable = function(){
@@ -71,10 +74,8 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oContai
     };
     
     this._initListener = function(){
-       oParent = this;
-
-       _oButton.on("mousedown", this.buttonDown);
-       _oButton.on("pressup" , this.buttonRelease);      
+       _oListenerDown = _oButton.on("mousedown", this.buttonDown);
+       _oListenerUp = _oButton.on("pressup" , this.buttonRelease);     
     };
     
     this.addEventListener = function( iEvent,cbCompleted, cbOwner ){
@@ -87,9 +88,9 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oContai
             return;
         }
         
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            playSound("press_but", 1, 0);
-        }
+        
+        playSound("press_but", 1, false);
+        
         
         _oButton.scaleX = 1;
         _oButton.scaleY = 1;

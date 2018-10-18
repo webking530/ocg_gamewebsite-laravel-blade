@@ -2,6 +2,7 @@ function CToggle(iXPos, iYPos, oSprite, bActive, oParentContainer) {
     var _bActive;
     var _aCbCompleted;
     var _aCbOwner;
+    
     var _oButton;
     var _oListenerMouseDown;
     var _oListenerMouseUp;
@@ -73,7 +74,7 @@ function CToggle(iXPos, iYPos, oSprite, bActive, oParentContainer) {
         _oButton.scaleX = 1;
         _oButton.scaleY = 1;
 
-        playSound("press_but", 1, 0);
+        playSound("press_but", 1, false);
 
         _bActive = !_bActive;
         _oButton.gotoAndStop("state_" + _bActive);

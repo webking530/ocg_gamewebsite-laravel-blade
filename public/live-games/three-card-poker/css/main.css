@@ -54,6 +54,8 @@ canvas {
 }
 
 /***************FONTS*******************/
+
+                
 @font-face {
     font-family: 'arialbold';
     src: url('arialbd-webfont.eot');
@@ -73,4 +75,16 @@ canvas {
 	     url('Digital-7.woff') format('woff'), 
 	     url('Digital-7.ttf')  format('truetype'),
 	     url('Digital-7.svg#Digital-7') format('svg');
+}
+
+.check-fonts{
+    position: fixed;
+    opacity:0;
+}
+
+.check-font-1{
+        font-family: 'arialbold';
+}
+.check-font-2{
+        font-family: 'Digital-7';
 }
