@@ -18,9 +18,10 @@
     @yield('head')
 
     <script>
-        function checkToken() {
-            $.get('{{ route('user.games.check_token', ['game' => $game]) }}', {
-                token: '{{ $token }}'
+        function checkSettings(settings) {
+            $.get('{{ route('user.session.check_settings', ['game' => $game]) }}', {
+                token: '{{ $token }}',
+                settings: settings
             }, function (response) {
                 if (response !== 'ok') {
                     window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
@@ -60,12 +61,6 @@
     </script>
 
     @yield('scripts')
-
-    <script>
-        $(document).ready(function() {
-            setInterval(checkToken, 1000);
-        });
-    </script>
 </head>
 <body ondragstart="return false;" ondrop="return false;" >
     <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
@@ -73,5 +68,16 @@
     @yield('game')
 
     <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+
+
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                if (typeof gameSettings !== 'undefined') {
+                    checkSettings(gameSettings);
+                }
+            }, 1000);
+        });
+    </script>
 </body>
 </html>

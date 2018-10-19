@@ -39,6 +39,30 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    win_occurrence: WIN_OCCURRENCE,
+                    min_reel_loop: MIN_REEL_LOOPS,
+                    reel_delay: REEL_DELAY,
+                    freespin_occurrence: FREESPIN_OCCURRENCE,
+                    bonus_occurrence: BONUS_OCCURRENCE,
+                    freespin_symbol_num_occur: FREESPIN_SYMBOL_NUM_OCCURR,
+                    num_freespin: NUM_FREESPIN,
+                    bonus_prize: BONUS_PRIZE,
+                    bonus_prize_occur: BONUS_PRIZE_OCCURR,
+                    coin_bet: COIN_BET,
+                    paytable_symbol_1: PAYTABLE_VALUES[0],
+                    paytable_symbol_2: PAYTABLE_VALUES[1],
+                    paytable_symbol_3: PAYTABLE_VALUES[2],
+                    paytable_symbol_4: PAYTABLE_VALUES[3],
+                    paytable_symbol_5: PAYTABLE_VALUES[4],
+                    paytable_symbol_6: PAYTABLE_VALUES[5],
+                    paytable_symbol_7: PAYTABLE_VALUES[6]
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -46,7 +70,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function (evt) {

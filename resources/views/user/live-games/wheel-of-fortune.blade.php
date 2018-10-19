@@ -34,6 +34,17 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    wheel_settings: WHEEL_SETTINGS,
+                    start_bet: START_BET,
+                    bet_offset: BET_OFFSET,
+                    max_bet: MAX_BET,
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -42,7 +53,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {

@@ -46,6 +46,16 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    min_bet: MIN_BET,
+                    max_bet: MAX_BET,
+                    win_occurrence: WIN_OCCURRENCE
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -58,7 +68,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {
@@ -105,6 +116,8 @@
             }else{
                 sizeHandler();
             }
+
+
         });
 
     </script>

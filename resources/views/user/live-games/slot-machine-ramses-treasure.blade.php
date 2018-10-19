@@ -34,6 +34,33 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    win_occurrence: WIN_OCCURRENCE,
+                    bonus_occurrence: BONUS_OCCURRENCE,
+                    min_reel_loop: MIN_REEL_LOOPS,
+                    reel_delay: REEL_DELAY,
+                    min_bet: MIN_BET,
+                    max_bet: MAX_BET,
+                    max_hold: MAX_NUM_HOLD,
+                    bonus_prize_for_3_symbol: BONUS_PRIZE[0],
+                    bonus_prize_for_4_symbol: BONUS_PRIZE[1],
+                    bonus_prize_for_5_symbol: BONUS_PRIZE[2],
+                    perc_win_prize_1: PERC_WIN_PRIZE_1,
+                    perc_win_prize_2: PERC_WIN_PRIZE_2,
+                    perc_win_prize_3: PERC_WIN_PRIZE_3,
+                    paytable_symbol_1: PAYTABLE_VALUES[0],
+                    paytable_symbol_2: PAYTABLE_VALUES[1],
+                    paytable_symbol_3: PAYTABLE_VALUES[2],
+                    paytable_symbol_4: PAYTABLE_VALUES[3],
+                    paytable_symbol_5: PAYTABLE_VALUES[4],
+                    paytable_symbol_6: PAYTABLE_VALUES[5],
+                    paytable_symbol_7: PAYTABLE_VALUES[6]
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -41,7 +68,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function (evt) {

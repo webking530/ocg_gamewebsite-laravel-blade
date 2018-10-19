@@ -38,6 +38,16 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    max_multiplier: MAX_MULTIPLIER,
+                    money_wheel_settings: MONEY_WHEEL_SETTINGS,
+                    instant_win_wheel_settings: INSTANT_WHEEL_SETTINGS
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -46,7 +56,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {

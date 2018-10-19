@@ -89,4 +89,8 @@ class Game extends Model
         $this->credits -= $credits;
         $this->save();
     }
+
+    public function getSettingsDecodedAttribute() {
+        return json_decode($this->settings)->live;
+    }
 }

@@ -39,6 +39,18 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    coin_bet: COIN_BETS,
+                    starting_bet: STARTING_BET,
+                    time_extraction: TIME_EXTRACTION,
+                    win_occurrence: WIN_OCCURRENCE,
+                    paytable: PAYTABLE_INFO
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -47,7 +59,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {
@@ -89,8 +102,9 @@
             }else{
                 sizeHandler();
             }
-        });
 
+
+        });
     </script>
     <canvas id="canvas" class='ani_hack' width="1920" height="1080"> </canvas>
     <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>

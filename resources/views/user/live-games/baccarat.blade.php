@@ -38,10 +38,21 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    min_bet: MIN_BET,
+                    max_bet: MAX_BET,
+                    multiplier: MULTIPLIERS,
+                    blackjack_payout: BLACKJACK_PAYOUT,
+                    win_occurrence: WIN_OCCURRENCE,
+                    bet_occurrence: BET_OCCURRENCE
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
-
-
 
             $(oMain).on("recharge", function(evt) {
                 redirectOnRecharge();
@@ -51,7 +62,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {
@@ -94,8 +106,9 @@
             } else {
                 sizeHandler();
             }
-        });
 
+
+        });
     </script>
     <canvas id="canvas" class='ani_hack' width="1700" height="768"> </canvas>
     <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>

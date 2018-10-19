@@ -49,7 +49,7 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
 
     Route::post('game/deposit/{game}', 'Account\GameController@depositToGame')->name('user.games.deposit');
     Route::get('game/live/{game}', 'Account\GameController@playLive')->name('user.games.play_live');
-    Route::get('game/check-token/{game}', 'Account\GameController@checkToken')->name('user.games.check_token');
+    Route::get('game/check-settings/{game}', 'Account\GameController@checkSettings')->name('user.session.check_settings');
     Route::get('session/{game}/close-ajax', 'Account\GameController@closeSession')->name('user.session.close_ajax');
     Route::get('session/{game}/save-credits', 'Account\GameController@saveCreditsToSession')->name('user.session.save_credits');
 

@@ -127,6 +127,23 @@ class GameController extends Controller
         return 'ok';
     }
 
+    public function checkSettings(Request $request, Game $game) {
+        $token = $request->get('token');
+        $settings = $request->get('settings');
+
+        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+            return 'invalid';
+        }
+
+        // Example ( to be modified ):
+        if ($settings['win_occurrence'] != $game->settings_decoded->win_occurrence) {
+            return 'invalid';
+        }
+        // TODO: Compare each setting value with the ones in DB. If one of them is different, return invalid
+
+        return 'ok';
+    }
+
     public function closeSession(Game $game) {
         try {
             $this->user->closeGameSession($game);

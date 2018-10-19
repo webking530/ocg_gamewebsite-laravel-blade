@@ -35,15 +35,27 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    prize: MIN_BET,
+                    prizeprob: PRIZE_PROB,
+                    win_occurrence: WIN_OCCURRENCE,
+                    multiple_win_percentage: MULTIPLE_WIN_PERCENTAGE,
+                    bet_to_play: BET
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
-
 
             $(oMain).on("start_session", function(evt) {
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {
@@ -88,6 +100,8 @@
             }else{
                 sizeHandler();
             }
+
+
         });
 
     </script>

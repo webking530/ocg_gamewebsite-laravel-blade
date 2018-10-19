@@ -35,6 +35,18 @@
 
 @section('game')
     <script>
+        function refreshSettings() {
+            setInterval(function() {
+                gameSettings = {
+                    double_occurrence: DOUBLE_OCCURRENCE,
+                    double_half_occurrence: DOUBLE_HALF_OCCURRENCE,
+                    win_occurrence: WIN_OCCURRENCE,
+                    bets: BET_TYPE,
+                    combo_prizes: COMBO_PRIZES
+                };
+            }, 1000);
+        }
+
         $(document).ready(function(){
             var oMain = new CMain(JSON.parse('{!! $game->getDynamicSettings() !!}'));
 
@@ -46,7 +58,8 @@
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeStartSession();
                 }
-                //...ADD YOUR CODE HERE EVENTUALLY
+
+                refreshSettings();
             });
 
             $(oMain).on("end_session", function(evt) {
@@ -94,6 +107,8 @@
             }else{
                 sizeHandler();
             }
+
+
         });
 
     </script>
