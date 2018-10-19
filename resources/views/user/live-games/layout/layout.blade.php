@@ -18,6 +18,11 @@
     @yield('head')
 
     <script>
+        function offlineRedirect() {
+            alert('{{ trans('frontend/game.you_are_offline') }}');
+            window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
+        }
+
         function checkSettings(settings) {
             $.get('{{ route('user.session.check_settings', ['game' => $game]) }}', {
                 token: '{{ $token }}',
@@ -26,7 +31,7 @@
                 if (response !== 'ok') {
                     window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
                 }
-            });
+            }).fail(offlineRedirect);
         }
         
         function closeGameSession() {
@@ -38,7 +43,7 @@
 
                 // By default, when the game does not detect an open session. The check token method will auto-redirect...
                 // So nothing else to do here
-            });
+            }).fail(offlineRedirect);
         }
 
         function redirectOnRecharge() {
@@ -55,7 +60,7 @@
                 if (response !== 'ok') {
                     window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
                 }
-            });
+            }).fail(offlineRedirect);
         }
 
         GAME_PATH = '/live-games/{{ $game->slug }}';
