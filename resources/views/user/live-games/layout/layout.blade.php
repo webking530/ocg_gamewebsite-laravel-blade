@@ -49,7 +49,8 @@
         function registerResult(credits) {
             $.get('{{ route('user.session.save_credits', ['game' => $game]) }}', {
                 token: '{{ $token }}',
-                credits: credits
+                credits: credits,
+                settings: gameSettings
             }, function (response) {
                 if (response !== 'ok') {
                     window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';

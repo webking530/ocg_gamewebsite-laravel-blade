@@ -41,4 +41,17 @@ class GameService
 
         return true;
     }
+
+    public function validateClientGameSettings(Game $game, $clientSettings) {
+        foreach ($clientSettings as $key => $value) {
+            $clientSetting = json_encode($value, JSON_NUMERIC_CHECK);
+            $serverSetting = json_encode($game->settings_decoded->{$key}, JSON_NUMERIC_CHECK);
+
+            if ($clientSetting !== $serverSetting) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

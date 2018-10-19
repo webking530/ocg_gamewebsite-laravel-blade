@@ -135,11 +135,9 @@ class GameController extends Controller
             return 'invalid';
         }
 
-        // Example ( to be modified ):
-        if ($settings['win_occurrence'] != $game->settings_decoded->win_occurrence) {
+        if ( ! $this->gameService->validateClientGameSettings($game, $settings)) {
             return 'invalid';
         }
-        // TODO: Compare each setting value with the ones in DB. If one of them is different, return invalid
 
         return 'ok';
     }
@@ -155,8 +153,13 @@ class GameController extends Controller
 
     public function saveCreditsToSession(Request $request, Game $game) {
         $token = $request->get('token');
+        $settings = $request->get('settings');
 
         if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+            return 'invalid';
+        }
+
+        if ( ! $this->gameService->validateClientGameSettings($game, $settings)) {
             return 'invalid';
         }
 
@@ -186,7 +189,6 @@ class GameController extends Controller
 
         // TODO: Check for tournament and add score to the table too
         // TODO: Check for jackpot
-        // TODO: Register in game_user_bets_open (Just to keep track of them)
 
         DB::commit();
 
