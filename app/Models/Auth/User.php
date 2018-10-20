@@ -2,10 +2,12 @@
 
 namespace Models\Auth;
 
+use Carbon\Carbon;
 use DB;
 use Models\Gaming\Badge;
 use Models\Gaming\Game;
 use Models\Gaming\Lottery;
+use Models\Gaming\Tournament;
 use Models\Location\HasCountry;
 use Models\Location\HasLanguage;
 use Models\Pricing\HasCurrency;
@@ -57,6 +59,10 @@ class User extends Authenticatable
 
     public function gameSessions() {
         return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'token', 'created_at', 'updated_at']);
+    }
+
+    public function tournaments() {
+        return $this->belongsToMany(Tournament::class, 'tournament_user', 'user_id', 'tournament_id')->withPivot(['total_win', 'total_lose']);
     }
 
     public function scopeUsers($query) {
@@ -226,6 +232,36 @@ class User extends Authenticatable
 
     public function getOpenSession(Game $game) {
         return $this->gameSessions()->where('game_id', $game->id)->first();
+    }
+
+    public function getRunningTournaments(Game $game) {
+        return $this->tournaments()->pending()->active()->whereHas('games', function($q) use ($game) {
+            $q->where('game_id', $game->id);
+        })->get();
+    }
+
+    public function addWinMoneyToRunningTournaments(Game $game, $money) {
+        $this->addMoneyToRunningTournament($game, 'total_win', $money);
+    }
+
+    public function addLoseMoneyToRunningTournaments(Game $game, $money) {
+        $this->addMoneyToRunningTournament($game, 'total_lose', $money);
+    }
+
+    private function addMoneyToRunningTournament(Game $game, $field, $money) {
+        $tournaments = $this->getRunningTournaments($game);
+
+        /**
+         * @var Tournament $tournament
+         */
+        foreach ($tournaments as $tournament) {
+            $currentMoney = $tournament->pivot->{$field};
+
+            $this->tournaments()->updateExistingPivot($tournament->id, [
+                $field => $currentMoney + $money,
+                'updated_at' => Carbon::now()
+            ]);
+        }
     }
 
     /*

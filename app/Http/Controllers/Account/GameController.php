@@ -183,11 +183,14 @@ class GameController extends Controller
                 'user_id' => $this->user->id,
                 'win_amount' => $earning
             ]);
+
+            $this->user->addWinMoneyToRunningTournaments($game, $earning);
         } else {
             $game->addCredits(abs($earning));
+
+            $this->user->addLoseMoneyToRunningTournaments($game, abs($earning));
         }
 
-        // TODO: Check for tournament and add score to the table too
         // TODO: Check for jackpot
 
         DB::commit();

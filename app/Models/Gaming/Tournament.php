@@ -54,6 +54,10 @@ class Tournament extends Model
         return $query->where('date_from', '<=', $now)->where('date_to', '>=', $now);
     }
 
+    public function scopePending($query) {
+        return $query->where('status', self::STATUS_PENDING);
+    }
+
     public function scopeCustom($query) {
         return $query->where('group', '>=', CustomGameGroup::CUSTOM_GROUP_START_ID);
     }
@@ -70,11 +74,12 @@ class Tournament extends Model
         return $this->extended_at != null;
     }
 
+    // TPA means the casino net winnings, because from the winning we will be giving out Tournament prizes
     public function getTotalPlayAmount() {
         $tpa = 0;
 
         foreach ($this->users as $user) {
-            $tpa += $user->pivot->total_win + $user->pivot->total_lose;
+            $tpa += $user->pivot->total_lose - $user->pivot->total_win;
         }
 
         return $tpa;
