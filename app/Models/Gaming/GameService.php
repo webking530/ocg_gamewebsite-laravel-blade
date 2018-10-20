@@ -44,8 +44,16 @@ class GameService
 
     public function validateClientGameSettings(Game $game, $clientSettings) {
         foreach ($clientSettings as $key => $value) {
+            $currentServerSetting = $game->settings_decoded->{$key};
+
+            // Check for paytable_symbol_1 and compare all but the last one, since it's dynamically generated based on Jackpot
+            if ($game->has_jackpot && Jackpot::isRealJackpotEnabled() && $key === 'paytable_symbol_1') {
+                array_pop($value);
+                array_pop($currentServerSetting);
+            }
+
             $clientSetting = json_encode($value, JSON_NUMERIC_CHECK);
-            $serverSetting = json_encode($game->settings_decoded->{$key}, JSON_NUMERIC_CHECK);
+            $serverSetting = json_encode($currentServerSetting, JSON_NUMERIC_CHECK);
 
             if ($clientSetting !== $serverSetting) {
                 return false;

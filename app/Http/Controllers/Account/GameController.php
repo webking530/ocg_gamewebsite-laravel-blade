@@ -184,14 +184,20 @@ class GameController extends Controller
                 'win_amount' => $earning
             ]);
 
-            $this->user->addWinMoneyToRunningTournaments($game, $earning);
+            // We will not add Jackpot won amount to the tournament, since it will throw out of balance the TPA
+            if (Jackpot::isRealJackpotEnabled() && Jackpot::amountIsCloseToJackpot($earning)) {
+                Jackpot::create([
+                    'user_id' => $this->user->id,
+                    'prize' => $earning
+                ]);
+            } else {
+                $this->user->addWinMoneyToRunningTournaments($game, $earning);
+            }
         } else {
             $game->addCredits(abs($earning));
 
             $this->user->addLoseMoneyToRunningTournaments($game, abs($earning));
         }
-
-        // TODO: Check for jackpot
 
         DB::commit();
 

@@ -77,6 +77,36 @@ class Game extends Model
         $settings->live->{$userCashKey} = $userCash;
         $settings->live->{$gameCashKey} = $gameCash;
 
+        /*
+        We need to dynamically adjust the multiplier value for the highest value figure in
+        each slot game. It will be based around the Jackpot size, so the higher the Jackpot, the
+        higher the multiplier.
+        Each game has a max coin interval that will be multiplied by the number of lines the game has. That is
+        the basic formula to get the max possible bet the user can place.
+        */
+        if ($this->has_jackpot && Jackpot::isRealJackpotEnabled()) {
+            $jackpot = Jackpot::getCurrentJackpot()['size'];
+
+            switch ($this->slug) {
+                default:
+                case 'slot-machine-the-fruits':
+                case 'slot-machine-ultimate-soccer':
+                    $max_bet = 0.5 * 20;
+                    break;
+                case 'slot-machine-mr-chicken':
+                case 'slot-machine-space-adventure':
+                case 'slot-machine-ramses-treasure':
+                case 'slot-machine-lucky-christmas':
+                    $max_bet = $settings->live->max_bet * 5;
+                    break;
+                case 'slot-machine-arabian-nights':
+                    $max_bet = last($settings->live->coin_bet) * 20;
+                    break;
+            }
+
+            $settings->live->paytable_symbol_1[count($settings->live->paytable_symbol_1) - 1] = ceil($jackpot / $max_bet);
+        }
+
         return json_encode($settings->live);
     }
 

@@ -41,7 +41,7 @@ class StatisticsService
             return (int)settings('fake_money_paid');
         }
 
-        return Withdrawal::whereStatus(Withdrawal::STATUS_APPROVED)->sum('amount'); // TODO: get this info from withdrawals
+        return Withdrawal::whereStatus(Withdrawal::STATUS_APPROVED)->sum('amount');
     }
 
     public function getHighestLotteryPot() {

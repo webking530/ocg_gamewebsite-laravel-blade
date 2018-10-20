@@ -22,6 +22,10 @@ class Jackpot extends Model
         return $days;
     }
 
+    public static function isRealJackpotEnabled() {
+        return settings('enable_fake_jackpot') == 'false';
+    }
+
     public static function getCurrentJackpot() {
         $enableFakeJackpot = settings('enable_fake_jackpot') == 'true';
         $fakeJackpotDays = Carbon::now()->diffInDays(Carbon::createFromDate(2018,9,1));
@@ -33,15 +37,14 @@ class Jackpot extends Model
             ];
         }
 
-        $creditsInMachine = Game::enabled()->where('has_jackpot', true)->sum('credits');
+        $creditsInMachines = Game::enabled()->where('has_jackpot', true)->sum('credits');
         $latestJackpot = self::getLatestJackpot();
 
         $daysSinceJackpot = $latestJackpot == null ? $fakeJackpotDays : Carbon::now()->diffInDays($latestJackpot->created_at);
         $daysSinceJackpot = $daysSinceJackpot == 0 ? 1 : $daysSinceJackpot;
 
-
         return [
-            'size' => $creditsInMachine * self::JACKPOT_CASINO_PERCENT * self::JACKPOT_SIZE_PERCENT,
+            'size' => $creditsInMachines * self::JACKPOT_CASINO_PERCENT * self::JACKPOT_SIZE_PERCENT,
             'days' => $daysSinceJackpot
         ];
     }
@@ -52,5 +55,17 @@ class Jackpot extends Model
 
     public static function getLatestJackpot() {
         return self::latest()->first();
+    }
+
+    // Due to rounding errors, earnings, loses and credit changes in machines that occur in real time,
+    // we need to estimate if the amount provided (in a winning result) is close to the Jackpot. If it is,
+    // we can assume that the user in fact hit the Jackpot.
+    public static function amountIsCloseToJackpot($amount) {
+        $currentJackpot = self::getCurrentJackpot()['size'];
+
+        // The amount can get as close as 95% of the jackpot for us to assume that it was a jackpot winning
+        $tolerance = 0.95;
+
+        return $amount >= ($currentJackpot * $tolerance);
     }
 }
