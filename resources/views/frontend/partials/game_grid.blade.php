@@ -27,7 +27,6 @@
             <hr>
             <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($highestJackpot->prize) }}</h4>
             <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $highestJackpot->days_since_jackpot, ['days' => $highestJackpot->days_since_jackpot]) }}</h4>
-            {{--<h3 class="custom-underline alternative-font"><a href="{{ route('home.user.profile', ['username' => $highestJackpot->user->nickname]) }}"><i class="fas fa-user"></i> {{ $highestJackpot->user->nickname }}</a></h3>--}}
             @include('frontend.partials.username', ['user' => $highestJackpot->user])
         </div>
     @endunless
@@ -38,7 +37,6 @@
             <hr>
             <h4 class="custom-underline mb-xs money-earned"><i class="fas fa-coins"></i> {{ number_format($latestJackpot->prize) }}</h4>
             <h4 class="custom-underline mb-xs">{{ trans_choice('app.days', $latestJackpot->days_since_jackpot, ['days' => $latestJackpot->days_since_jackpot]) }}</h4>
-            {{--<h3 class="custom-underline alternative-font"><i class="fas fa-user"></i> zack2057</h3>--}}
             @include('frontend.partials.username', ['user' => $latestJackpot->user])
         </div>
     @endunless
@@ -50,20 +48,27 @@
             <li data-group="{{ $game->group }}" class="col-sm-6 col-md-3 isotope-item game-item" @if ($game->isPopular()) data-popular @endif>
                 <div class="sample-item sample-item-home pl-md pr-md">
                     <a href="{{ route('home.game', ['slug' => $game->slug]) }}" target="_blank">
-                                    <span class="sample-item-image-wrapper">
-                                        <span class="sample-item-image" data-original="{{ asset($game->icon_url) }}" data-plugin-lazyload data-plugin-options="{'appearEffect': 'animated fadeIn'}"></span>
-                                        <i class="fa fa-spinner fa-spin fa-fw"></i>
-                                    </span>
+                        <span class="sample-item-image-wrapper">
+                            <span class="sample-item-image" data-original="{{ asset($game->icon_url) }}" data-plugin-lazyload data-plugin-options="{'appearEffect': 'animated fadeIn'}"></span>
+                            <i class="fa fa-spinner fa-spin fa-fw"></i>
+                        </span>
                         <span class="sample-item-description">
-                                        <h5>{{ $game->name }}<br>
-                                            {{--@if ($game->isInstantWin())--}}
-                                            {{--<strong class="custom-underline alternative-font">Instant Win</strong>--}}
-                                            {{--@else--}}
-                                            {{--<strong class="custom-underline alternative-font">&nbsp;</strong>--}}
-                                            {{--@endif--}}
-                                        </h5>
-
+                            <h5>
+                                {{ $game->name }}
+                                @if (Auth::check())
+                                    <hr>
+                                    <span class="display-block">
+                                        <span class="col-md-6 text-left"><i class="fas fa-clock"></i> Last Win</span>
+                                        <span class="col-md-6 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getLastWinAmount($game), 2) }}</span></span>
                                     </span>
+                                    <span class="display-block">
+                                        <span class="col-md-6 text-left"><i class="fas fa-star"></i> Highest Win</span>
+                                        <span class="col-md-6 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getHighestWinAmount($game), 2) }}</span></span>
+                                    </span>
+                                    <span class="clearfix"></span>
+                                @endif
+                            </h5>
+                        </span>
                     </a>
                 </div>
             </li>

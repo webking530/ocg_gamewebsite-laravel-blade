@@ -264,6 +264,26 @@ class User extends Authenticatable
         }
     }
 
+    public function getLastWinAmount(Game $game) {
+        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('pivot_created_at', 'DESC')->first();
+
+        if ($winning == null) {
+            return 0;
+        }
+
+        return $winning->pivot->win_amount;
+    }
+
+    public function getHighestWinAmount(Game $game) {
+        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('pivot_win_amount', 'DESC')->first();
+
+        if ($winning == null) {
+            return 0;
+        }
+
+        return $winning->pivot->win_amount;
+    }
+
     /*
     |------------------------------------------------------------------------------------
     | Validations
