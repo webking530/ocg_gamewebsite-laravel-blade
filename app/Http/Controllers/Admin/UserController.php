@@ -54,7 +54,7 @@ class UserController extends Controller
     public function resumeUser($id)
     {
         $user = User::where('id', $id)->first();
-        $user->suspended_on = 0;
+        $user->suspended_on = Null;
         $user->save();
         return back()->withSuccess(trans('app.success_destroy'));
     }

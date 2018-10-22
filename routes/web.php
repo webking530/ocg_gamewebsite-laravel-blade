@@ -67,7 +67,7 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
 });
 
 // Admin pages
-Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
+Route::group(['prefix' => 'admin', 'middleware' => [/*'admin', 'maintenancemode'*/]], function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
     Route::get('user/showdata','Admin\UserController@showdata');
     Route::get( 'user/switch/{user}', 'Admin\UserController@switchUser' );
@@ -75,5 +75,13 @@ Route::group(['prefix' => 'admin', 'middleware' => [/*'admin'*/]], function () {
     Route::get( 'user/resumeuser/{user}', 'Admin\UserController@resumeUser' );
     Route::get( 'user/switchback/stop', 'Admin\UserController@switchBack' );
     Route::resource('user','Admin\UserController');
+    Route::get('setting/general','Admin\SettingController@general')->name('setting.general');
+    Route::get('setting/games','Admin\SettingController@general')->name('setting.games');
+    Route::get('setting/badges','Admin\SettingController@general')->name('setting.badges');
+    Route::get('setting/money','Admin\SettingController@general')->name('setting.money');
+    Route::get('setting/countries','Admin\SettingController@general')->name('setting.countries');
+    Route::get('setting/lottery','Admin\SettingController@general')->name('setting.lottery');
+    Route::GET('setting/registration/{status}','Admin\SettingController@registrationEnableDisable')->name('setting.registration');
+    Route::GET('setting/maintenancemode/{mode}','Admin\SettingController@maintenanceMode')->name('setting.maintenancemode');
 });
 

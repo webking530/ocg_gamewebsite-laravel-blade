@@ -108,6 +108,17 @@
         </li>
         <li class="<?php echo (starts_with($route, 'user')) ? "active" : '' ?>"><a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
         </li>
+        <li  data-toggle="collapse" data-target="#products" class="<?php echo (starts_with($route, 'setting')) ? "" : 'collapsed' ?>  <?php echo (starts_with($route, 'setting')) ? "active" : '' ?>">
+            <a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Settings Management<span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse <?php echo (starts_with($route, 'setting')) ? "in" : "" ?>" id="products">
+            <li class="active"><a href="{{ route('setting.general') }}">General Settings</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="#">Badges</a></li>
+            <li><a href="#">Money</a></li>
+            <li><a href="#">Countries</a></li>
+            <li><a href="#">Lottery</a></li>
+        </ul>
     </ul>
 </div><!--/.sidebar-->
 

@@ -64,7 +64,7 @@
                         targets: [6],
                         render: function (a, b, data, d) {
                             $returnValue = '<ul class="list-inline" style="margin-bottom:0px;"><li><form method="GET" action="user/switch/' + data.id + '" accept-charset="UTF-8" class="delete"><meta name="csrf-token" content="<?php echo csrf_token(); ?>"><button class="btn btn-info btn-xs" title="Switch User"><i class="fa fa-retweet"></i></button></form></li><li><form method="GET" action="user/' + data.id + '/edit" accept-charset="UTF-8" class="delete"><input name="_method" value="EDIT" type="hidden"><meta name="csrf-token" content="<?php echo csrf_token(); ?>"><button class="btn btn-basic btn-xs" title="Edit User"><i class="fa fa-edit"></i></button></form></li>';
-                            if (data.suspended_on == 0) {
+                            if (data.suspended_on === '' || data.suspended_on === null) {
                                 $returnValue += '<li><form method="delete" action="user/suspend/' + data.id + '" accept-charset="UTF-8" class="delete"><input name="_method" value="delete" type="hidden"><meta name="csrf-token" content="<?php echo csrf_token(); ?>"><button class="btn btn-danger btn-xs" title="Suspend User"><i class="fa fa-eraser"></i></button></form></li>'
                             } else {
                                 $returnValue += '<li><form method="delete" action="user/resumeuser/' + data.id + '" accept-charset="UTF-8" class="delete"><input name="_method" value="delete" type="hidden"><meta name="csrf-token" content="<?php echo csrf_token(); ?>"><button class="btn btn-success btn-xs" title="Resume User"><i class="fa fa-eraser"></i></button></form></li>'
