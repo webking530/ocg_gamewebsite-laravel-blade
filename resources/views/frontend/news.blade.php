@@ -23,8 +23,8 @@
             <article class="blog-post">
                 <div class="col-md-12">
                     <div class="post-infos mb-xl">
-                        <span class="info like ml-xlg">
-                            Post Date:
+                        <span class="info like">
+                            <i class="fas fa-calendar-alt"></i> Post Date:
                             <span class="like-number font-weight-semibold custom-color-dark">
                                 {{ $news->created_at->format('l, F j, Y, g:i a') }}
                             </span>

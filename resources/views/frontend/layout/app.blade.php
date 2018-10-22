@@ -67,7 +67,6 @@
                         </div>
                     </div>
                     <div class="header-column">
-
                         <div class="header-row">
                             <div class="header-nav">
                                 <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
@@ -225,28 +224,17 @@
                     </div>
                 </div>
 
-                {{--<div class="header-row hidden-xs clearfix">--}}
-                    {{--<div class="header-column">--}}
-                        {{--<p class="mb-none text-center">--}}
-                            {{--<span class="alternative-font">RECENT WINNERS</span>--}}
-                            {{--&mdash; <span class="text-light">username02 (<i class="fas fa-coins"></i> 350)</span>--}}
-                            {{--&mdash; <span class="text-light">username3 (<i class="fas fa-coins"></i> 750)</span>--}}
-                            {{--&mdash; <span class="text-light">username24 (<i class="fas fa-coins"></i> 1,250)</span>--}}
-                            {{--&mdash; <span class="text-light">username15 (<i class="fas fa-coins"></i> 335)</span>--}}
-                            {{--&mdash; <span class="text-light">username17 (<i class="fas fa-coins"></i> 7,750)</span>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div class="header-row hidden-xs clearfix">--}}
-                    {{--<div class="header-column pt-lg">--}}
-                        {{--<p class="mb-none text-light text-center">--}}
-                            {{--<i class="fa fa-star text-warning"></i> Bonus content number one...--}}
-                            {{--<i class="fa fa-star text-warning"></i> Bonus content number two...--}}
-                            {{--<i class="fa fa-star text-warning"></i> Bonus content number three...--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                @if (($headerNews = $bannersService->getLatestHeaderNews(3))->count() > 0)
+                    <div class="header-row clearfix header-news">
+                        <div class="header-column">
+                            <p class="mb-none text-light text-center">
+                            @foreach ($headerNews as $news)
+                                <span>&middot; <a title="{{ $news->name }}" href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->name, 0, 30, '...') }}</a> <small><i class="fas fa-calendar-alt"></i> @datetime($news->date_from)</small></span>
+                            @endforeach
+                            </p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </header>

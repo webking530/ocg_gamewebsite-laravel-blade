@@ -9,6 +9,8 @@
 namespace Models\Banners;
 
 
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Models\Bonuses\Bonus;
 use Models\Gaming\GameUserWinning;
 use Models\News\News;
@@ -23,7 +25,15 @@ class BannersService
         return Bonus::orderByRaw('RAND()')->get()->chunk(3);
     }
 
-    public function getLatestNews() {
-        return News::orderBy('date_from', 'DESC')->take(2)->get();
+    /**
+     * @param int $amount
+     * @return Collection
+     */
+    public function getLatestHeaderNews($amount = 2) {
+        return News::currentNews()->orderBy('date_from', 'DESC')->take($amount)->get();
+    }
+
+    public function getLatestNews($amount = 2) {
+        return News::orderBy('date_from', 'DESC')->take($amount)->get();
     }
 }

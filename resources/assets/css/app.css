@@ -6,6 +6,17 @@ body {
     padding: 0;
 }
 
+.header-news p {
+    padding: 10px;
+    background-image: -webkit-linear-gradient(left, transparent, #3F4247, transparent);
+    background-image: linear-gradient(to right, transparent, #3F4247, transparent);
+    margin-right: 100px;
+}
+
+.header-news p span {
+    margin-right: 5%;
+}
+
 .inline-block {
     display: inline-block;
 }

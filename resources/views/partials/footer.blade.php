@@ -1,0 +1,1 @@
+{{-- This template is to be used to pass PHP variables to JavaScript (JavaScript Facade) --}}
