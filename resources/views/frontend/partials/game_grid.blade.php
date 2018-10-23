@@ -58,12 +58,12 @@
                                 @if (Auth::check())
                                     <hr>
                                     <span class="display-block">
-                                        <span class="col-md-6 text-left"><i class="fas fa-clock"></i> Last Win</span>
-                                        <span class="col-md-6 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getLastWinAmount($game), 2) }}</span></span>
+                                        <span class="col-md-8 text-left"><i class="fas fa-clock"></i> Last Win</span>
+                                        <span class="col-md-4 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getLastWinAmount($game), 2) }}</span></span>
                                     </span>
                                     <span class="display-block">
-                                        <span class="col-md-6 text-left"><i class="fas fa-star"></i> Highest Win</span>
-                                        <span class="col-md-6 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getHighestWinAmount($game), 2) }}</span></span>
+                                        <span class="col-md-8 text-left"><i class="fas fa-star"></i> Highest Win</span>
+                                        <span class="col-md-4 text-right"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->getHighestWinAmount($game), 2) }}</span></span>
                                     </span>
                                     <span class="clearfix"></span>
                                 @endif

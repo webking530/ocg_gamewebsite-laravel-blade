@@ -30,7 +30,7 @@ class BannersService
      * @return Collection
      */
     public function getLatestHeaderNews($amount = 2) {
-        return News::currentNews()->orderBy('date_from', 'DESC')->take($amount)->get();
+        return News::currentNews()->orderBy('order', 'ASC')->take($amount)->get();
     }
 
     public function getLatestNews($amount = 2) {

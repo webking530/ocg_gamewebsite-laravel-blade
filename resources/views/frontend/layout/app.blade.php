@@ -229,7 +229,7 @@
                         <div class="header-column">
                             <p class="mb-none text-light text-center">
                             @foreach ($headerNews as $news)
-                                <span>&middot; <a title="{{ $news->name }}" href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->name, 0, 30, '...') }}</a> <small><i class="fas fa-calendar-alt"></i> @datetime($news->date_from)</small></span>
+                                <span>&middot; <a title="{{ $news->name }}" href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->name, 0, 30, '...') }}</a> {{--<small><i class="fas fa-calendar-alt"></i> @datetime($news->date_from)</small>--}}</span>
                             @endforeach
                             </p>
                         </div>
