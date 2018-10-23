@@ -10,6 +10,7 @@ use Models\Gaming\Lottery;
 use Models\Gaming\Tournament;
 use Models\Location\HasCountry;
 use Models\Location\HasLanguage;
+use Models\Pricing\Deposit;
 use Models\Pricing\HasCurrency;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,8 +50,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function referral() {
-        return $this->belongsTo(User::class, 'referral_id');
+    public function referrer() {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+    public function referrals() {
+        return $this->hasMany(User::class, 'referrer_id');
     }
 
     public function badges() {
@@ -63,6 +68,10 @@ class User extends Authenticatable
 
     public function tournaments() {
         return $this->belongsToMany(Tournament::class, 'tournament_user', 'user_id', 'tournament_id')->withPivot(['total_win', 'total_lose']);
+    }
+
+    public function bankAccounts() {
+        return $this->hasMany(BankAccount::class, 'user_id');
     }
 
     public function scopeUsers($query) {
@@ -97,6 +106,18 @@ class User extends Authenticatable
 
     public function winnings() {
         return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount', 'created_at', 'updated_at']);
+    }
+
+    public function deposits() {
+        return $this->hasMany(Deposit::class, 'user_id');
+    }
+
+    public function getFirstApprovedDepositAttribute() {
+        return $this->deposits()->whereNotNull('approved_at')->orderBy('approved_at', 'ASC')->first();
+    }
+
+    public function getFirstRefundAttribute() {
+        return $this->deposits()->oldest()->where('status', Deposit::STATUS_REFUNDED)->first();
     }
 
     public function isUser() {

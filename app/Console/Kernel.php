@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         Commands\Tournament\CheckPendingTournaments::class,
         Commands\Tournament\EnrollNewUsersToTournaments::class,
         Commands\Gaming\DistributeGameCash::class,
+        Commands\Pricing\DCPAbuse::class,
     ];
 
     /**
@@ -35,6 +36,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('pricing:update-exchange-rates')->environments('production')->hourly()->withoutOverlapping();
         $schedule->command('pricing:notification')->environments('production')->hourly()->withoutOverlapping();
+        $schedule->command('detect-dcp-abuse')->environments('production')->everyThirtyMinutes()->withoutOverlapping();
 
         $schedule->command('lottery:process')->environments('production')->everyMinute()->withoutOverlapping();
         $schedule->command('lottery:reset-ticket-reservations')->environments('production')->everyMinute()->withoutOverlapping();

@@ -35,8 +35,8 @@ class CreateUsersTable extends Migration
             $table->string('verification_pin', 6);
             $table->integer('low_balance_threshold');
 
-            $table->integer('referral_id')->unsigned()->nullable();
-            $table->foreign('referral_id')->references('id')->on('users');
+            $table->integer('referrer_id')->unsigned()->nullable();
+            $table->foreign('referrer_id')->references('id')->on('users');
 
             $table->integer('role');
 

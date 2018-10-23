@@ -10,8 +10,6 @@ use Models\Gaming\Game;
 
 class DashboardController extends Controller
 {
-
-
     public function index() {
         $user = $this->user;
 

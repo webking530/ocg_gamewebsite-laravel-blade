@@ -7,7 +7,7 @@ use Models\Auth\BelongsToAUser;
 
 class Withdrawal extends Model
 {
-    use BelongsToAUser;
+    use BelongsToAUser, HasCurrency;
 
     protected $table = 'withdrawals';
     protected $guarded = ['id'];
