@@ -1,0 +1,1 @@
+<a class="label label-danger" href="#">You must verify your identity. Click here to do it.</a>

@@ -157,7 +157,7 @@ class User extends Authenticatable
             return $this->isMale() ? 'img/avatar/avatar_male.png' : 'img/avatar/avatar_female.png';
         }
 
-        return $this->avatar_url;
+        return \Storage::url($this->avatar_url);
     }
 
     public function getFullNameAttribute() {

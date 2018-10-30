@@ -54,6 +54,17 @@
     <p><i class="fas fa-times"></i> <span class="notifier-text-content"></span></p>
 </div>
 
+@if ($errors->any())
+    <div id="validation-errors" class="flash-notifier alert alert-danger alert-dismissible" role="alert" style="display: none">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="body">
     <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 0, 'stickySetTop': '0px', 'stickyChangeLogo': false}">
         <div class="header-body">
@@ -106,8 +117,8 @@
                                                         Bonuses
                                                     </a>
                                                 </li>
-                                                <li class="">
-                                                    <a href="#">
+                                                <li class="{{ set_active('*settings*') }}">
+                                                    <a href="{{ route('user.settings.index') }}">
                                                         Settings
                                                     </a>
                                                 </li>

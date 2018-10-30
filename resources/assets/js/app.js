@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip({html:true});
 
-    $('#flash-notifier').fadeIn(1500);
+    $('#flash-notifier, #validation-errors').fadeIn(1500);
 
     $('.confirm-submit').on('submit', function(ev) {
         ev.preventDefault();

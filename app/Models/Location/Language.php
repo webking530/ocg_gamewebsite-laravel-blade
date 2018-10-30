@@ -9,5 +9,7 @@ class Language extends Model
     public $incrementing = false;
     protected $table = 'languages';
 
+    public function getFormattedNameAttribute() {
 
+    }
 }

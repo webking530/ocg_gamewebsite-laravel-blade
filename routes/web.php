@@ -64,6 +64,11 @@ Route::group(['prefix' => 'account', 'middleware' => [/*'user'*/]], function () 
 
     Route::get('session/{game}/close', 'Account\DashboardController@closeSession')->name('user.session.close');
     Route::get('session/close-all', 'Account\DashboardController@closeAllSessions')->name('user.session.close_all');
+
+    Route::get('settings', 'Account\SettingsController@index')->name('user.settings.index');
+    Route::post('settings', 'Account\SettingsController@store')->name('user.settings.store');
+    Route::post('avatar', 'Account\SettingsController@updateAvatar')->name('user.avatar.update');
+    Route::post('change-password', 'Account\SettingsController@changePassword')->name('user.settings.change_password');
 });
 
 // Admin pages
