@@ -122,6 +122,13 @@
                                                         Settings
                                                     </a>
                                                 </li>
+                                                @if(Session::has('orig_user'))
+                                                    <li class="">
+                                                        <a href="{{ route('switch.stop') }}">
+                                                            Back To Admin
+                                                        </a>
+                                                    </li>
+                                                @endif
                                             @else
                                                 <li class="">
                                                     <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
