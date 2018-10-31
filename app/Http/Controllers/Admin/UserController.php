@@ -75,21 +75,24 @@ class UserController extends Controller {
         $this->validate($request, User::rules(true, $id));
         $user = User::findOrFail($id);
         $user->update($request->all());
-        return redirect()->route('user.index')->with('message', trans('user.success_edited'));
+        $this->flashNotifier->success(trans('user.success_edited'));
+        return redirect()->route('user.index');
     }
 
     public function suspendUser($id) {
         $user = User::where('id', $id)->first();
         $user->suspended_on = date('Y-m-d h:m:s');
         $user->save();
-        return back()->with('message', trans('user.user_suspend'));
+        $this->flashNotifier->success(trans('user.user_suspend'));
+        return back();
     }
 
     public function resumeUser($id) {
         $user = User::where('id', $id)->first();
         $user->suspended_on = Null;
         $user->save();
-        return back()->with('message', trans('user.user_resume'));
+        $this->flashNotifier->success(trans('user.user_resume'));
+        return back();
     }
 
     public function switchUser(Request $request, User $user) {

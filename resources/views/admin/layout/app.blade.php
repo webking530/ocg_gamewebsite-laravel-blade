@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Lumino - Dashboard</title>
     <link rel="stylesheet" href="{!! mix('compiled/css/shared.css') !!}">
     <link rel="stylesheet" href="{!! mix('compiled/lumino/lumino.css') !!}">
@@ -123,6 +125,28 @@
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        @if (Session::has('flash_message'))
+        <div id="flash-notifier" class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p><i class="fas {{ Session::get('flash_icon') }}"></i> {{ Session::get('flash_message') }}</p>
+        </div>
+        @endif
+
+        <div id="success-notifier" class="flash-notifier alert alert-success" role="alert" style="display: none">
+            <p><i class="fas fa-check"></i> <span class="notifier-text-content"></span></p>
+        </div>
+
+        <div id="info-notifier" class="flash-notifier alert alert-info" role="alert" style="display: none">
+            <p><i class="fas fa-info-circle"></i> <span class="notifier-text-content"></span></p>
+        </div>
+
+        <div id="warning-notifier" class="flash-notifier alert alert-warning" role="alert" style="display: none">
+            <p><i class="fas fa-info-circle"></i> <span class="notifier-text-content"></span></p>
+        </div>
+
+        <div id="danger-notifier" class="flash-notifier alert alert-danger" role="alert" style="display: none">
+            <p><i class="fas fa-times"></i> <span class="notifier-text-content"></span></p>
+        </div>
     @yield('content')
 </div>    <!--/.main-->
 

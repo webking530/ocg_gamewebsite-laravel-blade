@@ -8,11 +8,6 @@
         <div class="row">
 
             <div class="col-xs-12">
-                @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-                @endif
                 <div class="box" style="">
                     <div class="box-header" style="border-bottom:1px solid #d2d6de;">
                         <h3>User Management</h3>
