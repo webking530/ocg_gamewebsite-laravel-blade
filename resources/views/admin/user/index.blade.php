@@ -1,7 +1,4 @@
 @extends('admin.layout.app')
-@section('css')
-<link rel="stylesheet" href="{!! asset('css/pages/dataTables.bootstrap.css') !!}">
-@endsection
 @section('content')
 <div role="main" class="main">
     <div class="container">

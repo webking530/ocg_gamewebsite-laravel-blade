@@ -171,26 +171,6 @@
                                     @endif
                                 </div>
                             </div>
-
-<!--                            <div class="form-group">
-                                <label for="avatar_url" class="col-md-4 control-label">Avatar
-                                </label>
-                                <div class="col-md-6">
-                                    <img id='img-upload' src="/img/avatar/{{ $user->avatar_url  }}" height="80" width="30"/>
-                                </div>
-                            </div>-->
-<!--                            <div class="form-group{{ $errors->has('avatar_url') ? ' has-error' : '' }}">
-                                <label for="avatar_url" class="col-md-4 control-label">&nbsp;
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <span class="btn btn-default btn-file">
-                                            Browse… <input type="file" id="imgInp" name="avatar_url">
-                                        </span>
-                                    </span>
-                                    <input type="text" class="form-control" readonly>
-                                </div>
-                            </div>-->
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -212,7 +192,7 @@
                             <div class="col-xs-12 col-sm-8 form-group">
                                 <label for="" class="col-md-4 control-label">Avatar</label>
                                 <div class="col-md-8">
-                                    <img id='img-upload' src="/img/avatar/{{ $user->avatar_url  }}" height="80" width="30"/>
+                                    <img class="avatar-img {{ $user->isMale() ? 'avatar-male' : 'avatar-female' }} img-responsive" src="{{ asset($user->formatted_avatar) }}" alt="{{ $user->nickname }}" title="{{ $user->nickname }}"/>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-8 form-group">
@@ -269,45 +249,4 @@
         </div>
     </div>
 </div>
-@endsection
-@section('js')
-
-<script>
-//    $(document).ready(function () {
-//        $(document).on('change', '.btn-file :file', function () {
-//            var input = $(this),
-//                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-//            input.trigger('fileselect', [label]);
-//        });
-//
-//        $('.btn-file :file').on('fileselect', function (event, label) {
-//
-//            var input = $(this).parents('.input-group').find(':text'),
-//                    log = label;
-//
-//            if (input.length) {
-//                input.val(log);
-//            } else {
-//                if (log)
-//                    alert(log);
-//            }
-//
-//        });
-//        function readURL(input) {
-//            if (input.files && input.files[0]) {
-//                var reader = new FileReader();
-//
-//                reader.onload = function (e) {
-//                    $('#img-upload').attr('src', e.target.result);
-//                }
-//
-//                reader.readAsDataURL(input.files[0]);
-//            }
-//        }
-//
-//        $("#imgInp").change(function () {
-//            readURL(this);
-//        });
-//    });
-</script>
 @endsection
