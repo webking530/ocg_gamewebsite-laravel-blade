@@ -59,20 +59,30 @@ class SettingController extends Controller {
 
     public function showGamedata(Request $request) {
         $input = $request->all();
-        $games = Game::select('id', 'slug');
+        $games = Game::select('id', 'slug', 'enabled');
         $games->orderBy('id', 'desc');
         $data = $games->get()->toArray();
+         foreach ($games->get() as $key => $user) {
+            $data[$key]['name'] = $user->getNameAttribute();
+        }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
                             
                         })->make(true);
     }
-
+    public function statusupdate($id, Request $request) {
+        $game = Game::find($id);
+        $game->enabled = $request->enabled;
+        $msg = ($request->enabled == 0) ? 'games.game_disabled' : 'games.game_enabled';
+        if ($game->save()) {
+            $this->flashNotifier->success(trans($msg));
+            return redirect()->route('setting.games');
+        }
+    }
     public function editSettings($id, Request $request) {
         $game = Game::find($id);
         if ($request->isMethod('post')) {
-            $settings = $request->all();
-            unset($settings['_token']);
+            $settings = $request->except(['_token']);
             $settings = $settings['settings'];
             $game->settings = $settings;
             if ($game->save()) {

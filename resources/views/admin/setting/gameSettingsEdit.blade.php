@@ -1,25 +1,6 @@
 @extends('admin.layout.app')
 @section('css')
-<style>
-   
-    .main {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-    }
-
-    .main > div {
-        margin: 10px;
-    }
-
-    #jsoneditor {
-        flex: 1;
-        width: 100%;
-        max-width: 500px;
-        height: 400px;
-    }
-</style>
+<link rel="stylesheet" href="{!! mix('compiled/css/pages/settings.css') !!}">
 @endsection
 
 @section('content')
@@ -52,26 +33,8 @@
 
 @section('js')
 <script>
-    var container = document.getElementById('jsoneditor');
-    var options = {
-        mode: 'tree',
-//    modes: ['code', 'form', 'text', 'tree', 'view'] // allowed modes
-    };
-    var json = <?php if (!empty($game->settings)){print json_encode($game->settings);} else {print 'null';} ?>;
-    if(json == 'null'){
-        json = {};
-    }
-    var settingsjson = new Array();
-    settingsjson = JSON.parse(json);
-    var editor = new JSONEditor(container, options, settingsjson);
-    editor.expandAll();
-
-    $('.submitJson').click(function (e) {
-        var settings = editor.get();
-        console.log(settings);
-        $('.settings').val(JSON.stringify(settings));
-        $('.submitJsonForm').submit();
-    });
+    var json = <?phpif (!empty($game->settings)) { print json_encode($game->settings); } else { print 'null'; }?>;
 </script>
+<script src="{!! mix('compiled/js/pages/settings.js') !!}"></script>
 @endsection
 
