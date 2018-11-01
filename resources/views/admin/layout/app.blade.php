@@ -15,6 +15,7 @@
     @yield('css')
 </head>
 <body>
+    
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -115,7 +116,7 @@
         </li>
         <ul class="sub-menu collapse <?php echo (starts_with($route, 'setting')) ? "in" : "" ?>" id="products">
             <li class="active"><a href="{{ route('setting.general') }}">General Settings</a></li>
-            <li><a href="#">Games</a></li>
+            <li><a href="{{ route('setting.games') }}">Games</a></li>
             <li><a href="#">Badges</a></li>
             <li><a href="#">Money</a></li>
             <li><a href="#">Countries</a></li>
@@ -125,7 +126,7 @@
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        @if (Session::has('flash_message'))
+    @if (Session::has('flash_message'))
         <div id="flash-notifier" class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <p><i class="fas {{ Session::get('flash_icon') }}"></i> {{ Session::get('flash_message') }}</p>
@@ -153,15 +154,15 @@
 <script src="{!! mix('compiled/js/shared.js') !!}"></script>
 <script src="{!! mix('compiled/lumino/lumino.js') !!}"></script>
 <script>
-    window.onload = function () {
-        var chart1 = document.getElementById("line-chart").getContext("2d");
-        window.myLine = new Chart(chart1).Line(lineChartData, {
-            responsive: true,
-            scaleLineColor: "rgba(0,0,0,.2)",
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleFontColor: "#c5c7cc"
-        });
-    }
+//    window.onload = function () {
+//        var chart1 = document.getElementById("line-chart").getContext("2d");
+//        window.myLine = new Chart(chart1).Line(lineChartData, {
+//            responsive: true,
+//            scaleLineColor: "rgba(0,0,0,.2)",
+//            scaleGridLineColor: "rgba(0,0,0,.05)",
+//            scaleFontColor: "#c5c7cc"
+//        });
+//    }
 </script>
 @yield('js')
 

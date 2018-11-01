@@ -40,4 +40,5 @@ return [
         'Bingo',
         'Other'
     ],
+    'setting_changed' => 'Game Settings Successfully Updated',
 ];
