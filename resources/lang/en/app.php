@@ -1,4 +1,5 @@
 <?php
+
 return [
     'meta' => [
         'title' => 'Online Casino Games - OCG',
@@ -16,11 +17,12 @@ return [
         'not_yet' => 'Not yet',
         'operation_success' => 'The operation completed successfully',
         'operation_error' => 'The operation could not be completed',
-
         'confirm_text' => 'Yes',
         'cancel_text' => 'No',
         'are_you_sure' => 'Are you sure?',
-        'action_cannot_undone' => 'This action cannot be undone.'
+        'action_cannot_undone' => 'This action cannot be undone.',
+        'enabled' => 'Enabled Successfully',
+        'disabled' => 'Disabled Successfully',
     ],
     'days' => ':days day ago|:days days ago',
     'since_date' => 'Since :date',

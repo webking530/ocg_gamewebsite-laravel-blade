@@ -41,6 +41,4 @@ return [
         'Other'
     ],
     'setting_changed' => 'Game Settings Successfully Updated',
-    'game_enabled' => 'Game Enabled Successfully',
-    'game_disabled' => 'Game Disabled Successfully',
-];
+   ];

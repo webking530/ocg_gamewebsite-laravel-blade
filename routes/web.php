@@ -64,37 +64,40 @@ Route::group(['prefix' => 'account', 'middleware' => [/* 'user' */]], function (
 
     Route::get('session/{game}/close', 'Account\DashboardController@closeSession')->name('user.session.close');
     Route::get('session/close-all', 'Account\DashboardController@closeAllSessions')->name('user.session.close_all');
-
-    Route::get('settings', 'Account\SettingsController@index')->name('user.settings.index');
-    Route::post('settings', 'Account\SettingsController@store')->name('user.settings.store');
-    Route::post('avatar', 'Account\SettingsController@updateAvatar')->name('user.avatar.update');
-    Route::post('change-password', 'Account\SettingsController@changePassword')->name('user.settings.change_password');
 });
 
 // Admin pages
 Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode' */]], function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
+
+    // User Routes
     Route::post('user/showdata', 'Admin\UserController@showdata');
     Route::get('user/switch/{user}', 'Admin\UserController@switchUser');
     Route::get('user/suspend/{user}', 'Admin\UserController@suspendUser');
     Route::get('user/resumeuser/{user}', 'Admin\UserController@resumeUser');
     Route::get('user/switchback/stop', 'Admin\UserController@switchBack')->name('switch.stop');
-    ;
     Route::resource('user', 'Admin\UserController');
-    Route::get('setting/general', 'Admin\SettingController@general')->name('setting.general');
 
-
-    Route::get('setting/general', 'Admin\SettingController@general')->name('setting.general');
+    // General Routes
+    Route::any('setting/general', 'Admin\SettingController@general')->name('setting.general');
+    Route::post('setting/showGeneralSettingsdata', 'Admin\SettingController@showGeneralSettingsdata');
+    Route::any('setting/general/editSettings/{id}', 'Admin\SettingController@editGeneralSettings');
+    // Games Routes
     Route::get('setting/games', 'Admin\SettingController@games')->name('setting.games');
     Route::post('setting/games/showGamedata', 'Admin\SettingController@showGamedata');
-    Route::any('setting/games/editSettings/{id}', 'Admin\SettingController@editSettings');
-    Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@statusupdate');
+    Route::any('setting/games/editSettings/{id}', 'Admin\SettingController@editGameSettings');
+    Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@gameStatusUpdate');
 
     Route::get('setting/badges', 'Admin\SettingController@general')->name('setting.badges');
     Route::get('setting/money', 'Admin\SettingController@general')->name('setting.money');
-    Route::get('setting/countries', 'Admin\SettingController@general')->name('setting.countries');
+
+    // Country Routes
+    Route::get('setting/countries', 'Admin\SettingController@countries')->name('setting.countries');
+    Route::post('setting/country/statusupdate/{id}', 'Admin\SettingController@countryStatusUpdate');
+    Route::any('setting/country/add', 'Admin\SettingController@addCountry')->name('country.add');
+    Route::any('setting/country/edit/{code}', 'Admin\SettingController@editCountry')->name('country.edit');
+    
+    Route::post('setting/general/showCountrydata', 'Admin\SettingController@showCountrydata');
     Route::get('setting/lottery', 'Admin\SettingController@general')->name('setting.lottery');
-    Route::GET('setting/registration/{status}', 'Admin\SettingController@registrationEnableDisable')->name('setting.registration');
-    Route::GET('setting/maintenancemode/{mode}', 'Admin\SettingController@maintenanceMode')->name('setting.maintenancemode');
 });
 

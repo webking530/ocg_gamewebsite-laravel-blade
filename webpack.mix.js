@@ -117,9 +117,11 @@ mix.scripts([
     'resources/assets/vendor/lumino/js/custom.js',
 ], 'public/compiled/lumino/lumino.js');
 mix.scripts([
+    'resources/assets/js/pages/generalsettings.js',
+], 'public/compiled/js/pages/generalSettings.js');
+mix.scripts([
     'resources/assets/js/pages/settings.js',
 ], 'public/compiled/js/pages/settings.js');
-
 mix.styles([
     'resources/assets/css/pages/settings.css',
 ], 'public/compiled/css/pages/settings.css');
