@@ -87,13 +87,19 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::any('setting/general', 'Admin\SettingController@general')->name('setting.general');
     Route::post('setting/showGeneralSettingsdata', 'Admin\SettingController@showGeneralSettingsdata');
     Route::any('setting/general/editSettings/{id}', 'Admin\SettingController@editGeneralSettings');
+//    Route::post('setting/registration', 'Admin\SettingController@general')->name('setting.registration');
+//    Route::post('setting/maintenancemode', 'Admin\SettingController@general')->name('setting.maintenancemode');
     // Games Routes
     Route::get('setting/games', 'Admin\SettingController@games')->name('setting.games');
     Route::post('setting/games/showGamedata', 'Admin\SettingController@showGamedata');
     Route::any('setting/games/editSettings/{id}', 'Admin\SettingController@editGameSettings');
     Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@gameStatusUpdate');
-
-    Route::get('setting/badges', 'Admin\SettingController@general')->name('setting.badges');
+    // Badges Route
+    Route::get('setting/badges', 'Admin\SettingController@badges')->name('setting.badges');
+    Route::post('setting/badges/showBadgesdata', 'Admin\SettingController@showBadgesdata');
+    Route::any('setting/badges/add', 'Admin\SettingController@addBadges')->name('badges.add');
+    Route::any('setting/badges/edit/{code}', 'Admin\SettingController@editBadges')->name('badges.edit');
+    // Money Route
     Route::get('setting/money', 'Admin\SettingController@general')->name('setting.money');
 
     // Country Routes
@@ -101,8 +107,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('setting/country/statusupdate/{id}', 'Admin\SettingController@countryStatusUpdate');
     Route::any('setting/country/add', 'Admin\SettingController@addCountry')->name('country.add');
     Route::any('setting/country/edit/{code}', 'Admin\SettingController@editCountry')->name('country.edit');
-    
     Route::post('setting/general/showCountrydata', 'Admin\SettingController@showCountrydata');
+
+
+
     Route::get('setting/lottery', 'Admin\SettingController@general')->name('setting.lottery');
 });
 

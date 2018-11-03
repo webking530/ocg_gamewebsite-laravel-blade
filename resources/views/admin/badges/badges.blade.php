@@ -7,25 +7,23 @@
             <div class="col-xs-12">
                 <div class="box" style="">
                     <div class="box-header">
-                        <h3>Country Settings</h3>
+                        <h3>Badges Settings</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="well clearfix">
                         <div class="pull-right">
-                            <a href="{{ route('country.add') }}" class="btn btn-xs btn-primary">
+                            <a href="{{ route('badges.add') }}" class="btn btn-xs btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span> Create
                             </a>
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
-                        <table id="countryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                        <table id="badgesTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Currency code</th>
-                                    <th>Pricing Currency</th>
-                                    <th>Locale</th>
-                                    <th>Capital Timezone</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>relevance</th>
                                     <th>Action</th>
                                 </tr>   
                             </thead>
@@ -48,7 +46,7 @@
         return '<div  class="loader-datatable" style="display: block;"></div>';
     }
     $(document).ready(function () {
-        var dTable = $('#countryTbl').dataTable({
+        var dTable = $('#badgesTbl').dataTable({
             "pageLength": 10,
             processing: true,
             serverSide: true,
@@ -58,37 +56,28 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'general/showCountrydata',
+                url: 'badges/showBadgesdata',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
-//                    d.name = $('input[name=name]').val();
 
                 }
             },
             columns: [
-                {data: 'code', name: 'code'},
-                {data: 'currency_code', name: 'currency_code'},
-                {data: 'pricing_currency', name: 'pricing_currency'},
-                {data: 'locale', name: 'locale'},
-                {data: 'capital_timezone', name: 'capital_timezone'},
+                {data: 'name', name: 'name'},
+                {data: 'description', name: 'description'},
+                {data: 'relevance', name: 'relevance'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             aoColumnDefs: [
                 {
                     "mRender": function (a, b, data, d) {
                         $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">';
-
-                        if (data.enabled == 1) {
-                            $returnValue += '<li><form method="post" action="country/statusupdate/' + data.code + '" accept-charset="UTF-8" class="delete"><input name="enabled" value="0" type="hidden"><?php echo csrf_field(); ?><button class="btn btn-danger btn-xs" title="Disable Country"><i class="fa fa-toggle-on"></i></button></form></li>'
-                        } else {
-                            $returnValue += '<li><form method="post" action="country/statusupdate/' + data.code + '" accept-charset="UTF-8" class="delete"><input name="enabled" value="1" type="hidden"><?php echo csrf_field(); ?><button class="btn btn-success btn-xs" title="Enable Country"><i class="fa fa-toggle-off"></i></button></form></li>'
-                        }
-                        $returnValue += '<li><a href="country/edit/' + data.code + '" class="btn btn-basic btn-xs" title="Edit Game Settings"><i class="fa fa-edit"></i></a></li>';
+                        $returnValue += '<li><a href="badges/edit/' + data.id + '" class="btn btn-basic btn-xs" title="Edit Badges"><i class="fa fa-edit"></i></a></li>';
                         $returnValue += '</ul>'
                         return $returnValue;
                     },
-                    "aTargets": [5]
+                    "aTargets": [3]
                 },
             ]
         });

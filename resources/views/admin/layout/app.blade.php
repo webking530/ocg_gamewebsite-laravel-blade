@@ -117,7 +117,7 @@
                 <ul class="sub-menu collapse <?php echo (starts_with($route, 'setting')) ? "in" : "" ?>" id="products">
                     <li class="active"><a href="{{ route('setting.general') }}">General Settings</a></li>
                     <li><a href="{{ route('setting.games') }}">Games</a></li>
-                    <li><a href="#">Badges</a></li>
+                    <li><a href="{{ route('setting.badges') }}">Badges</a></li>
                     <li><a href="#">Money</a></li>
                     <li><a href="{{ route('setting.countries') }}">Countries</a></li>
                     <li><a href="#">Lottery</a></li>

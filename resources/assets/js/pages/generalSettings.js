@@ -43,6 +43,7 @@
         if (type == 'add') {
             $('.modal-title').html('Create Key');
             $('.modalBtn').html('Add');
+            $('#key').removeAttr('disabled');
             $('#key').val('');
             $('#value').val('');
         } else {
@@ -54,3 +55,43 @@
         }
         $('#modalForm').modal('show');
     });
+
+     $(document).ready(function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $('input[type=radio][name=registration]').change(function () {
+                $.ajax({
+                    url: 'general',
+                    data:{'_token':CSRF_TOKEN,'key':'registration_enable_disable','value': $(this).val()},
+                    type: 'POST',
+                    success: function (data) {
+                        if (data == 1) {
+                            if ($(this).val() == 'on') {
+                                swal("Registration Enabled Successfully")
+                            }else{
+                                swal("Registration Disabled Successfully")
+                            }
+                        } else {
+                            $('input[type="radio"]').not(':checked').prop("checked", true);
+                        }
+                    }
+                });
+            });
+            $('input[type=radio][name=maintenance]').change(function () {
+                $.ajax({
+                    url: 'general',
+                    data:{'_token':CSRF_TOKEN,'key':'maintenance_mode','value': $(this).val()},
+                    type: 'POST',
+                    success: function (data) {
+                        if (data == 1) {
+                            if ($(this).val() == 'on') {
+                                swal("Maintenance Mode Enabled Successfully")
+                            }else{
+                                swal("Maintenance Mode Disabled Successfully")
+                            }
+                        } else {
+                            $('input[type="radio"]').not(':checked').prop("checked", true);
+                        }
+                    }
+                });
+            });
+        });
