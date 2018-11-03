@@ -120,7 +120,7 @@
                     <li><a href="{{ route('setting.badges') }}">Badges</a></li>
                     <li><a href="#">Money</a></li>
                     <li><a href="{{ route('setting.countries') }}">Countries</a></li>
-                    <li><a href="#">Lottery</a></li>
+                    <li><a href="{{ route('setting.lottery') }}">Lottery</a></li>
                 </ul>
             </ul>
         </div><!--/.sidebar-->
