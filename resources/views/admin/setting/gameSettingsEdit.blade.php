@@ -16,9 +16,10 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
                         <div id="jsoneditor"></div> <br>
-                        <form method="post" class="submitJsonForm">
+                        <form method="post" class="submitJsonForm" action="{{ route('game.updateSetting') }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="settings" class="settings" value="">
+                            <input type="hidden" name="id" class="" value="{{ $game->id }}">
                             <input  type="button" class="btn btn-primary submitJson" value="Update">
                         </form>
                     </div>

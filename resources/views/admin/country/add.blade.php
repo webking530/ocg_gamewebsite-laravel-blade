@@ -22,9 +22,9 @@
                             </h1>
                             <hr>
                             @if(isset($country))
-                            {{ Form::model($country, array('route' => array('country.edit',$country->code), 'method' => 'post','class'=>'form-horizontal')) }}
+                            {{ Form::model($country, array('route' => array('country.update',$country->code), 'method' => 'post','class'=>'form-horizontal')) }}
                             @else
-                            {{ Form::open(['route' => 'country.add','class'=>'form-horizontal']) }}
+                            {{ Form::open(['route' => 'country.create','class'=>'form-horizontal','method' => 'post']) }}
                             @endif
 
                             {{ csrf_field() }}

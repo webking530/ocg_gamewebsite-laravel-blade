@@ -118,7 +118,7 @@ mix.scripts([
 ], 'public/compiled/lumino/lumino.js');
 mix.scripts([
     'resources/assets/js/pages/generalsettings.js',
-], 'public/compiled/js/pages/generalSettings.js');
+], 'public/compiled/js/pages/generalsettings.js');
 mix.scripts([
     'resources/assets/js/pages/settings.js',
 ], 'public/compiled/js/pages/settings.js');

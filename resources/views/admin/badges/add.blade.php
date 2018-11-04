@@ -22,9 +22,9 @@
                             </h1>
                             <hr>
                             @if(isset($badge))
-                            {{ Form::model($badge, array('route' => array('badges.edit',$badge->id), 'method' => 'post','class'=>'form-horizontal','enctype'=>'multipart/form-data')) }}
+                            {{ Form::model($badge, array('route' => array('badges.update',$badge->id), 'method' => 'post','class'=>'form-horizontal','enctype'=>'multipart/form-data')) }}
                             @else
-                            {{ Form::open(['route' => 'badges.add','class'=>'form-horizontal','enctype'=>'multipart/form-data']) }}
+                            {{ Form::open(['route' => 'badges.create','class'=>'form-horizontal','enctype'=>'multipart/form-data']) }}
                             @endif
 
                             {{ csrf_field() }}

@@ -15,19 +15,20 @@ use Yajra\DataTables\DataTables;
 class SettingController extends Controller {
 
 //****************  General  Settings *************************
-    public function general(Request $request) {
-
-        if ($request->isMethod('post')) {
-            settings($request->key, $request->value);
-            $this->flashNotifier->success(trans('app.common.operation_success'));
-            if ($request->ajax()) {
-                echo 1;
-                exit;
-            } else {
-                return redirect()->back();
-            }
-        }
+    public function general() {
         return view('admin.setting.generalSettings');
+    }
+
+    public function updateGeneral(Request $request) {
+
+        settings($request->key, $request->value);
+        $this->flashNotifier->success(trans('app.common.operation_success'));
+        if ($request->ajax()) {
+            echo 1;
+            exit;
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function showGeneralSettingsdata(Request $request) {
@@ -61,6 +62,9 @@ class SettingController extends Controller {
     }
 
     public function gameStatusUpdate($id, Request $request) {
+        $this->validate($request, [
+            'enabled' => 'required'
+        ]);
         $game = Game::find($id);
         $game->enabled = $request->enabled;
         $msg = ($request->enabled == 0) ? 'app.common.disabled' : 'app.common.enabled';
@@ -73,22 +77,27 @@ class SettingController extends Controller {
         }
     }
 
-    public function editGameSettings($id, Request $request) {
+    public function editGameSettings($id) {
         $game = Game::find($id);
-        if ($request->isMethod('post')) {
-            $settings = $request->except(['_token']);
-            $settings = $settings['settings'];
-            $game->settings = $settings;
-            if ($game->save()) {
-                $this->flashNotifier->success(trans('games.setting_changed'));
-                return redirect()->route('setting.games');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
-        }
-
         return view('admin.setting.gameSettingsEdit', compact('game'));
+    }
+
+    public function updateGameSetting(Request $request) {
+
+        $this->validate($request, [
+            'settings' => 'required'
+        ]);
+        $game = Game::find($request->id);
+        $settings = $request->except(['_token']);
+        $settings = $settings['settings'];
+        $game->settings = $settings;
+        if ($game->save()) {
+            $this->flashNotifier->success(trans('games.setting_changed'));
+            return redirect()->route('setting.games');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
     }
 
     //****************  Countries Settings *************************
@@ -121,42 +130,61 @@ class SettingController extends Controller {
         }
     }
 
-    public function addCountry(Request $request) {
+    public function addCountry() {
         $language = \Models\Location\Language::pluck('code', 'code');
         $currency = \Models\Pricing\Currency::pluck('code', 'code');
-        if ($request->isMethod('post')) {
-            $country = new Country ();
-            $country->code = $request->code;
-            $country->currency_code = $request->currency_code;
-            $country->pricing_currency = $request->pricing_currency;
-            $country->locale = $request->locale;
-            $country->capital_timezone = $request->capital_timezone;
-            if ($country->save()) {
-                $this->flashNotifier->success(trans('app.common.operation_success'));
-                return redirect()->route('setting.countries');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
-        }
         return view('admin.country.add', compact('language', 'currency'));
     }
 
-    public function editCountry($code, Request $request) {
+    public function createCountry(Request $request) {
+
+        $this->validate($request, [
+            'code' => 'required',
+            'currency_code' => 'required',
+            'pricing_currency' => 'required',
+            'locale' => 'required',
+            'capital_timezone' => 'required',
+        ]);
+        $country = new Country ();
+        $country->code = $request->code;
+        $country->currency_code = $request->currency_code;
+        $country->pricing_currency = $request->pricing_currency;
+        $country->locale = $request->locale;
+        $country->capital_timezone = $request->capital_timezone;
+        if ($country->save()) {
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('setting.countries');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
+    }
+
+    public function editCountry($code) {
 
         $country = Country::find($code);
         $language = \Models\Location\Language::pluck('code', 'code');
         $currency = \Models\Pricing\Currency::pluck('code', 'code');
-        if ($request->isMethod('post')) {
-            if ($country->update($request->all())) {
-                $this->flashNotifier->success(trans('app.common.operation_success'));
-                return redirect()->route('setting.countries');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
-        }
         return view('admin.country.add', compact('country', 'language', 'currency'));
+    }
+
+    public function updateCountry($code, Request $request) {
+
+        $this->validate($request, [
+            'code' => 'required',
+            'currency_code' => 'required',
+            'pricing_currency' => 'required',
+            'locale' => 'required',
+            'capital_timezone' => 'required',
+        ]);
+        $country = Country::find($code);
+        if ($country->update($request->all())) {
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('setting.countries');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
     }
 
     //****************  Badges Settings *************************
@@ -175,47 +203,63 @@ class SettingController extends Controller {
                         })->make(true);
     }
 
-    public function addBadges(Request $request) {
-        if ($request->isMethod('post')) {
-            $badge = new Badge();
-            $badge->name = $request->name;
-            $badge->description = $request->description;
-            $badge->relevance = $request->relevance;
-            $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
-            $badge->slug = str_replace(' ', '-', $request->name);
-            if ($badge->save()) {
-                $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
-                $this->flashNotifier->success(trans('app.common.operation_success'));
-                return redirect()->route('setting.badges');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
-        }
+    public function addBadges() {
+
         return view('admin.badges.add');
     }
 
-    public function editBadges($id, Request $request) {
+    public function createdBadges(Request $request) {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'relevance' => 'required',
+            'image_url' => 'required|file|image|max:4000'
+        ]);
+        $badge = new Badge();
+        $badge->name = $request->name;
+        $badge->description = $request->description;
+        $badge->relevance = $request->relevance;
+        $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
+        $badge->slug = str_replace(' ', '-', $request->name);
+        if ($badge->save()) {
+            $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('setting.badges');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
+    }
+
+    public function editBadges($id) {
 
         $badge = Badge::find($id);
-        if ($request->isMethod('post')) {
-            $badge->name = $request->name;
-            $badge->description = $request->description;
-            $badge->relevance = $request->relevance;
-            $badge->slug = str_replace(' ', '-', $request->name);
-            if ($request->hasFile('image_url')) {
-                $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
-                $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
-            }
-            if ($badge->update()) {
-                $this->flashNotifier->success(trans('app.common.operation_success'));
-                return redirect()->route('setting.badges');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
-        }
         return view('admin.badges.add', compact('badge', 'language', 'currency'));
+    }
+
+    public function updateBadges($id, Request $request) {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'relevance' => 'required',
+        ]);
+        $badge = Badge::find($id);
+        $badge->name = $request->name;
+        $badge->description = $request->description;
+        $badge->relevance = $request->relevance;
+        $badge->slug = str_replace(' ', '-', $request->name);
+        if ($request->hasFile('image_url')) {
+            $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
+            $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
+        }
+        if ($badge->update()) {
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('setting.badges');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
     }
 
     //****************  Lottery Settings *************************
@@ -228,9 +272,10 @@ class SettingController extends Controller {
         $Lottery = Lottery::select('id', 'prize', 'date_begin', 'status', 'type', 'ticket_price', 'country_code');
         $Lottery->orderBy('id', 'desc');
         $data = $Lottery->get()->toArray();
-//        foreach ($Lottery->get() as $key => $ltr) {
-//            $data[$key]['name'] = $ltr->getNameAttribute();
-//        }
+        foreach ($Lottery->get() as $key => $ltr) {
+            $data[$key]['status'] = $ltr->getFormattedStatusAttribute($ltr->status);
+            $data[$key]['type'] = $ltr->getStakeTextAttribute($ltr->type);
+        }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
                             
@@ -239,9 +284,7 @@ class SettingController extends Controller {
 
     public function updateLotterySettings(Request $request) {
         $data = $request->except('_token');
-        foreach ($data as $key => $val) {
-            settings($key, $val);
-        }
+        settings($data);
         $this->flashNotifier->success(trans('app.common.operation_success'));
         return redirect()->back();
     }

@@ -122,7 +122,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post">
+            <form method="post" id="settingForm" action="{{route('setting.updateGeneral') }}">
                 {{ csrf_field() }}
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
@@ -145,5 +145,5 @@
 
 @endsection
 @section('js')
-<script src="{!! mix('compiled/js/pages/generalSettings.js') !!}"></script>
+<script src="{!! mix('compiled/js/pages/generalsettings.js') !!}"></script>
 @endsection

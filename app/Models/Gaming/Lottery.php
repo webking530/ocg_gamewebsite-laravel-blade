@@ -84,6 +84,19 @@ class Lottery extends Model
                 return 'high_stake';
         }
     }
+    public function getFormattedStatusAttribute() {
+        switch ($this->status) {
+            default:
+            case self::STATUS_ACTIVE:
+                return 'Active';
+            case self::STATUS_PENDING:
+                return 'Pending';
+            case self::STATUS_CANCELLED:
+                return 'Cancelled';
+            case self::STATUS_FINALIZED:
+                return 'Finalized';
+        }
+    }
 
     public function isSoldOut() {
         return $this->tickets()->whereNull('user_id')->count() == 0;

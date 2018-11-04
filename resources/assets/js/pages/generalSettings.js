@@ -60,7 +60,7 @@
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $('input[type=radio][name=registration]').change(function () {
                 $.ajax({
-                    url: 'general',
+                    url: 'general/updateGeneral',
                     data:{'_token':CSRF_TOKEN,'key':'registration_enable_disable','value': $(this).val()},
                     type: 'POST',
                     success: function (data) {
@@ -78,7 +78,7 @@
             });
             $('input[type=radio][name=maintenance]').change(function () {
                 $.ajax({
-                    url: 'general',
+                    url: 'general/updateGeneral',
                     data:{'_token':CSRF_TOKEN,'key':'maintenance_mode','value': $(this).val()},
                     type: 'POST',
                     success: function (data) {
