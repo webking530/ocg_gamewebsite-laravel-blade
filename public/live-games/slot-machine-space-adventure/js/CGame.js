@@ -638,6 +638,8 @@ function CGame(oData){
         
         _oInterface.disableBetBut(false);
         _oInterface.enableGuiButtons();
+
+        $(s_oMain).trigger("save_score",_iMoney);
     };
     
     this.onSpin = function(){
