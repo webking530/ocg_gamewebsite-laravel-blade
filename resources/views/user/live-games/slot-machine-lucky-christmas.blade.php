@@ -98,7 +98,7 @@
             });
 
             $(oMain).on("share_event", function (evt, oData) {
-                trace(oData)
+                trace(oData);
                 if(getParamValue('ctl-arcade') === "true"){
                     parent.__ctlArcadeShareEvent(oData);
                 }

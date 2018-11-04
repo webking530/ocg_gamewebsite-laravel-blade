@@ -636,10 +636,12 @@ function CGame(oData){
         _iMoney += iBonus;
         _oInterface.refreshMoney(_iMoney);
         
-	SLOT_CASH -= iBonus;
-		
+	    SLOT_CASH -= iBonus;
+
         _oInterface.disableBetBut(false);
         _oInterface.enableGuiButtons();
+
+        $(s_oMain).trigger("save_score",_iMoney);
     };
     
     this.onSpin = function(){
