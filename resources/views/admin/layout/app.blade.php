@@ -121,6 +121,7 @@
                     <li><a href="#">Money</a></li>
                     <li><a href="{{ route('setting.countries') }}">Countries</a></li>
                     <li><a href="{{ route('setting.lottery') }}">Lottery</a></li>
+                    <li><a href="{{ route('setting.jackpot') }}">Jackpot Configuration </a></li>
                 </ul>
             </ul>
         </div><!--/.sidebar-->
