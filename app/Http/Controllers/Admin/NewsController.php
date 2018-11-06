@@ -22,7 +22,7 @@ class NewsController extends Controller {
         $data = $users->get()->toArray();
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-
+                            
                         })->make(true);
     }
 
@@ -75,11 +75,11 @@ class NewsController extends Controller {
                             ->withInput($request->all());
         } else {
             $news = new News;
-            $news->name = $request->name;
-            $news->content = $request->content;
-            $news->order = $request->order;
-            $news->date_from = $request->date_from;
-            $news->date_to = $request->date_to;
+            $news->name = $request->get('name');
+            $news->content = $request->get('content');
+            $news->order = $request->get('order');
+            $news->date_from = $request->get('date_from');
+            $news->date_to = $request->get('date_to');
             if ($news->save()) {
                 $this->flashNotifier->success(trans('app.common.operation_success'));
                 return redirect()->route('news.index');
@@ -89,15 +89,16 @@ class NewsController extends Controller {
             }
         }
     }
-    
+
     public function destroy($id) {
-             $news = News::find($id);
-             if ($news->delete()) {
-                $this->flashNotifier->success(trans('app.common.operation_success'));
-                return redirect()->route('news.index');
-            } else {
-                $this->flashNotifier->error(trans('app.common.operation_error'));
-                return redirect()->back();
-            }
+        $news = News::find($id);
+        if ($news->delete()) {
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('news.index');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
     }
+
 }

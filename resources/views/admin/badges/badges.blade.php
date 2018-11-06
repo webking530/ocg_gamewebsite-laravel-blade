@@ -12,7 +12,7 @@
                     <!-- /.box-header -->
                     <div class="well clearfix">
                         <div class="pull-right">
-                            <a href="{{ route('badges.add') }}" class="btn btn-xs btn-primary">
+                            <a href="{{ route('badges.add') }}" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span> Create
                             </a>
                         </div>

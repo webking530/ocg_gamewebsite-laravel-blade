@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Models\Location\HasCountry;
 
-class Lottery extends Model
-{
+class Lottery extends Model {
+
     use HasCountry;
 
     protected $guarded = ['id'];
@@ -21,7 +21,6 @@ class Lottery extends Model
     const STATUS_CANCELLED = 1;
     const STATUS_PENDING = 2;
     const STATUS_FINALIZED = 3;
-
     const TYPE_LOW_STAKE = 0;
     const TYPE_MID_STAKE = 1;
     const TYPE_HIGH_STAKE = 2;
@@ -39,19 +38,19 @@ class Lottery extends Model
     }
 
     public function isActive() {
-        return (int)$this->status === self::STATUS_ACTIVE;
+        return (int) $this->status === self::STATUS_ACTIVE;
     }
 
     public function isPending() {
-        return (int)$this->status === self::STATUS_PENDING;
+        return (int) $this->status === self::STATUS_PENDING;
     }
 
     public function isCancelled() {
-        return (int)$this->status === self::STATUS_CANCELLED;
+        return (int) $this->status === self::STATUS_CANCELLED;
     }
 
     public function isCompleted() {
-        return (int)$this->status === self::STATUS_FINALIZED;
+        return (int) $this->status === self::STATUS_FINALIZED;
     }
 
     public function getWinningTicket() {
@@ -74,28 +73,12 @@ class Lottery extends Model
     }
 
     public function getStakeTextAttribute() {
-        switch ($this->type) {
-            default:
-            case self::TYPE_LOW_STAKE:
-                return 'low_stake';
-            case self::TYPE_MID_STAKE:
-                return 'mid_stake';
-            case self::TYPE_HIGH_STAKE:
-                return 'high_stake';
-        }
+
+        return trans("frontend/lottery.type.{$this->type}");
     }
+
     public function getFormattedStatusAttribute() {
-        switch ($this->status) {
-            default:
-            case self::STATUS_ACTIVE:
-                return 'Active';
-            case self::STATUS_PENDING:
-                return 'Pending';
-            case self::STATUS_CANCELLED:
-                return 'Cancelled';
-            case self::STATUS_FINALIZED:
-                return 'Finalized';
-        }
+        return trans("frontend/lottery.status.{$this->status}");
     }
 
     public function isSoldOut() {
@@ -108,30 +91,28 @@ class Lottery extends Model
         if ($now->timestamp >= $this->date_begin->timestamp) {
             return [
                 'started' => true,
-                'text' =>trans ('frontend/lottery.lottery_starting')
+                'text' => trans('frontend/lottery.lottery_starting')
             ];
         }
 
         $text = null;
 
         $minutes = $this->date_begin->diffInMinutes($now);
-        $days = (int)($minutes / (24 * 60));
+        $days = (int) ($minutes / (24 * 60));
         $minutes -= $days * 24 * 60;
-        $hours = (int)($minutes / 60);
+        $hours = (int) ($minutes / 60);
         $minutes %= 60;
 
         if ($days) {
             $text = trans('frontend/lottery.start_days', ['days' => $days, 'hours' => $hours, 'minutes' => $minutes]);
         } elseif ($hours) {
             $text = trans('frontend/lottery.start_hours', ['hours' => $hours, 'minutes' => $minutes]);
-
         } elseif ($minutes) {
             if ($minutes == 1) {
                 $text = trans('frontend/lottery.start_minute');
             } else {
                 $text = trans('frontend/lottery.start_minutes', ['minutes' => $minutes]);
             }
-
         }
 
         return [
@@ -145,7 +126,7 @@ class Lottery extends Model
     }
 
     public function getPotSize() {
-        return (int)($this->tickets()->whereNotNull('user_id')->count() * $this->ticket_price * 0.5);
+        return (int) ($this->tickets()->whereNotNull('user_id')->count() * $this->ticket_price * 0.5);
     }
 
     public function canDisplayPrize() {
@@ -157,13 +138,14 @@ class Lottery extends Model
     }
 
     public static function getHighestWin($stake) {
-        return  self::join('lottery_ticket', 'lotteries.id', '=', 'lottery_ticket.lottery_id')
-                ->where('lotteries.type', $stake)
-                ->where('lotteries.status', self::STATUS_FINALIZED)
-                ->whereNotNull('lottery_ticket.user_id')
-                ->groupBy(['lotteries.id', 'lotteries.date_begin', 'lotteries.type', 'lotteries.status', 'lotteries.ticket_price'])
-                ->orderByRaw('COUNT(lottery_ticket.id) DESC')
-                ->selectRaw('lotteries.id, lotteries.date_begin, lotteries.type, lotteries.status, lotteries.ticket_price')
-                ->first();
+        return self::join('lottery_ticket', 'lotteries.id', '=', 'lottery_ticket.lottery_id')
+                        ->where('lotteries.type', $stake)
+                        ->where('lotteries.status', self::STATUS_FINALIZED)
+                        ->whereNotNull('lottery_ticket.user_id')
+                        ->groupBy(['lotteries.id', 'lotteries.date_begin', 'lotteries.type', 'lotteries.status', 'lotteries.ticket_price'])
+                        ->orderByRaw('COUNT(lottery_ticket.id) DESC')
+                        ->selectRaw('lotteries.id, lotteries.date_begin, lotteries.type, lotteries.status, lotteries.ticket_price')
+                        ->first();
     }
+
 }

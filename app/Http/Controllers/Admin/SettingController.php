@@ -15,13 +15,14 @@ use Yajra\DataTables\DataTables;
 class SettingController extends Controller {
 
 //****************  General  Settings *************************
-    public function general() {
+    public function general(Request $request) {
+
         return view('admin.setting.generalSettings');
     }
 
     public function updateGeneral(Request $request) {
 
-        settings($request->key, $request->value);
+        settings($request->get('key'), $request->get('value'));
         $this->flashNotifier->success(trans('app.common.operation_success'));
         if ($request->ajax()) {
             echo 1;
@@ -87,7 +88,7 @@ class SettingController extends Controller {
         $this->validate($request, [
             'settings' => 'required'
         ]);
-        $game = Game::find($request->id);
+        $game = Game::find($request->get('id'));
         $settings = $request->except(['_token']);
         $settings = $settings['settings'];
         $game->settings = $settings;
@@ -119,8 +120,8 @@ class SettingController extends Controller {
 
     public function countryStatusUpdate($id, Request $request) {
         $game = Country::find($id);
-        $game->enabled = $request->enabled;
-        $msg = ($request->enabled == 0) ? 'app.common.disabled' : 'app.common.enabled';
+        $game->enabled = $request->get('enabled');
+        $msg = ($request->get('enabled') == 0) ? 'app.common.disabled' : 'app.common.enabled';
         if ($game->save()) {
             $this->flashNotifier->success(trans($msg));
             return redirect()->route('setting.countries');
@@ -216,11 +217,11 @@ class SettingController extends Controller {
             'image_url' => 'required|file|image|max:4000'
         ]);
         $badge = new Badge();
-        $badge->name = $request->name;
-        $badge->description = $request->description;
-        $badge->relevance = $request->relevance;
+        $badge->name = $request->get('name');
+        $badge->description = $request->get('description');
+        $badge->relevance = $request->get('relevance');
+        $badge->slug = str_replace(' ', '-', $request->get('name'));
         $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
-        $badge->slug = str_replace(' ', '-', $request->name);
         if ($badge->save()) {
             $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
             $this->flashNotifier->success(trans('app.common.operation_success'));
@@ -245,10 +246,10 @@ class SettingController extends Controller {
             'relevance' => 'required',
         ]);
         $badge = Badge::find($id);
-        $badge->name = $request->name;
-        $badge->description = $request->description;
-        $badge->relevance = $request->relevance;
-        $badge->slug = str_replace(' ', '-', $request->name);
+        $badge->name = $request->get('name');
+        $badge->description = $request->get('description');
+        $badge->relevance = $request->get('relevance');
+        $badge->slug = str_replace(' ', '-', $request->get('name'));
         if ($request->hasFile('image_url')) {
             $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
             $file = $request->file('image_url')->storeAs('badges', $request->file('image_url')->getClientOriginalName(), 'uploads');
@@ -331,9 +332,9 @@ class SettingController extends Controller {
 //        }
 //        return view('admin.badges.add', compact('badge', 'language', 'currency'));
 //    }
-//Jackpt Configuration Start
+    
+    //Jackpt Configuration Start
     public function jackpot() {
         return view('admin.jackpot.index');
     }
-
 }
