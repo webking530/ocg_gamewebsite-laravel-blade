@@ -19,8 +19,9 @@ mix.scripts([
 ], 'public/compiled/js/shared.js');
 
 mix.copyDirectory('resources/assets/vendor/fontawesome-5.2.0/webfonts', 'public/compiled/webfonts');
-
 mix.copyDirectory('resources/assets/vendor/bootstrap/fonts/', 'public/compiled/fonts');
+mix.copyDirectory('resources/assets/vendor/ckeditor', 'public/compiled/plugins/ckeditor');
+mix.copyDirectory('resources/assets/vendor/datepicker', 'public/compiled/plugins/datepicker');
 
 // Porto Template
 mix.styles([
@@ -125,6 +126,9 @@ mix.scripts([
 mix.styles([
     'resources/assets/css/pages/settings.css',
 ], 'public/compiled/css/pages/settings.css');
+mix.scripts([
+    'resources/assets/js/pages/news.js',
+], 'public/compiled/js/pages/news.js');
 
 
 if (mix.inProduction()) {

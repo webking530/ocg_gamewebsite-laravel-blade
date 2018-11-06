@@ -128,7 +128,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
          // Jackpot Configuration Route
     Route::get('setting/jackpot', 'Admin\SettingController@jackpot')->name('setting.jackpot');
     
-
+    //News Mangagement
+    Route::resource('news', 'Admin\NewsController');
+    Route::post('news/showdata', 'Admin\NewsController@showdata');
+    Route::post('news/delete/{id}', 'Admin\NewsController@destroy');
     
 });
 
