@@ -85,5 +85,10 @@ class SettingsSeeder extends Seeder
                 ],
             ]),
         ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'enable_social_register',
+            'value' => 'true',
+        ]);
     }
 }

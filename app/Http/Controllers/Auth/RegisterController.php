@@ -69,8 +69,9 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+        $enableSocial = settings('enable_social_register') == 'true';
         $welcomeBonus = Bonus::whereSlug(Bonus::SLUG_WELCOME)->first();
 
-        return view('auth.register', compact('welcomeBonus'));
+        return view('auth.register', compact('welcomeBonus', 'enableSocial'));
     }
 }

@@ -36,4 +36,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function showLoginForm()
+    {
+        $enableSocial = settings('enable_social_register') == 'true';
+
+        return view('auth.login', compact('enableSocial'));
+    }
 }

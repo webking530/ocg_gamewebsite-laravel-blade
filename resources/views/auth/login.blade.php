@@ -19,6 +19,13 @@
 
                             <hr>
 
+                            @if ($enableSocial)
+                                <div class="text-center mb-md">
+                                    <button type="button" class="btn btn-danger"><i class="fab fa-google-plus"></i> Sign in with Google+</button>
+                                    <button type="button" class="btn btn-primary"><i class="fab fa-facebook"></i> Sign in with Facebook</button>
+                                </div>
+                            @endif
+
                             <form class="form-horizontal" method="POST" action="{{ route('home.login.post') }}">
                                 {{ csrf_field() }}
 
