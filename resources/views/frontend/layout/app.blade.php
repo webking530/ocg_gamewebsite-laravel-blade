@@ -284,7 +284,7 @@
                     <div id="news" class="twitter">
                         <ul>
                             @foreach ($bannersService->getLatestNews() as $news)
-                                <li><a href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->content, 0, 178, '...') }}</a></li>
+                                <li><a href="{{ route('news.details', ['news' => $news]) }}">{!! htmlspecialchars(trim(strip_tags(mb_strimwidth($news->content, 0, 178, '...'))))  !!}</a></li>
                             @endforeach
                         </ul>
                     </div>
