@@ -275,7 +275,7 @@ class SettingController extends Controller {
         $data = $Lottery->get()->toArray();
         foreach ($Lottery->get() as $key => $ltr) {
             $data[$key]['status'] = $ltr->getFormattedStatusAttribute($ltr->status);
-            $data[$key]['type'] = $ltr->getStakeTextAttribute($ltr->type);
+            $data[$key]['type'] = $ltr->getFormattedStakeTextAttribute($ltr->type);
         }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {

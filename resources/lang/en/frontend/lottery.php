@@ -64,8 +64,8 @@ return [
         3 => 'Finalized'
     ],
     'type' => [
-        0 => 'Low stack',
-        1 => 'Mid Stack',
-        2 => 'High Stack'
+        0 => 'Low Stakes',
+        1 => 'Mid Stakes',
+        2 => 'High Stakes'
     ]
 ];

@@ -73,7 +73,18 @@ class Lottery extends Model {
     }
 
     public function getStakeTextAttribute() {
+        switch ($this->type) {
+            default:
+            case self::TYPE_LOW_STAKE:
+                return 'low_stake';
+            case self::TYPE_MID_STAKE:
+                return 'mid_stake';
+            case self::TYPE_HIGH_STAKE:
+                return 'high_stake';
+        }
+    }
 
+    public function getFormattedStakeTextAttribute() {
         return trans("frontend/lottery.type.{$this->type}");
     }
 
