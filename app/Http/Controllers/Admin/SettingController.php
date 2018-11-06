@@ -331,4 +331,9 @@ class SettingController extends Controller {
 //        }
 //        return view('admin.badges.add', compact('badge', 'language', 'currency'));
 //    }
+//Jackpt Configuration Start
+    public function jackpot() {
+        return view('admin.jackpot.index');
+    }
+
 }
