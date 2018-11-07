@@ -107,13 +107,19 @@
             <?php $r = \Route::current()->getAction() ?>
             <?php $route = (isset($r['as'])) ? $r['as'] : ''; ?>
             <ul class="nav menu">
-                <li class="<?php echo (starts_with($route, 'admin.home')) ? "active" : '' ?>"><a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
+                <li class="<?php echo (starts_with($route, 'admin.home')) ? "active" : '' ?>">
+                    <a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
                 </li>
-                <li class="<?php echo (starts_with($route, 'user')) ? "active" : '' ?>"><a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
+                <li class="<?php echo (starts_with($route, 'user')) ? "active" : '' ?>">
+                    <a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
                 </li>
-                 <li class="<?php echo (starts_with($route, 'news')) ? "active" : '' ?>"><a href="{{ route('news.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> News Management</a>
+                <li class="<?php echo (starts_with($route, 'news')) ? "active" : '' ?>">
+                    <a href="{{ route('news.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> News Management</a>
                 </li>
-               
+                <li class="<?php echo (starts_with($route, 'bonus')) ? "active" : '' ?>">
+                    <a href="{{ route('bonus.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Bonus Management</a>
+                </li>
+
                 <li  data-toggle="collapse" data-target="#products" class="<?php echo (starts_with($route, 'setting')) ? "" : 'collapsed' ?>  <?php echo (starts_with($route, 'setting')) ? "active" : '' ?>">
                     <a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Settings Management<span class="arrow"></span></a>
                 </li>

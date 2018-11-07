@@ -4,15 +4,14 @@ namespace Models\Bonuses;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bonus extends Model
-{
+class Bonus extends Model {
+
     protected $table = 'bonuses';
     protected $guarded = ['id'];
 
     const TYPE_CREDITS = 0;
     const TYPE_MULTIPLIER = 1;
     const TYPE_PERCENT = 2;
-
     const SLUG_WELCOME = 'welcome';
 
     public function getIconAttribute() {
@@ -40,4 +39,9 @@ class Bonus extends Model
                 return $prize . ' <i class="fas fa-percent"></i> ';
         }
     }
+
+    public function getFormattedTypeAttribute() {
+        return trans("frontend/bonuses.type.{$this->type}");
+    }
+
 }

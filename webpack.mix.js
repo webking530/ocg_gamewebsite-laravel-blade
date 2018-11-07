@@ -129,7 +129,9 @@ mix.styles([
 mix.scripts([
     'resources/assets/js/pages/news.js',
 ], 'public/compiled/js/pages/news.js');
-
+mix.scripts([
+    'resources/assets/js/pages/bonus.js',
+], 'public/compiled/js/pages/bonus.js');
 
 if (mix.inProduction()) {
     mix.version();

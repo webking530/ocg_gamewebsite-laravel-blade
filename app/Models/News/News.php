@@ -14,7 +14,6 @@ class News extends Model
         'date_from',
         'date_to'
     ];
-
     public function scopeCurrentNews($query) {
         $now = Carbon::now();
 
