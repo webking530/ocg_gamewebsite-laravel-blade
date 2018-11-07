@@ -15,12 +15,10 @@
                         <div class="box-content">
                             <h1 class="mb-lg text-blue text-center">
                                 @if(isset($bonus))
-                                Edit
+                                {{ trans('frontend/bonuses.edit_bonus') }}
                                 @else
-                                Add
+                                {{ trans('frontend/bonuses.add_bonus') }}
                                 @endif
-                                Bonus
-
                             </h1>
                             <hr>
                             @if(isset($bonus))
@@ -43,7 +41,22 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
+                                <label for="slug" class="col-md-4 control-label">Slug</label>
 
+                                <div class="col-md-6">
+                                    @if(isset($bonus))
+                                    {{ Form::text('slug', Input::old('slug'),['disabled'=>'disabled','class'=>'form-control','required'=>'required']) }}
+                                    @else
+                                    {{ Form::text('slug', Input::old('slug'),['id'=>'slug','class'=>'form-control','required'=>'required']) }}
+                                    @endif
+                                    @if ($errors->has('slug'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('slug') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                                 <label for="order" class="col-md-4 control-label">Type</label>
 
@@ -108,6 +121,7 @@
                                 </div>
                             </div>
                             {{ Form::close() }}
+                            <a href="../../../../../../../Users/admin/AppData/Local/Temp/.keypress() jQuery API Documentation httpsapi.jquery.comkeypress.URL"></a>
                         </div>
                     </div>
                 </div>
@@ -127,6 +141,11 @@
                     "max": 100,
                     "min": 1
                 });
+        });
+        $("#name").keyup(function (event) {
+            var name = $(this).val();
+            var slug = name.replace(/ /g, "_");
+            $('#slug').val(slug.toLowerCase());
         });
     });
 </script>

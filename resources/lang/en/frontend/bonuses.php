@@ -11,4 +11,6 @@ return [
         '1' => 'Multiplier',
         '2' => 'Percent'
     ],
+    'add_bonus' => 'Add Bonus',
+    'edit_bonus' => 'Edit Bonus'
 ];

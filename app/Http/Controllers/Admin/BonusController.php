@@ -56,8 +56,6 @@ class BonusController extends Controller {
             $bonus->prize = $request->get('prize');
             $bonus->enabled = $request->get('enabled');
             $bonus->description = $request->get('description');
-            $bonus->slug = str_replace(' ', '-', $request->get('name'));
-            
             if ($bonus->save()) {
                 $this->flashNotifier->success(trans('app.common.operation_success'));
                 return redirect()->route('bonus.index');
@@ -92,7 +90,7 @@ class BonusController extends Controller {
             $bonus->prize = $request->get('prize');
             $bonus->enabled = $request->get('enabled');
             $bonus->description = $request->get('description');
-            $bonus->slug = str_replace(' ', '-', $request->get('name'));
+            $bonus->slug = $request->get('slug');
             if ($bonus->save()) {
                 $this->flashNotifier->success(trans('app.common.operation_success'));
                 return redirect()->route('bonus.index');
