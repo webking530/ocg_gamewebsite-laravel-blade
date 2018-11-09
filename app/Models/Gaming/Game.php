@@ -6,19 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Models\Auth\User;
 
-class Game extends Model
-{
+class Game extends Model {
+
     protected $guarded = ['id'];
 
     const TYPE_NORMAL = 0;
     const TYPE_INSTANT_WIN = 1;
-
     const GROUP_SLOT = 0;
     const GROUP_ROULETTE = 1;
     const GROUP_CARD = 2;
     const GROUP_BINGO = 3;
     const GROUP_OTHER = 4;
-
     const GROUP_LIST = [
         self::GROUP_SLOT,
         self::GROUP_ROULETTE,
@@ -26,11 +24,14 @@ class Game extends Model
         self::GROUP_BINGO,
         self::GROUP_OTHER
     ];
-
     const POPULAR_GAMES_AMOUNT = 8;
 
     public function winnings() {
         return $this->belongsToMany(User::class, 'game_user_winnings', 'game_id', 'user_id')->withPivot(['win_amount']);
+    }
+
+    public function sessions() {
+        return $this->belongsToMany(User::class, 'game_user_session', 'game_id', 'user_id');
     }
 
     public function getNameAttribute() {
@@ -71,19 +72,19 @@ class Game extends Model
 
         $userSession = Auth::user()->gameSessions()->where('game_id', $this->id)->first();
 
-        $userCash = $userSession === null ? 0.0 : (float)$userSession->pivot->credits;
-        $gameCash = (float)$this->credits;
+        $userCash = $userSession === null ? 0.0 : (float) $userSession->pivot->credits;
+        $gameCash = (float) $this->credits;
 
         $settings->live->{$userCashKey} = $userCash;
         $settings->live->{$gameCashKey} = $gameCash;
 
         /*
-        We need to dynamically adjust the multiplier value for the highest value figure in
-        each slot game. It will be based around the Jackpot size, so the higher the Jackpot, the
-        higher the multiplier.
-        Each game has a max coin interval that will be multiplied by the number of lines the game has. That is
-        the basic formula to get the max possible bet the user can place.
-        */
+          We need to dynamically adjust the multiplier value for the highest value figure in
+          each slot game. It will be based around the Jackpot size, so the higher the Jackpot, the
+          higher the multiplier.
+          Each game has a max coin interval that will be multiplied by the number of lines the game has. That is
+          the basic formula to get the max possible bet the user can place.
+         */
         if ($this->has_jackpot && Jackpot::isRealJackpotEnabled()) {
             $jackpot = Jackpot::getCurrentJackpot()['size'];
 
@@ -123,4 +124,25 @@ class Game extends Model
     public function getSettingsDecodedAttribute() {
         return json_decode($this->settings)->live;
     }
+
+    public function getHighestWinAmount(Game $game) {
+        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('pivot_win_amount', 'DESC')->first();
+
+        if ($winning == null) {
+            return 0;
+        }
+
+        return $winning->pivot->win_amount;
+    }
+
+    public function getLastWinAmount(Game $game) {
+        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('created_at', 'DESC')->first();
+
+        if ($winning == null) {
+            return 0;
+        }
+
+        return $winning->pivot->win_amount;
+    }
+
 }

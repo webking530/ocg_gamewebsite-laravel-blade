@@ -91,15 +91,15 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::get('setting/general', 'Admin\SettingController@general')->name('setting.general');
     Route::post('setting/general/updateGeneral', 'Admin\SettingController@updateGeneral')->name('setting.updateGeneral');
     Route::post('setting/showGeneralSettingsdata', 'Admin\SettingController@showGeneralSettingsdata');
-//    Route::post('setting/registration', 'Admin\SettingController@general')->name('setting.registration');
-//    Route::post('setting/maintenancemode', 'Admin\SettingController@general')->name('setting.maintenancemode');
+    
     // Games Routes
     Route::get('setting/games', 'Admin\SettingController@games')->name('setting.games');
     Route::post('setting/games/showGamedata', 'Admin\SettingController@showGamedata');
     Route::get('setting/games/editSettings/{id}', 'Admin\SettingController@editGameSettings');
     Route::post('setting/games/updateSettings', 'Admin\SettingController@updateGameSetting')->name('game.updateSetting');
     Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@gameStatusUpdate');
-
+    Route::get('setting/games/detail/{id}', 'Admin\SettingController@gameDetail');
+    
     // Badges Route
     Route::get('setting/badges', 'Admin\SettingController@badges')->name('setting.badges');
     Route::post('setting/badges/showBadgesdata', 'Admin\SettingController@showBadgesdata');

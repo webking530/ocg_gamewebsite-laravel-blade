@@ -11,6 +11,7 @@ use Models\Gaming\Lottery;
 use Models\Setting\Setting;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller {
 
@@ -50,11 +51,13 @@ class SettingController extends Controller {
 
     public function showGamedata(Request $request) {
         $input = $request->all();
-        $games = Game::select('id', 'slug', 'enabled');
+        $games = Game::select('id', 'slug', 'icon_url', 'credits', 'enabled');
         $games->orderBy('id', 'desc');
         $data = $games->get()->toArray();
-        foreach ($games->get() as $key => $user) {
-            $data[$key]['name'] = $user->getNameAttribute();
+        foreach ($games->get() as $key => $game) {
+            $data[$key]['name'] = $game->getNameAttribute();
+            $data[$key]['highestwin'] = $game->getHighestWinAmount($game);
+            $data[$key]['latestwin'] = $game->getLastWinAmount($game);
         }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
@@ -99,6 +102,13 @@ class SettingController extends Controller {
             $this->flashNotifier->error(trans('app.common.operation_error'));
             return redirect()->back();
         }
+    }
+
+    public function gameDetail($id) {
+
+        $game = Game::with('winnings')->find($id);
+        $gameActivePlayers = Game::with('sessions')->find($id);
+        return view('admin.setting.gameDetail', compact('game','gameActivePlayers'));
     }
 
     //****************  Countries Settings *************************
@@ -332,9 +342,9 @@ class SettingController extends Controller {
 //        }
 //        return view('admin.badges.add', compact('badge', 'language', 'currency'));
 //    }
-    
     //Jackpt Configuration Start
     public function jackpot() {
         return view('admin.jackpot.index');
     }
+
 }

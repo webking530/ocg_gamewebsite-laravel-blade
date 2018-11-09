@@ -133,6 +133,10 @@ mix.scripts([
     'resources/assets/js/pages/bonus.js',
 ], 'public/compiled/js/pages/bonus.js');
 
+mix.styles([
+    'resources/assets/css/pages/game_detail.css',
+], 'public/compiled/css/pages/game_detail.css');
+
 if (mix.inProduction()) {
     mix.version();
 }

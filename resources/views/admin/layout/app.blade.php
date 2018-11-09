@@ -107,16 +107,16 @@
             <?php $r = \Route::current()->getAction() ?>
             <?php $route = (isset($r['as'])) ? $r['as'] : ''; ?>
             <ul class="nav menu">
-                <li class="<?php echo (starts_with($route, 'admin.home')) ? "active" : '' ?>">
+                <li class="{{ set_active('admin.home') }}">
                     <a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
                 </li>
-                <li class="<?php echo (starts_with($route, 'user')) ? "active" : '' ?>">
+                <li class="{{ set_active('user.index') }}">
                     <a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
                 </li>
-                <li class="<?php echo (starts_with($route, 'news')) ? "active" : '' ?>">
+                <li class="{{ set_active('news.index') }}">
                     <a href="{{ route('news.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> News Management</a>
                 </li>
-                <li class="<?php echo (starts_with($route, 'bonus')) ? "active" : '' ?>">
+                <li class="{{ set_active('bonus.index') }}">
                     <a href="{{ route('bonus.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Bonus Management</a>
                 </li>
 
@@ -124,13 +124,13 @@
                     <a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Settings Management<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse <?php echo (starts_with($route, 'setting')) ? "in" : "" ?>" id="products">
-                    <li class="active"><a href="{{ route('setting.general') }}">General Settings</a></li>
-                    <li><a href="{{ route('setting.games') }}">Games</a></li>
-                    <li><a href="{{ route('setting.badges') }}">Badges</a></li>
-                    <li><a href="#">Money</a></li>
-                    <li><a href="{{ route('setting.countries') }}">Countries</a></li>
-                    <li><a href="{{ route('setting.lottery') }}">Lottery</a></li>
-                    <li><a href="{{ route('setting.jackpot') }}">Jackpot Configuration </a></li>
+                    <li class="{{ set_active('setting.general') }}"><a href="{{ route('setting.general') }}">General Settings</a></li>
+                    <li class="{{ set_active('setting.games') }}"><a href="{{ route('setting.games') }}">Games</a></li>
+                    <li class="{{ set_active('setting.badges') }}"><a href="{{ route('setting.badges') }}">Badges</a></li>
+                    <li class=""><a href="#">Money</a></li>
+                    <li class="{{ set_active('setting.countries') }}"><a href="{{ route('setting.countries') }}">Countries</a></li>
+                    <li class="{{ set_active('setting.lottery') }}"><a href="{{ route('setting.lottery') }}">Lottery</a></li>
+                    <li class="{{ set_active('setting.jackpot') }}"><a href="{{ route('setting.jackpot') }}">Jackpot Configuration </a></li>
                 </ul>
             </ul>
         </div><!--/.sidebar-->
