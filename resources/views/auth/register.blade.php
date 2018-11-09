@@ -114,7 +114,7 @@
                                     <label for="gender" class="col-md-4 control-label">Gender</label>
 
                                     <div class="col-md-6">
-                                        {!! Form::select('gender', Models\Auth\User::getGenderList(), null, ['class' => 'form-control', 'required' => true]) !!}
+                                        {!! Form::select('gender', Models\Auth\User::getGenderList(), null, ['class' => 'form-control', 'required' => true, 'placeholder' => trans('app.common.please_select')]) !!}
 
                                         @if ($errors->has('gender'))
                                             <span class="help-block">
@@ -142,7 +142,7 @@
                                     <label for="country_code" class="col-md-4 control-label">Country</label>
 
                                     <div class="col-md-6">
-                                        {!! Form::select('country_code', $locationService->getEnabledCountriesList(), null, ['class' => 'form-control', 'required' => true]) !!}
+                                        {!! Form::select('country_code', $locationService->getEnabledCountriesList(), null, ['class' => 'form-control', 'required' => true, 'placeholder' => trans('app.common.please_select')]) !!}
 
                                         @if ($errors->has('country_code'))
                                             <span class="help-block">
@@ -156,7 +156,7 @@
                                     <label for="currency_code" class="col-md-4 control-label">Preferred Currency</label>
 
                                     <div class="col-md-6">
-                                        {!! Form::select('currency_code', $pricingService->getCurrenciesList(), null, ['class' => 'form-control', 'required' => true]) !!}
+                                        {!! Form::select('currency_code', $pricingService->getCurrenciesList(), null, ['class' => 'form-control', 'required' => true, 'placeholder' => trans('app.common.please_select')]) !!}
 
                                         @if ($errors->has('currency_code'))
                                             <span class="help-block">

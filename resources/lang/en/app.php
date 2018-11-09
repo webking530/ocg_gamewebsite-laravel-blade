@@ -23,7 +23,9 @@ return [
         'action_cannot_undone' => 'This action cannot be undone.',
         'enabled' => 'Enabled Successfully',
         'disabled' => 'Disabled Successfully',
+        'please_select' => 'Please Select'
     ],
+    'copyright_footer' => 'Copyright &copy; :date OCG Casino. All rights reserved.',
     'days' => ':days day ago|:days days ago',
     'since_date' => 'Since :date',
     'not_enough_credits' => 'You do not have enough credits to perform this operation',

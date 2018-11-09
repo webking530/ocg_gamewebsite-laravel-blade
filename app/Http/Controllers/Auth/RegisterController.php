@@ -7,6 +7,7 @@ use Models\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Request;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/activation';
 
     /**
      * Create a new controller instance.
@@ -37,6 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('guest');
     }
 
@@ -73,5 +75,17 @@ class RegisterController extends Controller
         $welcomeBonus = Bonus::whereSlug(Bonus::SLUG_WELCOME)->first();
 
         return view('auth.register', compact('welcomeBonus', 'enableSocial'));
+    }
+
+    private function getReferrer(Request $request) {
+        if ($request->has('dcp')) {
+            $referrerNickname = trim($request->get('dcp'));
+        } elseif ($request->hasCookie('dcp')) {
+            $referrerNickname = trim($request->cookie('dcp'));
+        } else {
+            return null;
+        }
+
+        return User::where('dcp_suspended', 0)->where('nickname', $referrerNickname)->first();
     }
 }

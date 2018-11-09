@@ -90,5 +90,15 @@ class SettingsSeeder extends Seeder
             'key' => 'enable_social_register',
             'value' => 'true',
         ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'noreply_email',
+            'value' => 'noreply@ocgcasino.com',
+        ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'admin_email',
+            'value' => 'info@ocgcasino.com',
+        ]);
     }
 }

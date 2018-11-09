@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserTableChangeDatatype extends Migration
+class ModifyUsersTableVerificationPin extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UserTableChangeDatatype extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('suspended_on')->nullable()->change();
+            $table->timestamp('verification_pin_sent_at')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class UserTableChangeDatatype extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('suspended_on');
+            $table->dropColumn('verification_pin_sent_at');
         });
     }
 }

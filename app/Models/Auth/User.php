@@ -40,7 +40,9 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
-        'birthdate'
+        'birthdate',
+        'suspended_on',
+        'verification_pin_sent_at'
     ];
 
     public static function getGenderList() {
@@ -126,6 +128,10 @@ class User extends Authenticatable
 
     public function isAdmin() {
         return (int)$this->role === self::ROLE_ADMIN;
+    }
+
+    public function isSuspended() {
+        return $this->suspended_on != null;
     }
 
     public function isMale() {

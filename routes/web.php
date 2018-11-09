@@ -8,6 +8,10 @@ Route::post('login', 'Auth\LoginController@login')->name('home.login.post');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('home.logout');
 
+Route::get('activation/{nickname}', 'Auth\LoginController@activationForm')->name('home.activation');
+Route::get('send-pin/{user}/{type}', 'Auth\LoginController@resendPin')->name('home.pin.resend');
+Route::post('activation/{user}', 'Auth\LoginController@activationPost')->name('home.activation.post');
+
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('home.register');
 Route::post('register', 'Auth\RegisterController@register')->name('home.register.post');
 
