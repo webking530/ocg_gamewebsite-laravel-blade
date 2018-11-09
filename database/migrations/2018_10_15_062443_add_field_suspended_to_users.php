@@ -14,7 +14,7 @@ class AddFieldSuspendedToUsers extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('suspended_on', 100)->nullable();
+            $table->timestamp('suspended_on')->nullable();
         });
     }
 
