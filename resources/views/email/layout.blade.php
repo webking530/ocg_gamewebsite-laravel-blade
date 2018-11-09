@@ -1,13 +1,13 @@
 <div style="background:#f3f3f3;padding:15px">
     <div style="width:450px;margin:auto;background:white;padding:10px;text-align:center">
-        <img src="{{ asset('img/logo.png') }}" alt="{{ trans('app.meta.title') }}" width="400"/>
+        <img src="{{ asset('img/logo.png') }}" alt="{{ trans('app.meta.title') }}" width="200"/>
     </div>
 
     <div style="width:450px;margin:auto;background:white;padding:10px">
         @yield('content')
 
         <br>
-        <p>{{ trans('emails.email_footer') }}</p>
+        <p>{!! trans('emails.email_footer') !!}</p>
     </div>
 
     <div style="width:450px;margin:auto;background:white;padding:10px;text-align:center">
