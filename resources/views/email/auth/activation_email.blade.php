@@ -5,5 +5,5 @@
 
     <p><strong>{{ $user->verification_pin }}</strong></p>
 
-    <p>{{ trans('emails.activation.body_2', ['route' => route('home.activation')]) }}</p>
+    <p>{{ trans('emails.activation.body_2', ['route' => route('home.activation', ['nickname' => $user->nickname])]) }}</p>
 @endsection
