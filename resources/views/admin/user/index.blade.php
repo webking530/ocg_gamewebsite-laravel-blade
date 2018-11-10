@@ -52,7 +52,7 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'user/showdata',
+                url: '{{ route("user.showdata") }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {

@@ -49,6 +49,11 @@ class SettingController extends Controller {
         return view('admin.setting.game');
     }
 
+    /**
+     * 
+     * @var Game $game
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function showGamedata(Request $request) {
         $input = $request->all();
         $games = Game::select('id', 'slug', 'icon_url', 'credits', 'enabled');
@@ -56,6 +61,7 @@ class SettingController extends Controller {
         $data = $games->get()->toArray();
         foreach ($games->get() as $key => $game) {
             $data[$key]['name'] = $game->getNameAttribute();
+            $data[$key]['image'] = $game->getSmallIconAttribute();
             $data[$key]['highestwin'] = $game->getHighestWinAmount($game);
             $data[$key]['latestwin'] = $game->getLastWinAmount($game);
         }
@@ -65,13 +71,18 @@ class SettingController extends Controller {
                         })->make(true);
     }
 
+    /**
+     * 
+     * @param int $id
+     * @param Request $request
+     */
     public function gameStatusUpdate($id, Request $request) {
         $this->validate($request, [
             'enabled' => 'required'
         ]);
         $game = Game::find($id);
-        $game->enabled = $request->enabled;
-        $msg = ($request->enabled == 0) ? 'app.common.disabled' : 'app.common.enabled';
+        $game->enabled = $request->get('enabled');
+        $msg = ($request->get('enabled') == 0) ? 'app.common.disabled' : 'app.common.enabled';
         if ($game->save()) {
             $this->flashNotifier->success(trans($msg));
             return redirect()->route('setting.games');
@@ -81,6 +92,11 @@ class SettingController extends Controller {
         }
     }
 
+    /**
+     * 
+     * @param int $id
+     * @return type
+     */
     public function editGameSettings($id) {
         $game = Game::find($id);
         return view('admin.setting.gameSettingsEdit', compact('game'));
@@ -104,11 +120,15 @@ class SettingController extends Controller {
         }
     }
 
+    /**
+     * 
+     * @param int $id
+     */
     public function gameDetail($id) {
 
         $game = Game::with('winnings')->find($id);
         $gameActivePlayers = Game::with('sessions')->find($id);
-        return view('admin.setting.gameDetail', compact('game','gameActivePlayers'));
+        return view('admin.setting.gameDetail', compact('game', 'gameActivePlayers'));
     }
 
     //****************  Countries Settings *************************
@@ -128,6 +148,12 @@ class SettingController extends Controller {
                         })->make(true);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @param Request $request
+     * @return type
+     */
     public function countryStatusUpdate($id, Request $request) {
         $game = Country::find($id);
         $game->enabled = $request->get('enabled');
@@ -157,11 +183,11 @@ class SettingController extends Controller {
             'capital_timezone' => 'required',
         ]);
         $country = new Country ();
-        $country->code = $request->code;
-        $country->currency_code = $request->currency_code;
-        $country->pricing_currency = $request->pricing_currency;
-        $country->locale = $request->locale;
-        $country->capital_timezone = $request->capital_timezone;
+        $country->code = $request->get('code');
+        $country->currency_code = $request->get('currency_code');
+        $country->pricing_currency = $request->get('pricing_currency');
+        $country->locale = $request->get('locale');
+        $country->capital_timezone = $request->get('capital_timezone');
         if ($country->save()) {
             $this->flashNotifier->success(trans('app.common.operation_success'));
             return redirect()->route('setting.countries');
@@ -179,6 +205,12 @@ class SettingController extends Controller {
         return view('admin.country.add', compact('country', 'language', 'currency'));
     }
 
+    /**
+     * 
+     * @param int $code
+     * @param Request $request
+     * @return type
+     */
     public function updateCountry($code, Request $request) {
 
         $this->validate($request, [
@@ -242,12 +274,23 @@ class SettingController extends Controller {
         }
     }
 
+    /**
+     * 
+     * @param int $id
+     * @return type
+     */
     public function editBadges($id) {
 
         $badge = Badge::find($id);
         return view('admin.badges.add', compact('badge', 'language', 'currency'));
     }
 
+    /**
+     * 
+     * @param int  $id
+     * @param Request $request
+     * @return type
+     */
     public function updateBadges($id, Request $request) {
 
         $this->validate($request, [

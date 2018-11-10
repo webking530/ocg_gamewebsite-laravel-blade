@@ -58,7 +58,7 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'general/showCountrydata',
+                url: '{{ route("country.showdata") }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
@@ -78,7 +78,6 @@
                 {
                     "mRender": function (a, b, data, d) {
                         $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">';
-
                         if (data.enabled == 1) {
                             $returnValue += '<li><form method="post" action="country/statusupdate/' + data.code + '" accept-charset="UTF-8" class="delete"><input name="enabled" value="0" type="hidden"><?php echo csrf_field(); ?><button class="btn btn-danger btn-xs" title="Disable Country"><i class="fa fa-toggle-on"></i></button></form></li>'
                         } else {

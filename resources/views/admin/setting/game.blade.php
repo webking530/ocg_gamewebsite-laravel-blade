@@ -18,13 +18,12 @@
                                     <th>Credits</th>
                                     <th>Highest Win</th>
                                     <th>Latest Win</th>
-                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
-                        </table>
+                        </table> 
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -52,7 +51,7 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'games/showGamedata',
+                url: '{{ route("game.showdata") }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
@@ -65,16 +64,15 @@
                 {data: 'credits', name: 'credits'},
                 {data: 'highestwin', name: 'highestwin'},
                 {data: 'latestwin', name: 'latestwin'},
-                {data: 'image', name: 'image'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             aoColumnDefs: [
                 {
                     "mRender": function (a, b, data, d) {
-                        $returnValue = '<img width="48" src="/' + data.icon_url + '">';
+                        $returnValue = '<img width="48" src="/' + data.image + '">&nbsp;&nbsp;&nbsp;&nbsp;' + data.name;
                         return $returnValue;
                     },
-                    "aTargets": [4]
+                    "aTargets": [0]
                 },
                 {
                     "mRender": function (a, b, data, d) {
@@ -90,7 +88,7 @@
                         $returnValue += '</ul>'
                         return $returnValue;
                     },
-                    "aTargets": [5]
+                    "aTargets": [4]
                 },
             ]
         });

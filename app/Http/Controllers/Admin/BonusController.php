@@ -15,6 +15,11 @@ class BonusController extends Controller {
         return view('admin.bonus.index');
     }
 
+    /**
+     * @var Bonus $bonus
+     * @param Request $request
+     * @return type
+     */
     public function showdata(Request $request) {
         $input = $request->all();
         $bonuses = Bonus::select('id', 'type', 'prize', 'name', 'description', 'enabled');

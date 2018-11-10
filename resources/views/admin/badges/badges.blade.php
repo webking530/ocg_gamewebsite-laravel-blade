@@ -56,7 +56,7 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'badges/showBadgesdata',
+                url: '{{ route("badges.showdata") }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {

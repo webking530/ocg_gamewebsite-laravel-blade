@@ -80,7 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
 
     // User Routes
-    Route::post('user/showdata', 'Admin\UserController@showdata');
+    Route::post('user/showdata', 'Admin\UserController@showdata')->name('user.showdata');
     Route::get('user/switch/{user}', 'Admin\UserController@switchUser');
     Route::get('user/suspend/{user}', 'Admin\UserController@suspendUser');
     Route::get('user/resumeuser/{user}', 'Admin\UserController@resumeUser');
@@ -91,18 +91,19 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::get('setting/general', 'Admin\SettingController@general')->name('setting.general');
     Route::post('setting/general/updateGeneral', 'Admin\SettingController@updateGeneral')->name('setting.updateGeneral');
     Route::post('setting/showGeneralSettingsdata', 'Admin\SettingController@showGeneralSettingsdata');
-    
+//    Route::post('setting/registration', 'Admin\SettingController@general')->name('setting.registration');
+//    Route::post('setting/maintenancemode', 'Admin\SettingController@general')->name('setting.maintenancemode');
     // Games Routes
     Route::get('setting/games', 'Admin\SettingController@games')->name('setting.games');
-    Route::post('setting/games/showGamedata', 'Admin\SettingController@showGamedata');
+    Route::post('setting/games/showGamedata', 'Admin\SettingController@showGamedata')->name('game.showdata');
     Route::get('setting/games/editSettings/{id}', 'Admin\SettingController@editGameSettings');
     Route::post('setting/games/updateSettings', 'Admin\SettingController@updateGameSetting')->name('game.updateSetting');
     Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@gameStatusUpdate');
     Route::get('setting/games/detail/{id}', 'Admin\SettingController@gameDetail');
-    
+
     // Badges Route
     Route::get('setting/badges', 'Admin\SettingController@badges')->name('setting.badges');
-    Route::post('setting/badges/showBadgesdata', 'Admin\SettingController@showBadgesdata');
+    Route::post('setting/badges/showBadgesdata', 'Admin\SettingController@showBadgesdata')->name('badges.showdata');
     Route::get('setting/badges/add', 'Admin\SettingController@addBadges')->name('badges.add');
     Route::post('setting/badges/create', 'Admin\SettingController@createdBadges')->name('badges.create');
     Route::get('setting/badges/edit/{id}', 'Admin\SettingController@editBadges')->name('badges.edit');
@@ -118,11 +119,11 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('setting/country/create', 'Admin\SettingController@createCountry')->name('country.create');
     Route::get('setting/country/edit/{code}', 'Admin\SettingController@editCountry')->name('country.edit');
     Route::post('setting/country/update/{code}', 'Admin\SettingController@updateCountry')->name('country.update');
-    Route::post('setting/general/showCountrydata', 'Admin\SettingController@showCountrydata');
+    Route::post('setting/general/showCountrydata', 'Admin\SettingController@showCountrydata')->name('country.showdata');
 
     // Lottery Route
     Route::get('setting/lottery', 'Admin\SettingController@lottery')->name('setting.lottery');
-    Route::post('setting/lottery/showLotterydata', 'Admin\SettingController@showLotterydata');
+    Route::post('setting/lottery/showLotterydata', 'Admin\SettingController@showLotterydata')->name('lottery.showdata');
     Route::post('setting/lottery/updateSettings', 'Admin\SettingController@updateLotterySettings')->name('lottery.updateSettings');
     Route::get('setting/lottery/add', 'Admin\SettingController@addLottery')->name('lottery.add');
     Route::post('setting/lottery/create', 'Admin\SettingController@createLottery')->name('lottery.create');
@@ -143,6 +144,5 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('bonus/delete/{id}', 'Admin\BonusController@destroy');
     Route::post('bonus/statusupdate/{id}', 'Admin\BonusController@statusUpdate');
 });
-
 
 

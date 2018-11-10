@@ -4,35 +4,35 @@
 @endsection
 @section('content')
 <div role="main" class="main">
-    <div class="container">
+    <div class="container"><br>
+
+
         <div class="row user-menu-container square">
             <div class="col-md-12 user-details">
-                <div class="row coralbg white">
-                    <div class="col-md-6 no-pad">
-                        <div class="user-pad">
-                            <h3>{{ $game->getNameAttribute() }}</h3>
-<!--                        <h4 class="white"><i class="fa fa-check-circle-o"></i> San Antonio, TX</h4>
-                            <h4 class="white"><i class="fa fa-twitter"></i> CoolesOCool</h4>-->
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="text-center">{{ $game->getNameAttribute() }}</h2>
+                        <div class="row mt-lg">
+                            <div class="col-md-12">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 no-pad">
-                        <div class="user-image">
-                            <img src="{{ asset($game->icon_url) }}" alt="{{ $game->name }}" class="img-responsive thumbnail">
-                        </div>
+                    <div class="col-md-6">
+                        <img class="img-responsive margin-auto" src="{{ asset($game->icon_url) }}" alt="{{ $game->name }}" />
                     </div>
                 </div>
+                
                 <div class="row overview">
                     <div class="col-md-3 user-pad text-center">
-                        <h3>winning player</h3>
+                        <h3>Total Wins</h3>
                         <h4>{{ count($game->winnings) }}</h4>
                     </div>
                     <div class="col-md-3 user-pad text-center">
-                        <h3>Total Money</h3>
+                        <h3>Game Money</h3>
                         <h4>{{ $game->credits }}</h4>
                     </div>
                     <div class="col-md-3 user-pad text-center">
-                        <h3>Opened Session</h3>
+                        <h3>Opened Sessions</h3>
                         <h4>{{ $game->sessions_opened }}</h4>
                     </div>
                     <div class="col-md-3 user-pad text-center">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
 
             <div class="col-xs-12">
@@ -68,7 +68,7 @@
                                     <td><a target="_blank" href="{{ route('user.index') }}/{{ $winner->id }}">{{ $winner->nickname }}</a></td>
                                     <td>{{ $winner->email }}</td>
                                     <td>{{ $winner->credits }}</td>
-                                    <td>{{ $winner->pivot['win_amount'] }}</td>
+                                    <td>{{ $winner->pivot->win_amount }}</td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -80,8 +80,8 @@
                 <!-- /.box -->
             </div>
         </div>
-        
-          <div class="row">
+
+        <div class="row">
 
             <div class="col-xs-12">
                 <div class="box" style="">
@@ -96,17 +96,16 @@
                                     <th>Nickname</th>
                                     <th>Email</th>
                                     <th>Credits</th>
-                                    <th>Win Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @if(!empty($game->sessions))
                                 @foreach($game->sessions as $session)
                                 <tr>
                                     <td><a target="_blank" href="{{ route('user.index') }}/{{ $session->id }}">{{ $session->nickname }}</a></td>
                                     <td>{{ $session->email }}</td>
                                     <td>{{ $session->credits }}</td>
-                                    <td>{{ $session->pivot['win_amount'] }}</td>
                                 </tr>
                                 @endforeach
                                 @endif

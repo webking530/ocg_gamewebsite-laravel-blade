@@ -91,7 +91,7 @@
                 sProcessing: showMessage()
             },
             ajax: {
-                url: 'lottery/showLotterydata',
+                url: '{{ route("lottery.showdata") }}',
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
