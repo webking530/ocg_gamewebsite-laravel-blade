@@ -1,5 +1,5 @@
-<div style="background:#333;padding:15px">
-    <div style="width:450px;margin:auto;background:white;padding:10px;text-align:center">
+<div style="background:#f3f3f3;padding:15px">
+    <div style="width:450px;margin:auto;background:#333;padding:10px;text-align:center">
         <img src="{{ asset('img/logo.png') }}" alt="{{ trans('app.meta.title') }}" width="200"/>
     </div>
 
