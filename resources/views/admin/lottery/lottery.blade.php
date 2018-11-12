@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="date_close" class="col-md-4 control-label">lottery_cancel_hours</label>
+                                <label for="date  _close" class="col-md-4 control-label">lottery_cancel_hours</label>
                                 <div class="col-md-6">
                                     <input type='text' name="lottery_cancel_hours" value="{{ settings('lottery_cancel_hours') }}" class="form-control">
                                 </div>
@@ -43,11 +43,11 @@
                             </button>
                         </form>
                         <br>
-                        <!--                        <div class="pull-right">
-                                                    <a href="{{ route('lottery.add') }}" class="btn btn-xs btn-primary">
-                                                        <span class="glyphicon glyphicon-plus"></span> Create
-                                                    </a>
-                                                </div>-->
+                        <div class="pull-right">
+                            <a href="{{ route('lottery.add') }}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-plus"></span> Create
+                            </a>
+                        </div>
                     </div>
                     <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
                         <table id="lottetryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">

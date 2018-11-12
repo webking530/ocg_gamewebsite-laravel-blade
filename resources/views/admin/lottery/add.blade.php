@@ -2,7 +2,9 @@
 @section('meta')
 <title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
 @endsection
-
+@section('css')
+<link href="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.css') }}"  rel="stylesheet">
+@endsection
 @section('content')
 <div role="main" class="main">
     <div class="container">
@@ -24,7 +26,7 @@
                             @if(isset($lottery))
                             {{ Form::model($lottery, array('route' => array('lottery.edit',$lottery->id), 'method' => 'post','class'=>'form-horizontal')) }}
                             @else
-                            {{ Form::open(['route' => 'lottery.add','class'=>'form-horizontal']) }}
+                            {{ Form::open(['route' => 'lottery.create','method' => 'post','class'=>'form-horizontal']) }}
                             @endif
 
                             {{ csrf_field() }}
@@ -46,7 +48,7 @@
                                 <label for="date_open" class="col-md-4 control-label">Date Open</label>
 
                                 <div class="col-md-6">
-                                    {{ Form::text('date_open', Input::old('date_open'),['id'=>'date_open','class'=>'form-control','required'=>'required']) }}
+                                    {{ Form::text('date_open', Input::old('date_open'),['id'=>'date_open','class'=>'form-control date','required'=>'required']) }}
                                     @if ($errors->has('date_begin'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('date_open') }}</strong>
@@ -57,7 +59,7 @@
                             <div class="form-group{{ $errors->has('date_close') ? ' has-error' : '' }}">
                                 <label for="date_close" class="col-md-4 control-label">Date Close</label>
                                 <div class="col-md-6">
-                                    {{ Form::text('date_close', Input::old('date_close'),['id'=>'date_close','class'=>'form-control','required'=>'required']) }}
+                                    {{ Form::text('date_close', Input::old('date_close'),['id'=>'date_close','class'=>'form-control date','required'=>'required']) }}
                                     @if ($errors->has('date_close'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('date_close') }}</strong>
@@ -69,7 +71,7 @@
                                 <label for="date_begin" class="col-md-4 control-label">Date Begin</label>
 
                                 <div class="col-md-6">
-                                    {{ Form::text('date_begin', Input::old('date_begin'),['id'=>'date_begin','class'=>'form-control','required'=>'required']) }}
+                                    {{ Form::text('date_begin', Input::old('date_begin'),['id'=>'date_begin','class'=>'form-control date','required'=>'required']) }}
                                     @if ($errors->has('date_begin'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('date_begin') }}</strong>
@@ -133,4 +135,13 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script>
+$(function () {
+    $('.date').datetimepicker({format: 'yyyy-mm-dd HH:m:i'});
+});
+</script>
 @endsection

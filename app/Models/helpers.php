@@ -7,7 +7,7 @@ use libphonenumber\PhoneNumberFormat;
 use Models\Pricing\Currency;
 use Models\Setting\SettingsManager;
 
-if (! function_exists('set_active')) {
+if (!function_exists('set_active')) {
 
     /**
      * Returns the active state if the current url is the same as the passed route name.
@@ -15,13 +15,11 @@ if (! function_exists('set_active')) {
      * @param string $active
      * @return string
      */
-    function set_active($routePattern, $active = 'active')
-    {
+    function set_active($routePattern, $active = 'active') {
         return is_route($routePattern) ? $active : '';
     }
 
-    function set_active_href($routePattern, $active = '#', $route = null)
-    {
+    function set_active_href($routePattern, $active = '#', $route = null) {
         $route = $route ?: $routePattern;
 
         return is_route($routePattern) ? $active : route($route);
@@ -31,13 +29,13 @@ if (! function_exists('set_active')) {
      * @param $routePattern
      * @return bool
      */
-    function is_route($routePattern)
-    {
+    function is_route($routePattern) {
         return str_is($routePattern, Route::currentRouteName());
     }
+
 }
 
-if (! function_exists('settings')) {
+if (!function_exists('settings')) {
 
 
     /**
@@ -46,8 +44,7 @@ if (! function_exists('settings')) {
      * @param null         $value
      * @return SettingsManager|mixed
      */
-    function settings($key = null, $value = null)
-    {
+    function settings($key = null, $value = null) {
         $settings = new SettingsManager();
 
         if (is_null($key)) {
@@ -64,35 +61,36 @@ if (! function_exists('settings')) {
 
         return $settings->set($key, $value);
     }
+
 }
 
-if (! function_exists('enabled')) {
+if (!function_exists('enabled')) {
 
     /**
      * Checks if a certain SMSwords feature is enabled.
      * @param        $feature
      * @return boolean
      */
-    function enabled($feature)
-    {
-        return (bool)settings($feature . '_enabled');
+    function enabled($feature) {
+        return (bool) settings($feature . '_enabled');
     }
+
 }
 
-if (! function_exists('disabled')) {
+if (!function_exists('disabled')) {
 
     /**
      * Checks if a certain SMSwords feature is disabled.
      * @param        $feature
      * @return boolean
      */
-    function disabled($feature)
-    {
-        return ! enabled($feature);
+    function disabled($feature) {
+        return !enabled($feature);
     }
+
 }
 
-if (! function_exists('set_enabled')) {
+if (!function_exists('set_enabled')) {
 
     /**
      * Sets disabled state if the feature is inactive.
@@ -100,13 +98,13 @@ if (! function_exists('set_enabled')) {
      * @param string $disabled
      * @return string
      */
-    function set_enabled($feature, $disabled = 'disabled')
-    {
+    function set_enabled($feature, $disabled = 'disabled') {
         return enabled($feature) ? '' : $disabled;
     }
+
 }
 
-if (! function_exists('set_enabled_href')) {
+if (!function_exists('set_enabled_href')) {
 
     /**
      * Sets the href of a link if the corresponding feature is enabled
@@ -114,21 +112,20 @@ if (! function_exists('set_enabled_href')) {
      * @param $routeName
      * @return string
      */
-    function set_enabled_href($feature, $routeName)
-    {
+    function set_enabled_href($feature, $routeName) {
         return enabled($feature) ? route($routeName) : '#';
     }
+
 }
 
-if (! function_exists('localized_url')) {
+if (!function_exists('localized_url')) {
 
     /**
      * Get the localized URL of a the current page. It is a wrapper around LaravelLocalization::getLocalizedURL.
      * @param $locale
      * @return string
      */
-    function localized_url($locale)
-    {
+    function localized_url($locale) {
         /**
          * Remove PJAX parameter.
          */
@@ -138,36 +135,38 @@ if (! function_exists('localized_url')) {
 
         return LaravelLocalization::getLocalizedURL($locale, $url, $query);
     }
+
 }
 
-if (! function_exists('_e')) {
+if (!function_exists('_e')) {
+
     /**
      * Escapes text for printing, but allowing new lines.
      *
      * @param string $text
      * @return string
      */
-    function _e($text)
-    {
+    function _e($text) {
         return nl2br(e(preg_replace('/<br\s?\/?>/', "\n", $text)));
     }
+
 }
 
-if (! function_exists('s')) {
+if (!function_exists('s')) {
+
     /**
      *  isset wrapper
      * @param            $var
      * @param null|mixed $default
      * @return mixed
      */
-    function s(&$var, $default = null)
-    {
+    function s(&$var, $default = null) {
         return isset($var) ? $var : $default;
     }
+
 }
 
-function formatted_price($price, $currency, $decimals = 2)
-{
+function formatted_price($price, $currency, $decimals = 2) {
     if (is_string($currency)) {
         $currency = Currency::findOrFail($currency);
     }
@@ -175,24 +174,25 @@ function formatted_price($price, $currency, $decimals = 2)
     return $currency->symbol . number_format($price, $decimals) . ' ' . $currency->code;
 }
 
-function country_name($code)
-{
+function country_name($code) {
     return Countries::getOne($code, LaravelLocalization::getCurrentLocale());
 }
 
-
-function xml_to_array($xml)
-{
+function xml_to_array($xml) {
     return json_decode(json_encode($xml), true);
 }
 
-
-function text_excerpt($text, $len = 100)
-{
+function text_excerpt($text, $len = 100) {
     if ($len >= mb_strlen($text)) {
         return $text;
     }
 
     //return mb_strimwidth($text, 0, mb_strpos($text, ' ', $len));
     return mb_strimwidth($text, 0, $len);
+}
+
+function random_number_array() {
+    $random_number_array = range(01, 36);
+    shuffle($random_number_array);
+    return array_slice($random_number_array, 0, 5);
 }

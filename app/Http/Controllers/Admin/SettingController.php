@@ -12,6 +12,7 @@ use Models\Setting\Setting;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use Models\Gaming\LotteryTicket;
 
 class SettingController extends Controller {
 
@@ -343,48 +344,37 @@ class SettingController extends Controller {
         return redirect()->back();
     }
 
-//    public function addLottery(Request $request) {
-//        if ($request->isMethod('post')) {
-//            $badge = new Badge();
-//            $badge->name = $request->name;
-//            $badge->description = $request->description;
-//            $badge->relevance = $request->relevance;
-//            $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
-//            $badge->slug = str_replace(' ', '-', $request->name);
-//            if ($badge->save()) {
-//                $file = $request->file('image_url')->storeAs('badges',$request->file('image_url')->getClientOriginalName() ,'uploads');
-//                $this->flashNotifier->success(trans('app.common.operation_success'));
-//                return redirect()->route('setting.badges');
-//            } else {
-//                $this->flashNotifier->error(trans('app.common.operation_error'));
-//                return redirect()->back();
-//            }
-//        }
-//        return view('admin.lottery.add');
-//    }
-//
-//    public function editLottery($id, Request $request) {
-//
-//        $badge = Badge::find($id);
-//        if ($request->isMethod('post')) {
-//            $badge->name = $request->name;
-//            $badge->description = $request->description;
-//            $badge->relevance = $request->relevance;
-//            $badge->slug = str_replace(' ', '-', $request->name);
-//            if($request->hasFile('image_url')){
-//                $badge->image_url = 'img/badges/' . $request->file('image_url')->getClientOriginalName();
-//                $file = $request->file('image_url')->storeAs('badges',$request->file('image_url')->getClientOriginalName() ,'uploads');
-//            }
-//            if ($badge->update()) {
-//                $this->flashNotifier->success(trans('app.common.operation_success'));
-//                return redirect()->route('setting.badges');
-//            } else {
-//                $this->flashNotifier->error(trans('app.common.operation_error'));
-//                return redirect()->back();
-//            }
-//        }
-//        return view('admin.badges.add', compact('badge', 'language', 'currency'));
-//    }
+    public function addLottery(Request $request) {
+        return view('admin.lottery.add');
+    }
+
+    public function createLottery(Request $request) {
+
+        $lottery = new Lottery();
+        $lottery->prize = 0;
+        $lottery->date_open = $request->get('date_open');
+        $lottery->date_close = $request->get('date_close');
+        $lottery->date_begin = $request->get('date_begin');
+        $lottery->status = 3;
+        $lottery->type = $request->get('type');
+        $lottery->ticket_price = $request->get('ticket_price');
+        if ($lottery->save()) {
+            $lotteryticket = new LotteryTicket();
+            $lotteryticket->lottery_id = $lottery->id;
+            $lotteryticket->numbers = random_number_array();
+            if ($lotteryticket->save()) {
+                $this->flashNotifier->success(trans('app.common.operation_success'));
+                return redirect()->route('setting.lottery');
+            } else {
+                $this->flashNotifier->error(trans('app.common.operation_error'));
+                return redirect()->back();
+            }
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
+    }
+
     //Jackpt Configuration Start
     public function jackpot() {
         return view('admin.jackpot.index');

@@ -121,6 +121,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('setting/country/update/{code}', 'Admin\SettingController@updateCountry')->name('country.update');
     Route::post('setting/general/showCountrydata', 'Admin\SettingController@showCountrydata')->name('country.showdata');
 
+
     // Lottery Route
     Route::get('setting/lottery', 'Admin\SettingController@lottery')->name('setting.lottery');
     Route::post('setting/lottery/showLotterydata', 'Admin\SettingController@showLotterydata')->name('lottery.showdata');
@@ -129,6 +130,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('setting/lottery/create', 'Admin\SettingController@createLottery')->name('lottery.create');
     Route::get('setting/lottery/edit/{id}', 'Admin\SettingController@editLottery')->name('lottery.edit');
     Route::post('setting/lottery/update/{id}', 'Admin\SettingController@updateLottery')->name('lottery.update');
+
 
     // Jackpot Configuration Route
     Route::get('setting/jackpot', 'Admin\SettingController@jackpot')->name('setting.jackpot');
