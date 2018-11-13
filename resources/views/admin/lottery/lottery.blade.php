@@ -59,7 +59,7 @@
                                     <th>Type</th>
                                     <th>Ticket Price</th>
                                     <th>Country Code</th>
-                                    <!--<th>Action</th>-->
+                                    <th>Action</th>
                                 </tr>   
                             </thead>
                             <tbody>
@@ -105,17 +105,18 @@
                 {data: 'type', name: 'type'},
                 {data: 'ticket_price', name: 'ticket_price'},
                 {data: 'country_code', name: 'country_code'},
-                        //                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             aoColumnDefs: [
                 {
-                    //                    "mRender": function (a, b, data, d) {
-                    //                        $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">';
-                    //                        $returnValue += '<li><a href="lottery/edit/' + data.id + '" class="btn btn-basic btn-xs" title="Edit Lottery"><i class="fa fa-edit"></i></a></li>';
-                    //                        $returnValue += '</ul>'
-                    //                        return $returnValue;
-                    //                    },
-                    //                    "aTargets": [6]
+                    "mRender": function (a, b, data, d) {
+                        $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">';
+                        $returnValue += '<li><a href="lottery/edit/' + data.id + '" class="btn btn-basic btn-xs" title="Edit Lottery"><i class="fa fa-edit"></i></a></li>';
+                        $returnValue += '<li><form method="post" action="lottery/delete/' + data.id + '" class="delete"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '" ><button class="btn btn-danger btn-xs" title="Delete Lottery"><i class="fa fa-trash"></i></button></form></li>';
+                        $returnValue += '</ul>';
+                        return $returnValue;
+                    },
+                    "aTargets": [6]
                 },
             ]
         });

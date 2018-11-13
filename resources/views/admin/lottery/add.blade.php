@@ -24,26 +24,12 @@
                             </h1>
                             <hr>
                             @if(isset($lottery))
-                            {{ Form::model($lottery, array('route' => array('lottery.edit',$lottery->id), 'method' => 'post','class'=>'form-horizontal')) }}
+                            {{ Form::model($lottery, array('route' => array('lottery.update',$lottery->id), 'method' => 'post','class'=>'form-horizontal')) }}
                             @else
                             {{ Form::open(['route' => 'lottery.create','method' => 'post','class'=>'form-horizontal']) }}
                             @endif
 
                             {{ csrf_field() }}
-                            <!--                            <div class="form-group{{ $errors->has('prize') ? ' has-error' : '' }}">
-                                                            <label for="name" class="col-md-4 control-label">Prize</label>
-                            
-                                                            <div class="col-md-6">
-                                                                {{ Form::text('prize', Input::old('prize'),['id'=>'prize','class'=>'form-control','required'=>'required']) }}
-                            
-                                                                @if ($errors->has('prize'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('prize') }}</strong>
-                                                                </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>-->
-
                             <div class="form-group{{ $errors->has('date_open') ? ' has-error' : '' }}">
                                 <label for="date_open" class="col-md-4 control-label">Date Open</label>
 
@@ -80,18 +66,6 @@
                                 </div>
                             </div>
 
-                            <!--                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                                            <label for="status" class="col-md-4 control-label">status</label>
-                            
-                                                            <div class="col-md-6">
-                                                                {{ Form::text('status', Input::old('status'),['id'=>'status','class'=>'form-control','required'=>'required']) }}
-                                                                @if ($errors->has('status'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('status') }}</strong>
-                                                                </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>-->
                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                                 <label for="type" class="col-md-4 control-label">Type</label>
 
@@ -116,6 +90,15 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(!isset($lottery))
+                            <div class="form-group">
+                                <label for="ticket_amount" class="col-md-4 control-label">Amount OfTicket</label>
+
+                                <div class="col-md-6">
+                                    {{ Form::number('ticket_amount','',['id'=>'ticket_amount','class'=>'form-control','requiticket_amountred'=>'required']) }}
+                                </div>
+                            </div>
+                            @endif
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
