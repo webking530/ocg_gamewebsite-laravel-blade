@@ -192,11 +192,30 @@ function text_excerpt($text, $len = 100) {
 }
 
 function random_number_array() {
-    $random_number_array = range(01, 36);
-    shuffle($random_number_array);
-    return array_slice($random_number_array, 0, 5);
+    $finalArray = [];
+    for ($len = 0; $len < $ticketAmount; $len++) {
+        $arr = array();
+        $i = 0;
+        while ($i < 6) {
+            $num = rand(1, 36);
+            $c = 0;
+            for ($j = 0; $j < 4; $j++) {
+                if (isset($arr[$j]) && $arr[$j] == $num) {
+                    $c++;
+                    break;
+                }
+            }
+            if ($c == 0) {
+                if (!in_array($num, $arr)) {
+                    $arr[$i] = $num;
+                    $i++;
+                }
+            }
+        }
+        $finalArray[] = $arr;
+    }
+    return $finalArray;
 }
-
 
 function is_production() {
     return env('APP_ENV') == 'production';

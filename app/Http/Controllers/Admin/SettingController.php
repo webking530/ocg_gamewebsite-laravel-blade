@@ -14,6 +14,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Models\Gaming\LotteryTicket;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller {
 
@@ -320,7 +321,7 @@ class SettingController extends Controller {
 
     //****************  Lottery Settings *************************
     public function lottery() {
-        
+
         return view('admin.lottery.lottery');
     }
 
@@ -357,25 +358,30 @@ class SettingController extends Controller {
         $lottery->date_open = $request->get('date_open');
         $lottery->date_close = $request->get('date_close');
         $lottery->date_begin = $request->get('date_begin');
-        $lottery->status = 2;
+        $lottery->status = Lottery::STATUS_PENDING;
         $lottery->type = $request->get('type');
         $lottery->ticket_price = $request->get('ticket_price');
         if ($lottery->save()) {
-            $lotteryticket = new LotteryTicket();
-            $data = array();
-            $now = Carbon::now();
-            for ($i = 0; $i < $request->get('ticket_amount'); $i++) {
-                $data[] = array(
-                    'lottery_id' => $lottery->id,
-                    'numbers' => json_encode(random_number_array()),
-                    'created_at' => $now,
-                    'updated_at' => $now
-                );
-            }
-            if ($lotteryticket->insert($data)) {
+            DB::beginTransaction();
+            try {
+                $lotteryticket = new LotteryTicket();
+                $data = array();
+                $now = Carbon::now();
+                $randomNumbers = random_number_array($request->get('ticket_amount'));
+                for ($i = 0; $i < $request->get('ticket_amount'); $i++) {
+                    $data[] = array(
+                        'lottery_id' => $lottery->id,
+                        'numbers' => json_encode($randomNumbers[$i]),
+                        'created_at' => $now,
+                        'updated_at' => $now
+                    );
+                }
+                $lotteryticket->insert($data);
+                DB::commit();
                 $this->flashNotifier->success(trans('app.common.operation_success'));
                 return redirect()->route('setting.lottery');
-            } else {
+            } catch (\Exception $e) {
+                DB::rollback();
                 $this->flashNotifier->error(trans('app.common.operation_error'));
                 return redirect()->back();
             }
@@ -409,7 +415,7 @@ class SettingController extends Controller {
     }
 
     public function destroyLottery($id) {
-        $lotteryticket = LotteryTicket::where('lottery_id',$id)->delete();
+        $lotteryticket = LotteryTicket::where('lottery_id', $id)->delete();
         $lottery = Lottery::find($id);
         if ($lottery->delete()) {
             $this->flashNotifier->success(trans('app.common.operation_success'));
@@ -419,6 +425,7 @@ class SettingController extends Controller {
             return redirect()->back();
         }
     }
+
     //Jackpt Configuration Start
     public function jackpot() {
         return view('admin.jackpot.index');
