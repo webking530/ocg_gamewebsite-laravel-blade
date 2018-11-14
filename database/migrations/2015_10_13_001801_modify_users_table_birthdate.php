@@ -17,8 +17,6 @@ class ModifyUsersTableBirthdate extends Migration
             $table->string('verification_pin')->nullable()->change();
             $table->string('avatar_url')->nullable()->change();
         });
-
-        DB::statement("ALTER TABLE `users` CHANGE `birthdate` `birthdate` TIMESTAMP NULL;");
     }
 
     /**

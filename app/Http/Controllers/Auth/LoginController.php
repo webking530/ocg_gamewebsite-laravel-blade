@@ -121,10 +121,23 @@ class LoginController extends Controller
     public function activationForm($nickname) {
         $user = User::where('nickname', $nickname)->whereNotNull('verification_pin')->first();
 
-        if ($user == null) {
+        if ($user == null || $user->verification_pin == null) {
             $this->flashNotifier->error(trans('auth.login.username_invalid'));
 
             return redirect()->route('home.login');
+        } else {
+            if ($this->canSendPin($user)) {
+                try {
+                    $this->sendSMSPin($user);
+
+                    $user->verification_pin_sent_at = Carbon::now();
+                    $user->save();
+                } catch (\Exception $exception) {
+                    $this->flashNotifier->error(trans('auth.login.verification_pin_invalid_send_error'));
+
+                    return view('auth.activation', compact('user'));
+                }
+            }
         }
 
         return view('auth.activation', compact('user'));

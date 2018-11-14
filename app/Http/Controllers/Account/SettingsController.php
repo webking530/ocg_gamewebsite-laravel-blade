@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Account;
 use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Models\Auth\User;
 use Storage;
 
 class SettingsController extends Controller
@@ -16,6 +17,8 @@ class SettingsController extends Controller
     }
 
     public function store(Request $request) {
+        $this->validate($request, User::updateRules($this->user));
+
         $this->user->update($request->except(['_token']));
 
         $this->flashNotifier->success(trans('app.common.operation_success'));

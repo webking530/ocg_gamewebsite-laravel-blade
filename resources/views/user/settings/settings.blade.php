@@ -168,7 +168,7 @@
                                             <label class="control-label col-md-3">Birthdate</label>
 
                                             <div class="col-md-9">
-                                                {!! Form::date('birthdate', empty($user->birthdate) ? null : $user->birthdate->format('Y-m-d'), ['class' => 'form-control', 'required' => true]) !!}
+                                                {!! Form::text('birthdate', empty($user->birthdate) ? null : $user->birthdate->format('Y-m-d'), ['class' => 'form-control datepicker', 'required' => true]) !!}
                                             </div>
                                         </div>
 

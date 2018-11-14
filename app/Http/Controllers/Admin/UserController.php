@@ -72,7 +72,7 @@ class UserController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        $this->validate($request, User::rules(true, $id));
+        //$this->validate($request, User::rules(true, $id));
         $user = User::findOrFail($id);
         $user->update($request->all());
         $this->flashNotifier->success(trans('user.success_edited'));

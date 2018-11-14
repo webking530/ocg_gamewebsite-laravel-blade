@@ -26,6 +26,12 @@ abstract class BaseEmail
      */
     protected $variables;
 
+    /**
+     * BaseEmail constructor.
+     * @param array|string $recipients
+     * @param array $variables
+     *
+     */
     public function __construct($recipients, array $variables) {
         $this->isProduction = env('APP_ENV') == 'production';
 

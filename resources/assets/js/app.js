@@ -16,6 +16,8 @@ function showNotifier(type, content) {
 }
 
 $(document).ready(function() {
+    $('.datepicker').datetimepicker({format: 'yyyy-mm-dd', minView: 2, maxView: 4});
+
     if ($('.custom-scroll').length > 0) {
         const ps = new PerfectScrollbar('.custom-scroll');
     }

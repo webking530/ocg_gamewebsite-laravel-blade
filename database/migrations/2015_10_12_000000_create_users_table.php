@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('currency_code', 3);
             $table->foreign('currency_code')->references('code')->on('currencies');
 
-            $table->timestamp('birthdate');
+            $table->date('birthdate')->nullable();
             $table->string('verification_pin', 6);
             $table->integer('low_balance_threshold');
 

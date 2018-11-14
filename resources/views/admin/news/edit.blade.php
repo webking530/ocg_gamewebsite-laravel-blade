@@ -3,7 +3,7 @@
 <title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
 @endsection
 @section('css')
-<link href="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.css') }}"  rel="stylesheet">
+{{--<link href="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.css') }}"  rel="stylesheet">--}}
 @endsection
 @section('content')
 <div role="main" class="main">
@@ -122,7 +122,7 @@
 @section('js')
 
 <script src="{{ asset('compiled/plugins/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
+{{--<script src="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>--}}
 
 <script>
 $(function () {

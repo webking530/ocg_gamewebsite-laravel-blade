@@ -316,19 +316,40 @@ class User extends Authenticatable
     | Validations
     |------------------------------------------------------------------------------------
     */
-    public static function rules($update = false, $id = null)
-    {
-        $commun = [
-            'name' => 'required|min:2',
-            'email'    => "required|email|unique:users,email,$id",
+    public static function registerRules() {
+        return  [
+            'nickname' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'gender' => 'required',
+            'mobile_number' => 'required',
+            'country_code' => 'required',
+            'currency_code' => 'required',
+            'birthdate' => 'required',
+            'terms' => 'required'
+            //'g-recaptcha-response' => 'required|captcha'
+        ];
+    }
+
+    public static function updateRules(User $user) {
+        $rules = [
+            'email' => "required|email|unique:users,email,{$user->id}",
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'gender' => 'required',
+            'mobile_number' => 'required',
+            'country_code' => 'required',
+            'currency_code' => 'required',
+            'birthdate' => 'required',
         ];
 
-        if ($update) {
-            return $commun;
+        if ( ! $user->verified_identification) {
+            unset($rules['email']);
+            unset($rules['mobile_number']);
         }
 
-        return array_merge($commun, [
-            'email'    => 'required|email|max:255|unique:users',
-        ]);
+        return $rules;
     }
 }

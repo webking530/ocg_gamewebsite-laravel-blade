@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Auth\Events\Registered;
 use Models\Bonuses\Bonus;
 use Models\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Request;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -50,23 +51,61 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+        return Validator::make($data, User::registerRules());
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
+     * @param Request $request
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(Request $request, array $data)
     {
-        return null;
+        $user = new User();
+
+        $user->nickname = $data['nickname'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->name = $data['name'];
+        $user->lastname = $data['lastname'];
+        $user->gender = $data['gender'];
+        $user->mobile_number = $data['mobile_number'];
+        $user->country_code = $data['country_code'];
+        $user->currency_code = $data['currency_code'];
+        $user->credits = 0;
+        $user->birthdate = $data['birthdate'];
+        $user->verification_pin = mt_rand(100000, 999999);
+        $user->low_balance_threshold = 0;
+        $user->referrer_id = $this->getReferrer($request);
+        $user->role = User::ROLE_USER;
+        $user->locale = \App::getLocale();
+        $user->verified_identification = false;
+        $user->notifications = 1;
+        $user->lottery_sms_notification_minutes = 0;
+
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request, $request->all())));
+
+        //$this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect()->route('home.activation', ['nickname' => $user->nickname]);
     }
 
     public function showRegistrationForm()
@@ -86,6 +125,6 @@ class RegisterController extends Controller
             return null;
         }
 
-        return User::where('dcp_suspended', 0)->where('nickname', $referrerNickname)->first();
+        return User::where('dcp_suspended', 0)->where('nickname', $referrerNickname)->first()->id;
     }
 }

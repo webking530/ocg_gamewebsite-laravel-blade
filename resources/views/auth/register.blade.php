@@ -124,6 +124,20 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
+                                    <label for="lastname" class="col-md-4 control-label">Birthdate</label>
+
+                                    <div class="col-md-6">
+                                        <input id="birthdate" type="text" class="form-control datepicker" name="birthdate" value="{{ old('birthdate') }}" required autofocus>
+
+                                        @if ($errors->has('birthdate'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('birthdate') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
                                     <label for="mobile_number" class="col-md-4 control-label">Mobile Number</label>
 
@@ -173,7 +187,7 @@
                                     </div>
                                 </div>
 
-                                @captcha('{{ App::getLocale() }}')
+                                {{--@captcha('{{ App::getLocale() }}')--}}
 
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
