@@ -317,7 +317,7 @@ class User extends Authenticatable
     |------------------------------------------------------------------------------------
     */
     public static function registerRules() {
-        return  [
+        $rules = [
             'nickname' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -328,9 +328,15 @@ class User extends Authenticatable
             'country_code' => 'required',
             'currency_code' => 'required',
             'birthdate' => 'required',
-            'terms' => 'required'
-            //'g-recaptcha-response' => 'required|captcha'
+            'terms' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ];
+
+        if ( ! is_production()) {
+            unset($rules['g-recaptcha-response']);
+        }
+
+        return $rules;
     }
 
     public static function updateRules(User $user) {

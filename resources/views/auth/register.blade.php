@@ -187,7 +187,9 @@
                                     </div>
                                 </div>
 
-                                {{--@captcha('{{ App::getLocale() }}')--}}
+                                @if (is_production())
+                                    @captcha('{{ App::getLocale() }}')
+                                @endif
 
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">

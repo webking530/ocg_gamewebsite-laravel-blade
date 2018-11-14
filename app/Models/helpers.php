@@ -196,3 +196,8 @@ function random_number_array() {
     shuffle($random_number_array);
     return array_slice($random_number_array, 0, 5);
 }
+
+
+function is_production() {
+    return env('APP_ENV') == 'production';
+}

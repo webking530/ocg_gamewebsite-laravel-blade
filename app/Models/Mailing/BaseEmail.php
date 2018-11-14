@@ -33,7 +33,7 @@ abstract class BaseEmail
      *
      */
     public function __construct($recipients, array $variables) {
-        $this->isProduction = env('APP_ENV') == 'production';
+        $this->isProduction = is_production();
 
         $this->recipients = $recipients;
         $this->variables = $variables;
