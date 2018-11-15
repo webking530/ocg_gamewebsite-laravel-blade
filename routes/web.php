@@ -1,8 +1,6 @@
 <?php
 
 // Auth Routes
-// Auth::routes();
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('home.login');
 Route::post('login', 'Auth\LoginController@login')->name('home.login.post');
 

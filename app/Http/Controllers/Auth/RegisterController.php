@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/activation';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -101,8 +101,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request, $request->all())));
-
-        //$this->guard()->login($user);
 
         return $this->registered($request, $user)
             ?: redirect()->route('home.activation', ['nickname' => $user->nickname]);
