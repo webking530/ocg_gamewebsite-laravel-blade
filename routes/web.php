@@ -13,6 +13,9 @@ Route::post('activation/{user}', 'Auth\LoginController@activationPost')->name('h
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('home.register');
 Route::post('register', 'Auth\RegisterController@register')->name('home.register.post');
 
+Route::post('auth/google', 'Auth\RegisterController@authFromGoogle')->name('auth.social.google');
+Route::post('logout/google', 'Auth\RegisterController@logoutFromGoogle')->name('logout.social.google');
+
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('home.password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('home.password.request.send');
 
@@ -43,7 +46,7 @@ Route::get('terms', 'HomeController@terms')->name('home.terms');
 Route::get('policy', 'HomeController@policy')->name('home.policy');
 
 // User pages
-Route::group(['prefix' => 'account', 'middleware' => [/* 'user' */]], function () {
+Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
     Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');
 
     Route::get('games', 'Account\GameController@games')->name('user.games.index');

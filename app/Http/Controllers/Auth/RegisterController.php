@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Google_Client;
 use Illuminate\Auth\Events\Registered;
 use Models\Bonuses\Bonus;
 use Models\Auth\User;
@@ -84,6 +85,11 @@ class RegisterController extends Controller
         $user->verified_identification = false;
         $user->notifications = 1;
         $user->lottery_sms_notification_minutes = 0;
+        $user->social_complete_register = true;
+
+        if (isset($data['avatar_url'])) {
+            $user->avatar_url = $data['avatar_url'];
+        }
 
         $user->save();
 
@@ -124,5 +130,58 @@ class RegisterController extends Controller
         }
 
         return User::where('dcp_suspended', 0)->where('nickname', $referrerNickname)->first()->id;
+    }
+
+    public function authFromGoogle(Request $request) {
+        $client = new Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
+        $payload = $client->verifyIdToken($request->get('token'));
+        if ($payload) {
+            $userid = $payload['sub'];
+
+            $user = User::where('google_auth_id', $userid)->first();
+
+            if ($user != null) {
+                $this->guard()->login($user);
+
+                return [
+                    'status' => 'success',
+                    'route' => route('user.dashboard.index'),
+                ];
+            }
+        } else {
+            return [
+                'status' => 'error',
+                'msg' => 'Invalid session token'
+            ];
+        }
+
+        $data = [
+            'nickname' => explode('@', $request->get('email'))[0] . '_' . mt_rand(1, 10),
+            'email' => $request->get('email'),
+            'password' => null,
+            'name' => $request->get('name'),
+            'lastname' => $request->get('lastname'),
+            'gender' => User::GENDER_MALE,
+            'mobile_number' => 0,
+            'country_code' => 'DE',
+            'currency_code' => 'USD',
+            'birthdate' => null,
+            'avatar_url' => $request->get('avatar_url'),
+        ];
+
+        $user = $this->create($request, $data);
+
+        $user->google_auth_id = $userid;
+        $user->google_auth_token = $request->get('token');
+        $user->social_complete_register = false;
+        $user->verification_pin = null;
+        $user->save();
+
+        $this->guard()->login($user);
+
+        return [
+            'status' => 'success',
+            'route' => route('user.dashboard.index'),
+        ];
     }
 }

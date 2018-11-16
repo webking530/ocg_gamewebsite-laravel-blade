@@ -13,6 +13,8 @@
 
     <meta name="author" content="OCG - Online Casino Games">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
     <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
@@ -29,8 +31,11 @@
 
     @yield('styles')
 
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
+    <script src="https://apis.google.com/js/platform.js"></script>
 </head>
-<body>
+<body data-google-logout-route="{{ route('logout.social.google') }}">
 @if (Session::has('flash_message'))
     <div id="flash-notifier" class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -211,7 +216,7 @@
                                                                                 </a>
                                                                             </li>
                                                                             <li>
-                                                                                <a href="{{ route('home.logout') }}">
+                                                                                <a @if (Auth::check() && Auth::user()->isGoogleUser()) data-social-login="google" @endif href="{{ route('home.logout') }}">
                                                                                     <i class="fas fa-sign-out-alt"></i> Logout
                                                                                 </a>
                                                                             </li>

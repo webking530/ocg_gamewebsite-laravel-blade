@@ -45,6 +45,10 @@ class User extends Authenticatable
         'verification_pin_sent_at'
     ];
 
+    protected $casts = [
+        'social_auth_info' => 'array'
+    ];
+
     public static function getGenderList() {
         return [
             self::GENDER_MALE => trans('app.user.gender.male'),
@@ -161,6 +165,11 @@ class User extends Authenticatable
     public function getFormattedAvatarAttribute() {
         if (empty($this->avatar_url)) {
             return $this->isMale() ? 'img/avatar/avatar_male.png' : 'img/avatar/avatar_female.png';
+        }
+
+        // For external avatars (Social Login)
+        if (strpos($this->avatar_url, 'http') !== false) {
+            return $this->avatar_url;
         }
 
         return \Storage::url($this->avatar_url);
@@ -309,6 +318,14 @@ class User extends Authenticatable
         }
 
         return $winning->pivot->win_amount;
+    }
+
+    public function isSocialUser() {
+        return $this->isGoogleUser();
+    }
+
+    public function isGoogleUser() {
+        return $this->google_auth_id != null;
     }
 
     /*

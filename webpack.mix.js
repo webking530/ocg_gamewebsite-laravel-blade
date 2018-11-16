@@ -100,6 +100,10 @@ mix.scripts([
     'resources/assets/js/pages/manage_session.js',
 ], 'public/compiled/js/pages/manage_session.js');
 
+mix.scripts([
+    'resources/assets/js/social/auth.js',
+], 'public/compiled/js/social/auth.js');
+
 // Lumino Admin Template
 mix.styles([
     'resources/assets/vendor/lumino/css/datepicker3.css',

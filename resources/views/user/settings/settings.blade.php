@@ -20,6 +20,12 @@
                 </div>
             </div>
 
+            @if ( ! $user->social_complete_register)
+                <div class="row mt-md">
+                    <div class="alert alert-warning text-center">You must update your account information to have full access to the OCG platform.</div>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-5">
                     <div class="featured-boxes">
@@ -243,51 +249,54 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
-                    <div class="featured-boxes">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="featured-box featured-box-primary align-left mt-xlg">
-                                    <div class="box-content">
-                                        <h4 class="heading-primary text-uppercase mb-md">Change My Password</h4>
-                                        <hr>
 
-                                        {!! Form::open(['route' => 'user.settings.change_password', 'class' => 'form-horizontal']) !!}
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">My Current Password</label>
+                @if ( ! $user->isSocialUser())
+                    <div class="col-md-5">
+                        <div class="featured-boxes">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="featured-box featured-box-primary align-left mt-xlg">
+                                        <div class="box-content">
+                                            <h4 class="heading-primary text-uppercase mb-md">Change My Password</h4>
+                                            <hr>
 
-                                            <div class="col-md-9">
-                                                {!! Form::password('current_password', ['class' => 'form-control', 'required' => true]) !!}
+                                            {!! Form::open(['route' => 'user.settings.change_password', 'class' => 'form-horizontal']) !!}
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">My Current Password</label>
+
+                                                <div class="col-md-9">
+                                                    {!! Form::password('current_password', ['class' => 'form-control', 'required' => true]) !!}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Password</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Password</label>
 
-                                            <div class="col-md-9">
-                                                {!! Form::password('password', ['class' => 'form-control', 'required' => true]) !!}
+                                                <div class="col-md-9">
+                                                    {!! Form::password('password', ['class' => 'form-control', 'required' => true]) !!}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Confirm Password</label>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Confirm Password</label>
 
-                                            <div class="col-md-9">
-                                                {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => true]) !!}
+                                                <div class="col-md-9">
+                                                    {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => true]) !!}
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <div class="col-md-offset-3 col-md-6">
-                                                {!! Form::submit('Change Password', ['class' => 'btn btn-success']) !!}
+                                            <div class="form-group">
+                                                <div class="col-md-offset-3 col-md-6">
+                                                    {!! Form::submit('Change Password', ['class' => 'btn btn-success']) !!}
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {!! Form::close() !!}
+                                            {!! Form::close() !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -22,10 +22,10 @@
                             <hr>
 
                             @if ($enableSocial)
-                                <div class="text-center mb-md">
-                                    <button type="button" class="btn btn-danger"><i class="fab fa-google-plus"></i> Sign up with Google+</button>
-                                    <button type="button" class="btn btn-primary"><i class="fab fa-facebook"></i> Sign up with Facebook</button>
-                                </div>
+                                {{--<div class="text-center mb-md">--}}
+                                    {{--<button type="button" class="btn btn-danger"><i class="fab fa-google-plus"></i> Sign up with Google+</button>--}}
+                                    {{--<button type="button" class="btn btn-primary"><i class="fab fa-facebook"></i> Sign up with Facebook</button>--}}
+                                {{--</div>--}}
                             @endif
 
                             <form class="form-horizontal" method="POST" action="{{ route('home.register.post') }}">

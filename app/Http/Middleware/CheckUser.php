@@ -31,6 +31,16 @@ class CheckUser
             }
         }
 
+        if ( ! Auth::guard($guard)->user()->social_complete_register
+        && ! in_array($request->route()->getName(), [
+            'user.settings.index',
+            'user.settings.store',
+            'user.avatar.update',
+            'user.settings.change_password'
+        ])) {
+            return redirect()->route('user.settings.index');
+        }
+
         return $next($request);
     }
 }

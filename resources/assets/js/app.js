@@ -15,6 +15,18 @@ function showNotifier(type, content) {
     }, 3000);
 }
 
+function googleSignOut(redirectUrl) {
+    // var googleLogoutRoute = $('[data-google-logout-route]').data('google-logout-route');
+    gapi.load('auth2', function() {
+        gapi.auth2.init().then(function() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                window.location.href = redirectUrl;
+            });
+        });
+    });
+}
+
 $(document).ready(function() {
     $('.datepicker').datetimepicker({format: 'yyyy-mm-dd', minView: 2, maxView: 4});
 
@@ -78,5 +90,16 @@ $(document).ready(function() {
                 },
             }
         });
+    });
+
+    $('[data-social-login]').on('click', function(ev) {
+        ev.preventDefault();
+
+        var socialType = $(this).data('social-login');
+        var redirectUrl = $(this).attr('href');
+
+        if (socialType === 'google') {
+            googleSignOut(redirectUrl);
+        }
     });
 });

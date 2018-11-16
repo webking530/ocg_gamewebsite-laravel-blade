@@ -21,6 +21,11 @@ class SettingsController extends Controller
 
         $this->user->update($request->except(['_token']));
 
+        if ($this->user->social_complete_register == false) {
+            $this->user->social_complete_register = true;
+            $this->user->save();
+        }
+
         $this->flashNotifier->success(trans('app.common.operation_success'));
 
         return redirect()->route('user.settings.index');

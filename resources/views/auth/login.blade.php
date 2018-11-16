@@ -20,9 +20,12 @@
                             <hr>
 
                             @if ($enableSocial)
-                                <div class="text-center mb-md">
-                                    <button type="button" class="btn btn-danger"><i class="fab fa-google-plus"></i> Sign in with Google+</button>
-                                    <button type="button" class="btn btn-primary"><i class="fab fa-facebook"></i> Sign in with Facebook</button>
+                                <div class="row">
+                                    <div class="text-center mb-md col-md-offset-4 col-md-4">
+                                        <div class="g-signin2" data-onsuccess="googleSignIn" data-theme="dark" data-google-auth-route="{{ route('auth.social.google') }}"></div>
+                                        {{--<button type="button" class="btn btn-danger"><i class="fab fa-google-plus"></i> Sign in with Google+</button>--}}
+                                        {{--<button type="button" class="btn btn-primary"><i class="fab fa-facebook"></i> Sign in with Facebook</button>--}}
+                                    </div>
                                 </div>
                             @endif
 
@@ -86,4 +89,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="{!! mix('compiled/js/social/auth.js') !!}"></script>
 @endsection

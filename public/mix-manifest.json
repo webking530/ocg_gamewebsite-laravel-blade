@@ -13,6 +13,7 @@
     "/compiled/js/pages/user_dashboard.js": "/compiled/js/pages/user_dashboard.js",
     "/compiled/js/pages/buy_tickets.js": "/compiled/js/pages/buy_tickets.js",
     "/compiled/js/pages/manage_session.js": "/compiled/js/pages/manage_session.js",
+    "/compiled/js/social/auth.js": "/compiled/js/social/auth.js",
     "/compiled/lumino/lumino.css": "/compiled/lumino/lumino.css",
     "/compiled/lumino/lumino.js": "/compiled/lumino/lumino.js",
     "/compiled/js/pages/generalsettings.js": "/compiled/js/pages/generalsettings.js",
