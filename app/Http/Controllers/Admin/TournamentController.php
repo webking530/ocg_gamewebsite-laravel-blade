@@ -34,6 +34,15 @@ class TournamentController extends Controller {
             } else if ($tournament->status == Tournament::STATUS_PENDING) {
                 $data[$key]['recreate'] = 0;
             }
+            $data[$key]['users'] = $tournament->users()->count();
+            $data[$key]['tournamentends'] = '';
+            if (!$tournament->isCancelled()) {
+                if ($tournament->isExtended()) {
+                    $data[$key]['tournamentends'] = trans('frontend/tournaments.tournament_extended', ['date_to' => $tournament->date_to->format('l, F j, Y, g:i a'), 'date_extended' => $tournament->extended_at->format('l, F j, Y, g:i a')]);
+                } else {
+                    $data[$key]['tournamentends'] = $tournament->date_to->diffForHumans();
+                }
+            }
             $data[$key]['group'] = $tournament->formattedGroup;
             $data[$key]['status'] = $tournament->formatted_status;
         }

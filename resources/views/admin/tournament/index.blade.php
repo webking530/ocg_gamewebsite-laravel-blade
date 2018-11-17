@@ -31,6 +31,8 @@
                                     <th>Date To</th>
                                     <th>Status</th>
                                     <th>Level</th>
+                                    <th>Tournament Ends</th>
+                                    <th>Users Participating</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -80,6 +82,8 @@
                 {data: 'date_to', name: 'date_to'},
                 {data: 'status', name: 'status'},
                 {data: 'level', name: 'level'},
+                {data: 'tournamentends', name: 'tournamentends'},
+                {data: 'users', name: 'users'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             aoColumnDefs: [
@@ -92,10 +96,11 @@
                         } else if (data.recreate == 0) {
                             $returnValue += '<li><a href="tournament/cancel/' + data.id + '" class="btn btn-basic btn-xs" title="Cancel Tournaments"><i style="color:red" class="fa fa-times-circle"></i></a></li>';
                         }
+                        
                         $returnValue += '</ul>'
                         return $returnValue;
                     },
-                    "aTargets": [6]
+                    "aTargets": [8]
                 },
             ]
         });
