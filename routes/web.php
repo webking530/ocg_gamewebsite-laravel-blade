@@ -147,6 +147,14 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('bonus/showdata', 'Admin\BonusController@showdata');
     Route::post('bonus/delete/{id}', 'Admin\BonusController@destroy');
     Route::post('bonus/statusupdate/{id}', 'Admin\BonusController@statusUpdate');
+
+    //Tournament Management
+    Route::resource('tournament', 'Admin\TournamentController');
+    Route::post('tournament/showdata', 'Admin\TournamentController@showdata')->name('tournament.showdata');
+    Route::get('tournament/cancel/{id}', 'Admin\TournamentController@cancel')->name('tournament.cancel');
+    Route::get('tournament/recreate/{id}', 'Admin\TournamentController@recreate');
+    Route::get('tournament/edit/settings', 'Admin\TournamentController@editSettings')->name('tournament.editSettings');
+    Route::post('tournament/update/settings', 'Admin\TournamentController@updateSettings')->name('tournament.updateSettings');
 });
 
 
