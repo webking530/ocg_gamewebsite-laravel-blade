@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Models\Gaming\Tournament;
 use Illuminate\Support\Facades\Artisan;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class TournamentController extends Controller {
 
@@ -84,15 +85,71 @@ class TournamentController extends Controller {
 
     public function recreate($id) {
         $tournament = Tournament::find($id);
-        $games = Game::enabled()->where('group', $id)->get();
-        return view('admin.tournament.create', compact('tournament', 'games'));
+        return view('admin.tournament.create', compact('tournament'));
     }
 
     public function store(Request $request) {
         $tournamentServie = new \Models\Gaming\TournamentService();
-        $createTournamanet = $tournamentServie->createTournament($request->get('group'), $request->get('level'));
+        $games = Game::select('id')->whereIn('id', $request->get('game'))->get();
+        $createTournamanet = $tournamentServie->createTournament($request->get('group'), $request->get('level'), $games);
         $this->flashNotifier->success(trans('app.common.operation_success'));
         return redirect()->route('tournament.index');
+    }
+
+    public function edit($id) {
+        $tournament = Tournament::findOrFail($id);
+        return view('admin.tournament.edit', compact('tournament'));
+    }
+
+    public function update(Request $request, $id) {
+        $tournament = Tournament::findOrFail($id);
+        $tpaLevels = json_decode(settings('tournament_tpa_levels'));
+        $tournament->prizes = $tpaLevels[$request->get('level')]->prizes;
+        $tournament->level = $request->get('level');
+        if ($tournament->save()) {
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('tournament.index');
+        } else {
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
+    }
+
+    public function customTournamentCreate() {
+        $games = Game::select('id')->get();
+        $languages = \Models\Location\Language::get();
+        return view('admin.tournament.customCreate', compact('games', 'languages'));
+    }
+
+    public function customTournamentStore(Request $request) {
+        $languages = $request->get('languages');
+        $games = Game::select('id')->whereIn('id', $request->get('game'))->get();
+        DB::beginTransaction();
+        try {
+            $customGroup = new CustomGameGroup();
+            $now = Carbon::now();
+            $group = CustomGameGroup::max('group');
+            foreach ($languages as $key => $language) {
+                $data[] = array(
+                    'group' => $group + 1,
+                    'locale' => $key,
+                    'name' => $language,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                );
+            }
+            $customGroup->insert($data);
+
+            $tournamentServie = new \Models\Gaming\TournamentService();
+            $createTournamanet = $tournamentServie->createTournament($group + 1, $request->get('level'), $games);
+            DB::commit();
+            $this->flashNotifier->success(trans('app.common.operation_success'));
+            return redirect()->route('tournament.index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            $this->flashNotifier->error(trans('app.common.operation_error'));
+            return redirect()->back();
+        }
     }
 
 }

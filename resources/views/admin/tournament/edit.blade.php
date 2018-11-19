@@ -7,9 +7,9 @@
                 <div class="featured-boxes mt-none mb-none">
                     <div class="featured-box featured-box-primary mt-xl" style="text-align: left">
                         <div class="box-content">
-                            <h1 class="mb-lg text-blue text-center">Create Tournament for {{ $tournament->formattedGroup }}</h1>
+                            <h1 class="mb-lg text-blue text-center">Edit Tournament for {{ $tournament->formattedGroup }}</h1>
                             <hr>
-                            {{ Form::open(['route' => 'tournament.store','class'=>'form-horizontal']) }}
+                            {{ Form::model($tournament, array('route' => array('tournament.update',$tournament->id), 'method' => 'PUT','class'=>'form-horizontal')) }}
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Games</label>
@@ -17,7 +17,7 @@
                                 <div class="col-md-6">
                                     <select name="game[]" multiple="true" class="form-control">
                                         @foreach($tournament->games as $game)                    
-                                        <option value="{{ $game->id }}">{{ $game->getNameAttribute() }}</option>
+                                        <option  value="{{ $game->id }}">{{ $game->getNameAttribute() }}</option>
                                         @endforeach
                                     </select>
 
@@ -28,7 +28,7 @@
                                 <div class="col-md-6">
                                     <select name="level"  class="form-control">
                                         @for($i=0;$i<=5;$i++)                    
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option @if($tournament->level == $i) selected @endif value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Add
+                                        Update
                                     </button>
                                 </div>
                             </div>

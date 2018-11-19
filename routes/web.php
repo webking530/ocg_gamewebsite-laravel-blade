@@ -155,6 +155,9 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::get('tournament/recreate/{id}', 'Admin\TournamentController@recreate');
     Route::get('tournament/edit/settings', 'Admin\TournamentController@editSettings')->name('tournament.editSettings');
     Route::post('tournament/update/settings', 'Admin\TournamentController@updateSettings')->name('tournament.updateSettings');
+
+    Route::get('tournament/custom/create', 'Admin\TournamentController@customTournamentCreate')->name('tournament.customCreate');
+    Route::post('tournament/custom/store', 'Admin\TournamentController@customTournamentStore')->name('tournament.customStore');
 });
 
 
