@@ -98,7 +98,7 @@
                         if (data.recreate == 1) {
                             $returnValue += '<li><a href="tournament/recreate/' + data.id + '" class="btn btn-basic btn-xs" title="Create Tournaments"><i class="fa fa-plus-circle"></i></a></li>';
                         } else if (data.recreate == 0) {
-                            $returnValue += '<li><a href="tournament/cancel/' + data.id + '"  onclick="return confirm_click();" class="btn btn-basic btn-xs" title="Cancel Tournaments"><i style="color:red" class="fa fa-times-circle"></i></a></li>';
+                            $returnValue += '<li><a href="tournament/cancel/' + data.id + '" class="btn btn-basic btn-xs confirm-click" title="Cancel Tournaments"><i style="color:red" class="fa fa-times-circle"></i></a></li>';
                         }
                         $returnValue += '</ul>'
                         return $returnValue;
@@ -109,10 +109,6 @@
         });
     }
     );
-    function confirm_click()
-    {
-        return confirm("Are you sure ?");
-    }
 </script>
 
 @endsection
