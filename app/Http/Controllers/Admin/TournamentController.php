@@ -85,7 +85,13 @@ class TournamentController extends Controller {
 
     public function recreate($id) {
         $tournament = Tournament::find($id);
-        return view('admin.tournament.create', compact('tournament'));
+        if ($tournament->isCustom()) {
+            $games = Game::get();
+        } else {
+            $games = Game::where('group', $tournament->group)->get();
+        }
+        $tournamentGames = array_column($tournament->games->toArray(), 'id');
+        return view('admin.tournament.create', compact('tournament', 'games', 'tournamentGames'));
     }
 
     public function store(Request $request) {
@@ -98,7 +104,14 @@ class TournamentController extends Controller {
 
     public function edit($id) {
         $tournament = Tournament::findOrFail($id);
-        return view('admin.tournament.edit', compact('tournament'));
+        if ($tournament->isCustom()) {
+            $games = Game::get();
+        } else {
+            $games = Game::where('group', $tournament->group)->get();
+        }
+        $tournamentGames = array_column($tournament->games->toArray(), 'id');
+
+        return view('admin.tournament.edit', compact('tournament', 'games', 'tournamentGames'));
     }
 
     public function update(Request $request, $id) {
@@ -107,6 +120,17 @@ class TournamentController extends Controller {
         $tournament->prizes = $tpaLevels[$request->get('level')]->prizes;
         $tournament->level = $request->get('level');
         if ($tournament->save()) {
+            $games = $request->get('game');
+            $now = Carbon::now();
+            DB::table('tournament_game')->where('tournament_id', $tournament->id)->delete();
+            foreach ($games as $game) {
+                DB::table('tournament_game')->insert([
+                    'tournament_id' => $tournament->id,
+                    'game_id' => $game,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ]);
+            }
             $this->flashNotifier->success(trans('app.common.operation_success'));
             return redirect()->route('tournament.index');
         } else {

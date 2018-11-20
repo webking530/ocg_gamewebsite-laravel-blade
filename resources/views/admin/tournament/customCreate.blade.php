@@ -34,7 +34,7 @@
                                 <label for="level" class="col-md-4 control-label">Level</label>
                                 <div class="col-md-6">
                                     <select name="level"  class="form-control">
-                                        @for($i=1;$i<=6;$i++)                    
+                                        @for($i=0;$i<=5;$i++)                    
                                         <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>

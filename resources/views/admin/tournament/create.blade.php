@@ -13,11 +13,10 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Games</label>
-
                                 <div class="col-md-6">
                                     <select name="game[]" multiple="true" class="form-control">
-                                        @foreach($tournament->games as $game)                    
-                                        <option value="{{ $game->id }}">{{ $game->getNameAttribute() }}</option>
+                                        @foreach($games as $game)                    
+                                        <option  @if(in_array($game->id,$tournamentGames)) selected @endif value="{{ $game->id }}">{{ $game->getNameAttribute() }}</option>
                                         @endforeach
                                     </select>
 
