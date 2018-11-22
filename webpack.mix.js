@@ -141,6 +141,12 @@ mix.scripts([
 mix.styles([
     'resources/assets/css/pages/game_detail.css',
 ], 'public/compiled/css/pages/game_detail.css');
+mix.styles([
+    'resources/assets/css/pages/admin_dashboard.css',
+], 'public/compiled/css/pages/admin_dashboard.css');
+mix.scripts([
+    'resources/assets/js/pages/admin_dashboard.js',
+], 'public/compiled/js/pages/admin_dashboard.js');
 
 if (mix.inProduction()) {
     mix.version();

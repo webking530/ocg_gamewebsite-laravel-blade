@@ -191,7 +191,7 @@ function text_excerpt($text, $len = 100) {
     return mb_strimwidth($text, 0, $len);
 }
 
-function random_number_array() {
+function random_number_array($ticketAmount) {
     $finalArray = [];
     for ($len = 0; $len < $ticketAmount; $len++) {
         $arr = array();

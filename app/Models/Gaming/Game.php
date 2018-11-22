@@ -145,4 +145,21 @@ class Game extends Model {
         return $winning->pivot->win_amount;
     }
 
+    public function getDepositedAmount(Game $game) {
+        $Amount = $this->sessions()->where('game_id', $game->id)->sum('game_user_session.credits');
+        if ($Amount == null) {
+            return 0;
+        }
+        return $Amount;
+    }
+
+    public function getWinningUser(Game $game) {
+        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('pivot_win_amount', 'DESC')->first();
+
+        if ($winning == null) {
+            return '';
+        }
+        return $winning->nickname;
+    }
+
 }
