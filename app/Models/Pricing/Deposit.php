@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Models\Auth\BankAccount;
 use Models\Auth\BelongsToAUser;
 
-class Deposit extends Model
-{
-    use BelongsToAUser, HasCurrency;
+class Deposit extends Model {
+
+    use BelongsToAUser,
+        HasCurrency;
 
     protected $guarded = ['id'];
-
     protected $dates = [
         'approved_at'
     ];
@@ -20,7 +20,6 @@ class Deposit extends Model
     const STATUS_APPROVED = 1;
     const STATUS_REJECTED = 2;
     const STATUS_REFUNDED = 3;
-
     const DCP_DISCOUNT_PERCENT = 10;
 
     public function bankAccount() {
@@ -45,9 +44,9 @@ class Deposit extends Model
 
     public function getFirstApprovedAttribute() {
         $firstApproved = self::where('status', Deposit::STATUS_APPROVED)
-                        ->whereNotNull('approved_at')
-                        ->orderBy('approved_at', 'ASC')
-                        ->first();
+                ->whereNotNull('approved_at')
+                ->orderBy('approved_at', 'ASC')
+                ->first();
 
         return $this->id === $firstApproved->id;
     }
@@ -65,7 +64,7 @@ class Deposit extends Model
             return false;
         }
 
-        if ( ! $this->first_approved) {
+        if (!$this->first_approved) {
             return false;
         }
 
@@ -91,4 +90,13 @@ class Deposit extends Model
     public function getDiscountedUsdPriceAttribute() {
         return $this->amount_USD - $this->discount_amount_USD;
     }
+
+    public function isPending() {
+        return (int) $this->status === self::STATUS_PENDING;
+    }
+
+    public function getFormattedStatusAttribute() {
+        return trans("frontend/payment.status.{$this->status}");
+    }
+
 }

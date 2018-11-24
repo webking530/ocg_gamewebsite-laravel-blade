@@ -147,7 +147,9 @@ mix.styles([
 mix.scripts([
     'resources/assets/js/pages/admin_dashboard.js',
 ], 'public/compiled/js/pages/admin_dashboard.js');
-
+mix.scripts([
+    'resources/assets/js/pages/payment.js',
+], 'public/compiled/js/pages/payment.js');
 if (mix.inProduction()) {
     mix.version();
 }

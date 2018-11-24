@@ -155,9 +155,17 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::get('tournament/recreate/{id}', 'Admin\TournamentController@recreate');
     Route::get('tournament/edit/settings', 'Admin\TournamentController@editSettings')->name('tournament.editSettings');
     Route::post('tournament/update/settings', 'Admin\TournamentController@updateSettings')->name('tournament.updateSettings');
-
     Route::get('tournament/custom/create', 'Admin\TournamentController@customTournamentCreate')->name('tournament.customCreate');
     Route::post('tournament/custom/store', 'Admin\TournamentController@customTournamentStore')->name('tournament.customStore');
+
+    //Payments Management
+    Route::get('payment', 'Admin\PaymentController@index')->name('payment.index');
+    Route::post('payment/showDepositdata', 'Admin\PaymentController@showDepositdata');
+    Route::get('deposit/approve/{id}', 'Admin\PaymentController@depositApproved');
+    Route::post('deposit/reject', 'Admin\PaymentController@depositRejected');
+    Route::post('payment/showWithdrawdata', 'Admin\PaymentController@showWithdrawdata');
+    Route::get('withdraw/approve/{id}', 'Admin\PaymentController@withdrawApproved');
+    Route::get('withdraw/reject/{id}', 'Admin\PaymentController@withdrawRejected');
 });
 
 

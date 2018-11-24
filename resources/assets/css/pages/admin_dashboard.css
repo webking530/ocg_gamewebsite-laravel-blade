@@ -925,7 +925,7 @@
 	display: none;
 	width: 100%;
 	margin-top: .25rem;
-	font-size: 80%;
+	/*font-size: 80%;*/
 	color: #f44336
 }
 
@@ -937,7 +937,7 @@
 	max-width: 100%;
 	padding: .5rem;
 	margin-top: .1rem;
-	font-size: .875rem;
+	/*font-size: .875rem;*/
 	line-height: 1;
 	color: #fff;
 	background-color: rgba(244, 67, 54, .8);
@@ -1070,7 +1070,7 @@
 	user-select: none;
 	border: 1px solid transparent;
 	padding: .46875rem 1rem;
-	font-size: 1rem;
+/*	font-size: 1rem;*/
 	line-height: 1.5;
 	border-radius: .25rem;
 	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
@@ -1700,16 +1700,16 @@ fieldset:disabled a.btn {
 .btn-group-lg>.btn,
 .btn-lg {
 	padding: 1.125rem 2.25rem;
-	font-size: 1.25rem;
-	line-height: 1.5;
+/*	font-size: 1.25rem;*/
+	/*line-height: 1.5;*/
 	border-radius: .3rem
 }
 
 .btn-group-sm>.btn,
 .btn-sm {
 	padding: .40625rem 1.25rem;
-	font-size: .875rem;
-	line-height: 1.5;
+	/*font-size: .875rem;*/
+	/*line-height: 1.5;*/
 	border-radius: .1875rem
 }
 
@@ -1989,9 +1989,9 @@ tbody.collapse.show {
 	align-items: center;
 	padding: .4375rem 0;
 	margin-bottom: 0;
-	font-size: 1rem;
+/*	font-size: 1rem;
 	font-weight: 400;
-	line-height: 1.5;
+	line-height: 1.5;*/
 	color: #495057;
 	text-align: center;
 	white-space: nowrap;
@@ -2184,7 +2184,7 @@ tbody.collapse.show {
 
 .custom-select-sm {
 	height: calc(2.125rem + 2px);
-	font-size: 75%
+/*	font-size: 75%*/
 }
 
 .custom-select-lg,
@@ -2195,7 +2195,7 @@ tbody.collapse.show {
 
 .custom-select-lg {
 	height: calc(4.125rem + 2px);
-	font-size: 125%
+	/*font-size: 125%*/
 }
 
 .custom-file {
@@ -2634,7 +2634,7 @@ tbody.collapse.show {
 
 .pagination-lg .page-link {
 	padding: .75rem 0;
-	font-size: 1.25rem;
+/*	font-size: 1.25rem;*/
 	line-height: 1.5
 }
 
@@ -2650,7 +2650,7 @@ tbody.collapse.show {
 
 .pagination-sm .page-link {
 	padding: .25rem 0;
-	font-size: .875rem;
+/*	font-size: .875rem;*/
 	line-height: 1.5
 }
 
@@ -2695,7 +2695,7 @@ tbody.collapse.show {
 }
 
 .alert-link {
-	font-weight: 500
+/*	font-weight: 500*/
 }
 
 .alert-dismissible {
@@ -2835,7 +2835,7 @@ tbody.collapse.show {
 	display: flex;
 	height: 1rem;
 	overflow: hidden;
-	font-size: .75rem;
+/*	font-size: .75rem;*/
 	background-color: #e9ecef;
 	border-radius: .25rem;
 	box-shadow: inset 0 .1rem .1rem rgba(0, 0, 0, .1)
@@ -3085,10 +3085,10 @@ tbody.collapse.show {
 
 .close {
 	float: right;
-	font-size: 1.5rem;
+/*	font-size: 1.5rem;
 	font-weight: 500;
-	line-height: 1;
-	color: #000;
+	line-height: 1;*/
+	/*color: #000;*/
 	text-shadow: 0 1px 0 #fff;
 	opacity: .5
 }
@@ -3114,9 +3114,9 @@ button.close {
 .badge {
 	display: inline-block;
 	padding: .25em .4em;
-	font-size: 75%;
+/*	font-size: 75%;
 	font-weight: 500;
-	line-height: 1;
+	line-height: 1;*/
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: baseline;
@@ -3387,9 +3387,9 @@ button.close {
 	display: block;
 	margin: 0;
 	
-	font-style: normal;
+/*	font-style: normal;
 	font-weight: 400;
-	line-height: 1.5;
+	line-height: 1.5;*/
 	text-align: left;
 	text-align: start;
 	text-decoration: none;
@@ -3508,9 +3508,9 @@ button.close {
 	z-index: 1060;
 	max-width: 276px;
 	
-	font-style: normal;
+/*	font-style: normal;
 	font-weight: 400;
-	line-height: 1.5;
+	line-height: 1.5;*/
 	text-align: left;
 	text-align: start;
 	text-decoration: none;
@@ -3521,7 +3521,7 @@ button.close {
 	word-spacing: normal;
 	white-space: normal;
 	line-break: auto;
-	font-size: .875rem;
+	/*font-size: .875rem;*/
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: padding-box;
@@ -3688,8 +3688,8 @@ button.close {
 .popover-header {
 	padding: .5rem .75rem;
 	margin-bottom: 0;
-	font-size: 1rem;
-	color: inherit;
+/*	font-size: 1rem;
+	color: inherit;*/
 	background-color: #f7f7f7;
 	border-bottom: 1px solid #ebebeb;
 	border-top-left-radius: calc(.3rem - 1px);
@@ -6485,9 +6485,9 @@ a.text-dark:hover {
 	position: relative;
 	padding: 12px 30px;
 	margin: .3125rem 1px;
-	font-size: .75rem;
+/*	font-size: .75rem;
 	font-weight: 400;
-	line-height: 1.428571;
+	line-height: 1.428571;*/
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 0;
@@ -11997,8 +11997,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .table thead th {
-	font-size: .95rem;
-	font-weight: 500;
+/*	font-size: .95rem;
+	font-weight: 500;*/
 	border-top-width: 0;
 	border-bottom-width: 1px
 }
@@ -12022,19 +12022,11 @@ thead.thead-inverse th {
 	background-color: #f5f5f5
 }
 
-.dataTable>tbody>tr>td,
-.dataTable>tbody>tr>th,
-.dataTable>tfoot>tr>td,
-.dataTable>tfoot>tr>th,
-.dataTable>thead>tr>td,
-.dataTable>thead>tr>th {
-	padding: 5px!important
-}
 
 body {
 	background-color: #eee;
 	color: #3c4858;
-	font-weight: 300
+	/*font-weight: 300*/
 }
 
 legend {
@@ -12071,10 +12063,10 @@ a .material-icons {
 
 .form-check,
 label {
-	font-size: 14px;
+/*	font-size: 14px;
 	line-height: 1.42857;
 	color: #aaa;
-	font-weight: 400
+	font-weight: 400*/
 }
 
 .animation-transition-general,
@@ -12149,8 +12141,8 @@ label {
 	float: right;
 	margin-top: 5px;
 	padding: 3px 7px;
-	font-size: 8px;
-	line-height: 9px;
+/*	font-size: 8px;
+	line-height: 9px;*/
 	background-color: #9c27b0
 }
 
@@ -12396,7 +12388,7 @@ label {
 	top: -10px;
 	margin-right: 3px;
 	margin-left: 3px;
-	font-size: 18px
+	/*font-size: 18px*/
 }
 
 .card.bmd-card-raised {
@@ -12444,7 +12436,7 @@ label {
 	bottom: 15px;
 	left: 15px;
 	color: #fff;
-	font-size: 1.125rem;
+	/*font-size: 1.125rem;*/
 	text-shadow: 0 2px 5px rgba(33, 33, 33, .5)
 }
 
@@ -12617,7 +12609,7 @@ label {
 }
 
 .card .card-category-social .fa {
-	font-size: 24px;
+	/*font-size: 24px;*/
 	position: relative;
 	margin-top: -4px;
 	top: 2px;
@@ -12712,7 +12704,7 @@ label {
 
 .card .card-header.card-header-icon h4,
 .card .card-header.card-header-text h4 {
-	font-weight: 300
+	/*font-weight: 300*/
 }
 
 .card .card-header.card-header-tabs .nav-tabs {
@@ -12783,8 +12775,8 @@ label {
 .card .card-body+.card-footer .stats,
 .card .card-footer .stats {
 	color: #999;
-	font-size: 12px;
-	line-height: 22px
+/*	font-size: 12px;
+	line-height: 22px*/
 }
 
 .card .card-body+.card-footer .stats .card-category,
@@ -12798,7 +12790,7 @@ label {
 .card .card-footer .stats .material-icons {
 	position: relative;
 	top: 4px;
-	font-size: 16px
+	/*font-size: 16px*/
 }
 
 .card [class*=card-header-] {
@@ -12995,7 +12987,7 @@ label {
 
 .card-stats .card-header .card-category:not([class*=text-]) {
 	color: #999;
-	font-size: 14px
+/*	font-size: 14px*/
 }
 
 .card-stats .card-header+.card-footer {
@@ -13004,8 +12996,8 @@ label {
 }
 
 .card-stats .card-header.card-header-icon i {
-	font-size: 36px;
-	line-height: 56px;
+/*	font-size: 36px;
+	line-height: 56px;*/
 	width: 56px;
 	height: 56px;
 	text-align: center
@@ -13042,9 +13034,9 @@ label {
 }
 
 .card-profile .card-footer .btn.btn-just-icon {
-	font-size: 20px;
+/*	font-size: 20px;*/
 	padding: 12px;
-	line-height: 1em
+/*	line-height: 1em*/
 }
 
 .card-profile.card-plain .card-avatar {
@@ -13834,7 +13826,7 @@ screen and (-ms-high-contrast:active) {
 		z-index: 4
 	}
 	.form-group.form-search .form-control {
-		font-size: 1.7em;
+		/*font-size: 1.7em;*/
 		height: 37px;
 		width: 78%
 	}
@@ -14084,9 +14076,9 @@ screen and (-ms-high-contrast:active) {
 	bottom: 5px;
 	color: #c0c1c2;
 	display: block;
-	font-weight: 400;
+/*	font-weight: 400;
 	font-size: 13px;
-	line-height: 15px;
+	line-height: 15px;*/
 	left: 0;
 	margin-left: 20px;
 	position: absolute;
