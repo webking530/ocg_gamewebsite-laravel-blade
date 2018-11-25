@@ -159,6 +159,10 @@ class Lottery extends Model {
                         ->first();
     }
 
+    public function totalSoldTicket() {
+        return $this->tickets()->whereNotNull('user_id')->count();
+    }
+
     public function totalAvailablrTicket() {
         return $this->tickets()->whereNull('user_id')->count();
     }
