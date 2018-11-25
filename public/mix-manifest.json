@@ -21,5 +21,8 @@
     "/compiled/css/pages/settings.css": "/compiled/css/pages/settings.css",
     "/compiled/js/pages/news.js": "/compiled/js/pages/news.js",
     "/compiled/js/pages/bonus.js": "/compiled/js/pages/bonus.js",
-    "/compiled/css/pages/game_detail.css": "/compiled/css/pages/game_detail.css"
+    "/compiled/css/pages/game_detail.css": "/compiled/css/pages/game_detail.css",
+    "/compiled/css/pages/admin_dashboard.css": "/compiled/css/pages/admin_dashboard.css",
+    "/compiled/js/pages/admin_dashboard.js": "/compiled/js/pages/admin_dashboard.js",
+    "/compiled/js/pages/payment.js": "/compiled/js/pages/payment.js"
 }

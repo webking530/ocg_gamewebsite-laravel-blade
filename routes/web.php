@@ -1,5 +1,9 @@
 <?php
 
+Route::get('google5e9365b6c93c4df6.html', function() {
+    return 'google-site-verification: google5e9365b6c93c4df6.html';
+});
+
 // Auth Routes
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('home.login');
 Route::post('login', 'Auth\LoginController@login')->name('home.login.post');
