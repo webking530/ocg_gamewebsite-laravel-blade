@@ -110,6 +110,9 @@
                 <li class="{{ set_active('admin.home') }}">
                     <a href="{{ route('admin.home') }}"><em class="fa fa-bar-chart">&nbsp;</em> Dashboard</a>
                 </li>
+                <li class="{{ set_active('payment.index') }}">
+                    <a href="{{ route('payment.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Payments</a>
+                </li>
                 <li class="{{ set_active('user.index') }}">
                     <a href="{{ route('user.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> User Management</a>
                 </li>
@@ -122,9 +125,7 @@
                 <li class="{{ set_active('tournament.index') }}">
                     <a href="{{ route('tournament.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Tournament</a>
                 </li>
-                <li class="{{ set_active('payment.index') }}">
-                    <a href="{{ route('payment.index') }}"><em class="fa fa-bar-chart">&nbsp;</em> Payments</a>
-                </li>
+
                 <li  data-toggle="collapse" data-target="#products" class="<?php echo (starts_with($route, 'setting')) ? "" : 'collapsed' ?>  <?php echo (starts_with($route, 'setting')) ? "active" : '' ?>">
                     <a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Settings Management<span class="arrow"></span></a>
                 </li>
