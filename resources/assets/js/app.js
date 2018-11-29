@@ -40,9 +40,15 @@ $(document).ready(function () {
 
     $('#flash-notifier, #validation-errors').fadeIn(1500);
 
-    $('.confirm-submit').on('submit', function (ev) {
+//    $('.confirm-submit').on('submit', function (ev) {
+    $(document).on('click', '.confirm-submit', function (ev) {
+
         ev.preventDefault();
         var $form = $(this);
+        var confirmTitle = '';
+        var confirmContent = 'Are You sure ?';
+        var confirmYes = 'Yes';
+        var confirmNo = 'No';
 
         $.confirm({
             title: confirmTitle,
