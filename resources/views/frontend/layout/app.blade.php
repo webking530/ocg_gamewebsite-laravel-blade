@@ -329,6 +329,7 @@
         <script type="text/javascript">
         var _smartsupp = _smartsupp || {};
         _smartsupp.key = '7c8c11e4b7cfa34ebd0f687bdd68f3bcc629c948';
+        _smartsupp.alignX = "left";
         window.smartsupp || (function (d) {
             var s, c, o = smartsupp = function () {
                 o._.push(arguments)
@@ -342,6 +343,7 @@
             c.src = 'https://www.smartsuppchat.com/loader.js?';
             s.parentNode.insertBefore(c, s);
         })(document);
+          smartsupp('language',{{ App::getLocale() }});
         </script>
 
         @yield('scripts')

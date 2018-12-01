@@ -166,7 +166,7 @@
             </div>
             @yield('content')
         </div>    <!--/.main-->
-
+        @include('partials.footer')
         <script src="{!! mix('compiled/js/shared.js') !!}"></script>
         <script src="{!! mix('compiled/lumino/lumino.js') !!}"></script>
         <script>

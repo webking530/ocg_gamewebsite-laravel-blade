@@ -45,11 +45,7 @@ $(document).ready(function () {
 
         ev.preventDefault();
         var $form = $(this);
-        var confirmTitle = '';
-        var confirmContent = 'Are You sure ?';
-        var confirmYes = 'Yes';
-        var confirmNo = 'No';
-
+        
         $.confirm({
             title: confirmTitle,
             content: $form.data('confirm-content') === undefined ? confirmContent : $form.data('confirm-content'),
@@ -77,10 +73,7 @@ $(document).ready(function () {
         ev.preventDefault();
         var route = $(this).attr('href');
         var $button = $(this);
-        var confirmTitle = '';
-        var confirmContent = 'Are You sure ?';
-        var confirmYes = 'Yes';
-        var confirmNo = 'No';
+        
         $.confirm({
             title: confirmTitle,
             content: $button.data('confirm-content') === undefined ? confirmContent : $button.data('confirm-content'),
