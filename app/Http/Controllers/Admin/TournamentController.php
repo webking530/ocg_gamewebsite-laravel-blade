@@ -11,6 +11,7 @@ use Models\Gaming\Tournament;
 use Illuminate\Support\Facades\Artisan;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TournamentController extends Controller {
 
@@ -45,11 +46,20 @@ class TournamentController extends Controller {
                 }
             }
             $data[$key]['group'] = $tournament->formattedGroup;
-            $data[$key]['status'] = $tournament->formatted_status;
+            $data[$key]['FormattedStatus'] = $tournament->formatted_status;
         }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('status') && $request->status != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['status']), Str::lower($request->get('status'))) ? true : false;
+                                });
+                            }
+                            if ($request->has('level') && $request->level != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['level']), Str::lower($request->get('level'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 

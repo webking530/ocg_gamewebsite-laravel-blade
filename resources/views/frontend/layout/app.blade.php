@@ -322,11 +322,12 @@
         </div>
 
         @include('partials.footer')
-
+        
         <script src="{!! mix('compiled/js/shared.js') !!}"></script>
         <script src="{!! mix('compiled/porto/porto.js') !!}"></script>
         <!-- Smartsupp Live Chat script -->
-        <script type="text/javascript">
+        
+       <script type="text/javascript">
         var _smartsupp = _smartsupp || {};
         _smartsupp.key = '7c8c11e4b7cfa34ebd0f687bdd68f3bcc629c948';
         _smartsupp.alignX = "left";
@@ -343,9 +344,25 @@
             c.src = 'https://www.smartsuppchat.com/loader.js?';
             s.parentNode.insertBefore(c, s);
         })(document);
-          smartsupp('language',{{ App::getLocale() }});
+          smartsupp('language','{{ App::getLocale() }}');
+          smartsupp('theme:options', {
+            widgetWidth: 150,
+            widgetHeight: 42
+          });
+          smartsupp('on', 'status', function (status) {
+            if (status == 'online' || status == 'away') {
+              smartsupp('theme:colors', {
+                widget: '#2ecc71',
+                primary: '#2ecc71'
+              });
+            } else {
+              smartsupp('theme:colors', {
+                widget: '#c0392b',
+                primary: '#c0392b'
+              });
+            }
+       });
         </script>
-
         @yield('scripts')
 
     </body>

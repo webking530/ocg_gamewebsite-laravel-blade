@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Models\Gaming\LotteryTicket;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SettingController extends Controller {
 
@@ -70,7 +71,11 @@ class SettingController extends Controller {
         }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('enabled') && $request->get('enabled') != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['enabled']), Str::lower($request->get('enabled'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 
@@ -147,7 +152,11 @@ class SettingController extends Controller {
         $data = $Country->get()->toArray();
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('enabled') && $request->get('enabled') != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['enabled']), Str::lower($request->get('enabled'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 
@@ -245,7 +254,11 @@ class SettingController extends Controller {
         $data = $Badge->get()->toArray();
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('name') && $request->get('name') != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['name']), Str::lower($request->get('name'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 
@@ -331,12 +344,21 @@ class SettingController extends Controller {
         $Lottery->orderBy('id', 'desc');
         $data = $Lottery->get()->toArray();
         foreach ($Lottery->get() as $key => $ltr) {
-            $data[$key]['status'] = $ltr->getFormattedStatusAttribute($ltr->status);
-            $data[$key]['type'] = $ltr->getFormattedStakeTextAttribute($ltr->type);
+            $data[$key]['Formattedstatus'] = $ltr->getFormattedStatusAttribute($ltr->status);
+            $data[$key]['Formattedtype'] = $ltr->getFormattedStakeTextAttribute($ltr->type);
         }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('status') && $request->get('status') != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['status']), Str::lower($request->get('status'))) ? true : false;
+                                });
+                            }
+                            if ($request->has('type') && $request->get('type') != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['type']), Str::lower($request->get('type'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 

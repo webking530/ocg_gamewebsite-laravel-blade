@@ -16,9 +16,6 @@ $(document).ready(function () {
             type: 'post',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: function (d) {
-//                    d.name = $('input[name=name]').val();
-//                    d.Date = $('input[name=country_code]').val();
-//                    d.currency_code = $('input[name=currency_code]').val();
             }
         },
         columns: [
@@ -33,7 +30,7 @@ $(document).ready(function () {
                 "mRender": function (a, b, data, d) {
                     $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">' +
                             '<li><a href="news/' + data.id + '/edit" class="btn btn-basic btn-xs" title="Edit News"><i class="fa fa-edit"></i></a></li>' +
-                            '<li><form method="post" action="news/delete/' + data.id + '" class="delete"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '" ><button class="btn btn-danger btn-xs" title="Delete News"><i class="fa fa-trash"></i></button></form></li>';
+                            '<li><form method="post" action="news/delete/' + data.id + '" class="confirm-submit delete"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '" ><button class="btn btn-danger btn-xs" title="Delete News"><i class="fa fa-trash"></i></button></form></li>';
                     $returnValue += '</ul>';
                     return $returnValue;
 

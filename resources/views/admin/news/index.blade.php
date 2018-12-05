@@ -1,23 +1,30 @@
 @extends('admin.layout.app')
 @section('content')
-<div role="main" class="main">
-    <div class="container">
-        <div class="row">
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">News Management</li>
+    </ol>
+</div>
 
-            <div class="col-xs-12">
-                <div class="box" style="">
-                    <div class="box-header" style="border-bottom:1px solid #d2d6de;">
-                        <h3>News Management</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="well clearfix">
-                        <div class="pull-right">
-                            <a href="{{ route('news.create') }}" class="btn  btn-primary">
+<div class="row">
+    <div class="col-lg-12">
+        <h2>News Management</h2>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">News List
+                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
+                <span class="pull-right">
+                    <a href="{{ route('news.create') }}" class="btn  btn-default">
                                 <span class="glyphicon glyphicon-plus"></span> Create
-                            </a>
-                        </div>
-                    </div>
-                    <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
+                    </a>
+                </span>
+            </div>
+            <div class="panel-body">
                         <table id="Newstbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -31,10 +38,6 @@
                             <tbody>
                             </tbody>
                         </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
             </div>
         </div>
     </div>

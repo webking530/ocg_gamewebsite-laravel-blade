@@ -43,11 +43,41 @@
                             </button>
                         </form>
                         <br>
+
                         <div class="pull-right">
                             <a href="{{ route('lottery.add') }}" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span> Create
                             </a>
                         </div>
+                    </div>
+
+                    <div class="well clearfix">
+                        <form role="form" name="search-form" id="search-form">
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <select class="form-control select2" name="type">
+                                            <option value="">Select type</option>
+                                            <option value="0">Low Stakes</option>
+                                            <option value="1">Mid Stakes</option>
+                                            <option value="2">High Stakes</option>
+                                        </select>
+                                    </div>
+                                </div>  
+                                 <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <select class="form-control select2" name="status">
+                                            <option value="">Select Status</option>
+                                            <option value="0">Active</option>
+                                            <option value="1">cancelled</option>
+                                            <option value="2">Pending</option>
+                                            <option value="3">Finalized</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
                         <table id="lottetryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
@@ -95,14 +125,15 @@
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
-
+                    d.status = $('select[name=status]').val();
+                    d.type = $('select[name=type]').val();
                 }
             },
             columns: [
                 {data: 'prize', name: 'prize'},
                 {data: 'date_begin', name: 'date_begin'},
-                {data: 'status', name: 'status'},
-                {data: 'type', name: 'type'},
+                {data: 'Formattedstatus', name: 'Formattedstatus'},
+                {data: 'Formattedtype', name: 'Formattedtype'},
                 {data: 'ticket_price', name: 'ticket_price'},
                 {data: 'country_code', name: 'country_code'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -112,13 +143,21 @@
                     "mRender": function (a, b, data, d) {
                         $returnValue = '<ul class="list-inline" style="margin-bottom:0px;">';
                         $returnValue += '<li><a href="lottery/edit/' + data.id + '" class="btn btn-basic btn-xs" title="Edit Lottery"><i class="fa fa-edit"></i></a></li>';
-                        $returnValue += '<li><form method="post" action="lottery/delete/' + data.id + '" class="delete"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '" ><button class="btn btn-danger btn-xs" title="Delete Lottery"><i class="fa fa-trash"></i></button></form></li>';
+                        $returnValue += '<li><form method="post" action="lottery/delete/' + data.id + '" class="confirm-submit delete"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '" ><button class="btn btn-danger btn-xs" title="Delete Lottery"><i class="fa fa-trash"></i></button></form></li>';
                         $returnValue += '</ul>';
                         return $returnValue;
                     },
                     "aTargets": [6]
                 },
             ]
+        });
+        $('#search-form input').on('keyup', function (e) {
+            dTable.fnDraw(true);
+            e.preventDefault();
+        });
+        $('#search-form select').on('change', function (e) {
+            dTable.fnDraw(true);
+            e.preventDefault();
         });
     });
 </script>

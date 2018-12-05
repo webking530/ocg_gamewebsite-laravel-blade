@@ -8,6 +8,7 @@ use Yajra\DataTables\DataTables;
 use Models\Bonuses\Bonus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BonusController extends Controller {
 
@@ -26,13 +27,22 @@ class BonusController extends Controller {
         $bonuses->orderBy('id', 'desc');
         $data = $bonuses->get()->toArray();
         foreach ($bonuses->get() as $key => $bonus) {
-            $data[$key]['type'] = $bonus->getFormattedTypeAttribute();
+            $data[$key]['formattedtype'] = $bonus->getFormattedTypeAttribute();
             $data[$key]['prize'] = $bonus->getFormattedPrizeAttribute();
         }
 
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
-                            
+                            if ($request->has('type') && $request->type != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['type']), Str::lower($request->get('type'))) ? true : false;
+                                });
+                            }
+                            if ($request->has('enabled') && $request->enabled != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['enabled']), Str::lower($request->get('enabled'))) ? true : false;
+                                });
+                            }
                         })->make(true);
     }
 

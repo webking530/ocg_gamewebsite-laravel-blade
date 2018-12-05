@@ -11,6 +11,16 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="well clearfix">
+                        <form role="form" name="search-form" id="search-form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="Search Name">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
                         <div class="pull-right">
                             <a href="{{ route('badges.add') }}" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span> Create
@@ -60,7 +70,7 @@
                 type: 'post',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: function (d) {
-
+                    d.name = $('input[name=name]').val();
                 }
             },
             columns: [
@@ -80,6 +90,14 @@
                     "aTargets": [3]
                 },
             ]
+        });
+        $('#search-form input').on('keyup', function (e) {
+            dTable.fnDraw(true);
+            e.preventDefault();
+        });
+        $('#search-form select').on('change', function (e) {
+            dTable.fnDraw(true);
+            e.preventDefault();
         });
     });
 </script>
