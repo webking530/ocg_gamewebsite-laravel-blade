@@ -32,7 +32,7 @@
                             {{ Form::open(['route' => 'lottery.create','method' => 'post','class'=>'form-horizontal']) }}
                             @endif
 
-                            {{ csrf_field() }}
+                            
                             <div class="form-group{{ $errors->has('date_open') ? ' has-error' : '' }}">
                                 <label for="date_open" class="col-md-4 control-label">Date Open</label>
 

@@ -58,7 +58,7 @@
             <div class="panel-body">
                 <div class="col-md-6">
                     {{ Form::model($user, array('route' => array('user.update',$user->id), 'method' => 'PUT','class'=>'form-horizontal')) }}
-                    {{ csrf_field() }}
+                    
                     <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                         <label for="nickname" class="col-md-4 control-label">Nickname</label>
 

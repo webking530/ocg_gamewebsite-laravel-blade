@@ -42,7 +42,6 @@
                 {{ Form::open(['route' => 'bonus.store','class'=>'form-horizontal']) }}
                 @endif
 
-                {{ csrf_field() }}
                 <div class="col-md-6">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Name</label>

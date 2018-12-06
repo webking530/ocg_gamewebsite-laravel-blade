@@ -25,7 +25,7 @@
                             <ul class="nav nav-tabs" id="myTab">
                                 <div class="liner"></div>
                                 <li><a href="#profile" data-toggle="tab"
-                                                      title="Registration Enable/Disable">
+                                       title="Registration Enable/Disable">
                                         <span class="round-tabs two">
                                             <i class="glyphicon glyphicon-user"></i>
                                         </span>Registration
@@ -86,12 +86,12 @@
                                         <h3>General Settings</h3>
                                     </div>
                                     <div class="panel panel-default">
-					<div class="panel-heading">
+                                        <div class="panel-heading">
                                             <button type="button" class="btn btn-primary addEditBtn pull-right" data-type="add" id="command-add" data-row-id="0">
                                                 <span class="glyphicon glyphicon-plus"></span> Create
                                             </button></div>
-					<div class="panel-body">
-						<table id="settingsTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                                        <div class="panel-body">
+                                            <table id="settingsTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Key</th>
@@ -102,9 +102,9 @@
                                                 <tbody>
                                                 </tbody>
                                             </table>
-					</div>
-				</div>
-                                  </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="clearfix"></div>
@@ -125,23 +125,24 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" id="settingForm" action="{{route('setting.updateGeneral') }}">
-                {{ csrf_field() }}
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-key prefix grey-text"></i> Key</label>
-                        <input type="text" id="key" name="key" class="form-control validate">
-                    </div>
-                    <div class="md-form mb-5">
-                        <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-user prefix grey-text"></i> Value</label>
-                        <input type="text" id="value" name="value" class="form-control validate">
+            <!--<form method="post" id="settingForm" action="{{route('setting.updateGeneral') }}">-->
+            {{ Form::open(['route' => 'setting.updateGeneral','id'=>'settingForm','class'=>'form-horizontal','method' => 'post']) }}
 
-                    </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-key prefix grey-text"></i> Key</label>
+                    <input type="text" id="key" name="key" class="form-control validate">
                 </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="submit" class="btn btn-unique"><span class="modalBtn"> Add </span> <i class="fa fa-paper-plane-o ml-1"></i></button>
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-user prefix grey-text"></i> Value</label>
+                    <input type="text" id="value" name="value" class="form-control validate">
+
                 </div>
-            </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-unique"><span class="modalBtn"> Add </span> <i class="fa fa-paper-plane-o ml-1"></i></button>
+            </div>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

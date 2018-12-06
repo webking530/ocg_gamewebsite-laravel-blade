@@ -20,24 +20,24 @@
     </ol>
 </div>
 <div class="row">
-        <div class="col-lg-12">
+    <div class="col-lg-12">
         <div class="panel panel-primary">
             <div class="panel-heading">Edit Game settings
                 <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
             </div>
             <div class="panel-body">
                 <div id="jsoneditor"></div> <br>
-                <form method="post" class="submitJsonForm" action="{{ route('game.updateSetting') }}">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="settings" class="settings" value="">
-                    <input type="hidden" name="id" class="" value="{{ $game->id }}">
-                    <input  type="button" class="btn btn-primary submitJson" value="Update">
-                </form>
+                {{ Form::open(['route' => 'game.updateSetting','class'=>'form-horizontal submitJsonForm','method' => 'post']) }}
+
+                <input type="hidden" name="settings" class="settings" value="">
+                <input type="hidden" name="id" class="" value="{{ $game->id }}">
+                <input  type="button" class="btn btn-primary submitJson" value="Update">
+                {{ Form::close() }}
             </div>
         </div>
     </div>
 
-    
+
 </div>
 
 @endsection

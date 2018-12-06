@@ -23,7 +23,7 @@
             </div>
             <div class="panel-body">
                 {{ Form::model($tournament, array('route' => array('tournament.update',$tournament->id), 'method' => 'PUT','class'=>'form-horizontal')) }}
-                {{ csrf_field() }}
+                
                 <div class="form-group">
                     <label for="name" class="col-md-4 control-label">Games</label>
 

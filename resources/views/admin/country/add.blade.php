@@ -33,7 +33,7 @@
                             {{ Form::open(['route' => 'country.create','class'=>'form-horizontal','method' => 'post']) }}
                             @endif
 
-                            {{ csrf_field() }}
+                            
                             <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
                                 <label for="code" class="col-md-4 control-label">Code</label>
 

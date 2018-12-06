@@ -23,7 +23,7 @@
             </div>
             <div class="panel-body">
                 {{ Form::open(['route' => 'tournament.customStore','class'=>'form-horizontal']) }}
-                {{ csrf_field() }}
+                
                 @foreach($languages as $language)                    
                 <div class="form-group">
                     <label class="col-md-4 control-label">Group Name for {{$language->code}}</label>

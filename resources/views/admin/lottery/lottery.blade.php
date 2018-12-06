@@ -20,8 +20,8 @@
             <div class="panel-heading">Edit Lottery Params
                 <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
             <div class="panel-body">
-                <form class="form-horizontal" method="post" action="{{ route('lottery.updateSettings')  }}">
-                    {{ csrf_field() }}
+                {{ Form::open(['route' => 'lottery.updateSettings','class'=>'form-horizontal','method' => 'post']) }}
+
                     <div class="form-group">
                         <label for="date_close" class="col-md-4 control-label">lottery_deposit_percent_max</label>
                         <div class="col-md-6">
@@ -50,7 +50,7 @@
                     <button type="submit" class="btn btn-primary">
                         Update
                     </button>
-                </form>
+               {{ Form::close() }}
             </div>
         </div>
     </div>

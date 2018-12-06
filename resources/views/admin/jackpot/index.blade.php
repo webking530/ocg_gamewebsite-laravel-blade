@@ -19,8 +19,7 @@
             <div class="panel-heading">Edit Jackpot Settings
                 <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
             <div class="panel-body">
-                <form class="form-horizontal" method="post" action="{{ route('lottery.updateSettings')  }}">
-                            {{ csrf_field() }}
+                {{ Form::model('', array('route' => array('lottery.updateSettings'), 'method' => 'post','class'=>'form-horizontal')) }}
                             <div class="form-group">
                                 <label for="enable_fake_jackpot" class="col-md-4 control-label">enable_fake_jackpot</label>
                                 <div class="col-md-6">

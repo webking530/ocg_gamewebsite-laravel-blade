@@ -27,11 +27,12 @@
             </div>
             <div class="panel-body">
                 <div id="jsoneditor"></div> <br>
-                <form method="post" class="submitJsonForm" action="{{ route('tournament.updateSettings') }}">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="tournament_tpa_levels" class="settings" value="">
-                    <input  type="button" class="btn btn-primary submitJson" value="Update">
-                </form>
+                {{ Form::open(['route' => 'tournament.updateSettings','class'=>'form-horizontal submitJsonForm','method' => 'post']) }}
+                <!--<form method="post" class="submitJsonForm" action="{{ route('tournament.updateSettings') }}">-->
+
+                <input type="hidden" name="tournament_tpa_levels" class="settings" value="">
+                <input  type="button" class="btn btn-primary submitJson" value="Update">
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -42,11 +43,12 @@
                 <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
             </div>
             <div class="panel-body">
-                <form method="post" class="form-horizontal" action="{{ route('tournament.updateSettings') }}">
-                    {{ csrf_field() }}
-                    <input type="text" name="tournament_base_days" class="form-control" value="{{ settings('tournament_base_days ') }}"><br>
-                    <input  type="submit" class="btn btn-primary" value="Update">
-                </form>
+                <!--<form method="post" class="form-horizontal" action="{{ route('tournament.updateSettings') }}">-->
+                {{ Form::open(['route' => 'tournament.updateSettings','class'=>'form-horizontal','method' => 'post']) }}
+
+                <input type="text" name="tournament_base_days" class="form-control" value="{{ settings('tournament_base_days ') }}"><br>
+                <input  type="submit" class="btn btn-primary" value="Update">
+                {{ Form::close() }}
             </div>
         </div>
     </div>

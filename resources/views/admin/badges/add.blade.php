@@ -33,8 +33,6 @@
                 @else
                 {{ Form::open(['route' => 'badges.create','class'=>'form-horizontal','enctype'=>'multipart/form-data']) }}
                 @endif
-
-                {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">Name</label>
 
