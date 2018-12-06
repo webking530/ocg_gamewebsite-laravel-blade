@@ -11,6 +11,11 @@ return [
         '1' => 'Multiplier',
         '2' => 'Percent'
     ],
+    'status' => [
+        '0' => 'Enabled',
+        '1' => 'Disabled',
+        
+    ],
     'add_bonus' => 'Add Bonus',
     'edit_bonus' => 'Edit Bonus'
 ];

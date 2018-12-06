@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-12">
         <div class="panel panel-primary">
-            <div class="panel-heading">Search Panel
+            <div class="panel-heading">Search Panel 
                 <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
             <div class="panel-body">
                 <form role="form" name="search-form" id="search-form">
@@ -25,12 +25,9 @@
                             <div class="form-group">
                                 <select class="form-control select2" name="level">
                                     <option value="">Select level</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    @for($i=0;$i<=\Models\Gaming\Tournament::MAX_LEVEL;$i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
                             </div>
                         </div>
@@ -38,9 +35,9 @@
                             <div class="form-group">
                                 <select class="form-control select2" name="status">
                                     <option value="">Select Status</option>
-                                    <option value="0">Pending</option>
-                                    <option value="1">Finished</option>
-                                    <option value="2">Cancelled</option>
+                                    @foreach(Lang::get('frontend/tournaments.status') as  $statusKey => $status)
+                                    <option value="{{ $statusKey }}">{{ $status }}</option>  
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

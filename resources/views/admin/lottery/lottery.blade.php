@@ -64,25 +64,28 @@
             <div class="panel-body">
                 <form role="form" name="search-form" id="search-form">
                     <div class="row">
-
+                        
+                        <?php 
+                        //print_r(Lang::get('frontend/lottery.status'));die;
+                        ?>
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <div class="form-group">
                                 <select class="form-control select2" name="type">
                                     <option value="">Select type</option>
-                                    <option value="0">Low Stakes</option>
-                                    <option value="1">Mid Stakes</option>
-                                    <option value="2">High Stakes</option>
+                                    @foreach(Lang::get('frontend/lottery.type') as  $stakeKey => $stake)
+                                    <option value="{{ $stakeKey }}">{{ $stake }}</option>
+                                    @endforeach
+                                    
                                 </select>
                             </div>
                         </div>  
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col -xs-12 col-sm-6 col-md-3">
                             <div class="form-group">
                                 <select class="form-control select2" name="status">
                                     <option value="">Select Status</option>
-                                    <option value="0">Active</option>
-                                    <option value="1">cancelled</option>
-                                    <option value="2">Pending</option>
-                                    <option value="3">Finalized</option>
+                                    @foreach(Lang::get('frontend/lottery.status') as  $statusKey => $status)
+                                    <option value="{{ $statusKey }}">{{ $status }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

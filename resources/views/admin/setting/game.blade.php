@@ -27,8 +27,9 @@
                             <div class="form-group">
                                 <select class="form-control select2" name="enabled">
                                     <option value="">Select Status</option>
-                                    <option value="1">Enabled</option>
-                                    <option value="0">Disabled</option>
+                                    @foreach(Lang::get('frontend/game.status') as  $statusKey => $status)
+                                    <option value="{{ $statusKey }}">{{ $status }}</option>  
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

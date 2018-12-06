@@ -40,7 +40,7 @@
                     <label for="level" class="col-md-4 control-label">Level</label>
                     <div class="col-md-6">
                         <select name="level"  class="form-control">
-                            @for($i=0;$i<=5;$i++)                    
+                            @for($i=0;$i<=\Models\Gaming\Tournament::MAX_LEVEL;$i++)
                             <option @if($tournament->level == $i) selected @endif value="{{ $i }}">{{ $i }}</option>
                             @endfor
                         </select>

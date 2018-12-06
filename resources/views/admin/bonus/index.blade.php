@@ -24,9 +24,9 @@
                             <div class="form-group">
                                 <select class="form-control select2" name="type">
                                     <option value="">Select type</option>
-                                    <option value="0">Credits</option>
-                                    <option value="1">Multiplier</option>
-                                    <option value="2">Percent</option>
+                                    @foreach(Lang::get('frontend/bonuses.type') as  $bonusKey => $bonus)
+                                    <option value="{{ $bonusKey }}">{{ $bonus }}</option>  
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -34,8 +34,9 @@
                             <div class="form-group">
                                 <select class="form-control select2" name="enabled">
                                     <option value="">Select Status</option>
-                                    <option value="0">Enabled</option>
-                                    <option value="1">Disabled</option>
+                                    @foreach(Lang::get('frontend/bonuses.status') as  $statusKey => $status)
+                                    <option value="{{ $statusKey }}">{{ $status }}</option>  
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

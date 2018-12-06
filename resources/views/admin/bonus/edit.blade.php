@@ -1,10 +1,4 @@
 @extends('admin.layout.app')
-@section('meta')
-<title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
-@endsection
-@section('css')
-
-@endsection
 @section('content')
 
 <div class="row">
@@ -67,7 +61,7 @@
                         <label for="order" class="col-md-4 control-label">Type</label>
 
                         <div class="col-md-6">
-                            {{ Form::select('type', ['Credits','Multiplier','Percent'],Input::old('type'),['id'=>'type','class'=>'form-control','required'=>'required']) }}
+                            {{ Form::select('type', Lang::get('frontend/bonuses.type') ,Input::old('type'),['id'=>'type','class'=>'form-control','required'=>'required']) }}
 
                             @if ($errors->has('type'))
                             <span class="help-block">
@@ -110,7 +104,7 @@
                         <label for="order" class="col-md-4 control-label">Enabled</label>
 
                         <div class="col-md-6">
-                            {{ Form::select('enabled', ['No','Yes'],Input::old('enabled'),['id'=>'enabled','class'=>'form-control','required'=>'required']) }}
+                            {{ Form::select('enabled', Lang::get('frontend/bonuses.status') ,Input::old('enabled'),['id'=>'enabled','class'=>'form-control','required'=>'required']) }}
 
                             @if ($errors->has('enabled'))
                             <span class="help-block">
