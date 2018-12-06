@@ -1,17 +1,25 @@
 @extends('admin.layout.app')
 @section('content')
-<div role="main" class="main">
-    <div class="container">
-        <div class="row">
 
-            <div class="col-xs-12">
-                <div class="box" style="">
-                    <div class="box-header">
-                        <h3>Jackpot Settings</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="well clearfix">
-                        <form class="form-horizontal" method="post" action="{{ route('lottery.updateSettings')  }}">
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Jackpot Settings</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Jackpot Settings</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit Jackpot Settings
+                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="{{ route('lottery.updateSettings')  }}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="enable_fake_jackpot" class="col-md-4 control-label">enable_fake_jackpot</label>
@@ -46,13 +54,6 @@
                                 Update
                             </button>
                         </form>
-                        <br>
-
-                    </div>
-
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
             </div>
         </div>
     </div>

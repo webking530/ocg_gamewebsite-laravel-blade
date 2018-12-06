@@ -1,28 +1,31 @@
 @extends('admin.layout.app')
-@section('meta')
-<title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
-@endsection
-@section('css')
-{{--<link href="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.css') }}"  rel="stylesheet">--}}
-@endsection
 @section('content')
-<div role="main" class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="featured-boxes mt-none mb-none">
-                    <div class="featured-box featured-box-primary mt-xl" style="text-align: left">
-                        <div class="box-content">
-                            <h1 class="mb-lg text-blue text-center">
-                                @if(isset($lottery))
-                                Edit
-                                @else
-                                Add
-                                @endif
-                                Lottery
-
-                            </h1>
-                            <hr>
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('setting.lottery') }}">
+                Lottery Settings
+            </a>
+        </li>
+        <li class="active">
+            @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif
+        </li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h2>
+           @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif
+        </h2>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                
                             @if(isset($lottery))
                             {{ Form::model($lottery, array('route' => array('lottery.update',$lottery->id), 'method' => 'post','class'=>'form-horizontal')) }}
                             @else
@@ -111,17 +114,13 @@
                                 </div>
                             </div>
                             {{ Form::close() }}
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
 </div>
 @endsection
-
 @section('js')
-{{--<script src="{{ asset('compiled/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>--}}
 <script>
 $(function () {
     $('.date').datetimepicker({format: 'yyyy-mm-dd HH:m:i'});

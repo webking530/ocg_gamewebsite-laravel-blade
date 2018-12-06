@@ -1,20 +1,30 @@
 @extends('admin.layout.app')
 @section('content')
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Settings Management</li>
+    </ol>
+</div>
 
 <div class="row">
-    <div class="col-xs-12">
-        <div class="box" style="border:1px solid #d2d6de;">
-            <div class="box-header" style="border-bottom:1px solid #d2d6de;">
-                <h3>Settings Management</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
+    <div class="col-lg-12">
+        <h2>Settings Management</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit Settings
+                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
+            <div class="panel-body">
                 <section style="background:#efefe9;">
                     <div class="board">
                         <div class="board-inner">
                             <ul class="nav nav-tabs" id="myTab">
                                 <div class="liner"></div>
-                                <li class="active"><a href="#profile" data-toggle="tab"
+                                <li><a href="#profile" data-toggle="tab"
                                                       title="Registration Enable/Disable">
                                         <span class="round-tabs two">
                                             <i class="glyphicon glyphicon-user"></i>
@@ -27,7 +37,7 @@
                                         </span>Maintenance Mode </a>
                                 </li>
 
-                                <li><a href="#other" data-toggle="tab" title="Other Options">
+                                <li class="active"><a href="#other" data-toggle="tab" title="Other Options">
                                         <span class="round-tabs four">
                                             <i class="glyphicon glyphicon-unchecked"></i>
                                         </span>Other options
@@ -35,7 +45,7 @@
                             </ul>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="profile">
+                            <div class="tab-pane fade" id="profile">
                                 <h3 class="head text-center">Enable/Disable User Registration</h3>
                                 <div class="col-md-12">
                                     <form>
@@ -70,22 +80,18 @@
                                         </div>
                                     </form>
                                 </div>                                </div>
-                            <div class="tab-pane fade" id="other">
+                            <div class="tab-pane fade in active" id="other">
                                 <div class="box" style="">
                                     <div class="box-header" style="border-bottom:1px solid #d2d6de;">
                                         <h3>General Settings</h3>
                                     </div>
-                                    <!-- /.box-header -->
-                                    <div class="well clearfix">
-                                        <div class="pull-right">
-                                            <button type="button" class="btn btn-xs btn-primary addEditBtn" data-type="add" id="command-add" data-row-id="0">
+                                    <div class="panel panel-default">
+					<div class="panel-heading">
+                                            <button type="button" class="btn btn-primary addEditBtn pull-right" data-type="add" id="command-add" data-row-id="0">
                                                 <span class="glyphicon glyphicon-plus"></span> Create
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body table-responsive no-padding" style="padding-top: 10px;">
-                                        <section style="background:#efefe9;">
-                                            <table id="settingsTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                                            </button></div>
+					<div class="panel-body">
+						<table id="settingsTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Key</th>
@@ -96,10 +102,9 @@
                                                 <tbody>
                                                 </tbody>
                                             </table>
-                                        </section>
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
+					</div>
+				</div>
+                                  </div>
 
                             </div>
                             <div class="clearfix"></div>
@@ -108,9 +113,7 @@
                     </div>
                 </section>
             </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.box -->
     </div>
 </div>
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

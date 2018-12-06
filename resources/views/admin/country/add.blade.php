@@ -1,27 +1,33 @@
 @extends('admin.layout.app')
-@section('meta')
-<title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
-@endsection
-
 @section('content')
-<div role="main" class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="featured-boxes mt-none mb-none">
-                    <div class="featured-box featured-box-primary mt-xl" style="text-align: left">
-                        <div class="box-content">
-                            <h1 class="mb-lg text-blue text-center">
-                                @if(isset($country))
-                                Edit
-                                @else
-                                Add
-                                @endif
-                                Country
-                                
-                            </h1>
-                            <hr>
-                            @if(isset($country))
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('setting.countries') }}">
+                Country Settings
+            </a>
+        </li>
+        <li class="active">
+            @if(isset($country)) Edit Country  @else Add Country @endif
+        </li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>
+            @if(isset($country)) Edit Country  @else Add Country @endif
+        </h2>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @if(isset($country))
                             {{ Form::model($country, array('route' => array('country.update',$country->code), 'method' => 'post','class'=>'form-horizontal')) }}
                             @else
                             {{ Form::open(['route' => 'country.create','class'=>'form-horizontal','method' => 'post']) }}
@@ -109,9 +115,6 @@
                                 </div>
                             </div>
                             {{ Form::close() }}
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
