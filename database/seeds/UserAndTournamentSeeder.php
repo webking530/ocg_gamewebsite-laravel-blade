@@ -14,6 +14,25 @@ class UserAndTournamentSeeder extends Seeder
      */
     public function run()
     {
+        $admin = User::create([
+            'nickname' => 'administrator',
+            'name' => 'Admin',
+            'lastname' => 'OCG',
+            'gender' => User::GENDER_MALE,
+            'mobile_number' => 0,
+            'email' => 'admin@ocgcasino.com',
+            'password' => bcrypt('123456'),
+            'credits' => 0,
+            'country_code' => 'DE',
+            'currency_code' => 'EUR',
+            'low_balance_threshold' => 0,
+            'role' => User::ROLE_ADMIN,
+            'locale' => 'en',
+            'verified_identification' => true,
+            'notifications' => true,
+            'lottery_sms_notification_minutes' => 0,
+        ]);
+
         $user1 = User::create([
             'nickname' => 'username001',
             'name' => 'Player',

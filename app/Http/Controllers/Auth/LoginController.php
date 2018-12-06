@@ -117,6 +117,14 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
+    public function redirectPath() {
+        if ($this->guard()->user()->role == User::ROLE_USER) {
+             return route('user.dashboard.index');
+        } else {
+            return route('admin.home');
+        }
+    }
+
 
     public function activationForm($nickname) {
         $user = User::where('nickname', $nickname)->whereNotNull('verification_pin')->first();
