@@ -1,29 +1,34 @@
 @extends('admin.layout.app')
+@section('title','Tournaments')
 @section('content')
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('tournament.index') }}">
-                Tournament Management
-            </a>
-        </li>
-        <li class="active">Recreate Tournament</li>
-    </ol>
-</div> 
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>
+            Recreate  Tournament for  {{ $tournament->formattedGroup }}
+        </h4>
+    </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tournament.index') }}">
+                    Tournaments
+                </a>
+            </li>
+            <li class="active">Recreate  Tournament</li>
+        </ol>
+    </div>
+</div>
 <hr>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
-            <div class="panel-heading">Recreate Tournament for {{ $tournament->formattedGroup }}
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
-            </div>
             <div class="panel-body">
                 {{ Form::open(['route' => 'tournament.store','class'=>'form-horizontal']) }}
-                
+                {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name" class="col-md-4 control-label">Games</label>
                     <div class="col-md-6">

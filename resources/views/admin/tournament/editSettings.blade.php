@@ -1,54 +1,62 @@
 @extends('admin.layout.app')
+@section('title','Tournaments')
 @section('css')
 <link rel="stylesheet" href="{!! mix('compiled/css/pages/settings.css') !!}">
 @endsection
-
 @section('content')
-
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('tournament.index') }}">
-                Tournament Management
-            </a>
-        </li>
-        <li class="active">Edit Tournament Settings</li>
-    </ol>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>
+            Edit Tournament Settings
+        </h4>
+    </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tournament.index') }}">
+                    Tournaments
+                </a>
+            </li>
+            <li class="active">Edit Tournament Settings</li>
+        </ol>
+    </div>
 </div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Edit tournament_tpa_levels 
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
-            </div>
-            <div class="panel-body">
-                <div id="jsoneditor"></div> <br>
-                {{ Form::open(['route' => 'tournament.updateSettings','class'=>'form-horizontal submitJsonForm','method' => 'post']) }}
-                <!--<form method="post" class="submitJsonForm" action="{{ route('tournament.updateSettings') }}">-->
+<hr>
 
-                <input type="hidden" name="tournament_tpa_levels" class="settings" value="">
-                <input  type="button" class="btn btn-primary submitJson" value="Update">
-                {{ Form::close() }}
+
+<div class="row">
+    <div class="col-xs-6">
+
+        <div class="card card-accent-info">
+            <div class="card-header">Edit tournament_tpa_levels </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div id="jsoneditor"></div> <br>
+                    <form method="post" class="submitJsonForm" action="{{ route('tournament.updateSettings') }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="tournament_tpa_levels" class="settings" value="">
+                        <input  type="button" class="btn btn-primary submitJson" value="Update">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-xs-6">
 
-    <div class="col-lg-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Edit tournament_base_days
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
-            </div>
-            <div class="panel-body">
-                <!--<form method="post" class="form-horizontal" action="{{ route('tournament.updateSettings') }}">-->
-                {{ Form::open(['route' => 'tournament.updateSettings','class'=>'form-horizontal','method' => 'post']) }}
-
-                <input type="text" name="tournament_base_days" class="form-control" value="{{ settings('tournament_base_days ') }}"><br>
-                <input  type="submit" class="btn btn-primary" value="Update">
-                {{ Form::close() }}
+        <div class="card card-accent-info">
+            <div class="card-header">Edit tournament_base_days  </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <form method="post" class="form-horizontal" action="{{ route('tournament.updateSettings') }}">
+                        {{ csrf_field() }}
+                        <input type="text" name="tournament_base_days" class="form-control" value="{{ settings('tournament_base_days ') }}"><br>
+                        <input  type="submit" class="btn btn-primary" value="Update">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

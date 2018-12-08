@@ -1,36 +1,38 @@
 @extends('admin.layout.app')
-@section('meta')
-<title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
-@endsection
-@section('css')
-
-@endsection
+@section('title','News')
 @section('content')
-
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('news.index') }}">
-                News Management
-            </a>
-        </li>
-        <li class="active">@if(isset($news))
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>
+            @if(isset($news))
             Edit News
             @else
             Add News
             @endif
-        </li>
-    </ol>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h2>@if(isset($news)) Edit News @else Add News  @endif</h2>
+        </h4>
     </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li>
+                <a href="{{ route('news.index') }}">
+                    News
+                </a>
+            </li>
+            <li class="active">
+                @if(isset($news))
+                Edit News
+                @else
+                Add News
+                @endif
+            </li>
+        </ol>
+    </div>
+</div>
+<hr>
+<div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -40,8 +42,6 @@
                 @else
                 {{ Form::open(['route' => 'news.store','class'=>'form-horizontal']) }}
                 @endif
-
-                
                 <div class="col-md-6">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Name</label>

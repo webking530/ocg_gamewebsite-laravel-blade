@@ -1,27 +1,30 @@
 @extends('admin.layout.app')
+@section('title','Settings')
 @section('content')
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('setting.lottery') }}">
-                Lottery Settings
-            </a>
-        </li>
-        <li class="active">
-            @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif
-        </li>
-    </ol>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <h2>
-           @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif
-        </h2>
+
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4> @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif</h4>
     </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li><a href="#">Settings</a></li>
+            <li>
+                <a href="{{ route('setting.lottery') }}">
+                    Lottery
+                </a>
+            </li>
+            <li class="active"> @if(isset($lottery)) Edit Lottery  @else Add Lottery @endif</li>
+        </ol>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+   
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">

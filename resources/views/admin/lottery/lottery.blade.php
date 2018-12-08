@@ -1,132 +1,126 @@
 @extends('admin.layout.app')
+@section('title','Settings')
 @section('content')
-
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li class="active">Lottery Settings</li>
-    </ol>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h2>Lottery Settings</h2>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>Lottery</h4>
     </div>
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Edit Lottery Params
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                {{ Form::open(['route' => 'lottery.updateSettings','class'=>'form-horizontal','method' => 'post']) }}
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li><a href="#">Settings</a></li>
+            <li class="active">Lottery</li>
+        </ol>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
 
-                    <div class="form-group">
-                        <label for="date_close" class="col-md-4 control-label">lottery_deposit_percent_max</label>
-                        <div class="col-md-6">
-                            <input type='text' name="lottery_deposit_percent_max" value="{{ settings('lottery_deposit_percent_max') }}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="date  _close" class="col-md-4 control-label">lottery_cancel_hours</label>
-                        <div class="col-md-6">
-                            <input type='text' name="lottery_cancel_hours" value="{{ settings('lottery_cancel_hours') }}" class="form-control">
-                        </div>
-                    </div>
+        <div class="card card-accent-info">
+            <div class="card-header">
 
-                    <div class="form-group">
-                        <label for="date_close" class="col-md-4 control-label">lottery_deposit_percent_min</label>
-                        <div class="col-md-6">
-                            <input type='text' name='lottery_deposit_percent_min' value="{{ settings('lottery_deposit_percent_min') }}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="date_close" class="col-md-4 control-label">lottery_prize_not_reached_hours_check</label>
-                        <div class="col-md-6">
-                            <input type='text' name="lottery_prize_not_reached_hours_check" value="{{ settings('lottery_prize_not_reached_hours_check') }}" class="form-control">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Update
-                    </button>
-               {{ Form::close() }}
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Lottery List</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Edit Lottery settings</a></li>
+                </ul>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1">
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Search Panel
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                <form role="form" name="search-form" id="search-form">
-                    <div class="row">
-                        
-                        <?php 
-                        //print_r(Lang::get('frontend/lottery.status'));die;
-                        ?>
-                        <div class="col-xs-12 col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <select class="form-control select2" name="type">
-                                    <option value="">Select type</option>
-                                    @foreach(Lang::get('frontend/lottery.type') as  $stakeKey => $stake)
-                                    <option value="{{ $stakeKey }}">{{ $stake }}</option>
-                                    @endforeach
-                                    
-                                </select>
+                        <div class="text-center">
+                            <button class="btn btn-warning filterBtn">Filter</button>
+                            <a href="{{ route('lottery.add') }}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-plus"></span> Create
+                            </a>
+                        </div>
+                        <hr>
+                        <div class="col-sm-8 col-sm-offset-2 well clearfix searchFilterDiv hidden">
+                            <form role="form" name="search-form" id="search-form">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control select2" name="type">
+                                                <option value="">Select type</option>
+                                                @foreach(Lang::get('frontend/lottery.type') as  $stakeKey => $stake)
+                                                <option value="{{ $stakeKey }}">{{ $stake }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>  
+                                    <div class="col -xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control select2" name="status">
+                                                <option value="">Select Status</option>
+                                                @foreach(Lang::get('frontend/lottery.status') as  $statusKey => $status)
+                                                <option value="{{ $statusKey }}">{{ $status }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-12">
+                            <table id="lottetryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Prize</th>
+                                        <th>Date Begin</th>
+                                        <th>Status</th>
+                                        <th>Type</th>
+                                        <th>Ticket Price</th>
+                                        <th>Country Code</th>
+                                        <th>Action</th>
+                                    </tr>   
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table> </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        {{ Form::open(['route' => 'lottery.updateSettings','method' => 'post','class'=>'form-horizontal']) }}
+                        <div class="form-group">
+                            <label for="date_close" class="col-md-4 control-label">lottery_deposit_percent_max</label>
+                            <div class="col-md-6">
+                                <input type='text' name="lottery_deposit_percent_max" value="{{ settings('lottery_deposit_percent_max') }}" class="form-control">
                             </div>
-                        </div>  
-                        <div class="col -xs-12 col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <select class="form-control select2" name="status">
-                                    <option value="">Select Status</option>
-                                    @foreach(Lang::get('frontend/lottery.status') as  $statusKey => $status)
-                                    <option value="{{ $statusKey }}">{{ $status }}</option>
-                                    @endforeach
-                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date  _close" class="col-md-4 control-label">lottery_cancel_hours</label>
+                            <div class="col-md-6">
+                                <input type='text' name="lottery_cancel_hours" value="{{ settings('lottery_cancel_hours') }}" class="form-control">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="date_close" class="col-md-4 control-label">lottery_deposit_percent_min</label>
+                            <div class="col-md-6">
+                                <input type='text' name='lottery_deposit_percent_min' value="{{ settings('lottery_deposit_percent_min') }}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_close" class="col-md-4 control-label">lottery_prize_not_reached_hours_check</label>
+                            <div class="col-md-6">
+                                <input type='text' name="lottery_prize_not_reached_hours_check" value="{{ settings('lottery_prize_not_reached_hours_check') }}" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Update
+                        </button>
+                        {{Form::close() }}
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Lottery List
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
-                <span class="pull-right">
-                    <a href="{{ route('lottery.add') }}" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"></span> Create
-                    </a>
-                </span>
-            </div>
-            <div class="panel-body">
-                <table id="lottetryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Prize</th>
-                            <th>Date Begin</th>
-                            <th>Status</th>
-                            <th>Type</th>
-                            <th>Ticket Price</th>
-                            <th>Country Code</th>
-                            <th>Action</th>
-                        </tr>   
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 
@@ -135,6 +129,7 @@
     function showMessage() {
         return '<div  class="loader-datatable" style="display: block;"></div>';
     }
+
     $(document).ready(function () {
         var dTable = $('#lottetryTbl').dataTable({
             "pageLength": 10,

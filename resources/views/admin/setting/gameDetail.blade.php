@@ -1,33 +1,37 @@
 @extends('admin.layout.app')
+@section('title','Settings')
 @section('css')
 <link rel="stylesheet" href="{!! mix('compiled/css/pages/game_detail.css') !!}">
 @endsection
 @section('content')
 
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('setting.games') }}">
-                Game Settings
-            </a>
-        </li>
-        <li class="active"> Game Detail</li>
-    </ol>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4> Detail of {{ $game->getNameAttribute() }}</h4>
+    </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li><a href="#">Settings</a></li>
+            <li>
+                <a href="{{ route('setting.games') }}">
+                    Games
+                </a>
+            </li>
+            <li class="active">Game Detail</li>
+        </ol>
+    </div>
 </div>
+<hr>
 
 <div class="row">
-    <div class="col-lg-12">
-        <h2> Detail Of {{ $game->getNameAttribute() }}</h2>
-    </div>
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Detail
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
+    <div class="col-xs-12">
+        <div class="card card-accent-info">
+            <div class="card-header">Info</div>
+            <div class="card-body">
+
                 <div class="col-md-6">
                     <h3 class="text-center">Game Name <hr> {{ $game->getNameAttribute() }}</h3>
                     <div class="row mt-lg">
@@ -57,18 +61,19 @@
                         <h4>{{ count($gameActivePlayers->sessions) }}</h4>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-<div class="row">
 
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">winning Player List
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                <table id="playerTbl1" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card card-accent-info">
+            <div class="card-header">winning Player List</div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <table id="playerTbl1" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Nickname</th>
@@ -90,17 +95,15 @@
                         @endif
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Currently in game player List
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
+    <div class="col-xs-6">
+        <div class="card card-accent-info">
+            <div class="card-header">Currently in game player List</div>
+            <div class="card-body">
+                <div class="col-md-12">
                 <table id="playerTbl2" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -121,11 +124,13 @@
                         @endforeach
                         @endif
                     </tbody>
-                </table>
+                </table>    
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('js')

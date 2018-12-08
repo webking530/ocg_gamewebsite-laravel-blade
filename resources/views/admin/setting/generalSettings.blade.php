@@ -1,23 +1,26 @@
 @extends('admin.layout.app')
+@section('title','Settings')
 @section('content')
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li class="active">Settings Management</li>
-    </ol>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h2>Settings Management</h2>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>General settings</h4>
     </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li>
+                <a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li><a href="#">Settings</a></li>
+            <li class="active">General</li>
+        </ol>
+    </div>
+</div>
+<hr>
+<div class="row">
     <div class="col-md-12">
         <div class="panel panel-primary">
-            <div class="panel-heading">Edit Settings
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
             <div class="panel-body">
                 <section style="background:#efefe9;">
                     <div class="board">
@@ -81,16 +84,18 @@
                                     </form>
                                 </div>                                </div>
                             <div class="tab-pane fade in active" id="other">
-                                <div class="box" style="">
-                                    <div class="box-header" style="border-bottom:1px solid #d2d6de;">
-                                        <h3>General Settings</h3>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <button type="button" class="btn btn-primary addEditBtn pull-right" data-type="add" id="command-add" data-row-id="0">
+
+                                <div class="card card-accent-info">
+                                    <div class="card-header">List</div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary addEditBtn" data-type="add" id="command-add" data-row-id="0">
                                                 <span class="glyphicon glyphicon-plus"></span> Create
-                                            </button></div>
-                                        <div class="panel-body">
+                                            </button>
+                                        </div>
+                                        <hr>
+
+                                        <div class="col-md-12">
                                             <table id="settingsTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
@@ -105,7 +110,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -125,24 +129,24 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--<form method="post" id="settingForm" action="{{route('setting.updateGeneral') }}">-->
-            {{ Form::open(['route' => 'setting.updateGeneral','id'=>'settingForm','class'=>'form-horizontal','method' => 'post']) }}
+            <form method="post" id="settingForm" action="{{route('setting.updateGeneral') }}">
+                {{ csrf_field() }}
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-key prefix grey-text"></i> Key</label>
+                        <input type="text" id="key" name="key" class="form-control validate">
+                    </div>
+                    <div class="md-form mb-5">
+                        <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-user prefix grey-text"></i> Value</label>
+                        <input type="text" id="value" name="value" class="form-control validate">
 
-            <div class="modal-body mx-3">
-                <div class="md-form mb-5">
-                    <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-key prefix grey-text"></i> Key</label>
-                    <input type="text" id="key" name="key" class="form-control validate">
+                    </div>
                 </div>
-                <div class="md-form mb-5">
-                    <label data-error="wrong" data-success="right" for="form34"> <i class="fa fa-user prefix grey-text"></i> Value</label>
-                    <input type="text" id="value" name="value" class="form-control validate">
-
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary"><span class="modalBtn"> Add </span> 
+                        <i class="fa fa-paper-plane-o ml-1"></i></button>
                 </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="submit" class="btn btn-unique"><span class="modalBtn"> Add </span> <i class="fa fa-paper-plane-o ml-1"></i></button>
-            </div>
-            {{ Form::close() }}
+            </form>
         </div>
     </div>
 </div>

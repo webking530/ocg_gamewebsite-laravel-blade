@@ -92,7 +92,7 @@
             <div class="card-header">Most Played Game  :  {{ $mostPlayedGame->getNameAttribute() }}</div>
             <div class="card-body">
                 <table  class="table table-hover dataTable">
-                    <thead class="text-warning">
+                    <thead class="">
                     <th>Game</th>
                     <th>Deposited Money</th>
                     <th>Highest Win</th>

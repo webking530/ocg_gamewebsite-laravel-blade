@@ -1,37 +1,39 @@
 @extends('admin.layout.app')
+@section('title','Bonuses')
 @section('content')
-
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('bonus.index') }}">
-                Bonus Management
-            </a>
-        </li>
-        <li class="active">
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>
             @if(isset($bonus))
             {{ trans('frontend/bonuses.edit_bonus') }}
             @else
             {{ trans('frontend/bonuses.add_bonus') }}
             @endif
-        </li>
-    </ol>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h2>
-            @if(isset($bonus))
-            {{ trans('frontend/bonuses.edit_bonus') }}
-            @else
-            {{ trans('frontend/bonuses.add_bonus') }}
-            @endif
-        </h2>
+        </h4>
     </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li>
+                <a href="{{ route('bonus.index') }}">
+                    Bonuses
+                </a>
+            </li>
+            <li class="active">
+                @if(isset($bonus))
+                {{ trans('frontend/bonuses.edit_bonus') }}
+                @else
+                {{ trans('frontend/bonuses.add_bonus') }}
+                @endif
+            </li>
+        </ol>
+    </div>
+</div>
+<hr>
+<div class="row">
+   
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -41,7 +43,6 @@
                 @else
                 {{ Form::open(['route' => 'bonus.store','class'=>'form-horizontal']) }}
                 @endif
-
                 <div class="col-md-6">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Name</label>

@@ -1,67 +1,67 @@
 @extends('admin.layout.app')
+@section('title','Settings')
 @section('content')
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li class="active">Country Settings</li>
-    </ol>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <h2>Country Settings</h2>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>Countries</h4>
     </div>
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Search Panel
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                <form role="form" name="search-form" id="search-form">
-                    <div class="row">
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li><a href="#">Settings</a></li>
+            <li class="active">Countries</li>
+        </ol>
+    </div>
+</div>
+<hr>
 
-                        <div class="col-xs-12 col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <select class="form-control select2" name="enabled">
-                                    <option value="">Select Status</option>
-                                    <option value="1">Enabled</option>
-                                    <option value="0">Disabled</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Country List
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span>
-                <span class="pull-right">
-                    <a href="{{ route('country.add') }}" class="btn btn-default">
+    <div class="col-xs-12">
+
+        <div class="card card-accent-info">
+            <div class="card-header">Country List</div>
+            <div class="card-body">
+                <div class="text-center">
+                    <button class="btn btn-warning filterBtn">Filter</button>
+                    <a href="{{ route('country.add') }}" class="btn btn-primary">
                         <span class="glyphicon glyphicon-plus"></span> Create
                     </a>
-                </span>
-            </div>
-            <div class="panel-body">
-                <table id="countryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Currency code</th>
-                                    <th>Pricing Currency</th>
-                                    <th>Locale</th>
-                                    <th>Capital Timezone</th>
-                                    <th>Action</th>
-                                </tr>   
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                </div>
+                <hr>
+                <div class="col-sm-8 col-sm-offset-2 well clearfix searchFilterDiv hidden">
+                    <form role="form" name="search-form" id="search-form">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control select2" name="enabled">
+                                        <option value="">Select Status</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="0">Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <table id="countryTbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Currency code</th>
+                                <th>Pricing Currency</th>
+                                <th>Locale</th>
+                                <th>Capital Timezone</th>
+                                <th>Action</th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
