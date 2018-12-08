@@ -1,12 +1,7 @@
 @inject('locationService', "Models\Location\LocationService")
 @inject('pricingService', "Models\Pricing\PricingService")
 @extends('admin.layout.app')
-
-@section('meta')
-<title>{{ trans('user.edit.title') }} - {{ trans('user.edit.title') }}</title>
-
-@endsection
-
+@section('title','Edit Users')
 @section('content')
 <style>
     .btn-file {
@@ -34,31 +29,33 @@
     }
 </style>
 
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('user.index') }}">
-                User Management
-            </a>
-        </li>
-        <li class="active">Edit User</li>
-    </ol>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <h2>{{ trans('user.edit.title') }}</h2>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>Edit User</h4>
     </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li>
+                <a href="{{ route('user.index') }}">
+                    Users
+                </a>
+            </li>
+            <li class="active">Edit User</li>
+        </ol>
+    </div>
+</div>
+<hr>
 
+<div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
                     {{ Form::model($user, array('route' => array('user.update',$user->id), 'method' => 'PUT','class'=>'form-horizontal')) }}
-                    
+                    {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                         <label for="nickname" class="col-md-4 control-label">Nickname</label>
 
@@ -196,62 +193,62 @@
                     {{ Form::close() }}
                 </div>
                 <div class="col-md-6">
-                    
-                            
-                                <div class="col-xs-12 col-sm-8 form-group">
-                                    <label for="" class="col-md-4 control-label">Avatar</label>
-                                    <div class="col-md-8">
-                                        <img class="avatar-img {{ $user->isMale() ? 'avatar-male' : 'avatar-female' }} img-responsive" src="{{ asset($user->formatted_avatar) }}" alt="{{ $user->nickname }}" title="{{ $user->nickname }}"/>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-8 form-group">
-                                    <label for="" class="col-md-4 control-label">Bank  Account</label>
-                                    @if(!empty($bankAccount)) 
-                                    <div class="col-md-8">
-                                        <p><strong>Holder Name : </strong>{{ $bankAccount->account_holder }}</p>
-                                        <p><strong>Bank : </strong>{{ $bankAccount->bank }}</p>
-                                        <p><strong>Number : </strong>{{ $bankAccount->number }}</p>
-                                        <p><strong>Iban : </strong>{{ $bankAccount->iban }}</p>
-                                        <p><strong>Swift : </strong>{{ $bankAccount->swift }}</p>
-                                        <p><strong>Country Code : </strong>{{ $bankAccount->country_code }}</p>
-                                    </div>
-                                    @else
-                                    No Bank account linked
-                                    @endif
-                                </div>
-                                <div class="col-xs-12 col-sm-8 form-group">
-                                    <label for="" class="col-md-4 control-label">Referrals</label>
-                                    @if(!empty($user->referrals)) 
-                                    <div class="col-md-8">
-                                        @foreach($user->referrals as $ref)  
-                                        <p><strong> Email : </strong>{{ $ref->email }}</p>
-                                        @endforeach
-                                    </div>
-                                    @else
-                                    No Referrals
-                                    @endif
 
 
-                                </div>
-                                <div class="col-xs-12 col-sm-8">
-                                    <label for="" class="col-md-4 control-label">User Balance</label>
-                                    <div class="col-md-8">
-                                        {{ $user->credits }} -   @price($pricingService->exchangeCredits($user->credits, $user->currency_code), $user->currency_code)                                   
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-8">
-                                    <label for="" class="col-md-4 control-label">Days Since Registration</label>
-                                    <div class="col-md-8">
-                                        <?php
-                                        $CreatedDate = strtotime($user->created_at);
-                                        $NewDate = date('M j, Y', $CreatedDate);
-                                        $diff = date_diff(date_create($NewDate), date_create(date("M j, Y")));
-                                        echo $diff->days;
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                    <div class="col-xs-12 col-sm-8 form-group">
+                        <label for="" class="col-md-4 control-label">Avatar</label>
+                        <div class="col-md-8">
+                            <img class="avatar-img {{ $user->isMale() ? 'avatar-male' : 'avatar-female' }} img-responsive" src="{{ asset($user->formatted_avatar) }}" alt="{{ $user->nickname }}" title="{{ $user->nickname }}"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 form-group">
+                        <label for="" class="col-md-4 control-label">Bank  Account</label>
+                        @if(!empty($bankAccount)) 
+                        <div class="col-md-8">
+                            <p><strong>Holder Name : </strong>{{ $bankAccount->account_holder }}</p>
+                            <p><strong>Bank : </strong>{{ $bankAccount->bank }}</p>
+                            <p><strong>Number : </strong>{{ $bankAccount->number }}</p>
+                            <p><strong>Iban : </strong>{{ $bankAccount->iban }}</p>
+                            <p><strong>Swift : </strong>{{ $bankAccount->swift }}</p>
+                            <p><strong>Country Code : </strong>{{ $bankAccount->country_code }}</p>
+                        </div>
+                        @else
+                        No Bank account linked
+                        @endif
+                    </div>
+                    <div class="col-xs-12 col-sm-8 form-group">
+                        <label for="" class="col-md-4 control-label">Referrals</label>
+                        @if(!empty($user->referrals)) 
+                        <div class="col-md-8">
+                            @foreach($user->referrals as $ref)  
+                            <p><strong> Email : </strong>{{ $ref->email }}</p>
+                            @endforeach
+                        </div>
+                        @else
+                        No Referrals
+                        @endif
+
+
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <label for="" class="col-md-4 control-label">User Balance</label>
+                        <div class="col-md-8">
+                            {{ $user->credits }} -   @price($pricingService->exchangeCredits($user->credits, $user->currency_code), $user->currency_code)                                   
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <label for="" class="col-md-4 control-label">Days Since Registration</label>
+                        <div class="col-md-8">
+                            <?php
+                            $CreatedDate = strtotime($user->created_at);
+                            $NewDate = date('M j, Y', $CreatedDate);
+                            $diff = date_diff(date_create($NewDate), date_create(date("M j, Y")));
+                            echo $diff->days;
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

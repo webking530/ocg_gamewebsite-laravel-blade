@@ -1,31 +1,31 @@
 @inject('locationService', "Models\Location\LocationService")
 @inject('pricingService', "Models\Pricing\PricingService")
 @extends('admin.layout.app')
-
-@section('meta')
-<title>{{ trans('user.details.title') }} - {{ trans('user.details.title') }}</title>
-@endsection
-
+@section('title','Users Detail')
 @section('content')
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('user.index') }}">
-                User Management
-            </a>
-        </li>
-        <li class="active">User Detail</li>
-    </ol>
+
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>Detail of {{ ' : ' . ($user['details']->nickname ? $user['details']->nickname: '')}}</h4>
+    </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li>
+                <a href="{{ route('user.index') }}">
+                    Users
+                </a>
+            </li>
+            <li class="active">User Deatil</li>
+        </ol>
+    </div>
 </div>
+<hr>
 
 <div class="row">
-    <div class="col-lg-12">
-        <h2>{{ trans('user.details.title') }} {{ ' : ' . ($user['details']->nickname ? $user['details']->nickname: '')}}</h2>
-    </div>
+    
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">

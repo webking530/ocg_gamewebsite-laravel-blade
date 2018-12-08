@@ -45,7 +45,7 @@ $(document).ready(function () {
 
         ev.preventDefault();
         var $form = $(this);
-        
+
         $.confirm({
             title: confirmTitle,
             content: $form.data('confirm-content') === undefined ? confirmContent : $form.data('confirm-content'),
@@ -73,7 +73,7 @@ $(document).ready(function () {
         ev.preventDefault();
         var route = $(this).attr('href');
         var $button = $(this);
-        
+
         $.confirm({
             title: confirmTitle,
             content: $button.data('confirm-content') === undefined ? confirmContent : $button.data('confirm-content'),
@@ -105,5 +105,8 @@ $(document).ready(function () {
         if (socialType === 'google') {
             googleSignOut(redirectUrl);
         }
+    });
+    $('.filterBtn').on('click', function (ev) {
+        $(".searchFilterDiv").toggleClass("hidden");
     });
 });

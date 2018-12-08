@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
         <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
 
-        <title>OCG - Dashboard</title>
+        <title>OCG -  @yield('title')</title>
         <link rel="stylesheet" href="{!! mix('compiled/css/shared.css') !!}">
         <link rel="stylesheet" href="{!! mix('compiled/lumino/lumino.css') !!}">
 
@@ -17,123 +17,126 @@
         @yield('css')
     </head>
     <body>
+        <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 0, 'stickySetTop': '0px', 'stickyChangeLogo': false}">
+            <div class="header-body">
+                <div class="header-container container">
+                    <div class="header-row">
+                        <div class="header-column">
+                            <div class="header-logo">
+                                <a href="{{ route('home') }}">
+                                    <img alt="{{ trans('app.meta.short_title') }}" height="40" data-sticky-height="40" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="header-column">
+                            <div class="header-row">
+                                <div class="header-nav">
+                                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+                                        <i class="fa fa-bars"></i>
+                                    </button>
+                                    <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
+                                        <nav>
+                                            <ul class="nav nav-pills navbar-center navbar-custom">
 
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="{{ route('home') }}" style="padding-top: 13px;">
-                            <!--<span>OCG</span>Admin-->
-                        <img alt="{{ trans('app.meta.short_title') }}" height="40" data-sticky-height="40" data-sticky-top="30" src="{{ asset('img/logo.png') }}">
+                                                <li class="{{ set_active('admin.home') }}">
+                                                    <a href="{{ route('admin.home') }}">
+                                                        Dashboard
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*user*') }}">
+                                                    <a href="{{ route('user.index') }}">
+                                                        Users
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*news*') }}">
+                                                    <a href="{{ route('news.index') }}">
+                                                        News
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*bonus*') }}">
+                                                    <a href="{{ route('bonus.index') }}">
+                                                        Bonuses  
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*tournament*') }}">
+                                                    <a href="{{ route('tournament.index') }}">
+                                                        Tournaments
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*payment*') }}">
+                                                    <a href="{{ route('payment.index') }}">
+                                                        Payments
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#">
+                                                        <i class="fas fa-globe"></i> Settings<i class="fa fa-caret-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="{{ set_active('setting.general') }}">
+                                                            <a href="{{ route('setting.general') }}">
+                                                                General
+                                                            </a>
+                                                        </li>
+                                                        <li class="{{ set_active('setting.games') }}">
+                                                            <a href="{{ route('setting.games') }}">
+                                                                Games
+                                                            </a>
+                                                        </li>
+                                                        <li class="{{ set_active('setting.badges') }}">
+                                                            <a href="{{ route('setting.badges') }}">
+                                                                Badges
+                                                            </a>
+                                                        </li>
+                                                        <li class="{{ set_active('setting.countries') }}">
+                                                            <a href="{{ route('setting.countries') }}">
+                                                                Countries
+                                                            </a>
+                                                        </li>
+                                                        <li class="{{ set_active('setting.lottery') }}">
+                                                            <a href="{{ route('setting.lottery') }}">
+                                                                Lottery
+                                                            </a>
+                                                        </li>
+                                                        <li class="{{ set_active('setting.jackpot') }}">
+                                                            <a href="{{ route('setting.jackpot') }}">
+                                                                Jackpot
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
 
-                    </a>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" title="Logout" href="{{ route('home.logout') }}">
-                                <em class="fa fa-power-off"></em>
-                                <!--<span class="label label-danger">15</span>-->
-                            </a>
+                                                <li class="">
+                                                    <a href="{{ route('home.logout') }}">
+                                                        Logout
+                                                    </a>
+                                                </li>
+                                            </ul>
 
-                        </li>
-                    </ul>
-                </div>
-            </div><!-- /.container-fluid -->
-        </nav>
-        <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-            <?php
-            $r = \Route::current()->getAction();
-            $route = (isset($r['as'])) ? $r['as'] : '';
-            ?>
-
-            <ul class="nav menu">
-                <li class="{{ set_active('admin.home') }}">
-                    <a href="{{ route('admin.home') }}">
-                        <em class="fa fa-tachometer-alt">&nbsp;</em> Dashboard
-                    </a>
-                </li>
-                <li class="{{ set_active('user.index') }}">
-                    <a href="{{ route('user.index') }}">
-                        <em class="fa fa-users-cog">&nbsp;</em> User Management
-                    </a>
-                </li>
-                
-                <li class="{{ set_active('news.index') }}">
-                    <a href="{{ route('news.index') }}">
-                        <em class="fa fa-newspaper">&nbsp;</em> News Management
-                    </a>
-                </li>
-                <li class="{{ set_active('bonus.index') }}">
-                    <a href="{{ route('bonus.index') }}">
-                        <em class="fa fa-money-bill-alt">&nbsp;</em> Bonus Management
-                    </a>
-                </li>
-                <li class="{{ set_active('tournament.index') }}">
-                    <a href="{{ route('tournament.index') }}">
-                        <em class="fa fa-trophy">&nbsp;</em> Tournament
-                    </a>
-                </li>
-                <li class="{{ set_active('payment.index') }}">
-                    <a href="{{ route('payment.index') }}">
-                        <em class="fa fa-credit-card">&nbsp;</em> Payments
-                    </a>
-                </li>
-                <li class="parent {{ (starts_with($route, 'setting')) ? "active" : '' }}">
-                    <a class="{{ (starts_with($route, 'setting')) ? "" : 'collapsed' }}" data-toggle="collapse" href="#sub-item-1">
-                        <em class="fa fa-user-cog">&nbsp;</em> Settings
-                        <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
-                        <em class="fa fa-plus"></em></span>
-                    </a>
-                    <ul class="children collapse {{ (starts_with($route, 'setting')) ? "in" : '' }}" id="sub-item-1">
-                        <li class="{{ set_active('setting.general','sub-active') }}">
-                            <a class="" href="{{ route('setting.general') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> General
-                            </a>
-                        </li>
+                                            <!--                                                <ul class="nav nav-pills navbar-right navbar-custom">
+                                                                                                
+                                                
+                                                                                                <li class="">
+                                                                                                    <a href="{{ route('home.logout') }}">
+                                                                                                        Logout
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </ul>-->
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
                         
-                        <li class="{{ set_active('setting.games','sub-active') }}">
-                            <a class="" href="{{ route('setting.games') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Games
-                            </a>
-                        </li>
-                        <li class="{{ set_active('setting.badges','sub-active') }}">
-                            <a class="" href="{{ route('setting.badges') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Badges
-                            </a>
-                        </li>
-<!--                        <li class="">
-                            <a class="" href="">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Money
-                            </a>
-                        </li>-->
-                        <li class="{{ set_active('setting.countries','sub-active') }}">
-                            <a class="" href="{{ route('setting.countries') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Countries
-                            </a>
-                        </li>
-                        <li class="{{ set_active('setting.lottery','sub-active') }}">
-                            <a class="" href="{{ route('setting.lottery') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Lottery
-                            </a>
-                        </li>
-                        <li class="{{ set_active('setting.jackpot','sub-active') }}">
-                            <a class="" href="{{ route('setting.jackpot') }}">
-                                <span class="fa fa-arrow-right">&nbsp;</span> Jackpot
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="{{ route('home.logout') }}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
-            </ul>
-        </div><!--/.sidebar-->
 
+                </div>
+            </div>
+        </header>
 
-        <!--/.sidebar-->
-
-        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="col-sm-12  col-lg-12  main">
             @if (Session::has('flash_message'))
             <div id="flash-notifier" class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

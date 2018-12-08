@@ -1,75 +1,75 @@
 @inject('locationService', "Models\Location\LocationService")
 @extends('admin.layout.app')
+@section('title','Users')
 @section('content')
-
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">
-                <em class="fa fa-home"></em>
-            </a></li>
-        <li class="active">User Management</li>
-    </ol>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <h2>User Management</h2>
+<div class="row breadcrumbrow">
+    <div class="col-lg-4">
+        <h4>User Management</h4>
     </div>
-
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Search Panel
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                <form role="form" name="search-form" id="search-form">
-                    <div class="">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-3">
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Search Email" type="text"
-                                           name="email" id="email">
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-3">
-                                <div class="form-group">
-                                    <select class="form-control select2" name="country_code">
-                                        <option value="">Select Country</option>
-                                        @foreach($locationService->getEnabledCountriesList() as $code=>$country)
-                                        <option value="{{ $code }}">{{  $country }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="col-lg-8">
+        <ol class="breadcrumb pull-right">
+            <li><a href="{{ route('admin.home') }}">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Users</li>
+        </ol>
     </div>
-
 </div>
+<hr>
 <div class="row">
     <div class="col-xs-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">User List
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
-                <table id="tbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Nick Name</th>
-                            <th>Mobile Number</th>
-                            <th>Email</th>
-                            <th>Credits</th>
-                            <th>Country Code</th>
-                            <th>Currency Code</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+
+        <div class="card card-accent-info">
+            <div class="card-header">User List</div>
+            <div class="card-body">
+                <div class="text-center">
+                    <button class="btn btn-warning filterBtn">Filter</button>
+                </div>
+                <hr>
+                <div class="col-sm-8 col-sm-offset-2 well clearfix searchFilterDiv hidden">
+                    <form role="form" name="search-form" id="search-form">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Search Email" type="text"
+                                               name="email" id="email">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control select2" name="country_code">
+                                            <option value="">Select Country</option>
+                                            @foreach($locationService->getEnabledCountriesList() as $code=>$country)
+                                            <option value="{{ $code }}">{{  $country }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-12">
+                    <table id="tbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nick Name</th>
+                                <th>Mobile Number</th>
+                                <th>Email</th>
+                                <th>Credits</th>
+                                <th>Country Code</th>
+                                <th>Currency Code</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -18,15 +18,15 @@ class AdminController extends Controller {
         $games = Game::get();
         $mostPlayedGame = Game::orderBy('sessions_opened', 'desc')->first();
 
-        $topUserByCreditsEarned = GameUserWinning::with('user:id,nickname,email')
+        $topUserByCreditsEarned = GameUserWinning::with('user')
                         ->orderBy('win_amount', 'DESC')
                         ->groupBy(['user_id'])
                         ->take(10)->get();
-        $topUserByMoneyDeposited = Deposit::with('user:id,nickname,email')
+        $topUserByMoneyDeposited = Deposit::with('user')
                         ->orderBy('amount', 'DESC')
                         ->groupBy(['user_id'])
                         ->take(10)->get();
-        $topUserByMoneyWithdrawn = Withdrawal::with('user:id,nickname,email')
+        $topUserByMoneyWithdrawn = Withdrawal::with('user')
                         ->orderBy('amount', 'DESC')
                         ->groupBy(['user_id'])
                         ->take(10)->get();
@@ -52,7 +52,7 @@ class AdminController extends Controller {
             'approved' => Deposit::select(DB::raw('sum(amount_USD) as approved'))->where('status', Deposit::STATUS_APPROVED)->first(),
             'pendingapproval' => Deposit::select(DB::raw('sum(amount_USD) as pendingapproval'))->where('status', Deposit::STATUS_PENDING)->first(),
             'withdrawn' => Withdrawal::select(DB::raw('sum(amount_USD) as withdrawn'))->where('status', Deposit::STATUS_APPROVED)->first(),
-            'lastTenApprovedPayments' => Deposit::with('user:id,nickname,email')->where('status', Deposit::STATUS_APPROVED)->orderBy('approved_at', 'DESC')->get()->take(10),
+            'lastTenApprovedPayments' => Deposit::with('user')->where('status', Deposit::STATUS_APPROVED)->orderBy('approved_at', 'DESC')->get()->take(10),
         ];
         return view('admin.home'
                 , compact(
