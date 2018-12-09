@@ -1,5 +1,6 @@
 body {
-    background: #f1f4f7;
+    background: #ebecef;
+    /*#f1f4f7*/
     /*padding-top: 60px;*/
     font-size: 14px;
     color: #444444;
@@ -29,7 +30,7 @@ h3, h4 {
     font-size: 2em; }
 
 .text-muted {
-    color: #c5c7cc; }
+    color: #6f7072; }
 
 .color-gray {
     color: #444444; }
@@ -2963,7 +2964,7 @@ html.dark .dropdown-menu > li > a:hover, html.dark .dropdown-menu > li > a:focus
 .card-header{
     padding:.75rem 1.25rem;
     margin-bottom:0;
-    background-color:#dbe0e3;
+    background-color:#f6f6f6;
     border-bottom:1px solid #c8ced3;
     color: #63c2de;
     font-weight: 600;

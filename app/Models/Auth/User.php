@@ -15,8 +15,8 @@ use Models\Pricing\HasCurrency;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
     use HasCurrency;
     use HasCountry;
@@ -24,7 +24,6 @@ class User extends Authenticatable
 
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;
-
     const GENDER_MALE = 0;
     const GENDER_FEMALE = 1;
 
@@ -38,16 +37,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
     protected $dates = [
         'birthdate',
         'suspended_on',
         'verification_pin_sent_at'
     ];
-
     protected $casts = [
         'social_auth_info' => 'array'
     ];
+
+    public function country() {
+        return $this->belongsTo(\Models\Location\Country::class, 'code');
+    }
 
     public static function getGenderList() {
         return [
@@ -127,11 +128,11 @@ class User extends Authenticatable
     }
 
     public function isUser() {
-        return (int)$this->role === self::ROLE_USER;
+        return (int) $this->role === self::ROLE_USER;
     }
 
     public function isAdmin() {
-        return (int)$this->role === self::ROLE_ADMIN;
+        return (int) $this->role === self::ROLE_ADMIN;
     }
 
     public function isSuspended() {
@@ -139,11 +140,11 @@ class User extends Authenticatable
     }
 
     public function isMale() {
-        return (int)$this->gender === self::GENDER_MALE;
+        return (int) $this->gender === self::GENDER_MALE;
     }
 
     public function getGenderIconAttribute() {
-        if ((int)$this->gender === self::GENDER_MALE) {
+        if ((int) $this->gender === self::GENDER_MALE) {
             return 'fas fa-male';
         }
 
@@ -151,7 +152,7 @@ class User extends Authenticatable
     }
 
     public function getGenderColorAttribute() {
-        if ((int)$this->gender === self::GENDER_MALE) {
+        if ((int) $this->gender === self::GENDER_MALE) {
             return 'label-primary';
         }
 
@@ -272,8 +273,8 @@ class User extends Authenticatable
 
     public function getRunningTournaments(Game $game) {
         return $this->tournaments()->pending()->active()->whereHas('games', function($q) use ($game) {
-            $q->where('game_id', $game->id);
-        })->get();
+                    $q->where('game_id', $game->id);
+                })->get();
     }
 
     public function addWinMoneyToRunningTournaments(Game $game, $money) {
@@ -329,10 +330,11 @@ class User extends Authenticatable
     }
 
     /*
-    |------------------------------------------------------------------------------------
-    | Validations
-    |------------------------------------------------------------------------------------
-    */
+      |------------------------------------------------------------------------------------
+      | Validations
+      |------------------------------------------------------------------------------------
+     */
+
     public static function registerRules() {
         $rules = [
             'nickname' => 'required|string|max:255|unique:users',
@@ -349,7 +351,7 @@ class User extends Authenticatable
             'g-recaptcha-response' => 'required|captcha'
         ];
 
-        if ( ! is_production()) {
+        if (!is_production()) {
             unset($rules['g-recaptcha-response']);
         }
 
@@ -368,11 +370,12 @@ class User extends Authenticatable
             'birthdate' => 'required',
         ];
 
-        if ( ! $user->verified_identification) {
+        if (!$user->verified_identification) {
             unset($rules['email']);
             unset($rules['mobile_number']);
         }
 
         return $rules;
     }
+
 }

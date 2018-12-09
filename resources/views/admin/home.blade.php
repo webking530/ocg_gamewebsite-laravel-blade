@@ -17,81 +17,93 @@
     </div>
 </div>
 <hr>
-
 <div class="row">
-    <div class="col-sm-12 col-md-12">
+    <div class="col-sm-6 col-md-6">
         <div class="card card-accent-info">
-            <!--<div class="card-header">Amount Pending For Approval</div>-->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
-                        <div class="panel panel-teal panel-widget border-right">
-                            <div class="row no-padding">
-                                <div class="text-muted">Amount Withdrawn</div>
-                                <div class="large"> ${{ $paymentamount['withdrawn']->withdrawn or 0 }} </div>
+            <div class="card-header">Amount &nbsp;</div>
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="text-primary">Withdrawn</td>
+                            <td>${{ $paymentamount['withdrawn']->withdrawn or 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Approved</td>
+                            <td>${{ $paymentamount['approved']->approved or 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Pending Approval</td>
+                            <td>${{ $paymentamount['pendingapproval']->pendingapproval or 0 }}</td>
+                        </tr>
+                    </tbody>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
-                        <div class="panel panel-blue panel-widget border-right">
-                            <div class="row no-padding">
-                                <div class="text-muted">Amount Approved</div>
-                                <div class="large"> ${{ $paymentamount['approved']->approved or 0 }} </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
-                        <div class="panel panel-orange panel-widget border-right">
-                            <div class="row no-padding">
-                                <div class="text-muted">Amount Pending <br> For Approval</div>
-                                <div class="large"> ${{ $paymentamount['pendingapproval']->pendingapproval or 0 }}</div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
-                        <div class="panel panel-red panel-widget border-right">
-                            <div class="row no-padding">
-                                <div class="text-muted">Users By Gender</div>
-                                <div class="col-md-6">
-                                    <h4 class="card-title">Male</h4>
-                                    <p class="card-category">
-                                        <span class="text-success"><i class="fas fa-male"></i> {{ $gender->male }}% </span>
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4 class="card-title">Female</h4>
-                                    <p class="card-category">
-                                        <span class="text-success"><i class="fas fa-female"></i> {{ $gender->female }}% </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-3 col-lg-4 no-padding">
-                        <div class="panel panel-red panel-widget">
-                            <div class="row no-padding">
-                                <div class="text-muted">Users By Country</div>
-                                @foreach($usersByCountry as $country)
-                                <div class="col-md-6">
-                                    <h4 class="card-title">{{ $country->getCountryNameAttribute() }}</h4>
-                                    <p class="card-category">
-                                        <span class="text-warning"><img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"> {{ $country->users }} </span>
-                                    </p>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                </table>
             </div>
+
         </div>
     </div>
-    
+
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-accent-info">
+            <div class="card-header">Users </div>
+            <div class="card-body table-responsive">
+                <div class="col-sm-6 col-md-6 border-right">
+
+                    <table class="table">
+                        <thead class="">
+                            <tr>
+                                <th>Flag</th>
+                                <th>Country</th>
+                                <th>Users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(!empty($usersByCountry))
+                            @foreach($usersByCountry as $country)
+                            <tr>
+                                <td> <img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"></td>
+                                <td class="text-primary">{{ $country->getNameAttribute() }}</td>
+                                <td>{{ $country->user->count() }}</td>
+                            </tr>
+                            @endforeach
+                            @endif
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+                <div class="col-sm-6 col-md-6 border-right">
+
+                    <table class="table">
+                        <thead class="">
+                            <tr>
+
+                                <th>Gender</th>
+                                <th>Users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-primary">Male Users</td>
+                                <td>{{ $gender->male }}% </td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary">Female Users</td>
+                                <td>{{ $gender->female }}%  </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
 <div class="row">
 
     <div class="col-sm-6 col-md-6">
@@ -134,7 +146,7 @@
                     <th>Approved Date</th>
                     <th>Amount</th>
                     <th>Currency</th>
-                    <th>Payment Method</th>
+                    <!--<th>Payment Method</th>-->
                     </thead>
                     <tbody>
                         @if(!empty($paymentamount['lastTenApprovedPayments']))
@@ -145,7 +157,7 @@
                             <td>{{ $payment->approved_at }}</td>
                             <td>${{ $payment->amount_USD }}</td>
                             <td>{{ $payment->currency_code }}</td>
-                            <td>{{ $payment->method }}</td>
+                            <!--<td>{{ $payment->method }}</td>-->
                         </tr>
                         @endforeach
                         @endif

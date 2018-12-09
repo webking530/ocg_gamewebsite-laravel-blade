@@ -40,8 +40,8 @@ class AdminController extends Controller {
                 $gender->female = (int) $gen['percentage'];
             }
         }
-        $usersByCountry = User::select('country_code', DB::raw('count(*) as users'))->groupBy('country_code')->get();
-
+//        $usersByCountry = User::select('country_code', DB::raw('count(*) as users'))->groupBy('country_code')->get();
+        $usersByCountry = \Models\Location\Country::with('user')->get();
         $lotteries = [
             'low_stake' => Lottery::whereType(Lottery::TYPE_LOW_STAKE)->where('status', Lottery::STATUS_PENDING)->first(),
             'mid_stake' => Lottery::whereType(Lottery::TYPE_MID_STAKE)->where('status', Lottery::STATUS_PENDING)->first(),

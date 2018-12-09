@@ -1,16 +1,19 @@
-<?php namespace Models\Location;
+<?php
+
+namespace Models\Location;
 
 use Illuminate\Database\Eloquent\Model;
 use Models\Pricing\Currency;
 use Models\Pricing\HasCurrency;
 
-class Country extends Model
-{
+class Country extends Model {
+
     use HasCurrency;
     use HasLanguage;
 
     protected $primaryKey = 'code';
     public $incrementing = false;
+
     /**
      * The attributes that are not mass assignable.
      *
@@ -18,18 +21,19 @@ class Country extends Model
      */
     protected $guarded = [];
 
-    public function scopeEnabled($query)
-    {
-        return $query->whereEnabled(1);
+    public function user() {
+        return $this->hasMany(\Models\Auth\User::class, 'country_code');
     }
 
+    public function scopeEnabled($query) {
+        return $query->whereEnabled(1);
+    }
 
     public function pricingCurrency() {
         return $this->belongsTo(Currency::class, 'pricing_currency');
     }
 
-    public function getNameAttribute()
-    {
+    public function getNameAttribute() {
         return country_name($this->attributes['code']);
     }
 
