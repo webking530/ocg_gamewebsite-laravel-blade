@@ -17,73 +17,80 @@
     </div>
 </div>
 <hr>
+
 <div class="row">
-
-    <div class="col-sm-12 col-md-2">
+    <div class="col-sm-12 col-md-12">
         <div class="card card-accent-info">
-            <div class="card-header">Amount Pending For Approval</div>
-            <div class="card-body">
-                ${{ $paymentamount['pendingapproval']->pendingapproval or 0 }}
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-2">
-        <div class="card card-accent-info">
-            <div class="card-header">Amount Approved</div>
-            <div class="card-body">
-                ${{ $paymentamount['approved']->approved or 0 }}
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-2">
-        <div class="card card-accent-info">
-            <div class="card-header">Amount Withdrawn</div>
-            <div class="card-body">
-                ${{ $paymentamount['withdrawn']->withdrawn or 0 }}
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-2">
-        <div class="card card-accent-info">
-            <div class="card-header">Users</div>
+            <!--<div class="card-header">Amount Pending For Approval</div>-->
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="card-title">Male</h4>
-                        <p class="card-category">
-                            <span class="text-success"><i class="fas fa-male"></i> {{ $gender->male }}% </span>
-                        </p>
+                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
+                        <div class="panel panel-teal panel-widget border-right">
+                            <div class="row no-padding">
+                                <div class="text-muted">Amount Withdrawn</div>
+                                <div class="large"> ${{ $paymentamount['withdrawn']->withdrawn or 0 }} </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <h4 class="card-title">Female</h4>
-                        <p class="card-category">
-                            <span class="text-success"><i class="fas fa-female"></i> {{ $gender->female }}% </span>
-                        </p>
+                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
+                        <div class="panel panel-blue panel-widget border-right">
+                            <div class="row no-padding">
+                                <div class="text-muted">Amount Approved</div>
+                                <div class="large"> ${{ $paymentamount['approved']->approved or 0 }} </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
+                        <div class="panel panel-orange panel-widget border-right">
+                            <div class="row no-padding">
+                                <div class="text-muted">Amount Pending <br> For Approval</div>
+                                <div class="large"> ${{ $paymentamount['pendingapproval']->pendingapproval or 0 }}</div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3 col-lg-2 no-padding">
+                        <div class="panel panel-red panel-widget border-right">
+                            <div class="row no-padding">
+                                <div class="text-muted">Users By Gender</div>
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Male</h4>
+                                    <p class="card-category">
+                                        <span class="text-success"><i class="fas fa-male"></i> {{ $gender->male }}% </span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Female</h4>
+                                    <p class="card-category">
+                                        <span class="text-success"><i class="fas fa-female"></i> {{ $gender->female }}% </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3 col-lg-4 no-padding">
+                        <div class="panel panel-red panel-widget">
+                            <div class="row no-padding">
+                                <div class="text-muted">Users By Country</div>
+                                @foreach($usersByCountry as $country)
+                                <div class="col-md-6">
+                                    <h4 class="card-title">{{ $country->getCountryNameAttribute() }}</h4>
+                                    <p class="card-category">
+                                        <span class="text-warning"><img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"> {{ $country->users }} </span>
+                                    </p>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-4">
-        <div class="card card-accent-info">
-            <div class="card-header">Users By Country</div>
-            <div class="card-body">
-                <div class="row">
-                    @foreach($usersByCountry as $country)
-                    <div class="col-md-6">
-                        <h4 class="card-title">{{ $country->getCountryNameAttribute() }}</h4>
-                        <p class="card-category">
-                            <span class="text-warning"><img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"> {{ $country->users }} </span>
-                        </p>
-                    </div>
-                    @endforeach
-                </div>
-            
-            </div>
-        </div>
-    </div>
+    
 </div>
 <div class="row">
 

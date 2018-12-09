@@ -24,6 +24,9 @@ class UserController extends Controller {
         $users = User::select('id', 'nickname', 'mobile_number', 'email', 'credits', 'country_code', 'currency_code', 'suspended_on');
         $users->orderBy('id', 'desc');
         $data = $users->get()->toArray();
+        foreach ($users->get() as $key => $user) {
+            $data[$key]['flag'] = asset($user->flag_icon);
+        }
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
 

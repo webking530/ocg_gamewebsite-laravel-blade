@@ -113,7 +113,8 @@
             aoColumnDefs: [
                 {
                     "mRender": function (data, type, row) {
-                        $returnValue = '<a href="<?php echo route('user.index') ?>/' + row.id + '">' + row.nickname + '</a>';
+                        $returnValue = '<img src="' + row.flag + '" width="18" alt="' + row.currency_code + '">'
+                                + '&nbsp;&nbsp;<a href="<?php echo route('user.index') ?>/' + row.id + '">' + row.nickname + '</a>';
                         return $returnValue;
                     },
                     "aTargets": [0]
