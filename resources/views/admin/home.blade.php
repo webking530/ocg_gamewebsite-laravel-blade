@@ -48,64 +48,39 @@
         <div class="card card-accent-info">
             <div class="card-header">Users </div>
             <div class="card-body table-responsive">
-                <div class="col-sm-6 col-md-6 border-right">
 
-                    <table class="table">
-                        <thead class="">
-                            <tr>
-                                <th>Flag</th>
-                                <th>Country</th>
-                                <th>Users</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(!empty($usersByCountry))
-                            @foreach($usersByCountry as $country)
-                            <tr>
-                                <td> <img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"></td>
-                                <td class="text-primary">{{ $country->getNameAttribute() }}</td>
-                                <td>{{ $country->user->count() }}</td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
+                <table class="table">
+                    <thead class="">
+                        <tr>
 
-                    </table>
-                </div>
+                            <th>Gender</th>
+                            <th>Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-primary">Male Users</td>
+                            <td>{{ $gender->male }}% </td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Female Users</td>
+                            <td>{{ $gender->female }}%  </td>
+                        </tr>
 
+                    </tbody>
 
-                <div class="col-sm-6 col-md-6 border-right">
-
-                    <table class="table">
-                        <thead class="">
-                            <tr>
-
-                                <th>Gender</th>
-                                <th>Users</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-primary">Male Users</td>
-                                <td>{{ $gender->male }}% </td>
-                            </tr>
-                            <tr>
-                                <td class="text-primary">Female Users</td>
-                                <td>{{ $gender->female }}%  </td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-                </div>
+                </table>
             </div>
 
         </div>
     </div>
+
+
+
 </div>
 
-<div class="row">
 
+<div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="card card-accent-info">
             <div class="card-header">Most Played Game  :  {{ $mostPlayedGame->getNameAttribute() }}</div>
@@ -135,6 +110,45 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-accent-info">
+            <div class="card-header">Users </div>
+            <div class="card-body table-responsive">
+
+
+                <table class="table dataTable">
+                    <thead class="">
+                        <tr>
+                            <th>Flag</th>
+                            <th>Country</th>
+                            <th>Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if(!empty($usersByCountry))
+                        @foreach($usersByCountry as $country)
+                        <tr>
+                            <td> <img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"></td>
+                            <td class="text-primary">{{ $country->getNameAttribute() }}</td>
+                            <td>{{ $country->user->count() }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+
     <div class="col-sm-6 col-md-6">
         <div class="card card-accent-info">
             <div class="card-header"> Last 10 payments to be approved </div>
