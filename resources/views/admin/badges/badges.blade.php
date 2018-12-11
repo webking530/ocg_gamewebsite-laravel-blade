@@ -22,7 +22,7 @@
     <div class="col-xs-12">
 
         <div class="card card-accent-info">
-            <div class="card-header">Bonus List</div>
+            <div class="card-header">Badges List</div>
             <div class="card-body">
                 <div class="text-center">
                     <button class="btn btn-warning filterBtn">Filter</button>
