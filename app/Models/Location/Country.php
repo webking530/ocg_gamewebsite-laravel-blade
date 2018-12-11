@@ -37,4 +37,8 @@ class Country extends Model {
         return country_name($this->attributes['code']);
     }
 
+    public function getFlagIconAttribute() {
+        return "img/flags/" . mb_strtolower($this->code) . ".png";
+    }
+
 }
