@@ -64,20 +64,7 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h2>Game Settings</h2>
-    </div>
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Search Panel
-                <span class="pull-right clickable panel-toggle"><em class="fa fa-caret-square-down"></em></span></div>
-            <div class="panel-body">
 
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('js')
