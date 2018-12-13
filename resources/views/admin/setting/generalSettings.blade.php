@@ -40,6 +40,12 @@
                                         </span>Maintenance Mode </a>
                                 </li>
 
+                                <li><a href="#mathserver" data-toggle="tab" title="Game Math Service">
+                                        <span class="round-tabs three">
+                                            <i class="glyphicon glyphicon-console"></i>
+                                        </span>Game Math Service </a>
+                                </li>
+
                                 <li class="active"><a href="#other" data-toggle="tab" title="Other Options">
                                         <span class="round-tabs four">
                                             <i class="glyphicon glyphicon-unchecked"></i>
@@ -83,6 +89,15 @@
                                         </div>
                                     </form>
                                 </div>                                </div>
+
+                            <div class="tab-pane fade" id="mathserver">
+                                <h3 class="head text-center">Game Math Service</h3>
+                                <div class="col-md-12 text-center">
+                                    <a href="{{ route('admin.settings.regenerate_math') }}" class="btn btn-warning btn-lg confirm-click">Regenerate game math files</a>
+                                    <a href="{{ route('admin.settings.restart_math_server') }}" class="btn btn-danger btn-lg confirm-click">Restart game math server</a>
+                                </div>
+                            </div>
+
                             <div class="tab-pane fade in active" id="other">
 
                                 <div class="card card-accent-info">

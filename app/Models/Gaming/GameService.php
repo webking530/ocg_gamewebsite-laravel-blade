@@ -13,6 +13,8 @@ use Models\Auth\User;
 
 class GameService
 {
+    const NODE_SERVER_URL = 'http://localhost:3000';
+
     public function getGroupsList() {
         $groups = [];
 

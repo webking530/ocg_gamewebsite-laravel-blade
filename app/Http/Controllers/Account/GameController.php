@@ -146,7 +146,11 @@ class GameController extends Controller
             return 'out of credits';
         }
 
-        $result = json_decode(file_get_contents("http://localhost:3000?game={$game->slug}&lines=$lines"));
+        $query = http_build_query([
+            'game' => $game->slug,
+            'lines' => $lines
+        ]);
+        $result = json_decode(file_get_contents(GameService::NODE_SERVER_URL . "?" . $query));
 
         if ($result->ErrorOccured) {
             return $result->ExceptionMessage;

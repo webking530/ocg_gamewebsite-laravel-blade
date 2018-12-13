@@ -81,6 +81,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
     Route::post('change-password', 'Account\SettingsController@changePassword')->name('user.settings.change_password');
 });
 
+// This route does not need Laravel's user authentication since it does the session token check internally
 Route::group(['prefix' => 'account'], function () {
     Route::get('game/play/{game}', 'Account\GameController@playRequest')->name('user.games.play_request');
 });
@@ -110,6 +111,9 @@ Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode
     Route::post('setting/games/updateSettings', 'Admin\SettingController@updateGameSetting')->name('game.updateSetting');
     Route::post('setting/games/statusupdate/{id}', 'Admin\SettingController@gameStatusUpdate');
     Route::get('setting/games/detail/{id}', 'Admin\SettingController@gameDetail');
+
+    Route::get('setting/regenerate-math-files', 'Admin\GameMathController@regenerateMath')->name('admin.settings.regenerate_math');
+    Route::get('setting/restart-math-server', 'Admin\GameMathController@restartMathServer')->name('admin.settings.restart_math_server');
 
     // Badges Route
     Route::get('setting/badges', 'Admin\SettingController@badges')->name('setting.badges');
