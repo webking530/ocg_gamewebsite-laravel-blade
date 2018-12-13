@@ -47,6 +47,10 @@ body {
     color: yellow !important;
 }
 
+.money-earned-bonus {
+    color: #4488cc !important;
+}
+
 .bonus-icon {
     font-size: 50px;
     color: #ea9c1f;
@@ -233,7 +237,8 @@ body {
     background-color: #1d2127ab;
 }
 
-.deposit-coins {
+.deposit-coins,
+.deposit-coins-bonus {
     color: yellow;
     text-align: center;
     font-size: 40px;
@@ -242,8 +247,14 @@ body {
     -moz-appearance:textfield;
 }
 
+.deposit-coins-bonus {
+    color: #4488cc;
+}
+
 .deposit-coins::-webkit-inner-spin-button,
-.deposit-coins::-webkit-outer-spin-button {
+.deposit-coins::-webkit-outer-spin-button,
+.deposit-coins-bonus::-webkit-inner-spin-button,
+.deposit-coins-bonus::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }

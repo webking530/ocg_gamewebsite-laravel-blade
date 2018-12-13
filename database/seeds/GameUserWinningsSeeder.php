@@ -22,6 +22,8 @@ class GameUserWinningsSeeder extends Seeder
                 'game_id' => $game->id,
                 'user_id' => $user->id,
                 'win_amount' => $win,
+                'lose_amount' => 0,
+                'token' => substr(md5($user->id), 0, 6),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ]);

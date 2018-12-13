@@ -18,7 +18,7 @@ use Models\News\News;
 class BannersService
 {
     public function getRecentWinners() {
-        return GameUserWinning::latest()->take(16)->get()->shuffle();
+        return GameUserWinning::where('win_amount', '>', 0)->latest()->take(16)->get()->shuffle();
     }
 
     public function getBonusContent() {

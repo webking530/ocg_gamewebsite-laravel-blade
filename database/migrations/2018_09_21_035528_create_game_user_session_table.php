@@ -23,6 +23,7 @@ class CreateGameUserSessionTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->integer('credits');
+            $table->decimal('credits_bonus', 18, 2);
 
             $table->timestamps();
         });

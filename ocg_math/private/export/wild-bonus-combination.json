@@ -1,0 +1,35 @@
+{
+	"combination": [
+		[
+			8,
+			7,
+			1,
+			7,
+			8
+		],
+		[
+			7,
+			3,
+			7,
+			8,
+			5
+		],
+		[
+			8,
+			5,
+			3,
+			1,
+			4
+		]
+	],
+	"wins": [],
+	"win": 0,
+	"bonus": false,
+	"numItemInBonus": 0,
+	"bonusData": {
+		"id": -1,
+		"amount": -1
+	},
+	"freeSpins": false,
+	"freeSpinsData": -1
+}

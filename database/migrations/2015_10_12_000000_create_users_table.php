@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar_url');
             $table->integer('credits');
+            $table->decimal('credits_bonus', 18, 2);
 
             $table->string('country_code', 2);
             $table->foreign('country_code')->references('code')->on('countries');

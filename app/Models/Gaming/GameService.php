@@ -32,10 +32,11 @@ class GameService
         return $customGroups + $baseGroups;
     }
 
-    public function validSessionToken(User $user, Game $game, $token) {
-        $session = $user->getOpenSession($game);
+    public function validSessionToken(Game $game, $token) {
+        //$session = $user->getOpenSession($game);
+        $session = GameUserSession::where('game_id', $game->id)->where('token', $token)->first();
 
-        if ($session === null || $session->pivot->token !== $token) {
+        if ($session === null) {
             return false;
         }
 

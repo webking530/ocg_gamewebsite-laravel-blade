@@ -1,0 +1,98 @@
+{
+	"symbols": [
+		{
+			"0": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"1": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"2": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"3": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"4": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"id": 1
+		},
+		{
+			"0": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"1": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"2": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"3": {
+				"hitFrequency": 0,
+				"rtp": 0
+			},
+			"4": {
+				"hitFrequency": 0.5904900000000002,
+				"rtp": 0.5904900000000002
+			},
+			"id": 2
+		}
+	],
+	"bonus": [
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0.00243,
+			"rtp": 2.4299999999999997
+		}
+	],
+	"freeSpins": [
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		},
+		{
+			"hitFrequency": 0,
+			"rtp": 0
+		}
+	],
+	"total": {
+		"hitFrequency": 0.5929200000000002,
+		"rtp": 3.0204899999999997
+	}
+}

@@ -107,12 +107,26 @@ class User extends Authenticatable {
         return $sum;
     }
 
+    public function gameSessionsCreditBonusSum() {
+        $sum = 0;
+
+        foreach ($this->gameSessions as $game) {
+            $sum += $game->pivot->credits_bonus;
+        }
+
+        return $sum;
+    }
+
     public function betsOpen() {
         return $this->belongsToMany(Game::class, 'game_user_bets_open', 'user_id', 'game_id')->withPivot(['bet_amount', 'created_at', 'updated_at']);
     }
 
     public function winnings() {
-        return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount', 'created_at', 'updated_at']);
+        return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount', 'lose_amount', 'token', 'created_at', 'updated_at']);
+    }
+
+    public function freeSpins() {
+        return $this->belongsToMany(Game::class, 'game_user_freespins', 'user_id', 'game_id')->withPivot(['spins', 'created_at', 'updated_at']);
     }
 
     public function deposits() {

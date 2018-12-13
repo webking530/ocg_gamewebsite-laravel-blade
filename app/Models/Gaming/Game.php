@@ -27,7 +27,7 @@ class Game extends Model {
     const POPULAR_GAMES_AMOUNT = 8;
 
     public function winnings() {
-        return $this->belongsToMany(User::class, 'game_user_winnings', 'game_id', 'user_id')->withPivot(['win_amount']);
+        return $this->belongsToMany(User::class, 'game_user_winnings', 'game_id', 'user_id')->withPivot(['win_amount', 'lose_amount', 'token']);
     }
 
     public function sessions() {

@@ -23,6 +23,8 @@ class CreateGameUserWinningsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->integer('win_amount');
+            $table->decimal('lose_amount', 18, 2);
+            $table->string('token', 6);
 
             $table->timestamps();
         });

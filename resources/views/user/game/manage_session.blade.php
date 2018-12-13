@@ -32,7 +32,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h2 class="text-center">Credits in Session</h2>
-                                                    <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)</h3>
+                                                    <h3 class="text-center">
+                                                        <span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($gameSession->pivot->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits($gameSession->pivot->credits, $user->currency_code), $user->currency_code)
+                                                    </h3>
+                                                    <h3 class="text-center">
+                                                        <span class="money-earned-bonus"><i class="fas fa-star"></i> {{ number_format($gameSession->pivot->credits_bonus, 2) }}</span>
+                                                    </h3>
 
                                                     <h4>Session opened @datetime($gameSession->pivot->created_at)</h4>
 
@@ -59,13 +64,25 @@
                                                     <a href="#" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i> Add Money</a>
                                                     <hr>
 
-                                                    <h4>Input the amount in coins <i class="fas fa-coins money-earned"></i></h4>
-                                                    <div class="row mt-md mb-md">
-                                                        <div class="col-md-offset-3 col-md-6 text-center">
-                                                            <input type="number" name="credits" class="form-control deposit-coins" required="required" step="0.01" min="1" max="{{ $user->credits }}" placeholder="&middot; &middot; &middot;">
+                                                    <div class="col-md-6">
+                                                        <h4>Amount in coins <i class="fas fa-coins money-earned"></i></h4>
+                                                        <div class="row mt-md mb-md">
+                                                            <div class="col-md-12 text-center">
+                                                                <input type="number" name="credits" class="form-control deposit-coins" required="required" step="0.01" min="1" max="{{ $user->credits }}" placeholder="&middot; &middot; &middot;">
+                                                            </div>
                                                         </div>
+                                                        <h3 id="inputMoney" style="display: none" data-rate="{{ $pricingService->rate('USD', $user->currency_code) }}">{{ $user->currency->symbol }}<span>0.00</span> {{ $user->currency_code }}</h3>
                                                     </div>
-                                                    <h3 id="inputMoney" style="display: none" data-rate="{{ $pricingService->rate('USD', $user->currency_code) }}">{{ $user->currency->symbol }}<span>0.00</span> {{ $user->currency_code }}</h3>
+
+                                                    <div class="col-md-6">
+                                                        <h4>Bonus amount in coins <i class="fas fa-star money-earned-bonus"></i></h4>
+                                                        <div class="row mt-md mb-md">
+                                                            <div class="col-md-12 text-center">
+                                                                <input type="number" name="credits_bonus" class="form-control deposit-coins-bonus" required="required" step="0.01" min="0" max="{{ $user->credits_bonus }}" placeholder="&middot; &middot; &middot;">
+                                                            </div>
+                                                        </div>
+                                                        {{--<h3 id="inputMoney" style="display: none" data-rate="{{ $pricingService->rate('USD', $user->currency_code) }}">{{ $user->currency->symbol }}<span>0.00</span> {{ $user->currency_code }}</h3>--}}
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <img class="img-responsive margin-auto" src="{{ asset($game->icon_url) }}" alt="{{ $game->name }}" />

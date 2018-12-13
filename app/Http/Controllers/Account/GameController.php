@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Gaming\Game;
 use Models\Gaming\GameService;
+use Models\Gaming\GameUserSession;
 use Models\Gaming\GameUserWinning;
 use Models\Gaming\Jackpot;
 
@@ -42,6 +43,7 @@ class GameController extends Controller
 
     public function depositToGame(Request $request, Game $game) {
         $credits = (float)$request->get('credits');
+        $creditsBonus = (float)$request->get('credits_bonus');
 
         if ( ! $game->enabled) {
             $this->flashNotifier->error(trans('frontend/game.game_disabled'));
@@ -49,7 +51,7 @@ class GameController extends Controller
             return redirect()->back();
         }
 
-        if ($credits > $this->user->credits || $credits < 1) {
+        if ($credits > $this->user->credits || $credits < 1 || $creditsBonus > $this->user->credits_bonus) {
             $this->flashNotifier->error(trans('frontend/game.invalid_credits'));
 
             return redirect()->back();
@@ -69,11 +71,13 @@ class GameController extends Controller
 
         $this->user->gameSessions()->attach($game->id, [
             'credits' => $credits,
+            'credits_bonus' => $creditsBonus,
             'created_at' => $now,
             'updated_at' => $now
         ]);
 
         $this->user->credits -= $credits;
+        $this->user->credits_bonus -= $creditsBonus;
         $this->user->save();
 
         DB::commit();
@@ -117,10 +121,51 @@ class GameController extends Controller
         return view("user.live-games.{$game->slug}", compact('game', 'token'));
     }
 
+    public function playRequest(Request $request, Game $game) {
+        $bet = (int)$request->get('bet') / 100;
+        $lines = (int)$request->get('lines');
+        $token = $request->get('token');
+
+        if ($bet < 0.01) {
+            return 'invalid bet';
+        }
+
+        if ($lines < 1) {
+            return 'invalid lines';
+        }
+
+        if ( ! $this->gameService->validSessionToken($game, $token)) {
+            return 'invalid token';
+        }
+
+        $session = GameUserSession::where('token', $token)->first();
+
+        $result = json_decode(file_get_contents("http://localhost:3000?game={$game->slug}&lines=$lines"));
+
+        if ($result->ErrorOccured) {
+            return $result->ExceptionMessage;
+        }
+
+        $result = $result->Result;
+
+        if (count($result->wins)) {
+            $winAmount = $bet * $result->win;
+        } else {
+            $winAmount = - $bet * $lines;
+        }
+
+        $session->credits += $winAmount;
+        $session->save();
+
+        $result->credits = $session->credits * 100;
+
+        return json_encode($result);
+    }
+
     public function checkToken(Request $request, Game $game) {
         $token = $request->get('token');
 
-        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+        if ( ! $this->gameService->validSessionToken($game, $token)) {
             return 'invalid';
         }
 
@@ -131,7 +176,7 @@ class GameController extends Controller
         $token = $request->get('token');
         $settings = $request->get('settings');
 
-        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+        if ( ! $this->gameService->validSessionToken($game, $token)) {
             return 'invalid';
         }
 
@@ -155,7 +200,7 @@ class GameController extends Controller
         $token = $request->get('token');
         $settings = $request->get('settings');
 
-        if ( ! $this->gameService->validSessionToken($this->user, $game, $token)) {
+        if ( ! $this->gameService->validSessionToken($game, $token)) {
             return 'invalid';
         }
 

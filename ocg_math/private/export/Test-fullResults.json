@@ -1,0 +1,20 @@
+{
+	"wins": [
+		{
+			"games": 40740,
+			"winCoefficient": "0-1"
+		},
+		{
+			"games": 59017,
+			"winCoefficient": "1-2"
+		},
+		{
+			"games": 211,
+			"winCoefficient": "1000-1001"
+		}
+	],
+	"total": {
+		"hitFrequency": 0.5926,
+		"rtp": 3.02049
+	}
+}

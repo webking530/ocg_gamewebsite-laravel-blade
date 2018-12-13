@@ -196,8 +196,9 @@
                                                                             <span class="dropdown-mega-sub-title"><img class="valign-top" src="{{ asset(Auth::user()->flag_icon) }}" width="32"/> {{ Auth::user()->nickname }}</span>
                                                                         </div>
                                                                         <div class="col-md-8 mt-md">
-                                                                            <h2 class="text-center">My Balance</h2>
-                                                                            <h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits(Auth::user()->credits, Auth::user()->currency_code), Auth::user()->currency_code)</h3>
+                                                                            @include('user.partials.balance', ['user' => Auth::user()])
+                                                                            {{--<h2 class="text-center">My Balance</h2>--}}
+                                                                            {{--<h3 class="text-center"><span class="money-earned"><i class="fas fa-coins"></i> {{ number_format(Auth::user()->credits, 2) }}</span> <span class="text-blue">&mdash;</span> @price($pricingService->exchangeCredits(Auth::user()->credits, Auth::user()->currency_code), Auth::user()->currency_code)</h3>--}}
                                                                             <hr>
                                                                             <ul class="dropdown-mega-sub-nav text-center">
                                                                                 <li>
