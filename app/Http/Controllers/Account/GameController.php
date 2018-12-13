@@ -140,6 +140,12 @@ class GameController extends Controller
 
         $session = GameUserSession::where('token', $token)->first();
 
+        $totBet = $bet * $lines;
+
+        if ($session->credits < 0 || $totBet > $session->credits) {
+            return 'out of credits';
+        }
+
         $result = json_decode(file_get_contents("http://localhost:3000?game={$game->slug}&lines=$lines"));
 
         if ($result->ErrorOccured) {
@@ -151,7 +157,7 @@ class GameController extends Controller
         if (count($result->wins)) {
             $winAmount = $bet * $result->win;
         } else {
-            $winAmount = - $bet * $lines;
+            $winAmount = - $totBet;
         }
 
         $session->credits += $winAmount;
