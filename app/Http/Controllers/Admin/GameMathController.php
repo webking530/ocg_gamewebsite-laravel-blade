@@ -14,7 +14,7 @@ class GameMathController extends Controller
     }
 
     public function restartMathServer() {
-        exec('cd /web/ocgcasino.com/ocg_math/public && nodejs server.js');
+        exec('cd /web/ocgcasino.com/ocg_math/public && nodejs server.js > /dev/null &');
 
         $this->flashNotifier->success('Server restarted successfully');
 
