@@ -3,6 +3,8 @@ let mix = require('laravel-mix');
 // Shared styles and scripts
 mix.styles([
     'resources/assets/vendor/bootstrap/css/bootstrap.min.css',
+    'resources/assets/vendor/bootstrap/css/bootstrap-toggle.min.css',
+    'resources/assets/vendor/bootstrap/css/daterangepicker.css',
     'resources/assets/vendor/fontawesome-5.2.0/all.min.css',
     'resources/assets/vendor/jquery-confirm/jquery-confirm.min.css',
     'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.css',
@@ -13,6 +15,9 @@ mix.styles([
 mix.scripts([
     'resources/assets/vendor/jquery-3.3.1/jquery-3.3.1.js',
     'resources/assets/vendor/bootstrap/js/bootstrap.min.js',
+    'resources/assets/vendor/bootstrap/js/moment.min.js',
+    'resources/assets/vendor/bootstrap/js/daterangepicker.js',
+    'resources/assets/vendor/bootstrap/js/bootstrap-toggle.min.js',
     'resources/assets/vendor/jquery-confirm/jquery-confirm.min.js',
     'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
     'resources/assets/vendor/json-editor/jsoneditor.min.js',

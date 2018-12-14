@@ -39,13 +39,11 @@
                                             <i class="glyphicon glyphicon-wrench"></i>
                                         </span>Maintenance Mode </a>
                                 </li>
-
                                 <li><a href="#mathserver" data-toggle="tab" title="Game Math Service">
                                         <span class="round-tabs three">
                                             <i class="glyphicon glyphicon-console"></i>
                                         </span>Game Math Service </a>
                                 </li>
-
                                 <li class="active"><a href="#other" data-toggle="tab" title="Other Options">
                                         <span class="round-tabs four">
                                             <i class="glyphicon glyphicon-unchecked"></i>
@@ -55,40 +53,42 @@
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade" id="profile">
-                                <h3 class="head text-center">Enable/Disable User Registration</h3>
-                                <div class="col-md-12">
-                                    <form>
-                                        <label>User Registration : </label>
-                                        <div class="btn-group" id="status" data-toggle="buttons">
-                                            <label class="btn btn-default btn-on {{ settings('registration_enable_disable') == 'on' ? 'active' : '' }}">
-                                                <input type="radio" id="on" value="on" class="registration"
-                                                       name="registration"
-                                                       checked="{{ settings('registration_enable_disable') == 'on' ? 'checked' : '' }}">ON</label>
-                                            <label class="btn btn-default btn-off {{ settings('registration_enable_disable') == 'off' ? 'active' : '' }}">
-                                                <input type="radio" id="off" value="off" class="registration"
-                                                       name="registration"
-                                                       checked="{{ settings('registration_enable_disable') == 'on' ? 'checked' : '' }}">OFF</label>
+                                <div class="card card-accent-info">
+
+                                    <div class="card-body">
+                                        <div class="text-center">
+
+                                            <span class="">Enable/Disable User Registration</span> 
+
                                         </div>
-                                    </form>
+                                        <hr>
+
+                                        <div class="col-md-12">
+                                            <label>User Registration : &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <input class="registration" type="checkbox" name="registration" {{ settings('registration_enable_disable') == 'on' ? 'checked' : '' }} data-toggle="toggle" data-style="ios" >
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="maintenance">
-                                <h3 class="head text-center">Maintenance Mode</h3>
-                                <div class="col-md-12">
-                                    <form>
-                                        <label>Maintenance Mode : </label>
-                                        <div class="btn-group" id="status" data-toggle="buttons">
-                                            <label class="btn btn-default btn-on {{ settings('maintenance_mode') == 'on' ? 'active' : '' }}">
-                                                <input type="radio" id="on" value="on" class="maintenance"
-                                                       name="maintenance"
-                                                       checked="{{ settings('maintenance_mode') == 'on' ? 'checked' : '' }}">ON</label>
-                                            <label class="btn btn-default btn-off {{ settings('maintenance_mode') == 'off' ? 'active' : '' }}">
-                                                <input type="radio" id="off" value="off" class="maintenance"
-                                                       name="maintenance"
-                                                       checked="{{ settings('maintenance_mode') == 'off' ? 'checked' : '' }}">OFF</label>
+
+                                <div class="card card-accent-info">
+
+                                    <div class="card-body">
+                                        <div class="text-center">
+
+                                            <span class="">Maintenance Mode :</span> 
+
                                         </div>
-                                    </form>
-                                </div>                                </div>
+                                        <hr>
+
+                                        <div class="col-md-12">
+                                            <label>Maintenance Mode : &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <input class="maintenance" type="checkbox" name="maintenance"  {{ settings('maintenance_mode') == 'on' ? 'checked' : '' }} data-toggle="toggle" data-style="ios" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="tab-pane fade" id="mathserver">
                                 <h3 class="head text-center">Game Math Service</h3>
@@ -97,7 +97,6 @@
                                     <a href="{{ route('admin.settings.restart_math_server') }}" class="btn btn-danger btn-lg confirm-click">Restart game math server</a>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade in active" id="other">
 
                                 <div class="card card-accent-info">

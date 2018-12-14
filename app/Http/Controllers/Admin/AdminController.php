@@ -40,7 +40,7 @@ class AdminController extends Controller {
                 $gender->female = (int) $gen['percentage'];
             }
         }
-//        $usersByCountry = User::select('country_code', DB::raw('count(*) as users'))->groupBy('country_code')->get();
+        // $usersByCountry = User::select('country_code', DB::raw('count(*) as users'))->groupBy('country_code')->get();
         $usersByCountry = \Models\Location\Country::with('user')->get();
         $lotteries = [
             'low_stake' => Lottery::whereType(Lottery::TYPE_LOW_STAKE)->where('status', Lottery::STATUS_PENDING)->first(),
@@ -50,10 +50,14 @@ class AdminController extends Controller {
 
         $paymentamount = [
             'approved' => Deposit::select(DB::raw('sum(amount_USD) as approved'))->where('status', Deposit::STATUS_APPROVED)->first(),
-            'pendingapproval' => Deposit::select(DB::raw('sum(amount_USD) as pendingapproval'))->where('status', Deposit::STATUS_PENDING)->first(),
-            'withdrawn' => Withdrawal::select(DB::raw('sum(amount_USD) as withdrawn'))->where('status', Deposit::STATUS_APPROVED)->first(),
+            'pendingapprovalWithdrawal' => Withdrawal::select(DB::raw('sum(amount_USD) as pendingapprovalWithdrawal'))->where('status', Withdrawal::STATUS_PENDING)->first(),
+            'pendingapprovalDeposit' => Deposit::select(DB::raw('sum(amount_USD) as pendingapprovalDeposit'))->where('status', Deposit::STATUS_PENDING)->first(),
+            'withdrawn' => Withdrawal::select(DB::raw('sum(amount_USD) as withdrawn'))->where('status', Withdrawal::STATUS_APPROVED)->first(),
             'lastTenApprovedPayments' => Deposit::with('user')->where('status', Deposit::STATUS_APPROVED)->orderBy('approved_at', 'DESC')->get()->take(10),
         ];
+//        echo '<pre>';
+//        print_r($usersByCountry);
+//        die;
         return view('admin.home'
                 , compact(
                         'games'
@@ -67,6 +71,31 @@ class AdminController extends Controller {
                         , 'lotteries'
                         , 'paymentamount'
         ));
+    }
+
+    public function filterpayments(Request $request) {
+        $from = $request->get('from');
+        $to = $request->get('to');
+
+        $approved = Deposit::select(DB::raw('sum(amount_USD) as approved'))->where('status', Deposit::STATUS_APPROVED);
+        $withdrawn = Withdrawal::select(DB::raw('sum(amount_USD) as withdrawn'))->where('status', Withdrawal::STATUS_APPROVED);
+        $pendingapprovalWithdrawal = Withdrawal::select(DB::raw('sum(amount_USD) as pendingapprovalWithdrawal'))->where('status', Withdrawal::STATUS_PENDING);
+        $pendingapprovalDeposit = Deposit::select(DB::raw('sum(amount_USD) as pendingapprovalDeposit'))->where('status', Deposit::STATUS_PENDING);
+
+        if ($request->get('label') != 'All Time') {
+            $approved->whereBetween('approved_at', [$from, $to]);
+            $withdrawn->whereBetween('updated_at', [$from, $to]);
+            $pendingapprovalWithdrawal->whereBetween('created_at', [$from, $to]);
+            $pendingapprovalDeposit->whereBetween('created_at', [$from, $to]);
+        }
+
+        $paymentamount = [
+            'approved' => $approved->first(),
+            'withdrawn' => $withdrawn->first(),
+            'pendingapprovalWithdrawal' => $pendingapprovalWithdrawal->first(),
+            'pendingapprovalDeposit' => $pendingapprovalDeposit->first(),
+        ];
+        return $paymentamount;
     }
 
 }

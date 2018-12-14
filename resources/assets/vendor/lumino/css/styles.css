@@ -1536,9 +1536,9 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
 
     #header .header-nav-main nav > ul > li.dropdown .dropdown-menu li a {
         border-bottom: 1px solid #f4f4f4;
-        color: #777;
+        color: #686767;
         font-size: 0.9em;
-        font-weight: 400;
+        font-weight: bold;
         padding: 8px 20px 8px 8px;
         position: relative;
         text-transform: none;
@@ -2901,7 +2901,7 @@ html.dark .dropdown-menu > li > a {
 }
 
 html.dark .dropdown-menu > li > a:hover, html.dark .dropdown-menu > li > a:focus {
-    background-color: #2e353e;
+    background-color: #ebecef;
 }
 .header-news{
     background-color: #2e353e;
@@ -3288,3 +3288,9 @@ html.dark .dropdown-menu > li > a:hover, html.dark .dropdown-menu > li > a:focus
         column-count:2
     }
 }
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+
+.toggle.android { border-radius: 0px;}
+.toggle.android .toggle-handle { border-radius: 0px; }

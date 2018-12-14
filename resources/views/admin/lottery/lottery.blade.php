@@ -10,7 +10,6 @@
             <li><a href="{{ route('admin.home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li><a href="#">Settings</a></li>
             <li class="active">Lottery</li>
         </ol>
     </div>
@@ -23,7 +22,7 @@
             <div class="card-header">
 
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1" data-toggle="tab">Lottery List</a></li>
+                    <li class="active"><a href="#tab1" data-toggle="tab">Lotteries</a></li>
                     <li><a href="#tab2" data-toggle="tab">Edit Lottery settings</a></li>
                 </ul>
             </div>

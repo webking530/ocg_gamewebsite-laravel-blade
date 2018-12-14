@@ -5,6 +5,7 @@ namespace Models\Location;
 use Illuminate\Database\Eloquent\Model;
 use Models\Pricing\Currency;
 use Models\Pricing\HasCurrency;
+use Illuminate\Support\Facades\DB;
 
 class Country extends Model {
 
@@ -39,6 +40,12 @@ class Country extends Model {
 
     public function getFlagIconAttribute() {
         return "img/flags/" . mb_strtolower($this->code) . ".png";
+    }
+
+    public function getDepositsByCountry(Country $country) {
+        $deposite = \Models\Pricing\Deposit::select(DB::raw('sum(amount_USD) as countrydepossite'))
+                        ->where('currency_code', $country->currency_code)->first();
+        return ($deposite->countrydepossite) != null ? $deposite->countrydepossite : 0;
     }
 
 }
