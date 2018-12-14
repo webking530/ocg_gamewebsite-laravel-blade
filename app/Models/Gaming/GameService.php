@@ -65,4 +65,15 @@ class GameService
 
         return true;
     }
+
+    public function generateMathFiles() {
+        exec('cd /web/ocgcasino.com/ocg_math/public && sh math.sh > /dev/null &');
+
+        $this->restartMathServer();
+    }
+
+    public function restartMathServer() {
+        exec('kill -9 $(lsof -ti :3000)');
+        exec('cd /web/ocgcasino.com/ocg_math/public && nodejs server.js > /dev/null &');
+    }
 }
