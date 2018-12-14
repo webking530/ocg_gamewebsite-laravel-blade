@@ -298,5 +298,17 @@ class GamesSeeder extends Seeder
             'settings' => '{"user_cash_key":"money","game_cash_key":"casino_cash","live":{"min_bet":0.1,"max_bet":1000,"time_bet":0,"time_winner":1500,"win_occurrence":40,"fullscreen":true,"check_orientation":true,"show_credits":false,"num_hand_before_ads":10}}',
             'enabled' => true
         ]);
+
+        Game::create([
+            'id' => 999,
+            'slug' => 'slot-machine-dummy',
+            'icon_url' => 'img/games/1.jpg',
+            'credits' => 0,
+            'type' => GAME::TYPE_NORMAL,
+            'group' => Game::GROUP_SLOT,
+            'has_jackpot' => true,
+            'settings' => '{"user_cash_key":"money","game_cash_key":"slot_cash","live":{"win_occurrence":30,"min_reel_loop":2,"reel_delay":6,"time_show_win":2000,"time_show_all_wins":2000,"paytable_symbol_1":[0,0,100,150,200],"paytable_symbol_2":[0,0,50,100,150],"paytable_symbol_3":[0,10,25,50,100],"paytable_symbol_4":[0,10,25,50,100],"paytable_symbol_5":[0,5,15,25,50],"paytable_symbol_6":[0,2,10,20,35],"paytable_symbol_7":[0,1,5,10,15],"fullscreen":true,"check_orientation":true,"show_credits":false,"ad_show_counter":3}}',
+            'enabled' => true
+        ]);
     }
 }
