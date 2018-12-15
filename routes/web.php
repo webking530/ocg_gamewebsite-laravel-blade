@@ -90,6 +90,8 @@ Route::group(['prefix' => 'account'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => [/* 'admin', 'maintenancemode' */]], function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.home');
 
+    Route::post('paymentFilter', 'Admin\AdminController@filterpayments')->name('payment.filter');
+
     // User Routes
     Route::post('user/showdata', 'Admin\UserController@showdata')->name('user.showdata');
     Route::get('user/switch/{user}', 'Admin\UserController@switchUser');

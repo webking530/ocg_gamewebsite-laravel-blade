@@ -10,7 +10,6 @@
             <li><a href="{{ route('admin.home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li><a href="#">Settings</a></li>
             <li class="active">Games</li>
         </ol>
     </div>
@@ -63,8 +62,6 @@
         </div>
     </div>
 </div>
-
-
 @endsection
 
 @section('js')

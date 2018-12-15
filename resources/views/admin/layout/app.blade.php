@@ -68,37 +68,37 @@
                                                         Payments
                                                     </a>
                                                 </li>
+                                                <li class="{{ set_active('*lottery*') }}">
+                                                    <a href="{{ route('setting.lottery') }}">
+                                                        Lottery
+                                                    </a>
+                                                </li>
+                                                <li class="{{ set_active('*games*') }}">
+                                                    <a href="{{ route('setting.games') }}">
+                                                        Games
+                                                    </a>
+                                                </li>
                                                 <li class="dropdown">
                                                     <a class="dropdown-toggle" href="#">
                                                         <i class="fas fa-globe"></i> Settings<i class="fa fa-caret-down"></i>
                                                     </a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="{{ set_active('setting.general') }}">
+                                                        <li>
                                                             <a href="{{ route('setting.general') }}">
                                                                 General
                                                             </a>
                                                         </li>
-                                                        <li class="{{ set_active('setting.games') }}">
-                                                            <a href="{{ route('setting.games') }}">
-                                                                Games
-                                                            </a>
-                                                        </li>
-                                                        <li class="{{ set_active('setting.badges') }}">
+                                                        <li>
                                                             <a href="{{ route('setting.badges') }}">
                                                                 Badges
                                                             </a>
                                                         </li>
-                                                        <li class="{{ set_active('setting.countries') }}">
+                                                        <li>
                                                             <a href="{{ route('setting.countries') }}">
                                                                 Countries
                                                             </a>
                                                         </li>
-                                                        <li class="{{ set_active('setting.lottery') }}">
-                                                            <a href="{{ route('setting.lottery') }}">
-                                                                Lottery
-                                                            </a>
-                                                        </li>
-                                                        <li class="{{ set_active('setting.jackpot') }}">
+                                                        <li>
                                                             <a href="{{ route('setting.jackpot') }}">
                                                                 Jackpot
                                                             </a>
@@ -114,7 +114,7 @@
                                             </ul>
 
                                             <!--                                                <ul class="nav nav-pills navbar-right navbar-custom">
-                                                                                                
+                                                                                             
                                                 
                                                                                                 <li class="">
                                                                                                     <a href="{{ route('home.logout') }}">
@@ -126,11 +126,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                         </div>
                     </div>
-                        
+
 
                 </div>
             </div>

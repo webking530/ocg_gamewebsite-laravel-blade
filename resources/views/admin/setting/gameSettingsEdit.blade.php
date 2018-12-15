@@ -14,7 +14,6 @@
             <li><a href="{{ route('admin.home') }}">
                     <em class="fa fa-home"></em>
                 </a></li>
-            <li><a href="#">Settings</a></li>
             <li>
                 <a href="{{ route('setting.games') }}">
                     Games

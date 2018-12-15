@@ -4,8 +4,6 @@
 <!--<link rel="stylesheet" href="{!! mix('compiled/css/pages/admin_dashboard.css') !!}">-->
 @endsection
 @section('content')
-
-
 <div class="row breadcrumbrow">
     <div class="col-lg-4">
         <h4>Dashboard</h4>
@@ -18,55 +16,38 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-6 col-md-4">
         <div class="card card-accent-info">
-            <div class="card-header">Amount &nbsp;</div>
-            <div class="card-body table-responsive">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td class="text-primary">Withdrawn</td>
-                            <td>${{ $paymentamount['withdrawn']->withdrawn or 0 }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-primary">Approved</td>
-                            <td>${{ $paymentamount['approved']->approved or 0 }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-primary">Pending Approval</td>
-                            <td>${{ $paymentamount['pendingapproval']->pendingapproval or 0 }}</td>
-                        </tr>
-                    </tbody>
-
-                </table>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-md-6">
-        <div class="card card-accent-info">
-            <div class="card-header">Users </div>
+            <div class="card-header">Payments &nbsp;</div>
             <div class="card-body table-responsive">
 
                 <table class="table">
-                    <thead class="">
-                        <tr>
-
-                            <th>Gender</th>
-                            <th>Users</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td class="text-primary">Male Users</td>
-                            <td>{{ $gender->male }}% </td>
+                            <td colspan="2">
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                    <span></span> <b class="caret"></b>
+                                </div>
+                            </td>
+
                         </tr>
                         <tr>
-                            <td class="text-primary">Female Users</td>
-                            <td>{{ $gender->female }}%  </td>
+                            <td class="text-primary">Withdrawals</td>
+                            <td id="Withdrawals">${{ $paymentamount['withdrawn']->withdrawn or 0 }}</td>
                         </tr>
-
+                        <tr>
+                            <td class="text-primary">Deposits</td>
+                            <td id="Deposits">${{ $paymentamount['approved']->approved or 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Pending Approval Deposits</td>
+                            <td id="pendingDepositsApproval">${{ $paymentamount['pendingapprovalDeposit']->pendingapprovalDeposit or 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Pending Approval Withdrawals</td>
+                            <td id="pendingwithdrawalsApproval" >${{ $paymentamount['pendingapprovalWithdrawal']->pendingapprovalWithdrawal or 0 }}</td>
+                        </tr>
                     </tbody>
 
                 </table>
@@ -75,81 +56,7 @@
         </div>
     </div>
 
-
-
-</div>
-
-
-<div class="row">
-    <div class="col-sm-6 col-md-6">
-        <div class="card card-accent-info">
-            <div class="card-header">Most Played Game  :  {{ $mostPlayedGame->getNameAttribute() }}</div>
-            <div class="card-body">
-                <table  class="table table-hover dataTable">
-                    <thead class="">
-                    <th>Game</th>
-                    <th>Deposited Money</th>
-                    <th>Highest Win</th>
-                    <th>Latest Win</th>
-                    <th>Username</th>
-                    </thead>
-                    <tbody>
-                        @foreach($games as $game)   
-                        <tr>
-                            <td>{{ $game->getNameAttribute() }}</td>
-                            <td>{{ $game->getDepositedAmount($game) }}</td>
-                            <td>{{ $game->getHighestWinAmount($game) }}</td>
-                            <td>{{ $game->getLastWinAmount($game) }}</td>
-                            <td>{{$game->getWinningUser($game) }}</td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-6">
-        <div class="card card-accent-info">
-            <div class="card-header">Users </div>
-            <div class="card-body table-responsive">
-
-
-                <table class="table dataTable">
-                    <thead class="">
-                        <tr>
-                            <th>Flag</th>
-                            <th>Country</th>
-                            <th>Users</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @if(!empty($usersByCountry))
-                        @foreach($usersByCountry as $country)
-                        <tr>
-                            <td> <img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"></td>
-                            <td class="text-primary">{{ $country->getNameAttribute() }}</td>
-                            <td>{{ $country->user->count() }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                </table>
-
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="row">
-
-
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-6 col-md-8">
         <div class="card card-accent-info">
             <div class="card-header"> Last 10 payments to be approved </div>
             <div class="card-body table-responsive">
@@ -184,7 +91,71 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-12 col-md-12">
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-accent-info">
+            <div class="card-header">Users Country </div>
+            <div class="card-body table-responsive">
+
+
+                <table class="table dataTable">
+                    <thead class="">
+                        <tr>
+                            <th>Flag</th>
+                            <th>Country</th>
+                            <th>Users</th>
+                            <th>Deposits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if(!empty($usersByCountry))
+                        @foreach($usersByCountry as $country)
+                        <tr>
+                            <td> <img width="20" src="{{ asset($country->getFlagIconAttribute()) }}"></td>
+                            <td class="text-primary">{{ $country->getNameAttribute() }}</td>
+                            <td>{{ $country->user->count() }}</td>
+                            <td>{{ $country->getDepositsByCountry($country) }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-accent-info">
+            <div class="card-header">Users Gender </div>
+            <div class="card-body table-responsive">
+
+                <table class="table">
+                    <thead class="">
+                        <tr>
+
+                            <th>Gender</th>
+                            <th>Users</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-primary">Male Users</td>
+                            <td>{{ $gender->male }}% </td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary">Female Users</td>
+                            <td>{{ $gender->female }}%  </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-6">
         <div class="card card-accent-info">
             <div class="card-header"> Top 10 players by : </div>
             <div class="card-body table-responsive">
@@ -192,7 +163,7 @@
                 <ul class="nav nav-pills">
                     <li class="active">
                         <a class="nav-link active" data-id="credits" href="#credits" data-toggle="tab">
-                            <i class="fa fa-credit-card"></i> credits earned
+                            <i class="fa fa-credit-card"></i> Credits earned
                             <div class="ripple-container"></div>
                         </a>
                     </li>
@@ -208,20 +179,6 @@
                             <div class="ripple-container"></div>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" data-id="unverified" href="#unverified " data-toggle="tab">
-                            <i class="material-icons"></i> Unverified Users 
-                            <div class="ripple-container"></div>
-                        </a>
-
-                    </li>
-                    <li>
-                        <a class="nav-link" data-id="suspended" href="#suspended" data-toggle="tab">
-                            <i class="material-icons"></i> Suspended Users 
-                            <div class="ripple-container"></div>
-                        </a>
-                    </li>
-
                 </ul>
 
                 <div class="tab-content">
@@ -248,7 +205,6 @@
                         </table>
 
                     </div>
-
                     <div class="tab-pane fade" id="deposited">
                         <table class="table">
                             <thead class="text-primary">
@@ -293,7 +249,40 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="unverified">
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+        <div class="card card-accent-info">
+            <div class="card-header"> Top 10 : </div>
+            <div class="card-body table-responsive">
+
+                <ul class="nav nav-pills">
+
+                    <li class="active">
+                        <a class="nav-link active" data-id="unverified" href="#unverified " data-toggle="tab">
+                            <i class="material-icons"></i> Unverified Users 
+                            <div class="ripple-container"></div>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="nav-link" data-id="suspended" href="#suspended" data-toggle="tab">
+                            <i class="material-icons"></i> Suspended Users 
+                            <div class="ripple-container"></div>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane fade in active" id="unverified">
                         <table class="table">
                             <thead class="text-primary">
                                 <tr>
@@ -311,6 +300,7 @@
                                     <td>{{ $user->created_at }}</td>
                                 </tr>
                                 @endforeach
+
                                 @endif
                             </tbody>
                         </table>
@@ -348,7 +338,40 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-6 col-md-12">
+        <div class="card card-accent-info">
+            <div class="card-header">Games :  </div>
+            <div class="card-body">
+                <small class="pull-right">{{ $mostPlayedGame->getNameAttribute() }}&nbsp;<sup>MPG</sup></small>
+                <table  class="table table-hover dataTable">
+                    <thead class="">
+                    <th>Game</th>
+                    <th>Deposited Money</th>
+                    <th>Highest Win</th>
+                    <th>Latest Win</th>
+                    <th>Username</th>
+                    </thead>
+                    <tbody>
+                        @foreach($games as $game)   
+                        <tr>
+                            <td>{{ $game->getNameAttribute() }}</td>
+                            <td>{{ $game->getDepositedAmount($game) }}</td>
+                            <td>{{ $game->getHighestWinAmount($game) }}</td>
+                            <td>{{ $game->getLastWinAmount($game) }}</td>
+                            <td>{{$game->getWinningUser($game) }}</td>
+                        </tr>
+                        @endforeach
 
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="card card-accent-info">
@@ -463,6 +486,69 @@
         searching: false,
         "pageLength": 5,
     });
+
+    $(function () {
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end, label) {
+            if (label == 'All Time') {
+                $('#reportrange span').html(label);
+            } else {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            $.ajax({
+                url: '{{ route("payment.filter") }}',
+                data: {'_token': $('meta[name="csrf-token"]').attr('content'), 'label': label, 'from': start.format('YYYY-M-D'), 'to': end.format('YYYY-M-D')},
+                type: 'POST',
+                success: function (data) {
+                    var Withdrawals = data.withdrawn.withdrawn;
+                    if (Withdrawals == null) {
+                        Withdrawals = 0;
+                    }
+                    var Deposits = data.approved.approved;
+                    if (Deposits == null) {
+                        Deposits = 0;
+                    }
+                    var pendingapprovalDeposit = data.pendingapprovalDeposit.pendingapprovalDeposit;
+                    if (pendingapprovalDeposit == null) {
+                        pendingapprovalDeposit = 0;
+                    }
+                    var pendingapprovalWithdrawal = data.pendingapprovalWithdrawal.pendingapprovalWithdrawal;
+                    if (pendingapprovalWithdrawal == null) {
+                        pendingapprovalWithdrawal = 0;
+                    }
+                    $('#Deposits').text('$' + Deposits);
+                    $('#Withdrawals').text('$' + Withdrawals);
+                    $('#pendingDepositsApproval').text('$' + pendingapprovalDeposit);
+                    $('#pendingwithdrawalsApproval').text('$' + pendingapprovalWithdrawal);
+                }
+            });
+
+
+        }
+        $('#reportrange').daterangepicker({
+            startDate: null,
+            endDate: null,
+            autoApply: true,
+            showCustomRangeLabel: false,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'This Year': [moment().startOf('year'), moment().endOf('year')],
+                'Last Year': [moment().subtract(1, 'year').add(1, 'day'), moment()],
+                'All Time': [null, null]
+
+            }
+        }, cb);
+        cb(start, end, 'All Time');
+    });
+
 </script>
 <!--<script src="{!! mix('compiled/js/pages/admin_dashboard.js') !!}"></script>-->
 @endsection

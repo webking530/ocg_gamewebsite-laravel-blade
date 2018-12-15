@@ -28,16 +28,9 @@
                     <div class="form-group">
                         <label for="enable_fake_jackpot" class="col-md-4 control-label">enable_fake_jackpot</label>
                         <div class="col-md-6">
-                            <div class="btn-group" id="status" data-toggle="buttons">
-                                <label class="btn btn-default btn-on {{ settings('enable_fake_jackpot') == 'true' ? 'active' : '' }}">
-                                    <input type="radio" id="true" value="true" class="registration"
-                                           name="enable_fake_jackpot"
-                                           checked="{{ settings('enable_fake_jackpot') == 'true' ? 'checked' : '' }}">TRUE</label>
-                                <label class="btn btn-default btn-off {{ settings('enable_fake_jackpot') == 'false' ? 'active' : '' }}">
-                                    <input type="radio" id="false" value="false" class="registration"
-                                           name="enable_fake_jackpot"
-                                           checked="{{ settings('enable_fake_jackpot') == 'false' ? 'checked' : '' }}">FALSE</label>
-                            </div>                                    
+
+                            <input class="jackpotsetings" type="checkbox"   {{ settings('enable_fake_jackpot') == 'true' ? 'checked' : '' }} data-toggle="toggle" data-style="ios" >
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,5 +60,5 @@
 @endsection
 
 @section('js')
-
+<script src="{!! mix('compiled/js/pages/generalsettings.js') !!}"></script>
 @endsection

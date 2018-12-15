@@ -35,6 +35,11 @@ class UserController extends Controller {
                                     return Str::contains(Str::lower($row['email']), Str::lower($request->get('email'))) ? true : false;
                                 });
                             }
+                            if ($request->has('mobile_number') && $request->mobile_number != null) {
+                                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                                    return Str::contains(Str::lower($row['mobile_number']), Str::lower($request->get('mobile_number'))) ? true : false;
+                                });
+                            }
                             if ($request->has('country_code') && $request->country_code != null) {
                                 $instance->collection = $instance->collection->filter(function ($row) use ($request) {
                                     return Str::contains(Str::lower($row['country_code']), Str::lower($request->get('country_code'))) ? true : false;
