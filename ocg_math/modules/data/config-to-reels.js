@@ -32,7 +32,8 @@ module.exports = config => {
     for (const reel of reels) {
         shuffle(reel);
         // Make sure bonus and free spins symbols are at least (row - 1) spaces apart
-        while (!checkSymbols(reel, [config.bonusSymbol.id, config.freeSpinsSymbol.id], config.size.rows - 1)) {
+        // Also, wild symbols should be at least (row - 1) spaces apart from each other
+        while (!checkSymbols(reel, [config.bonusSymbol.id, config.freeSpinsSymbol.id], config.size.rows - 1) || !checkSymbol(reel, config.wildSymbol.id, config.size.rows - 1)) {
             shuffle(reel);
         }
     }
@@ -72,23 +73,22 @@ const checkSymbols = (reel, symbols, minimumSpacesBetween) => {
     return true;
 }
 
-// DEPRICATED
-// const checkSymbol = (reel, symbol, minimumSpacesBetween) => {
-//     const indice = getAllIndice(reel, symbol);
-//     if (indice.length === 0) {
-//         return true;
-//     }
-//     for (let i = 0; i < indice.length - 1; ++i) {
-//         const currentIndex = indice[i];
-//         const nextIndex = indice[(i + 1) % indice.length];
-//         if (nextIndex - currentIndex <= minimumSpacesBetween) {
-//             return false;
-//         }
-//     }
-//     const firstIndex = indice[0];
-//     const lastIndex = indice[indice.length - 1];
-//     if (firstIndex + reel.length - lastIndex <= minimumSpacesBetween) {
-//         return false;
-//     }
-//     return true;
-// };
+const checkSymbol = (reel, symbol, minimumSpacesBetween) => {
+    const indice = getAllIndice(reel, symbol);
+    if (indice.length === 0) {
+        return true;
+    }
+    for (let i = 0; i < indice.length - 1; ++i) {
+        const currentIndex = indice[i];
+        const nextIndex = indice[(i + 1) % indice.length];
+        if (nextIndex - currentIndex <= minimumSpacesBetween) {
+            return false;
+        }
+    }
+    const firstIndex = indice[0];
+    const lastIndex = indice[indice.length - 1];
+    if (firstIndex + reel.length - lastIndex <= minimumSpacesBetween) {
+        return false;
+    }
+    return true;
+};
