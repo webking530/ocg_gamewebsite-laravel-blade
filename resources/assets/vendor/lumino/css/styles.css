@@ -2966,7 +2966,7 @@ html.dark .dropdown-menu > li > a:hover, html.dark .dropdown-menu > li > a:focus
     margin-bottom:0;
     background-color:#f6f6f6;
     border-bottom:1px solid #c8ced3;
-    color: #63c2de;
+    color: #008AC6;
     font-weight: 600;
 }
 .card-header:first-child{
@@ -3288,9 +3288,12 @@ html.dark .dropdown-menu > li > a:hover, html.dark .dropdown-menu > li > a:focus
         column-count:2
     }
 }
-
 .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
 .toggle.ios .toggle-handle { border-radius: 20px; }
 
 .toggle.android { border-radius: 0px;}
 .toggle.android .toggle-handle { border-radius: 0px; }
+
+.text-primary {
+    color: #008AC6 !important; 
+}

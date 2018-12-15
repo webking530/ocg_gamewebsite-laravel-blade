@@ -5,7 +5,13 @@
 @endsection
 @section('content')
 
-
+<style>
+    .mpg{
+        border: 1px solid #000;
+        padding: 5px;
+        border-radius: 100%;
+    }
+</style>
 <div class="row breadcrumbrow">
     <div class="col-lg-4">
         <h4>Dashboard</h4>
@@ -15,6 +21,14 @@
             <li class="active">Dashboard</li>
         </ol>
     </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-12 text-right">
+        <small style="float: right;"><span class="mpg">mpg</span> &nbsp;&nbsp; {{ $mostPlayedGame->getNameAttribute() }}</small>
+
+    </div>
+
 </div>
 <hr>
 <div class="row">
