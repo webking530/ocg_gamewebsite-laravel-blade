@@ -122,7 +122,7 @@ module.exports = {
             return {
                 amount: paytable[1][combination.length - 1],
                 list: symbols,
-                num_win: combination.length - 1,
+                num_win: combination.length,
                 value: 1
             }
         }
