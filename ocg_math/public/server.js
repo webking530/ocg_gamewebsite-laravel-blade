@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
     try {
         const params = getParams(req);
         if (!params.game || !games[params.game]) {
-            throw new Error('Invalid game');
+            throw new Error('Invalid game: ' + params.game);
         }
         const game = games[params.game];
         if (!params.lines || params.lines <= 0 || params.lines > game.config.paylines.length) {

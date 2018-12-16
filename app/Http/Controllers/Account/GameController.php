@@ -189,7 +189,7 @@ class GameController extends Controller
         $result = json_decode(file_get_contents(GameService::NODE_SERVER_URL . "?" . $query));
 
         if ($result->ErrorOccured) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_BET, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_CUSTOM, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
         }
 
         $result = $result->Result;
