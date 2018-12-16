@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Models\Gaming\Game;
+use Models\Gaming\GameMathService;
 use Models\Gaming\GameService;
 use Models\Gaming\GameUserSession;
 use Models\Gaming\GameUserWinning;
@@ -155,7 +156,7 @@ class GameController extends Controller
         $isLiveToken = strpos($token, 'demo_') === false;
 
         if ( ! $this->gameService->validSessionToken($game, $token)) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_TOKEN, null, $bet, $lines, 0, 0);
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_INVALID_TOKEN, null, $bet, $lines, 0, 0);
         }
 
         /**
@@ -164,11 +165,11 @@ class GameController extends Controller
         $session = GameUserSession::where('token', $token)->first();
 
         if ($bet < 0.01) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_BET, null, $bet, $lines, $session->user->credits, 0);
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_INVALID_BET, null, $bet, $lines, $session->user->credits, 0);
         }
 
         if ($lines < 1) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_LINES, null, $bet, $lines, $session->user->credits, 0);
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_INVALID_LINES, null, $bet, $lines, $session->user->credits, 0);
         }
 
 
@@ -176,7 +177,7 @@ class GameController extends Controller
         $totBet = $bet * $lines;
 
         if ($session->credits < 0 || $totBet > $session->credits) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_USER_NO_CREDITS, null, $bet, $lines, $session->user->credits, 0);
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS, null, $bet, $lines, $session->user->credits, 0);
         }
 
         // TODO: check for freeSpins and append it: ArabianNightsFreeSpins / ArabianNightsFreeSpinsDemo...
@@ -186,10 +187,10 @@ class GameController extends Controller
             'game' => $configName,
             'lines' => $lines
         ]);
-        $result = json_decode(file_get_contents(GameService::NODE_SERVER_URL . "?" . $query));
+        $result = json_decode(file_get_contents(GameMathService::NODE_SERVER_URL . "?" . $query));
 
         if ($result->ErrorOccured) {
-            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_CUSTOM, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CUSTOM, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
         }
 
         $result = $result->Result;

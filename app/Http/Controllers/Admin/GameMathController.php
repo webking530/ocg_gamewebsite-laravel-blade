@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Models\Gaming\GameMathService;
 use Models\Gaming\GameService;
 
 class GameMathController extends Controller
 {
-    private $gameService;
-
-    public function __construct(GameService $gameService)
-    {
-        parent::__construct();
-        $this->gameService = $gameService;
-    }
-
     public function regenerateMath() {
-        $this->gameService->generateMathFiles();
+        GameMathService::generateMathFiles();
 
         $this->flashNotifier->success('Math files generated successfully');
 
@@ -25,7 +18,7 @@ class GameMathController extends Controller
     }
 
     public function restartMathServer() {
-        $this->gameService->restartMathServer();
+        GameMathService::restartMathServer();
 
         $this->flashNotifier->success('Server restarted successfully');
 
