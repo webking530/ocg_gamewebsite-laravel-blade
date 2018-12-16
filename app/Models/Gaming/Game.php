@@ -10,6 +10,10 @@ class Game extends Model {
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'settings' => 'array'
+    ];
+
     const TYPE_NORMAL = 0;
     const TYPE_INSTANT_WIN = 1;
     const GROUP_SLOT = 0;

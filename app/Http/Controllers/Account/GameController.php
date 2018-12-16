@@ -179,8 +179,11 @@ class GameController extends Controller
             return $this->generatePlayErrorResponse(GameService::ERROR_CODE_USER_NO_CREDITS, null, $bet, $lines, $session->user->credits, 0);
         }
 
+        // TODO: check for freeSpins and append it: ArabianNightsFreeSpins / ArabianNightsFreeSpinsDemo...
+        $configName = $isLiveToken ? $game->settings['config_name'] : $game->settings['config_name'] . 'Demo';
+
         $query = http_build_query([
-            'game' => $game->slug,
+            'game' => $configName,
             'lines' => $lines
         ]);
         $result = json_decode(file_get_contents(GameService::NODE_SERVER_URL . "?" . $query));
