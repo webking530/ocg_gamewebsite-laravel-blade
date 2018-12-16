@@ -152,7 +152,7 @@ class GameController extends Controller
         $bet = (int)$request->get('bet') / 100;
         $lines = (int)$request->get('lines');
         $token = $request->get('token');
-        $isLiveToken = strpos($token, 'live_') !== false;
+        $isLiveToken = strpos($token, 'demo_') === false;
 
         if ( ! $this->gameService->validSessionToken($game, $token)) {
             return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_TOKEN, null, $bet, $lines, 0, 0);
