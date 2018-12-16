@@ -119,11 +119,16 @@ module.exports = {
         // If all are wilds return highest pay in higest payline
         if (index === combination.length - 1 && symbol === wildSymbol) {
             // TODO - Handle finding highest paid symbol if needed
-            return paytable[1][combination.length - 1];
+            return {
+                amount: paytable[1][combination.length - 1],
+                list: symbols,
+                num_win: combination.length - 1,
+                value: 1
+            }
         }
         // If first not wild symbol is bonus or free spins symbol there is no win
         if (symbol === bonusSymbol || symbol === freeSpinsSymbol) {
-            return 0;
+            return;
         }
         // Count number of same (or wild) symbols on payline starting from the left side
         const paysymbols = [wildSymbol, symbol];
@@ -208,7 +213,6 @@ module.exports = {
         const isFreeSpins = count > 0 && paytable[count - 1] > 0;
         let freeSpinsWin = -1;
         if (isFreeSpins) {
-            console.log(paytable[count - 1]);
             freeSpinsWin = paytable[count - 1];
         }
         return {
