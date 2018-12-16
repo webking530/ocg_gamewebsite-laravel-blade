@@ -16,7 +16,7 @@ for (const game of Object.entries(config.games)) {
     const bonus4 = value.bonus4 ? JSON.parse(fileToJson(`${value.bonus4.name}-reels`)) : [[]];
     const bonus5 = value.bonus5 ? JSON.parse(fileToJson(`${value.bonus4.name}-reels`)) : [[]];
     const bonus = [[], [], bonus3[0], bonus4[0], bonus5[0]];
-    const freeSpins = value.freeSpins ? JSON.parse(fileToJson(`${value.config.name}-reels`)).map(freeSpin => freeSpin[0][0]) : [0, 0, 0, 0, 0];
+    const freeSpins = value.freeSpins ? JSON.parse(fileToJson(`${value.freeSpins.name}-reels`)).map(freeSpin => freeSpin[0][0]) : [0, 0, 0, 0, 0];
     games[key] = {
         config: value.config,
         reels,
@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
     try {
         const params = getParams(req);
         if (!params.game || !games[params.game]) {
-            throw new Error('Invalid game: ' + params.game);
+            throw new Error('Invalid game');
         }
         const game = games[params.game];
         if (!params.lines || params.lines <= 0 || params.lines > game.config.paylines.length) {

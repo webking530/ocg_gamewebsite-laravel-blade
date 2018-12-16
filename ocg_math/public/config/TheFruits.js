@@ -46,10 +46,7 @@ module.exports = {
     ],
     wildSymbol: {
         id: 8,
-        // LIVE
         occurrences: [1, 1, 0, 1, 1]
-        // DEMO
-        // occurrences: [2, 2, 1, 1, 1]
     },
     bonusSymbol: {
         id: 9,
