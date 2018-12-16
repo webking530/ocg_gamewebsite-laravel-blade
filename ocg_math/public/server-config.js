@@ -77,9 +77,9 @@ module.exports = {
         // Games for test
         'Dummy': {
             config: require('./config/Dummy'),
-            bonus3: undefined,
-            bonus4: undefined,
-            bonus5: undefined,
+            bonus3: require('./config/BonusItem3'),
+            bonus4: require('./config/BonusItem4'),
+            bonus5: require('./config/BonusItem5'),
             freeSpins: undefined,
         }
     }
