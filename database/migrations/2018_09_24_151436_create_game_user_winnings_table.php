@@ -24,7 +24,7 @@ class CreateGameUserWinningsTable extends Migration
 
             $table->integer('win_amount');
             $table->decimal('lose_amount', 18, 2);
-            $table->string('token', 6);
+            $table->string('token', 11);
 
             $table->timestamps();
         });

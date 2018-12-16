@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         Commands\Tournament\CheckPendingTournaments::class,
         Commands\Tournament\EnrollNewUsersToTournaments::class,
         Commands\Gaming\DistributeGameCash::class,
+        Commands\Gaming\CloseDemoSessions::class,
         Commands\Pricing\DCPAbuse::class,
     ];
 
@@ -48,6 +49,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('jackpot:process-stats')->environments('production')->daily()->withoutOverlapping();
 
         $schedule->command('games:distribute-money')->environments('production')->twiceDaily()->withoutOverlapping();
+        $schedule->command('demo-sessions:close')->environments('production')->everyMinute()->withoutOverlapping();
     }
 
     /**

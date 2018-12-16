@@ -33,24 +33,37 @@ class GameSessionSeeder extends Seeder
 
         $testUser = User::find(2);
 
-        DB::table('game_user_session')->insert([
-            'game_id' => 1,
-            'user_id' => $testUser->id,
-            'credits' => 1000000,
-            'credits_bonus' => 500000,
-            'token' => '1b4f0e',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
+        // These tokens are used to make integration tests with Stefan's work
+        $tokenMap = [
+            1 => '1b4f0e',
+            3 => '60303a',
+            5 => '111aaa',
+            7 => '222bbb',
+            13 => '333ccc',
+            14 => '444ddd',
+            15 => '555eee'
+        ];
 
-        DB::table('game_user_session')->insert([
-            'game_id' => 3,
-            'user_id' => $testUser->id,
-            'credits' => 1000000,
-            'credits_bonus' => 500000,
-            'token' => '60303a',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
+        foreach ($tokenMap as $gameId => $token) {
+            DB::table('game_user_session')->insert([
+                'game_id' => $gameId,
+                'user_id' => $testUser->id,
+                'credits' => 1000000,
+                'credits_bonus' => 500000,
+                'token' => $token,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]);
+
+            DB::table('game_user_session')->insert([
+                'game_id' => $gameId,
+                'user_id' => null,
+                'credits' => 1000000,
+                'credits_bonus' => 500000,
+                'token' => "demo_$token",
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            ]);
+        }
     }
 }

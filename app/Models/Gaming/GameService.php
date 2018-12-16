@@ -15,6 +15,14 @@ class GameService
 {
     const NODE_SERVER_URL = 'http://localhost:3000';
 
+    const ERROR_CODE_CUSTOM = 'custom';
+    const ERROR_CODE_INVALID_BET = 'invalid_bet';
+    const ERROR_CODE_INVALID_LINES = 'invalid_lines';
+    const ERROR_CODE_INVALID_TOKEN = 'invalid_token';
+    const ERROR_CODE_USER_NO_CREDITS = 'user_no_credits';
+    const ERROR_CODE_GAME_NO_CREDITS = 'game_no_credits';
+
+
     public function getGroupsList() {
         $groups = [];
 

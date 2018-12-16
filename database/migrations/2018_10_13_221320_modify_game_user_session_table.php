@@ -14,7 +14,7 @@ class ModifyGameUserSessionTable extends Migration
     public function up()
     {
         Schema::table('game_user_session', function (Blueprint $table) {
-            $table->string('token', 6)->nullable();
+            $table->string('token', 11)->nullable();
         });
     }
 

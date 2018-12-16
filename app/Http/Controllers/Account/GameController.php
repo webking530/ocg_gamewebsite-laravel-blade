@@ -111,7 +111,7 @@ class GameController extends Controller
         // Create a new token every time the user decides to play. This will later be checked in-game
         // to prevent having multiple tabs with the same game open
         $now = Carbon::now();
-        $token = substr(hash('sha256', "{$now->timestamp}.{$game->id}.{$this->user->id}." . uniqid()), 0, 6);
+        $token = GameUserSession::generateLiveToken($game, $this->user);
 
         $this->user->gameSessions()->updateExistingPivot($game->id, [
             'token' => $token,
@@ -121,29 +121,62 @@ class GameController extends Controller
         return view("user.live-games.{$game->slug}", compact('game', 'token'));
     }
 
+    private function generatePlayErrorResponse($errorCode, $errorMsg = null, $bet, $lines, $userCredits, $freeSpins) {
+        return json_encode([
+            'data' => [
+                'combination' => [
+                    [1,2,3,4,5],
+                    [1,2,3,4,5],
+                    [1,2,3,4,5]
+                ],
+                'win' => $bet * $lines,
+                'wins' => [],
+                'credits' => $userCredits,
+                'bonus' => false,
+                'numItemInBonus' => 0,
+                'bonusData' => [
+                    'id' => -1,
+                    'amount' => -1
+                ],
+                'freeSpins' => false,
+                'freeSpinsData' => $freeSpins
+            ],
+            'error' => [
+                'code' => $errorCode,
+                'message' => $errorMsg == null ? trans("games.errors.$errorCode") : $errorMsg
+            ]
+        ]);
+    }
+
     public function playRequest(Request $request, Game $game) {
         $bet = (int)$request->get('bet') / 100;
         $lines = (int)$request->get('lines');
         $token = $request->get('token');
+        $isLiveToken = strpos($token, 'live_') !== false;
+
+        if ( ! $this->gameService->validSessionToken($game, $token)) {
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_TOKEN, null, $bet, $lines, 0, 0);
+        }
+
+        /**
+         * @var GameUserSession $session
+         */
+        $session = GameUserSession::where('token', $token)->first();
 
         if ($bet < 0.01) {
-            return 'invalid bet';
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_BET, null, $bet, $lines, $session->user->credits, 0);
         }
 
         if ($lines < 1) {
-            return 'invalid lines';
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_LINES, null, $bet, $lines, $session->user->credits, 0);
         }
 
-        if ( ! $this->gameService->validSessionToken($game, $token)) {
-            return 'invalid token';
-        }
 
-        $session = GameUserSession::where('token', $token)->first();
 
         $totBet = $bet * $lines;
 
         if ($session->credits < 0 || $totBet > $session->credits) {
-            return 'out of credits';
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_USER_NO_CREDITS, null, $bet, $lines, $session->user->credits, 0);
         }
 
         $query = http_build_query([
@@ -153,23 +186,47 @@ class GameController extends Controller
         $result = json_decode(file_get_contents(GameService::NODE_SERVER_URL . "?" . $query));
 
         if ($result->ErrorOccured) {
-            return $result->ExceptionMessage;
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_INVALID_BET, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
         }
 
         $result = $result->Result;
 
         if (count($result->wins)) {
             $winAmount = $bet * $result->win;
+
+            if ($result->bonusData->amount > 0) {
+                $winAmount += $totBet * $result->bonusData->amount;
+            }
         } else {
             $winAmount = - $totBet;
         }
 
+        /*if ($isLiveToken && $winAmount > $game->credits) {
+            return $this->generatePlayErrorResponse(GameService::ERROR_CODE_GAME_NO_CREDITS, $result->ExceptionMessage, $bet, $lines, $session->user->credits, 0);
+        }*/
+
+        DB::beginTransaction();
+
         $session->credits += $winAmount;
         $session->save();
 
-        $result->credits = $session->credits * 100;
+        if ($isLiveToken) {
+            $game->credits -= $winAmount;
+            $game->save();
+        }
 
-        return json_encode($result);
+        DB::commit();
+
+        $result->credits = $session->credits * 100;
+        // TODO: modify freeSpinsData according to DB
+
+        return json_encode([
+            'data' => $result,
+            'error' => [
+                'code' => 'success',
+                'message' => ''
+            ]
+        ]);
     }
 
     public function checkToken(Request $request, Game $game) {
