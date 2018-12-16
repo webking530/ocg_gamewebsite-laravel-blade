@@ -1,6 +1,10 @@
-// FOR GAMES WITH WILD FEATURE
+// FOR GAMES WITH WILD AND BONUS FEATURES
+const bonus3 = 0.5 * 5 + 0.35 * 10 + 0.15 * 25;
+const bonus4 = 0.5 * 10 + 0.35 * 25 + 0.15 * 50;
+const bonus5 = 0.5 * 25 + 0.35 * 50 + 0.15 * 100;
+
 module.exports = {
-    name: 'Dummy',
+    name: 'SpaceAdventure',
 
     size: {
         reels: 5,
@@ -21,40 +25,45 @@ module.exports = {
         {
             id: 3,
             occurrences: [7, 5, 3, 3, 3],
-            paytable: [0, 0, 20, 80, 400]
+            paytable: [0, 0, 20, 50, 400]
         },
         {
             id: 4,
-            occurrences: [8, 6, 4, 4, 4],
-            paytable: [0, 0, 20, 40, 200]
+            occurrences: [7, 5, 3, 3, 3],
+            paytable: [0, 0, 20, 50, 400]
         },
         {
             id: 5,
+            occurrences: [8, 6, 4, 4, 4],
+            paytable: [0, 0, 10, 30, 200]
+        },
+        {
+            id: 6,
+            occurrences: [8, 6, 4, 4, 4],
+            paytable: [0, 0, 10, 30, 200]
+        },
+        {
+            id: 7,
             occurrences: [9, 7, 5, 5, 5],
             paytable: [0, 0, 10, 20, 100]
         },
         {
-            id: 6,
-            occurrences: [10, 8, 6, 6, 6],
-            paytable: [0, 0, 5, 20, 50]
-        },
-        {
-            id: 7,
-            occurrences: [11, 9, 7, 7, 7],
-            paytable: [0, 0, 5, 10, 25]
+            id: 8,
+            occurrences: [9, 7, 5, 5, 5],
+            paytable: [0, 0, 10, 20, 100]
         }
     ],
     wildSymbol: {
-        id: 8,
-        occurrences: [10, 10, 10, 10, 10]
+        id: 10,
+        occurrences: [1, 1, 0, 1, 1]
     },
     bonusSymbol: {
         id: 9,
-        occurrences: [0, 0, 0, 0, 0],
-        paytable: [0, 0, 0, 0, 0]
+        occurrences: [5, 5, 5, 5, 5],
+        paytable: [0, 0, bonus3, bonus4, bonus5]
     },
     freeSpinsSymbol: {
-        id: 10,
+        id: 11,
         occurrences: [0, 0, 0, 0, 0],
         paytable: [0, 0, 0, 0, 0]
     },
@@ -65,20 +74,5 @@ module.exports = {
         [{ row: 2, reel: 0 }, { row: 2, reel: 1 }, { row: 2, reel: 2 }, { row: 2, reel: 3 }, { row: 2, reel: 4 }],
         [{ row: 0, reel: 0 }, { row: 1, reel: 1 }, { row: 2, reel: 2 }, { row: 1, reel: 3 }, { row: 0, reel: 4 }],
         [{ row: 2, reel: 0 }, { row: 1, reel: 1 }, { row: 0, reel: 2 }, { row: 1, reel: 3 }, { row: 2, reel: 4 }],
-        [{ row: 1, reel: 0 }, { row: 0, reel: 1 }, { row: 0, reel: 2 }, { row: 0, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 1, reel: 0 }, { row: 2, reel: 1 }, { row: 2, reel: 2 }, { row: 2, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 0, reel: 0 }, { row: 0, reel: 1 }, { row: 1, reel: 2 }, { row: 2, reel: 3 }, { row: 2, reel: 4 }],
-        [{ row: 2, reel: 0 }, { row: 2, reel: 1 }, { row: 1, reel: 2 }, { row: 0, reel: 3 }, { row: 0, reel: 4 }],
-        [{ row: 1, reel: 0 }, { row: 2, reel: 1 }, { row: 1, reel: 2 }, { row: 0, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 2, reel: 0 }, { row: 0, reel: 1 }, { row: 1, reel: 2 }, { row: 2, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 0, reel: 0 }, { row: 1, reel: 1 }, { row: 1, reel: 2 }, { row: 1, reel: 3 }, { row: 0, reel: 4 }],
-        [{ row: 2, reel: 0 }, { row: 1, reel: 1 }, { row: 1, reel: 2 }, { row: 1, reel: 3 }, { row: 2, reel: 4 }],
-        [{ row: 0, reel: 0 }, { row: 1, reel: 1 }, { row: 0, reel: 2 }, { row: 1, reel: 3 }, { row: 0, reel: 4 }],
-        [{ row: 2, reel: 0 }, { row: 1, reel: 1 }, { row: 2, reel: 2 }, { row: 1, reel: 3 }, { row: 2, reel: 4 }],
-        [{ row: 1, reel: 0 }, { row: 1, reel: 1 }, { row: 0, reel: 2 }, { row: 1, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 1, reel: 0 }, { row: 1, reel: 1 }, { row: 2, reel: 2 }, { row: 1, reel: 3 }, { row: 1, reel: 4 }],
-        [{ row: 0, reel: 0 }, { row: 0, reel: 1 }, { row: 2, reel: 2 }, { row: 0, reel: 3 }, { row: 0, reel: 4 }],
-        [{ row: 2, reel: 0 }, { row: 2, reel: 1 }, { row: 0, reel: 2 }, { row: 2, reel: 3 }, { row: 2, reel: 4 }],
-        [{ row: 0, reel: 0 }, { row: 2, reel: 1 }, { row: 2, reel: 2 }, { row: 2, reel: 3 }, { row: 0, reel: 4 }]
     ]
 };
