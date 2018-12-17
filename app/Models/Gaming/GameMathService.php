@@ -87,7 +87,7 @@ class GameMathService
         if (count($result->wins)) {
             $winAmount = $this->bet * $result->win - $this->getTotalBet();
 
-            if ($result->bonusData->amount > 0) {
+            if ($result->bonus && $result->bonusData->amount > 0) {
                 $winAmount += $this->getTotalBet() * $result->bonusData->amount;
             }
         } else {
