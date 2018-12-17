@@ -85,7 +85,7 @@ class GameMathService
         $result = $this->serverResponse->Result;
 
         if (count($result->wins)) {
-            $winAmount = $this->bet * $result->win;
+            $winAmount = $this->bet * $result->win - $this->getTotalBet();
 
             if ($result->bonusData->amount > 0) {
                 $winAmount += $this->getTotalBet() * $result->bonusData->amount;
@@ -174,7 +174,7 @@ class GameMathService
                 ],
                 'win' => $this->bet * $this->lines,
                 'wins' => [],
-                'credits' => $this->session->credits,
+                'credits' => $this->session->credits * 100,
                 'bonus' => false,
                 'numItemInBonus' => 0,
                 'bonusData' => [
