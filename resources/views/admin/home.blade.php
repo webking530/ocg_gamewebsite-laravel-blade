@@ -63,22 +63,33 @@
                 <table class="table table-hover">
                     <thead class="">
                     <th>Nickname</th>
-                    <th>Email</th>
+                    <th>Payment Type</th>
                     <th>Approved Date</th>
                     <th>Amount</th>
                     <th>Currency</th>
-                    <!--<th>Payment Method</th>-->
+
                     </thead>
                     <tbody>
-                        @if(!empty($paymentamount['lastTenApprovedPayments']))
-                        @foreach($paymentamount['lastTenApprovedPayments'] as $payment)   
+                        @if(!empty($paymentamount['lastTenApprovedDepositPayments']))
+                        @foreach($paymentamount['lastTenApprovedDepositPayments'] as $paymentDeposit)   
                         <tr>
-                            <td> <img src="{{ asset($payment->user->flag_icon) }}" width="18" alt="{{ $payment->user->country_code }}"> {{ $payment->user->nickname }}</td>
-                            <td>{{ $payment->user->email }}</td>
-                            <td>{{ $payment->approved_at }}</td>
-                            <td>${{ $payment->amount_USD }}</td>
-                            <td>{{ $payment->currency_code }}</td>
-                            <!--<td>{{ $payment->method }}</td>-->
+                            <td> <img src="{{ asset($paymentDeposit->user->flag_icon) }}" width="18" alt="{{ $paymentDeposit->user->country_code }}"> {{ $paymentDeposit->user->nickname }}</td>
+                            <td>Deposit</td>
+                            <td>{{ $paymentDeposit->approved_at }}</td>
+                            <td>${{ $paymentDeposit->amount_USD }}</td>
+                            <td>{{ $paymentDeposit->currency_code }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                        @if(!empty($paymentamount['lastTenApprovedWithdrawalPayments']))
+                        @foreach($paymentamount['lastTenApprovedWithdrawalPayments'] as $WithdrawalPayments)   
+                        <tr>
+                            <td> <img src="{{ asset($WithdrawalPayments->user->flag_icon) }}" width="18" alt="{{ $WithdrawalPayments->user->country_code }}"> {{ $WithdrawalPayments->user->nickname }}</td>
+                            <td>Withdrawn</td>
+                            <td>{{ $WithdrawalPayments->updated_at }}</td>
+                            <td>${{ $WithdrawalPayments->amount_USD }}</td>
+                            <td>{{ $WithdrawalPayments->currency_code }}</td>
+
                         </tr>
                         @endforeach
                         @endif
@@ -259,7 +270,7 @@
 
     <div class="col-sm-12 col-md-6">
         <div class="card card-accent-info">
-            <div class="card-header"> Top 10 : </div>
+            <div class="card-header"> Users Issues : </div>
             <div class="card-body table-responsive">
 
                 <ul class="nav nav-pills">

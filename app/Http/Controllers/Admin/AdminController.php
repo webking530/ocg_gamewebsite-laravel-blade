@@ -53,11 +53,9 @@ class AdminController extends Controller {
             'pendingapprovalWithdrawal' => Withdrawal::select(DB::raw('sum(amount_USD) as pendingapprovalWithdrawal'))->where('status', Withdrawal::STATUS_PENDING)->first(),
             'pendingapprovalDeposit' => Deposit::select(DB::raw('sum(amount_USD) as pendingapprovalDeposit'))->where('status', Deposit::STATUS_PENDING)->first(),
             'withdrawn' => Withdrawal::select(DB::raw('sum(amount_USD) as withdrawn'))->where('status', Withdrawal::STATUS_APPROVED)->first(),
-            'lastTenApprovedPayments' => Deposit::with('user')->where('status', Deposit::STATUS_APPROVED)->orderBy('approved_at', 'DESC')->get()->take(10),
+            'lastTenApprovedDepositPayments' => Deposit::with('user')->where('status', Deposit::STATUS_APPROVED)->orderBy('approved_at', 'DESC')->get()->take(5),
+            'lastTenApprovedWithdrawalPayments' => Withdrawal::with('user')->where('status', Withdrawal::STATUS_APPROVED)->orderBy('updated_at', 'DESC')->get()->take(5)
         ];
-//        echo '<pre>';
-//        print_r($usersByCountry);
-//        die;
         return view('admin.home'
                 , compact(
                         'games'
