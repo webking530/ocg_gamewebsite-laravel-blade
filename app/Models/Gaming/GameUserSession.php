@@ -14,6 +14,10 @@ class GameUserSession extends Model
     protected $table = 'game_user_session';
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'extra' => 'array'
+    ];
+
     const DEMO_CREDITS = 100;
     const DEMO_SESSION_EXPIRATION_MINUTES = 60;
 

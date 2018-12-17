@@ -70,7 +70,7 @@ class User extends Authenticatable {
     }
 
     public function gameSessions() {
-        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'token', 'created_at', 'updated_at']);
+        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'token', 'extra', 'created_at', 'updated_at']);
     }
 
     public function tournaments() {
@@ -123,10 +123,6 @@ class User extends Authenticatable {
 
     public function winnings() {
         return $this->belongsToMany(Game::class, 'game_user_winnings', 'user_id', 'game_id')->withPivot(['win_amount', 'lose_amount', 'token', 'created_at', 'updated_at']);
-    }
-
-    public function freeSpins() {
-        return $this->belongsToMany(Game::class, 'game_user_freespins', 'user_id', 'game_id')->withPivot(['spins', 'created_at', 'updated_at']);
     }
 
     public function deposits() {

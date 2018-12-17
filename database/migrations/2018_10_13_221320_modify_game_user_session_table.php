@@ -15,6 +15,7 @@ class ModifyGameUserSessionTable extends Migration
     {
         Schema::table('game_user_session', function (Blueprint $table) {
             $table->string('token', 11)->nullable();
+            $table->text('extra')->nullable();
         });
     }
 
@@ -26,7 +27,8 @@ class ModifyGameUserSessionTable extends Migration
     public function down()
     {
         Schema::table('game_user_session', function (Blueprint $table) {
-            $table->dropColumn('token')->nullable();
+            $table->dropColumn('token');
+            $table->dropColumn('freespins');
         });
     }
 }

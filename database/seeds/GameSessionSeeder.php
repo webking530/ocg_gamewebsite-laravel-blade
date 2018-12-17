@@ -51,6 +51,11 @@ class GameSessionSeeder extends Seeder
                 'credits' => 1000000,
                 'credits_bonus' => 500000,
                 'token' => $token,
+                'extra' => json_encode([
+                    'free_spins' => 0,
+                    'bet' => 0,
+                    'lines' => 0
+                ]),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]);
@@ -61,6 +66,11 @@ class GameSessionSeeder extends Seeder
                 'credits' => 1000000,
                 'credits_bonus' => 500000,
                 'token' => "demo_$token",
+                'extra' => json_encode([
+                    'free_spins' => 0,
+                    'bet' => 0,
+                    'lines' => 0
+                ]),
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]);
@@ -72,6 +82,11 @@ class GameSessionSeeder extends Seeder
             'credits' => 1000000,
             'credits_bonus' => 500000,
             'token' => 'dummy',
+            'extra' => json_encode([
+                'free_spins' => 0,
+                'bet' => 0,
+                'lines' => 0
+            ]),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
