@@ -16,6 +16,7 @@ class GameMathService
     const NODE_SERVER_URL = 'http://localhost:3000';
 
     const ERROR_CODE_CUSTOM = 'custom';
+    const ERROR_CODE_CONNECTION_FAILED = 'connection_failed';
     const ERROR_CODE_INVALID_BET = 'invalid_bet';
     const ERROR_CODE_INVALID_LINES = 'invalid_lines';
     const ERROR_CODE_INVALID_TOKEN = 'invalid_token';
@@ -78,7 +79,11 @@ class GameMathService
 
         $this->serverResponse = $this->getMathServerResponse();
 
-        if ($this->serverResponse == null || $this->serverResponse->ErrorOccured) {
+        if ($this->serverResponse == null) {
+            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CONNECTION_FAILED);
+        }
+
+        if ($this->serverResponse->ErrorOccured) {
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CUSTOM);
         }
 
