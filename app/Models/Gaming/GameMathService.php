@@ -85,13 +85,17 @@ class GameMathService
         $result = $this->serverResponse->Result;
 
         if (count($result->wins)) {
-            $winAmount = $this->bet * $result->win - $this->getTotalBet();
+            $winAmount = $this->bet * $result->win;
 
             if ($result->bonus && $result->bonusData->amount > 0) {
                 $winAmount += $this->getTotalBet() * $result->bonusData->amount;
             }
         } else {
-            $winAmount = - $this->getTotalBet();
+            $winAmount = 0;
+        }
+
+        if ( ! $this->hasPendingFreeSpins()) {
+            $winAmount -= $this->getTotalBet();
         }
 
         DB::beginTransaction();
