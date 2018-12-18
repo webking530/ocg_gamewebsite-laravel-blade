@@ -181,7 +181,7 @@ class GameMathService
                     [1,2,3,4,5],
                     [1,2,3,4,5]
                 ],
-                'win' => $this->bet * $this->lines,
+                'win' => 0,
                 'wins' => [],
                 'credits' => $this->session->credits * 100,
                 'bonus' => false,
