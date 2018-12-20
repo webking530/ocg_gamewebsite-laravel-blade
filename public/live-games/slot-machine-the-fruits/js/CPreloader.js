@@ -12,9 +12,9 @@ function CPreloader() {
 
     this._init = function () {
         s_oSpriteLibrary.init(this._onImagesLoaded, this._onAllImagesLoaded, this);
-        s_oSpriteLibrary.addSprite("progress_bar", GAME_PATH + "/sprites/progress_bar.png");
-        s_oSpriteLibrary.addSprite("200x200", GAME_PATH + "/sprites/200x200.jpg");
-        s_oSpriteLibrary.addSprite("but_start", GAME_PATH + "/sprites/but_start.png");
+        s_oSpriteLibrary.addSprite("progress_bar", "./sprites/progress_bar.png");
+        s_oSpriteLibrary.addSprite("200x200", "./sprites/200x200.jpg");
+        s_oSpriteLibrary.addSprite("but_start", "./sprites/but_start.png");
         s_oSpriteLibrary.loadSprites();
 
         _oContainer = new createjs.Container();

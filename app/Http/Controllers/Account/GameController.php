@@ -124,7 +124,8 @@ class GameController extends Controller
         $sessionData = $this->gameService->generateJSONSessionData($gameSession->pivot->token, $gameSession->pivot->credits);
         $gameData = $this->gameService->generateJSONGameData($game);
 
-        return view("user.live-games.{$game->slug}", compact('game', 'sessionData', 'gameData'));
+        //return view("user.live-games.{$game->slug}", compact('game', 'sessionData', 'gameData'));
+        return view("user.live-games.layout.layout-iframe", compact('game', 'sessionData', 'gameData'));
     }
 
     public function playRequest(Request $request, Game $game) {

@@ -59,11 +59,11 @@ function CMain(oData){
         
         var aSoundsInfo = new Array();
         
-        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'press_but',loop:false,volume:1, ingamename: 'press_but'});
-        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'win',loop:false,volume:1, ingamename: 'win'});
-        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'reels',loop:false,volume:1, ingamename: 'reels'});
-        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'reel_stop',loop:false,volume:1, ingamename: 'reel_stop'});
-        aSoundsInfo.push({path: GAME_PATH + '/sounds/',filename:'start_reel',loop:false,volume:1, ingamename: 'start_reel'});
+        aSoundsInfo.push({path: './sounds/',filename:'press_but',loop:false,volume:1, ingamename: 'press_but'});
+        aSoundsInfo.push({path: './sounds/',filename:'win',loop:false,volume:1, ingamename: 'win'});
+        aSoundsInfo.push({path: './sounds/',filename:'reels',loop:false,volume:1, ingamename: 'reels'});
+        aSoundsInfo.push({path: './sounds/',filename:'reel_stop',loop:false,volume:1, ingamename: 'reel_stop'});
+        aSoundsInfo.push({path: './sounds/',filename:'start_reel',loop:false,volume:1, ingamename: 'start_reel'});
         
         RESOURCE_TO_LOAD += aSoundsInfo.length;
 
@@ -86,32 +86,32 @@ function CMain(oData){
     this._loadImages = function(){
         s_oSpriteLibrary.init( this._onImagesLoaded,this._onAllImagesLoaded, this );
 
-        s_oSpriteLibrary.addSprite("but_bg",GAME_PATH + "/sprites/but_play_bg.png");
-        s_oSpriteLibrary.addSprite("but_exit",GAME_PATH + "/sprites/but_exit.png");
-        s_oSpriteLibrary.addSprite("bg_menu",GAME_PATH + "/sprites/bg_menu.jpg");
-        s_oSpriteLibrary.addSprite("bg_game",GAME_PATH + "/sprites/bg_game.jpg");
-        s_oSpriteLibrary.addSprite("paytable",GAME_PATH + "/sprites/paytable.jpg");
-        s_oSpriteLibrary.addSprite("mask_slot",GAME_PATH + "/sprites/mask_slot.png");
-        s_oSpriteLibrary.addSprite("spin_but",GAME_PATH + "/sprites/but_spin_bg.png");
-        s_oSpriteLibrary.addSprite("coin_but",GAME_PATH + "/sprites/but_coin_bg.png");
-        s_oSpriteLibrary.addSprite("info_but",GAME_PATH + "/sprites/but_info_bg.png");
-        s_oSpriteLibrary.addSprite("bet_but",GAME_PATH + "/sprites/bet_but.png");
-        s_oSpriteLibrary.addSprite("win_frame_anim",GAME_PATH + "/sprites/win_frame_anim.png");
-        s_oSpriteLibrary.addSprite("but_lines_bg",GAME_PATH + "/sprites/but_lines_bg.png");
-        s_oSpriteLibrary.addSprite("but_maxbet_bg",GAME_PATH + "/sprites/but_maxbet_bg.png");
-        s_oSpriteLibrary.addSprite("audio_icon",GAME_PATH + "/sprites/audio_icon.png");
-        s_oSpriteLibrary.addSprite("msg_box",GAME_PATH + "/sprites/msg_box.png");
-        s_oSpriteLibrary.addSprite("logo_ctl",GAME_PATH + "/sprites/logo_ctl.png");
-        s_oSpriteLibrary.addSprite("but_fullscreen",GAME_PATH + "/sprites/but_fullscreen.png");
-        s_oSpriteLibrary.addSprite("but_credits",GAME_PATH + "/sprites/but_credits.png");
+        s_oSpriteLibrary.addSprite("but_bg","./sprites/but_play_bg.png");
+        s_oSpriteLibrary.addSprite("but_exit","./sprites/but_exit.png");
+        s_oSpriteLibrary.addSprite("bg_menu","./sprites/bg_menu.jpg");
+        s_oSpriteLibrary.addSprite("bg_game","./sprites/bg_game.jpg");
+        s_oSpriteLibrary.addSprite("paytable","./sprites/paytable.jpg");
+        s_oSpriteLibrary.addSprite("mask_slot","./sprites/mask_slot.png");
+        s_oSpriteLibrary.addSprite("spin_but","./sprites/but_spin_bg.png");
+        s_oSpriteLibrary.addSprite("coin_but","./sprites/but_coin_bg.png");
+        s_oSpriteLibrary.addSprite("info_but","./sprites/but_info_bg.png");
+        s_oSpriteLibrary.addSprite("bet_but","./sprites/bet_but.png");
+        s_oSpriteLibrary.addSprite("win_frame_anim","./sprites/win_frame_anim.png");
+        s_oSpriteLibrary.addSprite("but_lines_bg","./sprites/but_lines_bg.png");
+        s_oSpriteLibrary.addSprite("but_maxbet_bg","./sprites/but_maxbet_bg.png");
+        s_oSpriteLibrary.addSprite("audio_icon","./sprites/audio_icon.png");
+        s_oSpriteLibrary.addSprite("msg_box","./sprites/msg_box.png");
+        s_oSpriteLibrary.addSprite("logo_ctl","./sprites/logo_ctl.png");
+        s_oSpriteLibrary.addSprite("but_fullscreen","./sprites/but_fullscreen.png");
+        s_oSpriteLibrary.addSprite("but_credits","./sprites/but_credits.png");
         
         for(var i=1;i<NUM_SYMBOLS+1;i++){
-            s_oSpriteLibrary.addSprite("symbol_"+i,GAME_PATH + "/sprites/symbol_"+i+".png");
-            s_oSpriteLibrary.addSprite("symbol_"+i+"_anim",GAME_PATH + "/sprites/symbol_"+i+"_anim.png");
+            s_oSpriteLibrary.addSprite("symbol_"+i,"./sprites/symbol_"+i+".png");
+            s_oSpriteLibrary.addSprite("symbol_"+i+"_anim","./sprites/symbol_"+i+"_anim.png");
         }
         
         for(var j=1;j<NUM_PAYLINES+1;j++){
-            s_oSpriteLibrary.addSprite("payline_"+j,GAME_PATH + "/sprites/payline_"+j+".png");
+            s_oSpriteLibrary.addSprite("payline_"+j,"./sprites/payline_"+j+".png");
         }
         
         RESOURCE_TO_LOAD += s_oSpriteLibrary.getNumSprites();
