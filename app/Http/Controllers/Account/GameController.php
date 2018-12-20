@@ -111,7 +111,7 @@ class GameController extends Controller
 
         // Create a new token every time the user decides to play. This will later be checked in-game
         // to prevent having multiple tabs with the same game open
-        $now = Carbon::now();
+        /*$now = Carbon::now();
         $token = GameUserSession::generateLiveToken($game, $this->user);
 
         $this->user->gameSessions()->updateExistingPivot($game->id, [
@@ -119,7 +119,7 @@ class GameController extends Controller
             'updated_at' => $now
         ]);
 
-        $gameSession = $this->user->getOpenSession($game);
+        $gameSession = $this->user->getOpenSession($game);*/
 
         $sessionData = $this->gameService->generateJSONSessionData($gameSession->pivot->token, $gameSession->pivot->credits);
         $gameData = $this->gameService->generateJSONGameData($game);
