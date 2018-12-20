@@ -171,6 +171,10 @@ class GameMathService
     }
 
     private function getPendingFreeSpins() {
+        if ($this->session == null) {
+            return 0;
+        }
+
         return $this->session->extra['free_spins'];
     }
 
@@ -188,7 +192,7 @@ class GameMathService
                 ],
                 'win' => 0,
                 'wins' => [],
-                'credits' => $this->session->credits * 100,
+                'credits' => $this->session == null ? 0 : $this->session->credits * 100,
                 'bonus' => false,
                 'numItemInBonus' => 0,
                 'bonusData' => [
