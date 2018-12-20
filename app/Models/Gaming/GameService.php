@@ -76,8 +76,7 @@ class GameService
 
         return json_encode([
             'id' => $game->id,
-            'resourcesUrl' => "/live-games/{$game->slug}",
-            'playUrl' => route('home'),
+            'serverUrl' => route('home'),
             'language' => $settings['language'],
             'configuration' => $settings['configuration']
         ]);
