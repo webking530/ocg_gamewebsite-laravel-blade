@@ -78,7 +78,7 @@
                                                         <h4>Bonus amount in coins <i class="fas fa-star money-earned-bonus"></i></h4>
                                                         <div class="row mt-md mb-md">
                                                             <div class="col-md-12 text-center">
-                                                                <input type="number" name="credits_bonus" class="form-control deposit-coins-bonus" required="required" step="0.01" min="0" max="{{ $user->credits_bonus }}" placeholder="&middot; &middot; &middot;">
+                                                                <input type="number" name="credits_bonus" class="form-control deposit-coins-bonus" step="0.01" min="0" max="{{ $user->credits_bonus }}" placeholder="&middot; &middot; &middot;">
                                                             </div>
                                                         </div>
                                                         {{--<h3 id="inputMoney" style="display: none" data-rate="{{ $pricingService->rate('USD', $user->currency_code) }}">{{ $user->currency->symbol }}<span>0.00</span> {{ $user->currency_code }}</h3>--}}
