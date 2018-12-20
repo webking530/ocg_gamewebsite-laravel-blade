@@ -70,7 +70,7 @@ class User extends Authenticatable {
     }
 
     public function gameSessions() {
-        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'token', 'extra', 'created_at', 'updated_at']);
+        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'credits_bonus', 'token', 'extra', 'created_at', 'updated_at']);
     }
 
     public function tournaments() {

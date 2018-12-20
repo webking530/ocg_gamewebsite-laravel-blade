@@ -1,4 +1,3 @@
-@inject('gameService', "Models\Gaming\GameService")
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,54 +15,11 @@
     <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
 
     @yield('head')
-
     <script>
-        function offlineRedirect() {
-            alert('{{ trans('frontend/game.you_are_offline') }}');
-            window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
-        }
-
-        function checkSettings(settings) {
-            $.get('{{ route('user.session.check_settings', ['game' => $game]) }}', {
-                token: '{{ $token }}',
-                settings: settings
-            }, function (response) {
-                if (response !== 'ok') {
-                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
-                }
-            }).fail(offlineRedirect);
-        }
-        
-        function closeGameSession() {
-            $.get('{{ route('user.session.close_ajax', ['game' => $game]) }}', function(response) {
-                if (response !== 'ok') {
-                    alert('{{ trans('frontend/game.session_not_closed_properly') }}');
-                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
-                }
-
-                // By default, when the game does not detect an open session. The check token method will auto-redirect...
-                // So nothing else to do here
-            }).fail(offlineRedirect);
-        }
-
-        function redirectOnRecharge() {
-            //alert('{{ trans('frontend/game.out_of_money') }}');
-            window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
-        }
-
-        function registerResult(credits) {
-            $.get('{{ route('user.session.save_credits', ['game' => $game]) }}', {
-                token: '{{ $token }}',
-                credits: credits,
-                settings: gameSettings
-            }, function (response) {
-                if (response !== 'ok') {
-                    window.location.href = '{{ route('user.game.manage_session', ['slug' => $game->slug]) }}';
-                }
-            }).fail(offlineRedirect);
-        }
-
         GAME_PATH = '/live-games/{{ $game->slug }}';
+
+        window.addEventListener('load', () => sessionStorage.setItem('session', '{!! $sessionData !!}'));
+        window.addEventListener('load', () => sessionStorage.setItem('game', '{!! $gameData !!}'));
     </script>
 
     @yield('scripts')
@@ -74,16 +30,5 @@
     @yield('game')
 
     <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
-
-
-    <script>
-        $(document).ready(function() {
-            setInterval(function() {
-                if (typeof gameSettings !== 'undefined') {
-                    checkSettings(gameSettings);
-                }
-            }, 1000);
-        });
-    </script>
 </body>
 </html>

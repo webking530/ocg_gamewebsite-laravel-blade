@@ -144,8 +144,6 @@ function CMain(oData){
     this.gotoMenu = function(){
         _oMenu = new CMenu();
         _iState = STATE_MENU;
-
-        _oMenu._onButPlayRelease();
     };
     
     this.gotoGame = function(){
@@ -211,13 +209,14 @@ function CMain(oData){
     
     s_oMain = this;
     _oData = oData;
-    PAYTABLE_VALUES = new Array();
-    for(var i=0;i<7;i++){
-        PAYTABLE_VALUES[i] = oData["paytable_symbol_"+(i+1)];
-    }
-    ENABLE_FULLSCREEN = _oData.fullscreen;
-    ENABLE_CHECK_ORIENTATION = _oData.check_orientation;
-    SHOW_CREDITS = _oData.show_credits;
+    // SERVER-SIDE SETTINGS
+    // PAYTABLE_VALUES = new Array();
+    // for(var i=0;i<7;i++){
+    //     PAYTABLE_VALUES[i] = oData["paytable_symbol_"+(i+1)];
+    // }
+    // ENABLE_FULLSCREEN = _oData.fullscreen;
+    // ENABLE_CHECK_ORIENTATION = _oData.check_orientation;
+    // SHOW_CREDITS = _oData.show_credits;
     
     this.initContainer();
 }

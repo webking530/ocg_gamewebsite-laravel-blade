@@ -46,13 +46,13 @@
 
 @section('js')
 <script>
-    var json = <?php
+    var json = '<?php
 if (!empty($game->settings)) {
     print json_encode($game->settings);
 } else {
     print 'null';
 }
-?>;
+?>';
 </script>
 <script src="{!! mix('compiled/js/pages/settings.js') !!}"></script>
 @endsection

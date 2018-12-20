@@ -118,7 +118,7 @@ class SettingController extends Controller {
         $game = Game::find($request->get('id'));
         $settings = $request->except(['_token']);
         $settings = $settings['settings'];
-        $game->settings = $settings;
+        $game->settings = json_decode($settings);
         if ($game->save()) {
             $this->flashNotifier->success(trans('games.setting_changed'));
             return redirect()->route('setting.games');

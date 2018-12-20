@@ -119,7 +119,12 @@ class GameController extends Controller
             'updated_at' => $now
         ]);
 
-        return view("user.live-games.{$game->slug}", compact('game', 'token'));
+        $gameSession = $this->user->getOpenSession($game);
+
+        $sessionData = $this->gameService->generateJSONSessionData($gameSession->pivot->token, $gameSession->pivot->credits);
+        $gameData = $this->gameService->generateJSONGameData($game);
+
+        return view("user.live-games.{$game->slug}", compact('game', 'sessionData', 'gameData'));
     }
 
     public function playRequest(Request $request, Game $game) {

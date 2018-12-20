@@ -21,7 +21,46 @@ class GamesSeeder extends Seeder
             'group' => Game::GROUP_SLOT,
             'has_jackpot' => true,
             'settings' => [
-                'config_name' => 'TheFruits'
+                'config_name' => 'TheFruits',
+                'language' => [
+                    'TEXT_MONEY',
+                    'TEXT_PLAY',
+                    'TEXT_BET',
+                    'TEXT_COIN',
+                    'TEXT_MAX_BET',
+                    'TEXT_INFO',
+                    'TEXT_LINES',
+                    'TEXT_SPIN',
+                    'TEXT_WIN',
+                    'TEXT_HELP_WILD',
+                    'TEXT_CREDITS_DEVELOPED',
+                    'TEXT_CURRENCY',
+                    'TEXT_PRELOADER_CONTINUE',
+                    'TEXT_SHARE_IMAGE',
+                    'TEXT_SHARE_TITLE',
+                    'TEXT_SHARE_MSG1',
+                    'TEXT_SHARE_MSG2',
+                    'TEXT_SHARE_SHARE1',
+                    'TEXT_SHARE_SHARE2',
+                ],
+                'configuration' => [
+                    'paytable' => [
+                        [0, 0, 40, 400, 1000],
+                        [0, 0, 20, 100, 500],
+                        [0, 0, 20, 80, 400],
+                        [0, 0, 20, 40, 200],
+                        [0, 0, 10, 20, 100],
+                        [0, 0, 5, 20, 50],
+                        [0, 0, 5, 10, 25]
+                    ],
+                    'bets' => [10, 50, 100, 200, 500, 1000],
+                    'fullscreen' => true,
+                    'checkOrientation' => true,
+                    'maxFramesReelEase' => 10,
+                    'minReelLoops' => 0,
+                    'reelDelay' => 0,
+                    'timeShowWins' => 1000
+                ]
             ],
             'enabled' => true,
         ]);

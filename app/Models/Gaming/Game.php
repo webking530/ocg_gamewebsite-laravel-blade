@@ -69,6 +69,23 @@ class Game extends Model {
     }
 
     public function getDynamicSettings() {
+        $settings = $this->settings;
+
+        $langVars = $settings['language'];
+        $language = [];
+
+        foreach ($langVars as $var) {
+            $language[$var] = trans("games.language_strings.$var");
+        }
+
+        $settings['language'] = $language;
+
+        return $settings;
+    }
+
+
+
+    /*public function getDynamicSettings() {
         $settings = json_decode($this->settings);
 
         $userCashKey = $settings->user_cash_key;
@@ -82,13 +99,13 @@ class Game extends Model {
         $settings->live->{$userCashKey} = $userCash;
         $settings->live->{$gameCashKey} = $gameCash;
 
-        /*
-          We need to dynamically adjust the multiplier value for the highest value figure in
-          each slot game. It will be based around the Jackpot size, so the higher the Jackpot, the
-          higher the multiplier.
-          Each game has a max coin interval that will be multiplied by the number of lines the game has. That is
-          the basic formula to get the max possible bet the user can place.
-         */
+
+//          We need to dynamically adjust the multiplier value for the highest value figure in
+//          each slot game. It will be based around the Jackpot size, so the higher the Jackpot, the
+//          higher the multiplier.
+//          Each game has a max coin interval that will be multiplied by the number of lines the game has. That is
+//          the basic formula to get the max possible bet the user can place.
+
         if ($this->has_jackpot && Jackpot::isRealJackpotEnabled()) {
             $jackpot = Jackpot::getCurrentJackpot()['size'];
 
@@ -113,7 +130,7 @@ class Game extends Model {
         }
 
         return json_encode($settings->live);
-    }
+    }*/
 
     public function addCredits($credits) {
         $this->credits += $credits;

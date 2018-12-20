@@ -10,6 +10,7 @@ use Models\Auth\User;
 class GameUserSession extends Model
 {
     use BelongsToAUser;
+    use BelongsToAGame;
 
     protected $table = 'game_user_session';
     protected $guarded = ['id'];
@@ -20,10 +21,6 @@ class GameUserSession extends Model
 
     const DEMO_CREDITS = 100;
     const DEMO_SESSION_EXPIRATION_MINUTES = 60;
-
-    public function game() {
-        return $this->belongsTo(Game::class, 'game_id');
-    }
 
     public static function generateLiveToken(Game $game, User $user) {
         $now = Carbon::now();

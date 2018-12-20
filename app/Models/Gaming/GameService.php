@@ -63,4 +63,23 @@ class GameService
 
         return true;
     }
+
+    public function generateJSONSessionData($token, $credits) {
+        return json_encode([
+            'token' => $token,
+            'credits' => $credits * 100 // Game works in cents
+        ]);
+    }
+
+    public function generateJSONGameData(Game $game) {
+        $settings = $game->getDynamicSettings();
+
+        return json_encode([
+            'id' => $game->id,
+            'resourcesUrl' => "/live-games/{$game->slug}",
+            'playUrl' => route('home'),
+            'language' => $settings['language'],
+            'configuration' => $settings['configuration']
+        ]);
+    }
 }

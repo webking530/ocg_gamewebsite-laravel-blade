@@ -57,6 +57,11 @@ class GameMathService
         if ($this->session != null && $this->hasPendingFreeSpins()) {
             $this->bet = $this->session->extra['bet'];
             $this->lines = $this->session->extra['lines'];
+
+            BlacklistGameUser::create([
+                'game_id' => $this->game->id,
+                'user_id' => $this->session->user->id
+            ]);
         }
     }
 
@@ -73,7 +78,7 @@ class GameMathService
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_INVALID_LINES);
         }
 
-        if ($this->session->credits < 0 || $this->getTotalBet() > $this->session->credits) {
+        if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits) {
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS);
         }
 
