@@ -65,9 +65,23 @@ class GameService
     }
 
     public function generateJSONSessionData($token, $credits) {
+        $session = GameUserSession::where('token', $token)->first();
+        $freeSpins = [
+            'games' => 0,
+            'bet' => 0,
+            'lines' => 0
+        ];
+
+        if ($session->extra != null && isset($session->extra['free_spins']) && $session->extra['free_spins'] > 0) {
+            $freeSpins['games'] = $session->extra['free_spins'];
+            $freeSpins['bet'] = $session->extra['bet'];
+            $freeSpins['lines'] = $session->extra['lines'];
+        }
+
         return json_encode([
             'token' => $token,
-            'credits' => $credits * 100 // Game works in cents
+            'credits' => $credits * 100, // Game works in cents
+            'freeSpins' => $freeSpins
         ]);
     }
 
