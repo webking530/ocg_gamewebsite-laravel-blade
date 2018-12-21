@@ -78,9 +78,9 @@ return [
         'TEXT_MSG_SHARING1' => 'My score is ',
         'TEXT_MSG_SHARING2' => ' points! Can you do better?',
 
-        'TEXT_AUTOSPIN' => "AUTO\nPLAY",
+        'TEXT_AUTOSPIN' => 'AUTO\nPLAY',
         'TEXT_OK' => 'OK',
-        'TEXT_STOP_AUTO' => "STOP\nAUTO",
+        'TEXT_STOP_AUTO' => 'STOP\nAUTO',
 
         'TEXT_HELP_BONUS1' => '3 OR MORE ON ANY REELS, WILL TRIGGER WHEEL OF FORTUNE BONUS!!',
         'TEXT_HELP_BONUS2' => 'CLICK SPIN BUTTON TO GET YOUR PRIZE!!',
