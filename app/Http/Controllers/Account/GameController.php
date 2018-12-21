@@ -73,6 +73,7 @@ class GameController extends Controller
         $this->user->gameSessions()->attach($game->id, [
             'credits' => $credits,
             'credits_bonus' => $creditsBonus,
+            'token' => GameUserSession::generateLiveToken($game, $this->user),
             'created_at' => $now,
             'updated_at' => $now
         ]);
