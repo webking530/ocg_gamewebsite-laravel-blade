@@ -23,8 +23,11 @@
 
 
     <script>
-        window.addEventListener('load', () => sessionStorage.setItem('session', '{!! $sessionData !!}'));
-        window.addEventListener('load', () => sessionStorage.setItem('game', '{!! $gameData !!}'));
+        sessionStorage.setItem('session', '{!! $sessionData !!}');
+        sessionStorage.setItem('game', '{!! $gameData !!}');
+
+        //window.addEventListener('load', () => sessionStorage.setItem('session', '{!! $sessionData !!}'));
+        //window.addEventListener('load', () => sessionStorage.setItem('game', '{!! $gameData !!}'));
     </script>
 </head>
 <body>
