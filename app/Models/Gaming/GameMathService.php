@@ -79,8 +79,10 @@ class GameMathService
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_INVALID_LINES);
         }
 
-        if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits) {
-            return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS);
+        if ( ! $this->hasPendingFreeSpins()) {
+            if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits * 100) {
+                return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS);
+            }
         }
 
         $this->serverResponse = $this->getMathServerResponse();
