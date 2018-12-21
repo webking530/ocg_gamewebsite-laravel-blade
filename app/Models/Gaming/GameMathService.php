@@ -58,10 +58,11 @@ class GameMathService
             $this->bet = $this->session->extra['bet'];
             $this->lines = $this->session->extra['lines'];
 
-            BlacklistGameUser::create([
+            // TODO: this has to be checked better (only if user changed those 2 params while in free-spin)
+            /*BlacklistGameUser::create([
                 'game_id' => $this->game->id,
                 'user_id' => $this->session->user->id
-            ]);
+            ]);*/
         }
     }
 
@@ -114,6 +115,10 @@ class GameMathService
 
         $sessionExtra = $this->session->extra;
 
+        if ($sessionExtra == null) {
+            $sessionExtra = [];
+        }
+
         if ($this->hasPendingFreeSpins()) {
             $sessionExtra['free_spins']--;
         }
@@ -126,6 +131,14 @@ class GameMathService
 
         $this->session->extra = $sessionExtra;
         $this->session->save();
+
+        if ($this->isLiveToken) {
+            if ($winAmount > 0) {
+                $this->session->user->addWinMoneyToRunningTournaments($this->game, $winAmount);
+            } else {
+                $this->session->user->addLoseMoneyToRunningTournaments($this->game, abs($winAmount));
+            }
+        }
 
         DB::commit();
 
@@ -171,7 +184,7 @@ class GameMathService
     }
 
     private function getPendingFreeSpins() {
-        if ($this->session == null) {
+        if ($this->session == null || $this->session->extra == null) {
             return 0;
         }
 
