@@ -113,7 +113,7 @@ class GameMathService
 
         DB::beginTransaction();
 
-        $this->session->credits += $winAmount;
+        $this->session->credits += $winAmount / 100;
 
         $sessionExtra = $this->session->extra;
 
