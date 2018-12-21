@@ -232,7 +232,13 @@ class User extends Authenticatable {
     }
 
     public function closeGameSession(Game $game) {
-        $credits = $this->gameSessions()->where('game_id', $game->id)->first()->pivot->credits;
+        $session = $this->gameSessions()->where('game_id', $game->id)->first();
+
+        if ($session == null) {
+            return;
+        }
+
+        $credits = $session->pivot->credits;
 
         DB::beginTransaction();
 

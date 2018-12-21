@@ -75,7 +75,7 @@ function CBetBut(iXPos,iYPos,oSprite){
     
     this.buttonRelease = function(){
         if(_aCbCompleted[ON_MOUSE_UP] && _bDisable === false){
-            playSound("press_but",1,0);
+            playSound("press_but",1,false);
             
             _aCbCompleted[ON_MOUSE_UP].call(_aCbOwner[ON_MOUSE_UP],_aParams);
         }

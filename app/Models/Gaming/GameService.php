@@ -77,7 +77,7 @@ class GameService
         return json_encode([
             'id' => $game->id,
             'serverUrl' => route('home'),
-            'sessionCloseUrl' => route('user.session.close_ajax'),
+            'sessionCloseUrl' => route('user.session.close_ajax', ['game' => $game->id]),
             'language' => $settings['language'],
             'configuration' => $settings['configuration']
         ]);

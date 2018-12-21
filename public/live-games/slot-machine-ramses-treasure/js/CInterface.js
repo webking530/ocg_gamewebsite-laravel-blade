@@ -47,7 +47,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _fRequestFullScreen = false;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             oSprite = s_oSpriteLibrary.getSprite('but_fullscreen');
             
 
@@ -167,7 +167,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _oAudioToggle = null;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.unload();
         }
         
@@ -184,7 +184,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _oAudioToggle.setPosition(_pStartPosAudio.x - iNewX,iNewY + _pStartPosAudio.y);
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.setPosition(_pStartPosFullscreen.x - iNewX,_pStartPosFullscreen.y + iNewY);
         }
         
@@ -313,20 +313,25 @@ function CInterface(iCurBet,iTotBet,iMoney){
     };
     
     this._onAudioToggle = function(){
-        createjs.Sound.setMute(s_bAudioActive);
+        Howler.mute(s_bAudioActive);
         s_bAudioActive = !s_bAudioActive;
     };
     
+    this.resetFullscreenBut = function(){
+	if (_fRequestFullScreen && screenfull.enabled){
+		_oButFullscreen.setActive(s_bFullscreen);
+	}
+    };
+
+
     this._onFullscreenRelease = function(){
-        if(s_bFullscreen) { 
-            _fCancelFullScreen.call(window.document);
-            s_bFullscreen = false;
-        }else{
-            _fRequestFullScreen.call(window.document.documentElement);
-            s_bFullscreen = true;
-        }
-        
-        sizeHandler();
+	if(s_bFullscreen) { 
+		_fCancelFullScreen.call(window.document);
+	}else{
+		_fRequestFullScreen.call(window.document.documentElement);
+	}
+	
+	sizeHandler();
     };
     
     s_oInterface = this;

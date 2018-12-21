@@ -23,8 +23,6 @@ function CGame(oData){
     var _aWinningLine;
     var _aReelSequence;
     var _aFinalSymbolCombo;
-    var _oReelSound;
-    var _oCurSymbolWinSound;
     var _oBg;
     var _oLogo;
     var _oLogoFreeSpin;
@@ -99,11 +97,26 @@ function CGame(oData){
         _oBonusPanel = new CBonusPanel();
 
         _bUpdate = true;
+
+        if (freeSpins.games > 0) {
+            // Set data
+            _iTotFreeSpin = freeSpins.games;
+            this.setCoinBet(freeSpins.bet);
+            this.activateLines(freeSpins.lines);
+            // Set logo and label
+            _oInterface.refreshFreeSpinNum(_iTotFreeSpin);
+            _oLogo.visible = false;
+            _oLogoFreeSpin.visible = true;
+            _oFreeSpinPanel.visible = true;
+            // Set buttons and play
+            _oInterface.disableSpin(_bAutoSpin);
+            _oInterface.disableGuiButtons(false);
+            this.onSpin();
+        }
     };
     
     this.unload = function(){
-        createjs.Sound.stop();
-        
+        stopSound("reels");
         
         _oInterface.unload();
         _oPayTable.unload();
@@ -238,7 +251,7 @@ function CGame(oData){
 
         if(_iNumReelsStopped%2 === 0){
             
-            playSound("reel_stop",1,0);
+            playSound("reel_stop",1,false);
             
             _iNextColToStop = _aReelSequence[_iNumReelsStopped/2];
             if (_iNumReelsStopped === (NUM_REELS*2) ) {
@@ -248,9 +261,7 @@ function CGame(oData){
     };
     
     this._endReelAnimation = function(){
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            _oReelSound.stop();
-        }
+        stopSound("reels");
 
         _bReadyToStop = false;
         
@@ -303,9 +314,8 @@ function CGame(oData){
             _iTimeElaps = 0;
             _iCurState = GAME_STATE_SHOW_ALL_WIN;
             
-            if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                _oCurSymbolWinSound = playSound("win",0.3,0);
-            }
+            playSound("win",0.3,false);
+            
             
             if(_iBonus !== BONUS_WHEEL){
                 _oInterface.refreshMoney(_iMoney);
@@ -369,9 +379,7 @@ function CGame(oData){
     this._showWin = function(){
         var iLineIndex;
         if(_iCurWinShown>0){ 
-            if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                _oCurSymbolWinSound.stop();
-            }
+            stopSound("win");
             
             iLineIndex = _aWinningLine[_iCurWinShown-1].line;
             if(iLineIndex > 0){
@@ -465,17 +473,22 @@ function CGame(oData){
         }
 		
         var iNewTotalBet = _iCurBet * _iLastLineActive;
-
+        iNewTotalBet = parseFloat(iNewTotalBet.toFixed(2));
+        
         _iTotBet = iNewTotalBet;
         _oInterface.refreshTotalBet(_iTotBet);
         _oInterface.refreshNumLines(_iLastLineActive);
 
-/*
-        if(iNewTotalBet>_iMoney){
-                _oInterface.disableSpin(_bAutoSpin);
-        }else{*/
-                _oInterface.enableSpin();
-        //}
+
+        _oInterface.enableSpin();
+    };
+
+    this.setCoinBet = function (bet) {
+        _iCurCoinIndex = COIN_BET.indexOf((bet / 100).toString()) - 1;
+        if (_iCurCoinIndex === -1) {
+            _iCurCoinIndex = COIN_BET.length - 1;
+        }
+        this.changeCoinBet();
     };
     
     this.resetCoinBet = function(){
@@ -524,6 +537,7 @@ function CGame(oData){
     };
 	
     this.onMaxBet = function(){
+        _iCurCoinIndex = COIN_BET.length - 1;
         if(_iMoney < (MAX_BET*NUM_PAYLINES)){
                 s_oMsgBox.show(TEXT_NO_MAX_BET);
                 return;
@@ -567,6 +581,34 @@ function CGame(oData){
         
         _iCurState = GAME_STATE_IDLE;
     };
+
+    on('play', data => {
+        if (data.bonus) {
+            WHEEL_SETTINGS = ALL_WHEEL_SETTINGS[data.numItemInBonus - 3];
+        }
+        freeSpins.games = data.freeSpinsData;
+        if (data.freeSpins) {
+            freeSpins.bet = _iCurBet * 100;
+            freeSpins.lines = _iLastLineActive;
+        }
+        this.onSpinReceived({
+            res: 'true',
+            pattern: JSON.stringify(data.combination),
+            win: data.wins.length > 0 ? 'true' : 'false',
+            win_lines: JSON.stringify(data.wins),
+            tot_win: (data.win * _iCurBet).toString(),
+            money: (data.credits / 100).toString(),
+            cash: '0',
+            bonus: data.bonus ? '1' : '0',
+            bonus_prize: data.bonusData.id.toString(),
+            freespin: data.freeSpinsData.toString()
+        });
+    });
+
+    on('error', data => {
+        // _iMoney += _iCurBet * _iLastLineActive;
+        _oInterface.refreshMoney(_iMoney);
+    });
     
     this.onSpin = function(){
         if(_iMoney < _iTotBet && _iTotFreeSpin === 0){
@@ -576,12 +618,9 @@ function CGame(oData){
             return;
         }
         
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            if(_oCurSymbolWinSound){
-                _oCurSymbolWinSound.stop();
-            }
-            _oReelSound = playSound("reels",1,0);
-        }
+        stopSound("win");
+        playSound("reels",1,false);
+        
         
         _oInterface.disableBetBut(true);
         this.removeWinShowing();
@@ -592,7 +631,8 @@ function CGame(oData){
             }else{
                 _iTotBet = _iCurBet * _iLastLineActive;
             }
-            tryCallSpin(_iCurBet,_iTotBet,_iLastLineActive);
+            // tryCallSpin(_iCurBet,_iTotBet,_iLastLineActive);
+            play(COIN_BET.indexOf(_iCurBet.toString()), _iLastLineActive);
         }else{
             this.generateLosingPattern();
         }
@@ -705,7 +745,7 @@ function CGame(oData){
     };
     
     this.exitFromBonus = function(){
-        //_iMoney = _iMoney + parseFloat(WHEEL_SETTINGS[_iCurBonusPrizeIndex]);
+        $(s_oMain).trigger("bonus_end",_iMoney);
         _oInterface.refreshMoney(_iMoney);
         
         if(_bAutoSpin){
@@ -721,16 +761,17 @@ function CGame(oData){
     };
 
     this.onExit = function(){
-        this.unload();
-        s_oMain.gotoMenu();
+        close();
+        // this.unload();
+        // s_oMain.gotoMenu();
         
-        $(s_oMain).trigger("end_session");
-        $(s_oMain).trigger("share_event", {
-                img: "200x200.jpg",
-                title: TEXT_CONGRATULATIONS,
-                msg:  TEXT_MSG_SHARE1+ _iMoney + TEXT_MSG_SHARE2,
-                msg_share: TEXT_MSG_SHARING1 + _iMoney + TEXT_MSG_SHARING2
-            });
+        // $(s_oMain).trigger("end_session");
+        // $(s_oMain).trigger("share_event", {
+        //         img: "200x200.jpg",
+        //         title: TEXT_CONGRATULATIONS,
+        //         msg:  TEXT_MSG_SHARE1+ _iMoney + TEXT_MSG_SHARE2,
+        //         msg_share: TEXT_MSG_SHARING1 + _iMoney + TEXT_MSG_SHARING2
+        //     });
     };
     
     this.getState = function(){

@@ -61,4 +61,8 @@ function CFormatText (iX, iY, szText, oParentContainer){
     
     this._init(iX, iY, szText, oParentContainer);
     
+    this.setText = function (text) {
+        this.unload();
+        this._init(iX, iY, text, oParentContainer);
+    }
 }

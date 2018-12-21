@@ -217,6 +217,8 @@ function sizeHandler() {
         }
         
         $("#canvas").css("left",fOffsetX+"px");
+        
+        fullscreenHandler();
 
 };
 
@@ -239,14 +241,6 @@ function _checkOrientation(iWidth,iHeight){
                 s_oMain.stopUpdate();
             }   
         }
-    }
-}
-
-function inIframe() {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
     }
 }
 
@@ -401,7 +395,8 @@ function tryCheckLogin(){
     if ( oRetData.res === "true" ){
             s_bLogged = true;
             
-            WHEEL_SETTINGS = (oRetData.bonus_prize).split("#");
+            ALL_WHEEL_SETTINGS = (oRetData.bonus_prize).split("#").map(settings => settings.split(',').map(value => parseInt(value)));
+            WHEEL_SETTINGS = ALL_WHEEL_SETTINGS[0];
             s_oGameSettings.initSymbolWin(oRetData.paytable);
             COIN_BET = (oRetData.coin_bet).split("#");
             MAX_BET = parseFloat(COIN_BET[COIN_BET.length-1]);
@@ -415,9 +410,188 @@ function tryCheckLogin(){
 }
 
 function tryCallSpin(iCoin,iTotBet,iLastLineActive){
+    // MODIFIED!!!
+    // All calculations will be on server side
+    // This is just demo of what it will return
+        
     var oData = callSpin(iLastLineActive,iCoin,iTotBet);
 
     var oRetData = getUrlVars(oData);
+    // BONUS EXAMPLE
+    /*oRetData = {
+        res: 'true',
+        // Regular
+        pattern: `[
+            [
+                4,
+                9,
+                7,
+                5,
+                9
+            ],
+            [
+                6,
+                7,
+                9,
+                9,
+                5
+            ],
+            [
+                7,
+                5,
+                5,
+                2,
+                5
+            ]
+        ]`,
+        win: 'true',
+        win_lines: `[
+            {
+                "amount": 5,
+                "list": [
+                    {
+                        "row": 2,
+                        "col": 0,
+                        "value": 7
+                    },
+                    {
+                        "row": 1,
+                        "col": 1,
+                        "value": 7
+                    },
+                    {
+                        "row": 0,
+                        "col": 2,
+                        "value": 7
+                    }
+                ],
+                "num_win": 3,
+                "value": 7,
+                "line": 5
+            },
+            {
+                "amount": 0,
+                "line": 0,
+                "list": [
+                    {
+                        "row": 0,
+                        "col": 1,
+                        "value": 9
+                    },
+                    {
+                        "row": 1,
+                        "col": 2,
+                        "value": 9
+                    },
+                    {
+                        "row": 1,
+                        "col": 3,
+                        "value": 9
+                    },
+                    {
+                        "row": 0,
+                        "col": 4,
+                        "value": 9
+                    }
+                ],
+                "num_win": 4,
+                "value": 9
+            }
+        ]`,
+        tot_win: '5',
+        money: '101',
+        cash: '100',
+        // Bonus
+        bonus: '1',
+        bonus_prize: '18',
+        // FreeSpins
+        freespin: '0',
+    };*/
+    // FREE SPINS EXAMPLE
+    /*oRetData = {
+        res: 'true',
+        // Regular
+        pattern: `[
+            [
+                4,
+                10,
+                7,
+                7,
+                7
+            ],
+            [
+                7,
+                8,
+                2,
+                6,
+                4
+            ],
+            [
+                10,
+                1,
+                6,
+                9,
+                10
+            ]
+        ]`,
+        win: 'true',
+        win_lines: `[
+            {
+                "amount": 5,
+                "list": [
+                    {
+                        "row": 1,
+                        "col": 0,
+                        "value": 7
+                    },
+                    {
+                        "row": 1,
+                        "col": 1,
+                        "value": 8
+                    },
+                    {
+                        "row": 0,
+                        "col": 2,
+                        "value": 7
+                    }
+                ],
+                "num_win": 3,
+                "value": 7,
+                "line": 16
+            },
+            {
+                "amount": 0,
+                "line": 0,
+                "list": [
+                    {
+                        "row": 2,
+                        "col": 0,
+                        "value": 10
+                    },
+                    {
+                        "row": 0,
+                        "col": 1,
+                        "value": 10
+                    },
+                    {
+                        "row": 2,
+                        "col": 4,
+                        "value": 10
+                    }
+                ],
+                "num_win": 3,
+                "value": 10
+            }
+        ]`,
+        tot_win: '5',
+        money: '101',
+        cash: '100',
+        // Bonus
+        bonus: '0',
+        bonus_prize: '-1',
+        // FreeSpins
+        freespin: '4',
+    };*/
     if ( oRetData.res === "true" ){
         s_oGame.onSpinReceived(oRetData);
     }else{
@@ -447,30 +621,35 @@ function getParamValue(paramName){
     }
 }
 
-function playSound(szSound, iVolume, iLoop){
-    if (DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-        var oPointer = createjs.Sound.play(szSound, {loop: iLoop, volume:iVolume});
-        return oPointer;
+function playSound(szSound,iVolume,bLoop){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+
+        s_aSounds[szSound].play();
+        s_aSounds[szSound].volume(iVolume);
+
+        s_aSounds[szSound].loop(bLoop);
+
+        return s_aSounds[szSound];
     }
     return null;
 }
 
-function stopSound(oPointer){
-    if (DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-        oPointer.stop();
+function stopSound(szSound){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].stop();
     }
-}
+}   
 
-function setVolume(oPointer, iVolume){
-   if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-       oPointer.volume= iVolume;
-   }
+function setVolume(szSound, iVolume){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].volume(iVolume);
+    }
 }  
 
-function setMute(oPointer, bMute){
-   if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-       oPointer.setMute(bMute);
-   }
+function setMute(szSound, bMute){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].mute(bMute);
+    }
 }
 
 (function() {
@@ -508,3 +687,39 @@ function setMute(oPointer, bMute){
         }
     }
 })();
+
+
+function fullscreenHandler(){
+	if (!ENABLE_FULLSCREEN || !screenfull.enabled){
+       return;
+    }
+	
+    if(screen.height < window.innerHeight+3 && screen.height > window.innerHeight-3){
+        s_bFullscreen = true;
+    }else{
+        s_bFullscreen = false;
+    }
+
+    if (s_oInterface !== null){
+        s_oInterface.resetFullscreenBut();
+    }
+
+    if (s_oMenu !== null){
+        s_oMenu.resetFullscreenBut();
+    }
+}
+
+
+if (screenfull.enabled) {
+    screenfull.on('change', function(){
+            s_bFullscreen = screenfull.isFullscreen;
+
+            if (s_oInterface !== null){
+                s_oInterface.resetFullscreenBut();
+            }
+
+            if (s_oMenu !== null){
+                s_oMenu.resetFullscreenBut();
+            }
+    });
+}

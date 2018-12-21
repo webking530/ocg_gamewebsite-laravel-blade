@@ -127,7 +127,7 @@ function CReelColumn(iIndex,iXPos,iYPos,iDelay){
     
     this._updateStart = function(){
         if(_iCntFrames === 0 && _iIndex < NUM_REELS){
-            playSound("start_reel",1,0);
+            playSound("start_reel",1,false);
         }
         
         _iCntFrames++;

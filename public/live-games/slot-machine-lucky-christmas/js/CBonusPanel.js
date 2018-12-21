@@ -1,5 +1,6 @@
 function CBonusPanel(){
     var _bItemClicked;
+    var _iCurBet;
     var _iBonusMoney;
     var _iAnimInterval;
     var _iCurFrame;
@@ -15,7 +16,6 @@ function CBonusPanel(){
     var _oWinText;
     var _oContainerItemAnim;
     var _oContainer;
-    var _oSoundtrackBonus;
     
     this._init = function(){        
         _oContainer = new createjs.Container();
@@ -134,6 +134,8 @@ function CBonusPanel(){
     };
     
     this.show = function(iNumItems,iCurBet){
+        $(s_oMain).trigger("bonus_start");
+        
         _iCurBet = iCurBet;
         _bItemClicked = false;
         _oWinText.alpha = 0;
@@ -174,12 +176,19 @@ function CBonusPanel(){
         
         _oContainer.visible = true;
         createjs.Tween.get(_oContainer).to({alpha:1}, 1000);  
-		
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                s_oSoundTrack.setVolume(0);
-                _oSoundtrackBonus = createjs.Sound.play("soundtrack_bonus",{loop:-1});
-        }
+
+        setVolume("soundtrack",0)
+        playSound("soundtrack_bonus",1,true);
     };
+
+    var _iItem;
+    var _iWin;
+    on(`bonus`, data => {
+        if (data.bonus) {
+            _iItem = data.bonusData.id;
+            _iWin = data.bonusData.amount;
+        }
+    });
     
     this._onItemReleased = function(evt,oData){
         if(_bItemClicked){
@@ -189,21 +198,16 @@ function CBonusPanel(){
         _bItemClicked = true;
         _iIndexClicked = oData;
 
-        do{
-                var iRandItem = Math.floor(Math.random()* s_aBonusItemOccurence.length);
-        }while(_aBonusValue[s_aBonusItemOccurence[iRandItem]]*_iCurBet > SLOT_CASH);
-
         _aItems[_iIndexClicked].visible = false;
 		
-        this.playItemAnim(_iIndexClicked,s_aBonusItemOccurence[iRandItem]);
+        this.playItemAnim(_iIndexClicked, _iItem, _iWin);
 		
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.play("bonus_item_choosen");
-        }
+        playSound("bonus_item_choosen",1,false);
+        
     };
     
-    this.playItemAnim = function(iIndex,iRandItem){
-        _iBonusMoney = _aBonusValue[iRandItem];
+    this.playItemAnim = function(iIndex,iRandItem,iMoney){
+        _iBonusMoney = iMoney;
 
         _oBonusItem.gotoAndStop("star_"+iRandItem);
                 
@@ -226,8 +230,8 @@ function CBonusPanel(){
                                     _aItems[i].visible = false;
                                 }
                                 if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                                    s_oSoundTrack.setVolume(SOUNDTRACK_VOLUME);
-                                    _oSoundtrackBonus.stop();
+                                    setVolume("soundtrack",SOUNDTRACK_VOLUME);
+                                    stopSound("soundtrack_bonus");
                                 }
                                 s_oGame.endBonus(_iBonusMoney)},4000);
     };
@@ -257,9 +261,9 @@ function CBonusPanel(){
                    _aItemAnim[_aItemAnim.length-1].visible = false;
                    this.endBonus();
 
-                   if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                       createjs.Sound.play("reveal_prize");
-                   }   
+                   
+                    playSound("reveal_prize",1,false);
+                     
                 }
                 
             }

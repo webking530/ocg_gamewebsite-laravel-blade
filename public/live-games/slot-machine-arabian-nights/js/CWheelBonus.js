@@ -6,7 +6,6 @@ function CWheelBonus(iX, iY,oParentContainer){
     
     var _oWheel;
     var _oWheelContainer;
-    var _oSpinSound;
     var _oParentContainer;
     
     this._init = function(iX, iY){    
@@ -109,13 +108,12 @@ function CWheelBonus(iX, iY,oParentContainer){
     };
     
     this.spin = function(iValue,iTimeMult){
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-           playSound("start_reel_bonus",1,0);
-           _oSpinSound = playSound("reel_bonus",1,-1);
-        }
+           playSound("start_reel_bonus",1,false);
+           playSound("reel_bonus",1,true);
+        
 		
         createjs.Tween.get(_oWheelContainer).to({rotation:_oWheelContainer.rotation + iValue}, WHEEL_SPIN_TIMESPEED*iTimeMult, createjs.Ease.quartOut)//cubicOut
-                .call(function(){_oWheelContainer.rotation %= 360; s_oBonusPanel.wheelArrived(); if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){_oSpinSound.stop();}});
+                .call(function(){_oWheelContainer.rotation %= 360; s_oBonusPanel.wheelArrived(); if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){stopSound("reel_bonus")}});
     };
     
     this.getDegree = function(){
@@ -131,4 +129,10 @@ function CWheelBonus(iX, iY,oParentContainer){
     
     this._init(iX, iY);
     
+    this.update = function () {
+        for (let i = 0; i < WHEEL_SETTINGS.length; ++i) {
+            _aText[i].setText("x" + WHEEL_SETTINGS[i]);
+            _aText[i].rotateText(-SEGMENT_ROT * i);
+        }
+    }
 }

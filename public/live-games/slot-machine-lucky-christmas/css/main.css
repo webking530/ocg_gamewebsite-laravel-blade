@@ -54,6 +54,17 @@ canvas {
 }
 
 /***************FONTS*******************/
+
+.check-fonts{
+            position: fixed;
+            opacity:0;
+}
+
+.check-font-1{
+    font-family: 'walibi0615bold';
+}
+                
+                
 @font-face {
     font-family: 'walibi0615bold';
     src: url('walibi-holland-webfont.eot');

@@ -99,6 +99,8 @@ function CBonusPanel(){
     };
     
     this.show = function(iNumBonusItem,iCurBet){
+        $(s_oMain).trigger("bonus_start");
+        
         _iCurBet = iCurBet;
         _bBonusItemClicked = false;
         
@@ -133,6 +135,13 @@ function CBonusPanel(){
         createjs.Tween.get(_oContainer).to({alpha:1}, 1000);  
 		
     };
+
+    on(`bonus`, data => {
+        if (data.bonus) {
+            _iBonusMoney = data.bonusData.amount;
+        }
+    });
+
     
     this._onBonusItemReleased = function(event,oData){
         if(_bBonusItemClicked){
@@ -140,20 +149,13 @@ function CBonusPanel(){
         }
         
         _bBonusItemClicked = true;
-        var iIndex = oData;
-        
-        do{
-            var iRandPrize = Math.floor(Math.random()* s_aPrizeOccurence.length);
-        }while(_aBonusValue[s_aPrizeOccurence[iRandPrize]]*_iCurBet > SLOT_CASH);    
-
-        _iBonusMoney = _aBonusValue[s_aPrizeOccurence[iRandPrize]];
-        _aBonusItems[iIndex].gotoAndPlay("item_clicked");
+        _aBonusItems[oData].gotoAndPlay("item_clicked");
 	
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                createjs.Sound.play("choose_bonus_item");
-        }
         
-        this.endBonus(iIndex);
+        playSound("choose_bonus_item",1,false);
+        
+        
+        this.endBonus(oData);
     };
     
     this.endBonus = function(iIndex){

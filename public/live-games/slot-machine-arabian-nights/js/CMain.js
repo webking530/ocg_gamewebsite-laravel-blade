@@ -54,94 +54,81 @@ function CMain(oData){
          var iPerc = Math.floor(_iCurResource/RESOURCE_TO_LOAD *100);
 
          _oPreloader.refreshLoader(iPerc);
-         if(_iCurResource === RESOURCE_TO_LOAD){
-              this.onAllResourcesLoaded();
-         }
     };
     
     this._initSounds = function(){
-         if (!createjs.Sound.initializeDefaultPlugins()) {
-             return;
-         }
-		
-        if(navigator.userAgent.indexOf("Opera")>0 || navigator.userAgent.indexOf("OPR")>0){
-                createjs.Sound.alternateExtensions = ["mp3"];
-                createjs.Sound.addEventListener("fileload", createjs.proxy(this.soundLoaded, this));
+        var aSoundsInfo = new Array();
+        aSoundsInfo.push({path: './sounds/',filename:'press_but',loop:false,volume:1, ingamename: 'press_but'});
+        aSoundsInfo.push({path: './sounds/',filename:'win',loop:false,volume:1, ingamename: 'win'});
+        aSoundsInfo.push({path: './sounds/',filename:'reels',loop:false,volume:1, ingamename: 'reels'});
+        aSoundsInfo.push({path: './sounds/',filename:'reel_stop',loop:false,volume:1, ingamename: 'reel_stop'});
+        aSoundsInfo.push({path: './sounds/',filename:'game_over_bonus',loop:false,volume:1, ingamename: 'game_over_bonus'});
+        aSoundsInfo.push({path: './sounds/',filename:'reel_bonus',loop:false,volume:1, ingamename: 'reel_bonus'});
+        aSoundsInfo.push({path: './sounds/',filename:'start_reel_bonus',loop:false,volume:1, ingamename: 'start_reel_bonus'});
+        aSoundsInfo.push({path: './sounds/',filename:'win_bonus',loop:false,volume:1, ingamename: 'win_bonus'});
+        aSoundsInfo.push({path: './sounds/',filename:'start_reel',loop:false,volume:1, ingamename: 'start_reel'});
+        
+        RESOURCE_TO_LOAD += aSoundsInfo.length;
 
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/press_but.ogg", "press_but");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win.ogg", "win");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reels.ogg", "reels");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reel_stop.ogg", "reel_stop",6);
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/start_reel.ogg", "start_reel",6);
-                
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/game_over_bonus.ogg", "game_over_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reel_bonus.ogg", "reel_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/start_reel_bonus.ogg", "start_reel_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win_bonus.ogg", "win_bonus");
-        }else{
-                createjs.Sound.alternateExtensions = ["ogg"];
-                createjs.Sound.addEventListener("fileload", createjs.proxy(this.soundLoaded, this));
-
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/press_but.mp3", "press_but");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win.mp3", "win");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reels.mp3", "reels");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reel_stop.mp3", "reel_stop",6);
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/start_reel.mp3", "start_reel",6);
-                
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/game_over_bonus.mp3", "game_over_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/reel_bonus.mp3", "reel_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/start_reel_bonus.mp3", "start_reel_bonus");
-                createjs.Sound.registerSound(GAME_PATH + "/sounds/win_bonus.mp3", "win_bonus");
+        s_aSounds = new Array();
+        for(var i=0; i<aSoundsInfo.length; i++){
+            s_aSounds[aSoundsInfo[i].ingamename] = new Howl({ 
+                                                            src: [aSoundsInfo[i].path+aSoundsInfo[i].filename+'.mp3'],
+                                                            autoplay: false,
+                                                            preload: true,
+                                                            loop: aSoundsInfo[i].loop, 
+                                                            volume: aSoundsInfo[i].volume,
+                                                            onload: s_oMain.soundLoaded
+                                                        });
         }
-        RESOURCE_TO_LOAD += 9;
         
     };
     
     this._loadImages = function(){
         s_oSpriteLibrary.init( this._onImagesLoaded,this._onAllImagesLoaded, this );
 
-        s_oSpriteLibrary.addSprite("but_bg",GAME_PATH + "/sprites/but_play_bg.png");
-        s_oSpriteLibrary.addSprite("but_exit",GAME_PATH + "/sprites/but_exit.png");
-        s_oSpriteLibrary.addSprite("bg_menu",GAME_PATH + "/sprites/bg_menu.jpg");
-        s_oSpriteLibrary.addSprite("bg_game",GAME_PATH + "/sprites/bg_game.jpg");
-        s_oSpriteLibrary.addSprite("paytable1",GAME_PATH + "/sprites/paytable1.jpg");
-        s_oSpriteLibrary.addSprite("paytable2",GAME_PATH + "/sprites/paytable2.jpg");
-        s_oSpriteLibrary.addSprite("paytable3",GAME_PATH + "/sprites/paytable3.jpg");
-        s_oSpriteLibrary.addSprite("mask_slot",GAME_PATH + "/sprites/mask_slot.png");
-        s_oSpriteLibrary.addSprite("spin_but",GAME_PATH + "/sprites/but_spin_bg.png");
-        s_oSpriteLibrary.addSprite("but_autospin",GAME_PATH + "/sprites/but_autospin.png");
-        s_oSpriteLibrary.addSprite("spin_bg",GAME_PATH + "/sprites/spin_bg.png");
-        s_oSpriteLibrary.addSprite("coin_but",GAME_PATH + "/sprites/but_coin_bg.png");
-        s_oSpriteLibrary.addSprite("info_but",GAME_PATH + "/sprites/but_info_bg.png");
-        s_oSpriteLibrary.addSprite("bet_but",GAME_PATH + "/sprites/bet_but.png");
-        s_oSpriteLibrary.addSprite("win_frame_anim",GAME_PATH + "/sprites/win_frame_anim.png");
-        s_oSpriteLibrary.addSprite("but_lines_bg",GAME_PATH + "/sprites/but_lines_bg.png");
-        s_oSpriteLibrary.addSprite("but_maxbet_bg",GAME_PATH + "/sprites/but_maxbet_bg.png");
-        s_oSpriteLibrary.addSprite("audio_icon",GAME_PATH + "/sprites/audio_icon.png");
-        s_oSpriteLibrary.addSprite("msg_box",GAME_PATH + "/sprites/msg_box.png");
-        s_oSpriteLibrary.addSprite("but_arrow_next",GAME_PATH + "/sprites/but_arrow_next.png");
-        s_oSpriteLibrary.addSprite("but_arrow_prev",GAME_PATH + "/sprites/but_arrow_prev.png");
-        s_oSpriteLibrary.addSprite("freespin_panel",GAME_PATH + "/sprites/freespin_panel.png");
-        s_oSpriteLibrary.addSprite("logo",GAME_PATH + "/sprites/logo.png");
-        s_oSpriteLibrary.addSprite("logo_freespin",GAME_PATH + "/sprites/logo_freespin.png");
-        s_oSpriteLibrary.addSprite("but_credits",GAME_PATH + "/sprites/but_credits.png");
-        s_oSpriteLibrary.addSprite("but_fullscreen",GAME_PATH + "/sprites/but_fullscreen.png");
-        s_oSpriteLibrary.addSprite("logo_ctl",GAME_PATH + "/sprites/logo_ctl.png");
+        s_oSpriteLibrary.addSprite("but_bg","./sprites/but_play_bg.png");
+        s_oSpriteLibrary.addSprite("but_exit","./sprites/but_exit.png");
+        s_oSpriteLibrary.addSprite("bg_menu","./sprites/bg_menu.jpg");
+        s_oSpriteLibrary.addSprite("bg_game","./sprites/bg_game.jpg");
+        s_oSpriteLibrary.addSprite("paytable1","./sprites/paytable1.jpg");
+        s_oSpriteLibrary.addSprite("paytable2","./sprites/paytable2.jpg");
+        s_oSpriteLibrary.addSprite("paytable3","./sprites/paytable3.jpg");
+        s_oSpriteLibrary.addSprite("mask_slot","./sprites/mask_slot.png");
+        s_oSpriteLibrary.addSprite("spin_but","./sprites/but_spin_bg.png");
+        s_oSpriteLibrary.addSprite("but_autospin","./sprites/but_autospin.png");
+        s_oSpriteLibrary.addSprite("spin_bg","./sprites/spin_bg.png");
+        s_oSpriteLibrary.addSprite("coin_but","./sprites/but_coin_bg.png");
+        s_oSpriteLibrary.addSprite("info_but","./sprites/but_info_bg.png");
+        s_oSpriteLibrary.addSprite("bet_but","./sprites/bet_but.png");
+        s_oSpriteLibrary.addSprite("win_frame_anim","./sprites/win_frame_anim.png");
+        s_oSpriteLibrary.addSprite("but_lines_bg","./sprites/but_lines_bg.png");
+        s_oSpriteLibrary.addSprite("but_maxbet_bg","./sprites/but_maxbet_bg.png");
+        s_oSpriteLibrary.addSprite("audio_icon","./sprites/audio_icon.png");
+        s_oSpriteLibrary.addSprite("msg_box","./sprites/msg_box.png");
+        s_oSpriteLibrary.addSprite("but_arrow_next","./sprites/but_arrow_next.png");
+        s_oSpriteLibrary.addSprite("but_arrow_prev","./sprites/but_arrow_prev.png");
+        s_oSpriteLibrary.addSprite("freespin_panel","./sprites/freespin_panel.png");
+        s_oSpriteLibrary.addSprite("logo","./sprites/logo.png");
+        s_oSpriteLibrary.addSprite("logo_freespin","./sprites/logo_freespin.png");
+        s_oSpriteLibrary.addSprite("but_credits","./sprites/but_credits.png");
+        s_oSpriteLibrary.addSprite("but_fullscreen","./sprites/but_fullscreen.png");
+        s_oSpriteLibrary.addSprite("logo_ctl","./sprites/logo_ctl.png");
         
         for(var i=1;i<NUM_SYMBOLS+1;i++){
-            s_oSpriteLibrary.addSprite("symbol_"+i,GAME_PATH + "/sprites/symbol_"+i+".png");
-            s_oSpriteLibrary.addSprite("symbol_"+i+"_anim",GAME_PATH + "/sprites/symbol_"+i+"_anim.png");
+            s_oSpriteLibrary.addSprite("symbol_"+i,"./sprites/symbol_"+i+".png");
+            s_oSpriteLibrary.addSprite("symbol_"+i+"_anim","./sprites/symbol_"+i+"_anim.png");
         }
         
         for(var j=1;j<NUM_PAYLINES+1;j++){
-            s_oSpriteLibrary.addSprite("payline_"+j,GAME_PATH + "/sprites/payline_"+j+".png");
+            s_oSpriteLibrary.addSprite("payline_"+j,"./sprites/payline_"+j+".png");
         }
         
         //LOAD BONUS SPRITES
-        s_oSpriteLibrary.addSprite("bg_bonus",GAME_PATH + "/sprites/bonus/bg_bonus.png");
-        s_oSpriteLibrary.addSprite("but_spin_bonus",GAME_PATH + "/sprites/bonus/but_spin_bonus.png");
-        s_oSpriteLibrary.addSprite("leds",GAME_PATH + "/sprites/bonus/leds.png");
-        s_oSpriteLibrary.addSprite("wheel",GAME_PATH + "/sprites/bonus/wheel.png");
+        s_oSpriteLibrary.addSprite("bg_bonus","./sprites/bonus/bg_bonus.png");
+        s_oSpriteLibrary.addSprite("but_spin_bonus","./sprites/bonus/but_spin_bonus.png");
+        s_oSpriteLibrary.addSprite("leds","./sprites/bonus/leds.png");
+        s_oSpriteLibrary.addSprite("wheel","./sprites/bonus/wheel.png");
         
         RESOURCE_TO_LOAD += s_oSpriteLibrary.getNumSprites();
 
@@ -155,40 +142,38 @@ function CMain(oData){
 
         _oPreloader.refreshLoader(iPerc);
 
-        if(_iCurResource === RESOURCE_TO_LOAD){
-            this.onAllResourcesLoaded();
-        }
     };
     
     this._onAllImagesLoaded = function(){
         
     };
     
-    this.onAllResourcesLoaded = function(){
+    this._onRemovePreloader = function(){
         s_oGameSettings = new CSlotSettings();
         s_oMsgBox = new CMsgBox();
         _oPreloader.unload();
 
         
-        WIN_OCCURRENCE = _oData.win_occurrence;
-        MIN_REEL_LOOPS = _oData.min_reel_loop;
-        REEL_DELAY = _oData.reel_delay;
-        TIME_SHOW_WIN = _oData.time_show_win;
-        TIME_SHOW_ALL_WINS = _oData.time_show_all_wins;
-        SLOT_CASH = _oData.slot_cash;
-        TOTAL_MONEY = parseFloat(_oData.money);
-        FREESPIN_OCCURRENCE = _oData.freespin_occurrence;
-        BONUS_OCCURRENCE = _oData.bonus_occurrence;
-        FREESPIN_SYMBOL_NUM_OCCURR = _oData.freespin_symbol_num_occur;
-        NUM_FREESPIN = _oData.num_freespin;
-        BONUS_PRIZE = _oData.bonus_prize;
-        BONUS_PRIZE_OCCURR = _oData.bonus_prize_occur;
-        COIN_BET = _oData.coin_bet;
-        NUM_SPIN_FOR_ADS = oData.num_spin_ads_showing;
-        PAYTABLE_VALUES = new Array();
-        for(var i=0;i<7;i++){
-            PAYTABLE_VALUES[i] = oData["paytable_symbol_"+(i+1)];
-        }
+        // SERVER-SIDE SETTINGS
+        // WIN_OCCURRENCE = _oData.win_occurrence;
+        // MIN_REEL_LOOPS = _oData.min_reel_loop;
+        // REEL_DELAY = _oData.reel_delay;
+        // TIME_SHOW_WIN = _oData.time_show_win;
+        // TIME_SHOW_ALL_WINS = _oData.time_show_all_wins;
+        // SLOT_CASH = _oData.slot_cash;
+        // TOTAL_MONEY = parseFloat(_oData.money);
+        // FREESPIN_OCCURRENCE = _oData.freespin_occurrence;
+        // BONUS_OCCURRENCE = _oData.bonus_occurrence;
+        // FREESPIN_SYMBOL_NUM_OCCURR = _oData.freespin_symbol_num_occur;
+        // NUM_FREESPIN = _oData.num_freespin;
+        // BONUS_PRIZE = _oData.bonus_prize;
+        // BONUS_PRIZE_OCCURR = _oData.bonus_prize_occur;
+        // COIN_BET = _oData.coin_bet;
+        // NUM_SPIN_FOR_ADS = oData.num_spin_ads_showing;
+        // PAYTABLE_VALUES = new Array();
+        // for(var i=0;i<7;i++){
+        //     PAYTABLE_VALUES[i] = oData["paytable_symbol_"+(i+1)];
+        // }
         
         this.gotoMenu();
     };
@@ -196,8 +181,6 @@ function CMain(oData){
     this.gotoMenu = function(){
         _oMenu = new CMenu();
         _iState = STATE_MENU;
-
-        _oMenu._onButPlayRelease();
     };
     
     this.gotoGame = function(){
@@ -215,7 +198,10 @@ function CMain(oData){
         _bUpdate = false;
         createjs.Ticker.paused = true;
         $("#block_game").css("display","block");
-	createjs.Sound.setMute(true);
+        
+        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+            Howler.mute(true);
+        }
         
     };
 
@@ -225,9 +211,12 @@ function CMain(oData){
         createjs.Ticker.paused = false;
         $("#block_game").css("display","none");
         
-        if(s_bAudioActive){
-                createjs.Sound.setMute(false);
+        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+            if(s_bAudioActive){
+                Howler.mute(false);
+            }
         }
+        
     };
     
     this._update = function(event){
@@ -257,9 +246,10 @@ function CMain(oData){
     
     s_oMain = this;
     _oData = oData;
-    ENABLE_FULLSCREEN = _oData.fullscreen;
-    ENABLE_CHECK_ORIENTATION = _oData.check_orientation;
-    SHOW_CREDITS = _oData.show_credits;
+    // SERVER-SIDE SETTINGS
+    // ENABLE_FULLSCREEN = _oData.fullscreen;
+    // ENABLE_CHECK_ORIENTATION = _oData.check_orientation;
+    // SHOW_CREDITS = _oData.show_credits;
     
     this.initContainer();
 }

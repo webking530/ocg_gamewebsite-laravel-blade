@@ -134,9 +134,9 @@ function CReelColumn(iIndex,iXPos,iYPos,iDelay){
     
     this._updateStart = function(){
         if(_iCntFrames === 0 && _iIndex < NUM_REELS){
-            if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                createjs.Sound.play("start_reel",{volume:0.3});
-            }
+
+            playSound("start_reel",0.3,false);
+            
         }
         
         _iCntFrames++;

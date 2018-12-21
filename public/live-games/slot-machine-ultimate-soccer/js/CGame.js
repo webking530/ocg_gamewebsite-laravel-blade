@@ -111,57 +111,16 @@ function CGame(oData){
         }
     };
     
-    this.generateFinalSymbols = function(){
-        _aFinalSymbolCombo = new Array();
-        for(var i=0;i<NUM_ROWS;i++){
-            _aFinalSymbolCombo[i] = new Array();
-            for(var j=0;j<NUM_REELS;j++){
-                var iRandIndex = Math.floor(Math.random()* s_aRandSymbols.length);
-                var iRandSymbol = s_aRandSymbols[iRandIndex];
-                _aFinalSymbolCombo[i][j] = iRandSymbol;
-            }
-        }
-        
-        //CHECK IF THERE IS ANY COMBO
-        _aWinningLine = new Array();
-        _iTotWin = 0;
-        for(var k=0;k<_iLastLineActive;k++){
-            var aCombos = s_aPaylineCombo[k];
-            
-            var aCellList = new Array();
-            var iValue = _aFinalSymbolCombo[aCombos[0].row][aCombos[0].col];
-            var iNumEqualSymbol = 1;
-            var iStartIndex = 1;
-            aCellList.push({row:aCombos[0].row,col:aCombos[0].col,value:_aFinalSymbolCombo[aCombos[0].row][aCombos[0].col]});
-            
-            while(iValue === WILD_SYMBOL && iStartIndex<NUM_REELS){
-                iNumEqualSymbol++;
-                iValue = _aFinalSymbolCombo[aCombos[iStartIndex].row][aCombos[iStartIndex].col];
-                aCellList.push({row:aCombos[iStartIndex].row,col:aCombos[iStartIndex].col,
-                                            value:_aFinalSymbolCombo[aCombos[iStartIndex].row][aCombos[iStartIndex].col]});
-                iStartIndex++;
-            }
-            
-            for(var t=iStartIndex;t<aCombos.length;t++){
-                if(_aFinalSymbolCombo[aCombos[t].row][aCombos[t].col] === iValue || 
-                                            _aFinalSymbolCombo[aCombos[t].row][aCombos[t].col] === WILD_SYMBOL){
-                    iNumEqualSymbol++;
-                    
-                    aCellList.push({row:aCombos[t].row,col:aCombos[t].col,value:_aFinalSymbolCombo[aCombos[t].row][aCombos[t].col]});
-                }else{
-                    break;
-                }
-            }
-            
-            if(s_aSymbolWin[iValue-1][iNumEqualSymbol-1] > 0){
-                _iTotWin += s_aSymbolWin[iValue-1][iNumEqualSymbol-1];
-                _aWinningLine.push({line:k+1,amount:s_aSymbolWin[iValue-1][iNumEqualSymbol-1],
-                                                            num_win:iNumEqualSymbol,value:iValue,list:aCellList});
-            }
-        }
-        
-        return _aWinningLine.length>0?true:false;
-    };
+    on(`play`, data => {
+        _aFinalSymbolCombo = data.combination;
+        _aWinningLine = data.wins;
+        _iTotWin = data.win;
+    });
+
+    on(`error`, data => {
+        _iMoney += _iCurBet * _iLastLineActive;
+        _oInterface.refreshMoney(_iMoney);
+    });
     
     this._generateRandSymbols = function() {
         var aRandSymbols = new Array();
@@ -175,7 +134,7 @@ function CGame(oData){
     
     this.reelArrived = function(iReelIndex,iCol) {
         if(_iCurReelLoops>MIN_REEL_LOOPS ){
-            if (_iNextColToStop === iCol) {
+            if (_iNextColToStop === iCol && lastPlay) {
                 if (_aMovingColumns[iReelIndex].isReadyToStop() === false) {
                     var iNewReelInd = iReelIndex;
                     if (iReelIndex < NUM_REELS) {
@@ -380,25 +339,18 @@ function CGame(oData){
     };
     
     this.changeCoinBet = function(){
-        var iNewBet = Math.floor((_iCurBet+0.05) * 100)/100;
-		var iNewTotalBet;
-		
-        if(iNewBet>MAX_BET){
-            _iCurBet = MIN_BET;
-            _iTotBet = _iCurBet * _iLastLineActive;
-            _oInterface.refreshBet(_iCurBet);
-            _oInterface.refreshTotalBet(_iTotBet);
-			iNewTotalBet = _iTotBet;
-        }else{
-            iNewTotalBet = iNewBet * _iLastLineActive;
-
-			_iCurBet += 0.05;
-			_iCurBet = Math.floor(_iCurBet * 100)/100;
-			_iTotBet = iNewTotalBet;
-			_oInterface.refreshBet(_iCurBet);
-			_oInterface.refreshTotalBet(_iTotBet);       
-        }
+        ++_iBetIndex;
+        _iBetIndex %= BETS.length;
+        var iNewBet = BETS[_iBetIndex];
+        var iNewTotalBet = iNewBet * _iLastLineActive;
+        iNewTotalBet = parseFloat(iNewTotalBet.toFixed(2));
         
+        _iCurBet = iNewBet;
+        _iCurBet = Math.floor(_iCurBet * 100)/100;
+        _iTotBet = iNewTotalBet;
+        _oInterface.refreshBet(_iCurBet);
+        _oInterface.refreshTotalBet(_iTotBet);  
+
         if(iNewTotalBet>_iMoney){
 			_oInterface.disableSpin();
 		}else{
@@ -408,6 +360,7 @@ function CGame(oData){
     };
 	
 	this.onMaxBet = function(){
+        _iBetIndex = BETS.length - 1;
         var iNewBet = MAX_BET;
 		_iLastLineActive = NUM_PAYLINES;
         
@@ -458,54 +411,19 @@ function CGame(oData){
         _oInterface.disableBetBut(true);
         this.removeWinShowing();
         
-        //FIND MIN WIN
-        MIN_WIN = s_aSymbolWin[0][s_aSymbolWin[0].length-1];
-        for(var i=0;i<s_aSymbolWin.length;i++){
-            var aTmp = s_aSymbolWin[i];
-            for(var j=0;j<aTmp.length;j++){
-                if(aTmp[j] !== 0 && aTmp[j] < MIN_WIN){
-                    MIN_WIN = aTmp[j];
-                }
-            }
-        }
-		
-        MIN_WIN *= _iCurBet;
-        
         _iMoney -= _iTotBet;
         _oInterface.refreshMoney(_iMoney);
         SLOT_CASH += _iTotBet;
         
         $(s_oMain).trigger("bet_placed",{bet:_iCurBet,tot_bet:_iTotBet});
         
-        //CHECK IF THERE IS MINIMUM AMOUNT FOR AT LEAST WORST WINNING
-        if(SLOT_CASH < MIN_WIN){
-            //PLAYER MUST LOSE
-             do{
-                var bRet = this.generateFinalSymbols();
-            }while(bRet === true);
-        }else{
-            //RANDOM TO ASSIGN A WIN OR NOT
-            var iRandSpin = Math.floor(Math.random() * 101);
-
-            if(iRandSpin > WIN_OCCURRENCE){
-                //PLAYER LOSES
-                do{
-                    var bRet = this.generateFinalSymbols();
-                }while(bRet === true);
-            }else{
-                //PLAYER WINS
-                do{
-                    var bRet = this.generateFinalSymbols();
-                }while(bRet === false || (_iTotWin*_iCurBet) > SLOT_CASH);
-            }
-        }
-        
-
         _oInterface.hideAllLines();
         _oInterface.disableGuiButtons();
         
         
         _iCurState = GAME_STATE_SPINNING;
+
+        play(_iBetIndex, _iLastLineActive);
     };
     
     this.onInfoClicked = function(){
@@ -521,11 +439,12 @@ function CGame(oData){
     };
 
     this.onExit = function(){
-        this.unload();
-        $(s_oMain).trigger("end_session");
-        $(s_oMain).trigger("share_event", _iMoney);
+        close();
+        // this.unload();
+        // $(s_oMain).trigger("end_session");
+        // $(s_oMain).trigger("share_event", _iMoney);
             
-        s_oMain.gotoMenu();
+        // s_oMain.gotoMenu();
     };
     
     this.getState = function(){
@@ -567,14 +486,19 @@ function CGame(oData){
     
     s_oGame = this;
     
-    WIN_OCCURRENCE = oData.win_occurrence;
-    MIN_REEL_LOOPS = oData.min_reel_loop;
-    REEL_DELAY = oData.reel_delay;
-    TIME_SHOW_WIN = oData.time_show_win;
-    TIME_SHOW_ALL_WINS = oData.time_show_all_wins;
-    TOTAL_MONEY = oData.money;
-    SLOT_CASH = oData.slot_cash;
-    _iAdsShowingCont = oData.ad_show_counter;
+    // SERVER-SIDE SETTINGS
+    // WIN_OCCURRENCE = oData.win_occurrence;
+    // MIN_REEL_LOOPS = oData.min_reel_loop;
+    // REEL_DELAY = oData.reel_delay;
+    // TIME_SHOW_WIN = oData.time_show_win;
+    // TIME_SHOW_ALL_WINS = oData.time_show_all_wins;
+    // TOTAL_MONEY = oData.money;
+    // SLOT_CASH = oData.slot_cash;
+    // _iAdsShowingCont = oData.ad_show_counter;
+
+    // BETS ARE ALSO SERVER-SIDE SETTINGS
+    // SO THEY ARE SET FROM A GIVEN ARRAY
+    var _iBetIndex = 0;
     
     this._init();
 }

@@ -9,7 +9,6 @@ function CBonusPanel(){
     var _oEgg;
     var _oWinText;
     var _oContainer;
-    var _oSoundtrackBonus;
     
     this._init = function(){        
         _oContainer = new createjs.Container();
@@ -129,6 +128,8 @@ function CBonusPanel(){
     };
     
     this.show = function(iNumChicken,iCurBet){
+        $(s_oMain).trigger("bonus_start");
+        
         _iCurBet = iCurBet;
         _bChickenClicked = false;
         _oWinText.alpha = 0;
@@ -170,11 +171,20 @@ function CBonusPanel(){
         _oContainer.visible = true;
         createjs.Tween.get(_oContainer).to({alpha:1}, 1000);  
 		
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                s_oSoundTrack.setVolume(0);
-                _oSoundtrackBonus = createjs.Sound.play("soundtrack_bonus",{loop:-1});
-        }
+        
+        setVolume("soundtrack",0);
+        playSound("soundtrack_bonus",1,true);
+        
     };
+
+    var _iEgg;
+    var _iWin;
+    on(`bonus`, data => {
+        if (data.bonus) {
+            _iEgg = data.bonusData.id;
+            _iWin = data.bonusData.amount;
+        }
+    });
     
     this._onChickenReleased = function(event,oData){
         if(_bChickenClicked){
@@ -182,21 +192,16 @@ function CBonusPanel(){
         }
         
         _bChickenClicked = true;
-        var iIndex = oData;
         
-        do{
-            var iRandEgg = Math.floor(Math.random()* s_aEggOccurence.length);
-        }while(_aBonusValue[s_aEggOccurence[iRandEgg]]*_iCurBet > SLOT_CASH);
-        
-        this.playChickenLayAnim(iIndex,s_aEggOccurence[iRandEgg]);
+        this.playChickenLayAnim(oData, _iEgg, _iWin);
 		
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                createjs.Sound.play("choose_chicken");
-        }
+        
+        playSound("choose_chicken",1,false);
+        
     };
     
-    this.playChickenLayAnim = function(iIndex,iRandEgg){
-        _iBonusMoney = _aBonusValue[iRandEgg];
+    this.playChickenLayAnim = function(iIndex,iRandEgg,iMoney){
+        _iBonusMoney = iMoney;
 
         _oEgg.gotoAndStop("egg_"+iRandEgg);
         
@@ -222,9 +227,9 @@ function CBonusPanel(){
         var oParent = this;
         createjs.Tween.get(_oEgg).to({y:460}, 300).call(function(){oParent.endBonus();});  
 		
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                createjs.Sound.play("reveal_egg");
-        }
+        
+        playSound("reveal_egg",1,false);
+        
     };
     
     this.endBonus = function(){
@@ -240,10 +245,10 @@ function CBonusPanel(){
 				for(var i=0;i<_aChickens.length;i++){
                                     _aChickens[i].visible = false;
                                 }
-                                if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                                    s_oSoundTrack.setVolume(SOUNDTRACK_VOLUME);
-                                    _oSoundtrackBonus.stop();
-                                }
+                                
+                                setVolume("soundtrack",SOUNDTRACK_VOLUME);
+                                stopSound("soundtrack_bonus");
+                                
                                 s_oGame.endBonus(_iBonusMoney)},4000);
     };
     

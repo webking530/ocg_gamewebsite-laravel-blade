@@ -164,12 +164,9 @@ class GameController extends Controller
     }
 
     public function closeSession(Game $game) {
-        try {
-            $this->user->closeGameSession($game);
-            return 'ok';
-        } catch (\Exception $ex) {
-            return 'error';
-        }
+        $this->user->closeGameSession($game);
+
+        return redirect()->route('user.game.manage_session', ['slug' => $game->slug]);
     }
 
     public function saveCreditsToSession(Request $request, Game $game) {

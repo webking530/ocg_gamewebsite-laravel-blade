@@ -73,9 +73,9 @@ function CToggle(iXPos, iYPos, oSprite, bActive, oParentContainer) {
         _oButton.scaleX = 1;
         _oButton.scaleY = 1;
 
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.play("press_but");
-        }
+        
+        playSound("press_but",1,false);
+        
 
         _bActive = !_bActive;
         _oButton.gotoAndStop("state_" + _bActive);

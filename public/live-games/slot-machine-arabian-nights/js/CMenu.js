@@ -17,7 +17,7 @@ function CMenu(){
         s_oAttachSection.addChild(_oBg);
 
         var oSprite = s_oSpriteLibrary.getSprite('but_bg');
-        _oButPlay = new CTextButton((CANVAS_WIDTH/2),CANVAS_HEIGHT -164,oSprite,TEXT_PLAY,FONT_GAME,"#ffffff",40);
+        _oButPlay = new CTextButton((CANVAS_WIDTH/2),CANVAS_HEIGHT -164,oSprite,TEXT_PLAY,FONT_GAME,"#ffffff",40,s_oStage);
         _oButPlay.addEventListener(ON_MOUSE_UP, this._onButPlayRelease, this);
 
         if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
@@ -48,7 +48,7 @@ function CMenu(){
             _fRequestFullScreen = false;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             oSprite = s_oSpriteLibrary.getSprite('but_fullscreen');
 
             _oButFullscreen = new CToggle(_pStartPosFullscreen.x,_pStartPosFullscreen.y,oSprite,s_bFullscreen,s_oAttachSection);
@@ -78,7 +78,7 @@ function CMenu(){
             _oButCredits.unload();
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.unload();
         }
         
@@ -98,7 +98,7 @@ function CMenu(){
         if(SHOW_CREDITS){
             _oButCredits.setPosition(_pStartPosCredits.x + iNewX,_pStartPosCredits.y + iNewY);
         }
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.setPosition(_pStartPosFullscreen.x + iNewX,_pStartPosFullscreen.y + iNewY);
         }
     };
@@ -113,7 +113,7 @@ function CMenu(){
     };
 
     this._onAudioToggle = function(){
-        createjs.Sound.setMute(s_bAudioActive);
+        Howler.mute(s_bAudioActive);
         s_bAudioActive = !s_bAudioActive;
     };
     
@@ -121,17 +121,23 @@ function CMenu(){
         new CCreditsPanel();
     };
     
-    this._onFullscreenRelease = function(){
-        if(s_bFullscreen) { 
-            _fCancelFullScreen.call(window.document);
-            s_bFullscreen = false;
-        }else{
-            _fRequestFullScreen.call(window.document.documentElement);
-            s_bFullscreen = true;
-        }
-        
-        sizeHandler();
+    this.resetFullscreenBut = function(){
+	if (_fRequestFullScreen && screenfull.enabled){
+		_oButFullscreen.setActive(s_bFullscreen);
+	}
     };
+
+
+    this._onFullscreenRelease = function(){
+	if(s_bFullscreen) { 
+		_fCancelFullScreen.call(window.document);
+	}else{
+		_fRequestFullScreen.call(window.document.documentElement);
+	}
+	
+	sizeHandler();
+    };
+
     
     s_oMenu = this;
     

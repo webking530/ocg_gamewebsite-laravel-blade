@@ -4,6 +4,8 @@ function CGfxButton(iXPos,iYPos,oSprite,bAttach){
     var _iHeight;
     var _aCbCompleted;
     var _aCbOwner;
+    var _oListenerDown;
+    var _oListenerUp;
     var _oParams;
     var _oButton;
     
@@ -29,8 +31,8 @@ function CGfxButton(iXPos,iYPos,oSprite,bAttach){
     };
     
     this.unload = function(){
-       _oButton.off("mousedown", this.buttonDown);
-       _oButton.off("pressup" , this.buttonRelease); 
+        _oButton.off("mousedown", _oListenerDown);
+       _oButton.off("pressup" , _oListenerUp); 
        
        s_oStage.removeChild(_oButton);
     };
@@ -58,8 +60,8 @@ function CGfxButton(iXPos,iYPos,oSprite,bAttach){
     };
     
     this._initListener = function(){
-       _oButton.on("mousedown", this.buttonDown);
-       _oButton.on("pressup" , this.buttonRelease);      
+       _oListenerDown = _oButton.on("mousedown", this.buttonDown);
+       _oListenerUp = _oButton.on("pressup" , this.buttonRelease);      
     };
     
     this.addEventListener = function( iEvent,cbCompleted, cbOwner ){
@@ -78,9 +80,9 @@ function CGfxButton(iXPos,iYPos,oSprite,bAttach){
             return;
         }
         
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.play("press_but");
-        }
+        
+        playSound("press_but",1,false);
+        
         
         _oButton.scaleX = 1;
         _oButton.scaleY = 1;

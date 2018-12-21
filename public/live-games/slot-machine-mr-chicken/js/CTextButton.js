@@ -1,12 +1,15 @@
-function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
+function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize,oParentContainer){
     var _bDisable;
     var _iWidth;
     var _iHeight;
     var _aCbCompleted;
     var _aCbOwner;
+    var _oListenerDown;
+    var _oListenerUp;
     var _oButton;
     var _oText;
     var _oButtonBg;
+    var _oParentContainer = oParentContainer;
     
     this._init =function(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
         _bDisable = false;
@@ -33,16 +36,16 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
         _oButton.cursor = "pointer";
         _oButton.addChild(_oButtonBg,_oText);
 
-        s_oStage.addChild(_oButton);
+        _oParentContainer.addChild(_oButton);
 
         this._initListener();
     };
     
     this.unload = function(){
-       _oButton.off("mousedown");
-       _oButton.off("pressup");
+       _oButton.off("mousedown", _oListenerDown);
+       _oButton.off("pressup" , _oListenerUp); 
        
-       s_oStage.removeChild(_oButton);
+       _oParentContainer.removeChild(_oButton);
     };
     
     this.setVisible = function(bVisible){
@@ -60,7 +63,7 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
     this.disable = function(){
         _bDisable = true;
 		
-		var matrix = new createjs.ColorMatrix().adjustSaturation(-100);
+        var matrix = new createjs.ColorMatrix().adjustSaturation(-100);
         _oButtonBg.filters = [
                  new createjs.ColorMatrixFilter(matrix)
         ];
@@ -68,10 +71,8 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
     };
     
     this._initListener = function(){
-       oParent = this;
-
-       _oButton.on("mousedown", this.buttonDown);
-       _oButton.on("pressup" , this.buttonRelease);      
+       _oListenerDown = _oButton.on("mousedown", this.buttonDown);
+       _oListenerUp = _oButton.on("pressup" , this.buttonRelease);    
     };
     
     this.addEventListener = function( iEvent,cbCompleted, cbOwner ){
@@ -84,9 +85,9 @@ function CTextButton(iXPos,iYPos,oSprite,szText,szFont,szColor,iFontSize){
             return;
         }
         
-        if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-            createjs.Sound.play("press_but");
-        }
+        
+        playSound("press_but",1,false);
+        
         
         _oButton.scaleX = 1;
         _oButton.scaleY = 1;

@@ -69,6 +69,10 @@ function CBonusPanel(){
         _iPrizeToShow = iPrize;
         _oContainer.visible = true;
         _bInitGame = true;
+
+        _oWheel.update();
+        
+        $(s_oMain).trigger("bonus_start");
     };
     
     this._onSpin = function(){
@@ -145,18 +149,18 @@ function CBonusPanel(){
     };
     
     this.wheelArrived = function(){	
-        _oTextHighLight.text = TEXT_CURRENCY + WHEEL_SETTINGS[_iPrizeToShow];
+        _oTextHighLight.text = "x" + WHEEL_SETTINGS[_iPrizeToShow];
         
 	this._animWinText();
 
         if(WHEEL_SETTINGS[_iPrizeToShow].prize <= 0){
             _iGameState = STATE_BONUS_LOSE;
 
-            playSound("game_over_bonus",1,0);
+            playSound("game_over_bonus",1,false);
         } else {
             _iGameState = STATE_BONUS_WIN;
 
-            playSound("win_bonus",1,0);
+            playSound("win_bonus",1,false);
         }
     };
     

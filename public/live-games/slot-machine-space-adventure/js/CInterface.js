@@ -48,7 +48,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _fRequestFullScreen = false;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             oSprite = s_oSpriteLibrary.getSprite('but_fullscreen');
 
             _oButFullscreen = new CToggle(_pStartPosFullscreen.x,_pStartPosFullscreen.y,oSprite,s_bFullscreen,s_oStage);
@@ -56,25 +56,25 @@ function CInterface(iCurBet,iTotBet,iMoney){
         }
         
         oSprite = s_oSpriteLibrary.getSprite('spin_but');
-        _oSpinBut = new CTextButton(1090 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,"",FONT_GAME,"#f951aa",22);  
+        _oSpinBut = new CTextButton(1090 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,"",FONT_GAME,"#f951aa",22,s_oStage);  
         _oSpinBut.addEventListener(ON_MOUSE_UP, this._onSpin, this);
         
         
         oSprite = s_oSpriteLibrary.getSprite('info_but');
-        _oInfoBut = new CTextButton(328 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_INFO,FONT_GAME,"#ffffff",24);        
+        _oInfoBut = new CTextButton(328 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_INFO,FONT_GAME,"#ffffff",24,s_oStage);        
         _oInfoBut.addEventListener(ON_MOUSE_UP, this._onInfo, this);
         
         
         oSprite = s_oSpriteLibrary.getSprite('but_lines_bg');
-        _oAddLineBut = new CTextButton(494 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_LINES,FONT_GAME,"#ffffff",24);
+        _oAddLineBut = new CTextButton(494 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_LINES,FONT_GAME,"#ffffff",24,s_oStage);
         _oAddLineBut.addEventListener(ON_MOUSE_UP, this._onAddLine, this);
         
         oSprite = s_oSpriteLibrary.getSprite('coin_but');
-        _oBetCoinBut = new CTextButton(680 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_COIN,FONT_GAME,"#ffffff",24);
+        _oBetCoinBut = new CTextButton(680 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_COIN,FONT_GAME,"#ffffff",24,s_oStage);
         _oBetCoinBut.addEventListener(ON_MOUSE_UP, this._onBet, this);
         
         oSprite = s_oSpriteLibrary.getSprite('but_maxbet_bg');
-        _oMaxBetBut = new CTextButton(866 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_MAX_BET,FONT_GAME,"#ffffff",24);
+        _oMaxBetBut = new CTextButton(866 + (oSprite.width/2),CANVAS_HEIGHT - (oSprite.height/2),oSprite,TEXT_MAX_BET,FONT_GAME,"#ffffff",24,s_oStage);
         _oMaxBetBut.addEventListener(ON_MOUSE_UP, this._onMaxBet, this);
 		
 	_oMoneyText = new createjs.Text(TEXT_MONEY +"\n"+iMoney.toFixed(2)+ TEXT_CURRENCY,"30px "+FONT_GAME, "#f951aa");
@@ -169,7 +169,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _oAudioToggle = null;
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.unload();
         }
         
@@ -186,7 +186,7 @@ function CInterface(iCurBet,iTotBet,iMoney){
             _oAudioToggle.setPosition(_pStartPosAudio.x - iNewX,iNewY + _pStartPosAudio.y);
         }
         
-        if (_fRequestFullScreen && inIframe() === false){
+        if (_fRequestFullScreen && screenfull.enabled){
             _oButFullscreen.setPosition(_pStartPosFullscreen.x - iNewX,_pStartPosFullscreen.y + iNewY);
         }
         
@@ -315,20 +315,25 @@ function CInterface(iCurBet,iTotBet,iMoney){
     };
     
     this._onAudioToggle = function(){
-        createjs.Sound.setMute(s_bAudioActive);
+        Howler.mute(s_bAudioActive);
         s_bAudioActive = !s_bAudioActive;
     };
     
+    this.resetFullscreenBut = function(){
+	if (_fRequestFullScreen && screenfull.enabled){
+		_oButFullscreen.setActive(s_bFullscreen);
+	}
+    };
+
+    
     this._onFullscreenRelease = function(){
-        if(s_bFullscreen) { 
-            _fCancelFullScreen.call(window.document);
-            s_bFullscreen = false;
-        }else{
-            _fRequestFullScreen.call(window.document.documentElement);
-            s_bFullscreen = true;
-        }
-        
-        sizeHandler();
+	if(s_bFullscreen) { 
+		_fCancelFullScreen.call(window.document);
+	}else{
+		_fRequestFullScreen.call(window.document.documentElement);
+	}
+	
+	sizeHandler();
     };
     
     s_oInterface = this;

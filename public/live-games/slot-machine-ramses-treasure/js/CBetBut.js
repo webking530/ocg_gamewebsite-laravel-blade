@@ -76,9 +76,9 @@ function CBetBut(iXPos,iYPos,oSprite){
     this.buttonRelease = function(){
         if(_aCbCompleted[ON_MOUSE_UP] && _bDisable === false){
             
-            if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
-                createjs.Sound.play("press_but");
-            }
+            
+            playSound("press_but",1,false);
+            
             
             _aCbCompleted[ON_MOUSE_UP].call(_aCbOwner[ON_MOUSE_UP],_aParams);
         }

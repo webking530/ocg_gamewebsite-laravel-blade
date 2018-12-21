@@ -12,12 +12,12 @@ let game;
         initConfig(session.credits, game.configuration);
         initPlay(session, game);
         initUi();
-    }
+    };
 
     const initProd = () => {
         session = JSON.parse(sessionStorage.getItem(`session`));
         game = JSON.parse(sessionStorage.getItem(`game`));
-    }
+    };
 
     const initDev = () => {
         session = {
@@ -26,6 +26,8 @@ let game;
         };
         game = {
             id: 1,
+            serverUrl: 'https://www.ocgcasino.com',
+            sessionCloseUrl: 'http://www.google.com',
             language: {
                 TEXT_MONEY: "MONEY",
                 TEXT_PLAY: "PLAY",
@@ -112,12 +114,12 @@ let game;
         TIME_SHOW_WIN = config.timeShowWins;
         TIME_SHOW_ALL_WINS = config.timeShowWins;
         TOTAL_MONEY = credits / 100;
-    }
+    };
 
     // Play init
     const initPlay = (session, game) => {
-        playUrl = `https://www.ocgcasino.com/account/game/play/${game.id}?bet={bet}&lines={lines}&token=${session.token}`;
-    }
+        playUrl = `${game.serverUrl}/account/game/play/${game.id}?bet={bet}&lines={lines}&token=${session.token}`;
+    };
 
     // UI init
     const initUi = () => {
@@ -127,7 +129,7 @@ let game;
         } else {
             sizeHandler();
         }
-    }
+    };
 
     window.addEventListener(`load`, () => init(sessionStorage.getItem(`session`) && sessionStorage.getItem(`game`)));
 })();
@@ -185,9 +187,21 @@ const getErrorData = data => ({
 const processResponse = data => {
     lastPlay = data;
     emit(`play`, lastPlay.data);
+    emit(`bonus`, lastPlay.data);
     if (lastPlay.error.code !== `success`) {
         emit('error', lastPlay.error);
+        if (lastPlay.error.code === `invalid_token`) {
+            close();
+        }
     }
+};
+
+// ----------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------
+// Closing
+const close = () => {
+    window.location.href = game.sessionCloseUrl;
 };
 
 // ----------------------------------------------------------------------------------------------------

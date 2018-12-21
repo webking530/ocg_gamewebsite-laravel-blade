@@ -439,11 +439,12 @@ function CGame(oData){
     };
 
     this.onExit = function(){
-        this.unload();
-        $(s_oMain).trigger("end_session");
-        $(s_oMain).trigger("share_event", _iMoney);
+        close();
+        // this.unload();
+        // $(s_oMain).trigger("end_session");
+        // $(s_oMain).trigger("share_event", _iMoney);
             
-        s_oMain.gotoMenu();
+        // s_oMain.gotoMenu();
     };
     
     this.getState = function(){

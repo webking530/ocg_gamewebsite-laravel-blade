@@ -211,7 +211,8 @@ function sizeHandler() {
         }
         
         $("#canvas").css("left",fOffsetX+"px");
-
+        
+        fullscreenHandler();
 };
 
 function createBitmap(oSprite, iWidth, iHeight){
@@ -266,11 +267,34 @@ function _checkOrientation(iWidth,iHeight){
     }
 }
 
-function inIframe() {
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
+function playSound(szSound,iVolume,bLoop){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+
+        s_aSounds[szSound].play();
+        s_aSounds[szSound].volume(iVolume);
+
+        s_aSounds[szSound].loop(bLoop);
+
+        return s_aSounds[szSound];
+    }
+    return null;
+}
+
+function stopSound(szSound){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].stop();
+    }
+}   
+
+function setVolume(szSound, iVolume){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].volume(iVolume);
+    }
+}  
+
+function setMute(szSound, bMute){
+    if(DISABLE_SOUND_MOBILE === false || s_bMobile === false){
+        s_aSounds[szSound].mute(bMute);
     }
 }
 
@@ -426,3 +450,39 @@ function getParamValue(paramName){
         }
     }
 })();
+
+
+function fullscreenHandler(){
+	if (!ENABLE_FULLSCREEN || !screenfull.enabled){
+       return;
+    }
+	
+    if(screen.height < window.innerHeight+3 && screen.height > window.innerHeight-3){
+        s_bFullscreen = true;
+    }else{
+        s_bFullscreen = false;
+    }
+
+    if (s_oInterface !== null){
+        s_oInterface.resetFullscreenBut();
+    }
+
+    if (s_oMenu !== null){
+        s_oMenu.resetFullscreenBut();
+    }
+}
+
+
+if (screenfull.enabled) {
+    screenfull.on('change', function(){
+            s_bFullscreen = screenfull.isFullscreen;
+
+            if (s_oInterface !== null){
+                s_oInterface.resetFullscreenBut();
+            }
+
+            if (s_oMenu !== null){
+                s_oMenu.resetFullscreenBut();
+            }
+    });
+}
