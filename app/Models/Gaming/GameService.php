@@ -81,7 +81,7 @@ class GameService
         return json_encode([
             'token' => $token,
             'credits' => $credits * 100, // Game works in cents
-            'freeSpins' => json_encode($freeSpins)
+            'freeSpins' => $freeSpins
         ]);
     }
 
