@@ -76,7 +76,7 @@ class GameSessionSeeder extends Seeder
             ]);
         }
 
-        DB::table('game_user_session')->insert([
+        /*DB::table('game_user_session')->insert([
             'game_id' => 999,
             'user_id' => $testUser->id,
             'credits' => 1000000,
@@ -89,6 +89,6 @@ class GameSessionSeeder extends Seeder
             ]),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
-        ]);
+        ]);*/
     }
 }

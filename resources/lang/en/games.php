@@ -70,6 +70,25 @@ return [
         'TEXT_SHARE_MSG1' => "You collected <strong>",
         'TEXT_SHARE_MSG2' => " points</strong>!<br><br>Share your score with your friends!",
         'TEXT_SHARE_SHARE1' => "My score is ",
-        'TEXT_SHARE_SHARE2' => " points! Can you do better?"
+        'TEXT_SHARE_SHARE2' => " points! Can you do better?",
+
+        'TEXT_HOLD' => 'HOLD',
+        'TEXT_HELP_BONUS' => '3 OR MORE MR CHICKEN LET YOU PLAY THE BONUS GAME!',
+        'TEXT_CONGRATULATIONS' => 'Congratulations!',
+        'TEXT_MSG_SHARING1' => 'My score is ',
+        'TEXT_MSG_SHARING2' => ' points! Can you do better?',
+
+        'TEXT_AUTOSPIN' => "AUTO\nPLAY",
+        'TEXT_OK' => 'OK',
+        'TEXT_STOP_AUTO' => "STOP\nAUTO",
+
+        'TEXT_HELP_BONUS1' => '3 OR MORE ON ANY REELS, WILL TRIGGER WHEEL OF FORTUNE BONUS!!',
+        'TEXT_HELP_BONUS2' => 'CLICK SPIN BUTTON TO GET YOUR PRIZE!!',
+        'TEXT_HELP_FREESPIN' => 'GET 3 OR MORE FREESPIN SYMBOL ON ANY REEL TO TRIGGER FREESPINS',
+        'TEXT_BONUS_HELP' => 'SPIN THE WHEEL!!',
+
+        'TEXT_NO_MAX_BET' => 'NOT ENOUGH MONEY FOR MAX BET!!',
+        'TEXT_CONNECTION_LOST' => 'CONNECTION DOWN! PLEASE TRY AGAIN',
+        'TEXT_NOT_ENOUGH_MONEY' => 'NOT ENOUGH MONEY FOR THE CURRENT BET!',
     ]
    ];
