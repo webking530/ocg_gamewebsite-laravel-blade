@@ -74,7 +74,7 @@ class GameService
 
         if ($session->extra != null && isset($session->extra['free_spins']) && $session->extra['free_spins'] > 0) {
             $freeSpins['games'] = $session->extra['free_spins'];
-            $freeSpins['bet'] = $session->extra['bet'];
+            $freeSpins['bet'] = $session->extra['bet'] * 100; // Game works in cents
             $freeSpins['lines'] = $session->extra['lines'];
         }
 

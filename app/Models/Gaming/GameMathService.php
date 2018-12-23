@@ -80,7 +80,7 @@ class GameMathService
         }
 
         if ( ! $this->hasPendingFreeSpins()) {
-            if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits * 100) {
+            if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits) {
                 return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS);
             }
         }
@@ -113,12 +113,16 @@ class GameMathService
 
         DB::beginTransaction();
 
-        $this->session->credits += $winAmount / 100;
+        $this->session->credits += $winAmount;
 
         $sessionExtra = $this->session->extra;
 
         if ($sessionExtra == null) {
-            $sessionExtra = [];
+            $sessionExtra = [
+                'free_spins' => 0,
+                'bet' => 0,
+                'lines' => 0
+            ];
         }
 
         if ($this->hasPendingFreeSpins()) {
