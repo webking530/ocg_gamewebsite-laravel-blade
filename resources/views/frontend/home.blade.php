@@ -14,63 +14,92 @@
 @endsection
 
 @section('content')
-    <div role="main" class="main">
-        <div class="slider-container rev_slider_wrapper" style="height: 700px;">
-            <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 800, 'gridheight': 700}">
-                <ul>
-                    <li data-transition="fade">
-                        <img src="{{ asset('img/sliderbg.jpg') }}"
-                             alt=""
-                             data-bgposition="center center"
-                             data-bgfit="cover"
-                             data-bgrepeat="no-repeat"
-                             class="rev-slidebg">
-
-
-
-                        <div class="tp-caption top-label"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-95"
-                             data-start="500"
-                             style="z-index: 5"
-                             data-transform_in="y:[-300%];opacity:0;s:500;">ARE YOU READY FOR</div>
-
-
-
-                        <div class="tp-caption main-label"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-45"
-                             data-start="1500"
-                             data-whitespace="nowrap"
-                             data-transform_in="y:[100%];s:500;"
-                             data-transform_out="opacity:0;s:500;"
-                             style="z-index: 5"
-                             data-mask_in="x:0px;y:0px;">THE BEST ONLINE CASINO EXPERIENCE?</div>
-
-                        <div class="tp-caption bottom-label"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="5"
-                             data-start="2000"
-                             style="z-index: 5"
-                             data-transform_in="y:[100%];opacity:0;s:500;">Check out all of our games.</div>
-
-                        <a class="tp-caption btn btn-lg btn-primary btn-slider-action"
-                           data-hash
-                           data-hash-offset="100"
-                           href="#demos"
-                           data-x="center" data-hoffset="0"
-                           data-y="center" data-voffset="80"
-                           data-start="2200"
-                           data-whitespace="nowrap"
-                           data-transform_in="y:[100%];s:500;"
-                           data-transform_out="opacity:0;s:500;"
-                           style="z-index: 5"
-                           data-mask_in="x:0px;y:0px;">Start Playing Now!</a>
-
-                    </li>
-                </ul>
+    <section class="hero primary-hero" id="primary-hero">
+        <div class="container">
+            <div class="row" id="hero-row">
+                <div class="col-lg-12">
+                    <div class="hero-container">
+                        <div class="hero-title text-center">
+                            <h1>
+                            <span>
+                                ARE YOU READY FOR
+                                <br />
+                                <strong>THE BEST ONLINE CASINO EXPERIENCE?</strong>
+                            </span>
+                            </h1>
+                        </div>
+                        <div class="hero-tagline text-center">
+                            <p class="hero-paragraph">Check out all of our games.</p>
+                        </div>
+                        <div class="hero-cta text-center">
+                            <a href="#demos" class="btn btn-lg btn-primary btn-borders text-uppercase" data-hash data-hash-offset="100">
+                                <p class="hero-paragraph">Start Playing Now!</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+
+    <div role="main" class="main">
+        {{--<div class="slider-container rev_slider_wrapper" style="height: 700px;">--}}
+            {{--<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 800, 'gridheight': 700}">--}}
+                {{--<ul>--}}
+                    {{--<li data-transition="fade">--}}
+                        {{--<img src="{{ asset('img/sliderbg.jpg') }}"--}}
+                             {{--alt=""--}}
+                             {{--data-bgposition="center center"--}}
+                             {{--data-bgfit="cover"--}}
+                             {{--data-bgrepeat="no-repeat"--}}
+                             {{--class="rev-slidebg">--}}
+
+
+
+                        {{--<div class="tp-caption top-label"--}}
+                             {{--data-x="center" data-hoffset="0"--}}
+                             {{--data-y="center" data-voffset="-95"--}}
+                             {{--data-start="500"--}}
+                             {{--style="z-index: 5"--}}
+                             {{--data-transform_in="y:[-300%];opacity:0;s:500;">ARE YOU READY FOR</div>--}}
+
+
+
+                        {{--<div class="tp-caption main-label"--}}
+                             {{--data-x="center" data-hoffset="0"--}}
+                             {{--data-y="center" data-voffset="-45"--}}
+                             {{--data-start="1500"--}}
+                             {{--data-whitespace="nowrap"--}}
+                             {{--data-transform_in="y:[100%];s:500;"--}}
+                             {{--data-transform_out="opacity:0;s:500;"--}}
+                             {{--style="z-index: 5"--}}
+                             {{--data-mask_in="x:0px;y:0px;">THE BEST ONLINE CASINO EXPERIENCE?</div>--}}
+
+                        {{--<div class="tp-caption bottom-label"--}}
+                             {{--data-x="center" data-hoffset="0"--}}
+                             {{--data-y="center" data-voffset="5"--}}
+                             {{--data-start="2000"--}}
+                             {{--style="z-index: 5"--}}
+                             {{--data-transform_in="y:[100%];opacity:0;s:500;">Check out all of our games.</div>--}}
+
+                        {{--<a class="tp-caption btn btn-lg btn-primary btn-slider-action"--}}
+                           {{--data-hash--}}
+                           {{--data-hash-offset="100"--}}
+                           {{--href="#demos"--}}
+                           {{--data-x="center" data-hoffset="0"--}}
+                           {{--data-y="center" data-voffset="80"--}}
+                           {{--data-start="2200"--}}
+                           {{--data-whitespace="nowrap"--}}
+                           {{--data-transform_in="y:[100%];s:500;"--}}
+                           {{--data-transform_out="opacity:0;s:500;"--}}
+                           {{--style="z-index: 5"--}}
+                           {{--data-mask_in="x:0px;y:0px;">Start Playing Now!</a>--}}
+
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+
         <div class="home-intro" id="home-intro">
             <div class="container">
 

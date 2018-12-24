@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
+
 body {
     color: #aaa;
+    height: 100%;
 }
 
 #header .header-body {
@@ -266,4 +271,220 @@ body {
 #header .header-nav-main nav>ul>li.register-link.active>a,#header .header-nav-main nav>ul>li.register-link:hover>a {
     background: #e2b352;
     color: #fff!important
+}
+
+
+
+
+
+
+
+#primary-hero {
+    background: url(../../img/sliderbg.jpg) no-repeat 50%;
+    background-size: cover;
+    /*margin-bottom: 60px;*/
+    height: 100%
+}
+
+#primary-hero>.container {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%)
+}
+
+.hero .btn+.btn {
+    margin-left: 30px
+}
+
+.hero {
+    min-height: 425px;
+    background-position: top;
+    background-size: cover;
+    position: relative
+}
+
+.hero .col-12 {
+    display: table
+}
+
+.hero .hero-container-outer {
+    display: table;
+    width: 100%
+}
+
+.hero .hero-container {
+    height: 100%;
+    vertical-align: middle
+}
+
+.hero .hero-title {
+    font-weight: 300
+}
+
+.hero .hero-title h1 span {
+    font-size: 39px;
+    line-height: 52px;
+    font-weight: 300;
+    color: #fff;
+    text-transform: uppercase
+}
+
+.hero .hero-tagline p {
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 32px;
+    color: #fff
+}
+
+.hero .hero-cta {
+    margin-top: 45px
+}
+
+.hero p {
+    color: inherit;
+    margin: 0
+}
+
+@media screen and (max-width: 1300px) {
+    .hero .hero-title h1 span {
+        font-size:36px;
+        line-height: 48px
+    }
+
+    .hero .hero-tagline p {
+        font-size: 21px;
+        line-height: 28px
+    }
+
+    #primary-hero {
+        background: url(../../img/sliderbg.jpg) no-repeat 50%;
+        background-size: cover
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .hero .hero-title h1 span {
+        font-size:33px;
+        line-height: 44px
+    }
+
+    .hero .hero-tagline p {
+        font-size: 18px;
+        line-height: 24px
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .hero .hero-title h1 span {
+        font-size:30px;
+        line-height: 40px
+    }
+
+    .hero .hero-tagline p {
+        font-size: 15px;
+        line-height: 20px
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .hero .hero-title h1 span {
+        font-size:27px;
+        line-height: 36px
+    }
+
+    .hero .hero-tagline p {
+        font-size: 15px;
+        line-height: 20px
+    }
+}
+
+@media screen and (max-width: 455px) {
+    .hero .hero-title h1 span {
+        font-size:24px;
+        line-height: 32px
+    }
+
+    .hero .hero-tagline p {
+        font-size: 15px;
+        line-height: 20px
+    }
+}
+
+@media screen and (max-width: 1130px) {
+    .hero>.row {
+        background-color:rgba(0,0,0,.4)
+    }
+}
+
+@media screen and (max-width: 844px) {
+    .hero .hero-tagline br {
+        content:""
+    }
+
+    .hero .hero-tagline br:after {
+        content: " "
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .hero {
+        min-height:500px
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .hero {
+        min-height:550px
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .hero {
+        min-height:600px
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #primary-hero {
+        background:url(../../img/sliderbg.jpg) no-repeat 50%;
+        background-size: cover
+    }
+
+    .hero .hero-container,.hero .hero-cta {
+        text-align: center
+    }
+
+    .hero .hero-cta {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1
+    }
+
+    .hero .hero-tagline {
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    .hero .hero-scroll {
+        margin-left: -4.5px;
+        bottom: 20px;
+        color: #fff
+    }
+
+    .hero .hero-scroll .hero-scroll-text {
+        display: none
+    }
+
+    .hero .btn+.btn {
+        margin-top: 20px
+    }
+
+    .hero .btn {
+        display: block;
+        max-width: 200px;
+        margin-left: auto!important;
+        margin-right: auto!important
+    }
 }

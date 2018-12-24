@@ -70,7 +70,7 @@
         </div>
         @endif
 
-        <div class="body">
+        {{--<div class="body">--}}
             <header id="header" class="header-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 1, 'stickySetTop': '1', 'stickyChangeLogo': false}">
                 <div class="header-body">
                     <div class="header-container container">
@@ -89,7 +89,7 @@
                                             <i class="fa fa-bars"></i>
                                         </button>
                                         <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                                            <nav>
+                                            <nav class="text-center">
                                                 <ul class="nav nav-pills navbar-center navbar-custom">
                                                     @if (Auth::check())
                                                     <li class="{{ set_active('user.dashboard.index') }}">
@@ -320,7 +320,7 @@
                     </div>
                 </div>
             </footer>
-        </div>
+        {{--</div>--}}
 
         @include('partials.footer')
         
