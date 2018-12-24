@@ -71,7 +71,7 @@
         @endif
 
         <div class="body">
-            <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 0, 'stickySetTop': '0px', 'stickyChangeLogo': false}">
+            <header id="header" class="header-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 1, 'stickySetTop': '1', 'stickyChangeLogo': false}">
                 <div class="header-body">
                     <div class="header-container container">
                         <div class="header-row">
@@ -234,7 +234,7 @@
                                                             <i class="fas fa-user"></i> Login
                                                         </a>
                                                     </li>
-                                                    <li class="{{ set_active('home.register') }}">
+                                                    <li class="{{ set_active('home.register') }} register-link">
                                                         <a href="{{ route('home.register') }}">
                                                             Sign Up
                                                         </a>

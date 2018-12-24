@@ -258,3 +258,12 @@ body {
     -webkit-appearance: none;
     margin: 0;
 }
+
+#header .header-nav-main nav>ul>li.register-link>a {
+    color: #e2b352!important
+}
+
+#header .header-nav-main nav>ul>li.register-link.active>a,#header .header-nav-main nav>ul>li.register-link:hover>a {
+    background: #e2b352;
+    color: #fff!important
+}
