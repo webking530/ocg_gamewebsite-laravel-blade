@@ -473,7 +473,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
 	#header .header-nav-main nav > ul > li > a {
 		display: inline-block;
 		border-radius: 4px;
-		font-size: 12px;
+		font-size: 14px;
 		font-style: normal;
 		font-weight: 700;
 		line-height: 20px;
