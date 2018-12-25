@@ -131,17 +131,19 @@ $(document).ready(function () {
         }
     });
 
-    setInterval(function() {
-        let $newsNotification = $('.news-notification');
+    if ($('[data-news-id]').length) {
+        setInterval(function() {
+            let $newsNotification = $('.news-notification');
 
-        $.get($('#news-bubble').data('count-news-route'), {news: getNewsId()}, function(unreadNewsCount) {
-            if (unreadNewsCount > 0) {
-                $newsNotification.html(unreadNewsCount);
-                $newsNotification.show();
-            } else {
-                $newsNotification.html(0);
-                $newsNotification.hide();
-            }
-        })
-    }, 5000);
+            $.get($('#news-bubble').data('count-news-route'), {news: getNewsId()}, function(unreadNewsCount) {
+                if (unreadNewsCount > 0) {
+                    $newsNotification.html(unreadNewsCount);
+                    $newsNotification.show();
+                } else {
+                    $newsNotification.html(0);
+                    $newsNotification.hide();
+                }
+            })
+        }, 5000);
+    }
 });

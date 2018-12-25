@@ -7,15 +7,8 @@ use Illuminate\Http\Request;
 class CookiesController extends Controller
 {
     public function setNewsCookies(Request $request) {
-        if ($request->hasCookie('viewed_news')) {
-            $viewedNews = json_decode($request->cookie('viewed_news'));
-        } else {
-            $viewedNews = [];
-        }
-
-        $unreadNews = array_map(function($item) {
-            return intval($item);
-        }, $request->get('news'));
+        $viewedNews = $this->getViewedNews($request);
+        $unreadNews = $this->getUnreadNews($request);
 
         $viewedNews = array_unique(array_merge($viewedNews, $unreadNews));
 
@@ -23,16 +16,31 @@ class CookiesController extends Controller
     }
 
     public function countUnreadNews(Request $request) {
+        $viewedNews = $this->getViewedNews($request);
+        $unreadNews = $this->getUnreadNews($request);
+
+        return count(array_diff($unreadNews, $viewedNews));
+    }
+
+    private function getViewedNews(Request $request) {
         if ($request->hasCookie('viewed_news')) {
             $viewedNews = json_decode($request->cookie('viewed_news'));
         } else {
             $viewedNews = [];
         }
 
-        $unreadNews = array_map(function($item) {
-            return intval($item);
-        }, $request->get('news'));
+        return $viewedNews;
+    }
 
-        return count(array_diff($unreadNews, $viewedNews));
+    private function getUnreadNews(Request $request) {
+        if ($request->get('news') == null) {
+            $unreadNews = [];
+        } else {
+            $unreadNews = array_map(function($item) {
+                return intval($item);
+            }, $request->get('news'));
+        }
+
+        return $unreadNews;
     }
 }
