@@ -291,9 +291,11 @@
                             <h4>Latest News</h4>
                             <div id="news" class="twitter">
                                 <ul>
-                                    @foreach ($bannersService->getLatestNews() as $news)
-                                    <li><a href="{{ route('news.details', ['news' => $news]) }}">{!! htmlspecialchars(trim(strip_tags(mb_strimwidth($news->content, 0, 178, '...'))))  !!}</a></li>
-                                    @endforeach
+                                    @forelse ($bannersService->getLatestNews() as $news)
+                                        <li><a href="{{ route('news.details', ['news' => $news]) }}">{!! htmlspecialchars(trim(strip_tags(mb_strimwidth($news->content, 0, 178, '...'))))  !!}</a></li>
+                                    @empty
+                                        <li>No news to show at the moment.</li>
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
