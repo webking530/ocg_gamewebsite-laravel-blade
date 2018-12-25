@@ -49,6 +49,9 @@ Route::get('news/{news}', 'NewsController@news')->name('news.details');
 Route::get('terms', 'HomeController@terms')->name('home.terms');
 Route::get('policy', 'HomeController@policy')->name('home.policy');
 
+Route::post('cookies/set-read-news', 'CookiesController@setNewsCookies')->name('cookies.set_read_news');
+Route::get('cookies/count-unread-news', 'CookiesController@countUnreadNews')->name('cookies.count_unread_news');
+
 // User pages
 Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
     Route::get('dashboard', 'Account\DashboardController@index')->name('user.dashboard.index');

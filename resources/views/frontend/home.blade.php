@@ -42,7 +42,7 @@
         </div>
     </section>
 
-    <div role="main" class="main">
+    <div role="main" class="main" style="margin-top: 0">
         {{--<div class="slider-container rev_slider_wrapper" style="height: 700px;">--}}
             {{--<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 800, 'gridheight': 700}">--}}
                 {{--<ul>--}}

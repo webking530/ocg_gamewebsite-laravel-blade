@@ -4,9 +4,9 @@
 	'use strict';
 
 	// Scroll to Top Button.
-	if (typeof theme.PluginScrollToTop !== 'undefined') {
+	/*if (typeof theme.PluginScrollToTop !== 'undefined') {
 		theme.PluginScrollToTop.initialize();
-	}
+	}*/
 
 	// Tooltips
 	if ($.isFunction($.fn['tooltip'])) {

@@ -70,6 +70,8 @@
         </div>
         @endif
 
+        @include('frontend.partials.news-bubble')
+
         {{--<div class="body">--}}
             <header id="header" class="header-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 1, 'stickySetTop': '1', 'stickyChangeLogo': false}">
                 <div class="header-body">
@@ -248,17 +250,17 @@
                             </div>
                         </div>
 
-                        @if (($headerNews = $bannersService->getLatestHeaderNews(3))->count() > 0)
-                        <div class="header-row clearfix header-news">
-                            <div class="header-column">
-                                <p class="mb-none text-light text-center">
-                                    @foreach ($headerNews as $news)
-                                    <span>&middot; <a title="{{ $news->name }}" href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->name, 0, 30, '...') }}</a> {{--<small><i class="fas fa-calendar-alt"></i> @datetime($news->date_from)</small>--}}</span>
-                                    @endforeach
-                                </p>
-                            </div>
-                        </div>
-                        @endif
+                        {{--@if (($headerNews = $bannersService->getLatestHeaderNews(3))->count() > 0)--}}
+                        {{--<div class="header-row clearfix header-news">--}}
+                            {{--<div class="header-column">--}}
+                                {{--<p class="mb-none text-light text-center">--}}
+                                    {{--@foreach ($headerNews as $news)--}}
+                                    {{--<span>&middot; <a title="{{ $news->name }}" href="{{ route('news.details', ['news' => $news]) }}">{{ mb_strimwidth($news->name, 0, 30, '...') }}</a> --}}{{--<small><i class="fas fa-calendar-alt"></i> @datetime($news->date_from)</small>--}}{{--</span>--}}
+                                    {{--@endforeach--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </header>
@@ -310,10 +312,12 @@
                             </div>
                             <div class="col-md-4">
                                 <nav id="sub-menu">
-                                    <ul>
+                                    <ul class="inline-block">
                                         <li><a href="{{ route('home.terms') }}">Terms & Conditions</a></li>
                                         <li><a href="{{ route('home.policy') }}">Privacy Policy</a></li>
                                     </ul>
+
+                                    <a class="hidden-mobile visible scroll-top" href="#"><i class="fa fa-chevron-up"></i></a>
                                 </nav>
                             </div>
                         </div>
@@ -331,7 +335,7 @@
        <script type="text/javascript">
         var _smartsupp = _smartsupp || {};
         _smartsupp.key = '7c8c11e4b7cfa34ebd0f687bdd68f3bcc629c948';
-        _smartsupp.alignX = "left";
+        _smartsupp.alignX = "right";
         window.smartsupp || (function (d) {
             var s, c, o = smartsupp = function () {
                 o._.push(arguments)
