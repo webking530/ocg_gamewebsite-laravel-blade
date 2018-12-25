@@ -506,7 +506,7 @@ div.main {
 
 #news-bubble {
     position: fixed;
-    top: 12px;
+    top: 80px;
     right: 20px;
     z-index: 1000;
 }
