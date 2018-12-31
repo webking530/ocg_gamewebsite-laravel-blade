@@ -8,17 +8,15 @@
 
 namespace Models\Banners;
 
-
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Models\Bonuses\Bonus;
-use Models\Gaming\GameUserWinning;
+use Models\Gaming\GameUserWinningCache;
 use Models\News\News;
 
 class BannersService
 {
     public function getRecentWinners() {
-        return GameUserWinning::where('win_amount', '>', 0)->latest()->take(16)->get()->shuffle();
+        return GameUserWinningCache::orderBy('net_win', 'DESC')->get();
     }
 
     public function getBonusContent() {

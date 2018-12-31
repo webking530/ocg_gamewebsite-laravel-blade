@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DB;
 use Models\Gaming\Badge;
 use Models\Gaming\Game;
+use Models\Gaming\GameUserWinning;
 use Models\Gaming\Lottery;
 use Models\Gaming\Tournament;
 use Models\Location\HasCountry;
@@ -70,7 +71,7 @@ class User extends Authenticatable {
     }
 
     public function gameSessions() {
-        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits', 'credits_bonus', 'token', 'extra', 'created_at', 'updated_at']);
+        return $this->belongsToMany(Game::class, 'game_user_session', 'user_id', 'game_id')->withPivot(['credits_deposited', 'credits', 'credits_bonus', 'token', 'extra', 'created_at', 'updated_at']);
     }
 
     public function tournaments() {
@@ -238,33 +239,53 @@ class User extends Authenticatable {
             return;
         }
 
-        $credits = $session->pivot->credits;
-
         DB::beginTransaction();
 
-        $this->credits += $credits;
+        $this->credits += $session->pivot->credits;
+        $this->credits_bonus += $session->pivot->credits_bonus;
         $this->save();
 
         $this->gameSessions()->detach($game->id);
+
+        $this->saveWinningBanner($game, $this, $session->pivot->credits - $session->pivot->credits_deposited);
 
         DB::commit();
     }
 
     public function closeAllGameSessions() {
         $credits = 0;
-
-        foreach ($this->gameSessions as $game) {
-            $credits += $game->pivot->credits;
-        }
+        $creditsBonus = 0;
 
         DB::beginTransaction();
 
+        foreach ($this->gameSessions as $game) {
+            $credits += $game->pivot->credits;
+            $creditsBonus += $game->pivot->credits_bonus;
+
+            $this->saveWinningBanner($game, $this, $game->pivot->credits - $game->pivot->credits_deposited);
+        }
+
         $this->credits += $credits;
+        $this->credits_bonus += $creditsBonus;
         $this->save();
 
         $this->gameSessions()->detach();
 
         DB::commit();
+    }
+
+    private function saveWinningBanner(Game $game, User $user, $netCredits) {
+        if ($netCredits <= 0) {
+            return;
+        }
+
+        GameUserWinning::create([
+            'game_id' => $game->id,
+            'user_id' => $user->id,
+            'win_amount' => $netCredits,
+            'lose_amount' => 0,
+            'token' => 'live_close'
+        ]);
     }
 
     public function isLowOnBalance() {
@@ -324,17 +345,21 @@ class User extends Authenticatable {
             return 0;
         }
 
-        return $winning->pivot->win_amount;
+        $win = $winning->pivot->win_amount - $winning->pivot->lose_amount;
+
+        return $win > 0 ? $win : 0;
     }
 
     public function getHighestWinAmount(Game $game) {
-        $winning = $this->winnings()->where('game_id', $game->id)->orderBy('pivot_win_amount', 'DESC')->first();
+        $winning = $this->winnings()->where('game_id', $game->id)->orderByRaw('pivot_win_amount - pivot_lose_amount DESC')->first();
 
         if ($winning == null) {
             return 0;
         }
 
-        return $winning->pivot->win_amount;
+        $win = $winning->pivot->win_amount - $winning->pivot->lose_amount;
+
+        return $win > 0 ? $win : 0;
     }
 
     public function isSocialUser() {

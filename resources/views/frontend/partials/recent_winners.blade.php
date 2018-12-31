@@ -15,7 +15,7 @@
                                             <span class="thumb-info-title">
                                                 <span class="thumb-info-inner text-left">
                                                     <span class="game-name">{{ $winner->game->name }}</span><br>
-                                                    <span class="money-earned"><i class="fas fa-coins"></i> {{ $winner->win_amount }}</span>
+                                                    <span class="money-earned"><i class="fas fa-coins"></i> {{ number_format($winner->net_win, 2) }}</span>
                                                 </span>
                                                 <span class="thumb-info-type {{ $winner->user->isMale() ? '' : 'label-pink' }}"><img class="little-flag-winners" src="{{ asset($winner->user->flag_icon) }}" width="18" alt=""> {{ $winner->user->nickname }}</span>
                                             </span>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\Gaming\UpdateRecentWinnersCache;
 use Models\Gaming\Game;
 use Illuminate\Database\Seeder;
 use Models\Auth\User;
@@ -13,7 +14,7 @@ class GameUserWinningsSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $game = Game::orderByRaw('RAND()')->first();
             $user = User::orderByRaw('RAND()')->first();
             $win = mt_rand(5, 150);
@@ -28,5 +29,7 @@ class GameUserWinningsSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now(),
             ]);
         }
+
+        UpdateRecentWinnersCache::executeCommand();
     }
 }

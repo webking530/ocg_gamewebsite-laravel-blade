@@ -55,14 +55,15 @@ class GameMathService
         // For free spins, bet and lines should be unchanged, just like they were when the player won the free spin
         // this is just a check to avoid cheating
         if ($this->session != null && $this->hasPendingFreeSpins()) {
-            $this->bet = $this->session->extra['bet'];
-            $this->lines = $this->session->extra['lines'];
+            if ($this->bet != $this->session->extra['bet'] || $this->lines != $this->session->extra['lines']) {
+                $this->bet = $this->session->extra['bet'];
+                $this->lines = $this->session->extra['lines'];
 
-            // TODO: this has to be checked better (only if user changed those 2 params while in free-spin)
-            /*BlacklistGameUser::create([
-                'game_id' => $this->game->id,
-                'user_id' => $this->session->user->id
-            ]);*/
+                BlacklistGameUser::create([
+                    'game_id' => $this->game->id,
+                    'user_id' => $this->session->user->id
+                ]);
+            }
         }
     }
 
@@ -80,7 +81,7 @@ class GameMathService
         }
 
         if ( ! $this->hasPendingFreeSpins()) {
-            if ($this->session->credits <= 0 || $this->getTotalBet() > $this->session->credits) {
+            if ($this->getTotalCredits() <= 0 || $this->getTotalBet() > $this->getTotalCredits()) {
                 return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_USER_NO_CREDITS);
             }
         }
@@ -107,13 +108,15 @@ class GameMathService
             $winAmount = 0;
         }
 
-        if ( ! $this->hasPendingFreeSpins()) {
-            $winAmount -= $this->getTotalBet();
+        if ($this->hasPendingFreeSpins()) {
+            $loseAmount = 0;
+        } else {
+            $loseAmount = $this->getTotalBet();
         }
 
         DB::beginTransaction();
 
-        $this->session->credits += $winAmount;
+        $this->distributeCreditsToSession($winAmount, $loseAmount);
 
         $sessionExtra = $this->session->extra;
 
@@ -141,14 +144,24 @@ class GameMathService
         if ($this->isLiveToken) {
             if ($winAmount > 0) {
                 $this->session->user->addWinMoneyToRunningTournaments($this->game, $winAmount);
-            } else {
-                $this->session->user->addLoseMoneyToRunningTournaments($this->game, abs($winAmount));
             }
+
+            if ($loseAmount > 0) {
+                $this->session->user->addLoseMoneyToRunningTournaments($this->game, $loseAmount);
+            }
+
+            GameUserWinning::create([
+                'game_id' => $this->game->id,
+                'user_id' => $this->session->user->id,
+                'win_amount' => $winAmount,
+                'lose_amount' => $loseAmount,
+                'token' => $this->token
+            ]);
         }
 
         DB::commit();
 
-        $result->credits = $this->session->credits * 100; // Game works in cents
+        $result->credits = $this->getTotalCredits() * 100; // Game works in cents
         $result->freeSpinsData = $this->getPendingFreeSpins();
 
         return json_encode([
@@ -211,7 +224,7 @@ class GameMathService
                 ],
                 'win' => 0,
                 'wins' => [],
-                'credits' => $this->session == null ? 0 : $this->session->credits * 100,
+                'credits' => $this->session == null ? 0 : $this->getTotalCredits() * 100,
                 'bonus' => false,
                 'numItemInBonus' => 0,
                 'bonusData' => [
@@ -234,6 +247,30 @@ class GameMathService
         }
 
         return trans("games.errors.$errorCode");
+    }
+
+    // Loses must be deducted from bonus credits first, then from regular credits
+    // Earnings must always be summed to regular credits
+    private function distributeCreditsToSession($winAmount, $loseAmount) {
+        if ($loseAmount > 0) {
+            $creditsBonus = $this->session->credits_bonus;
+            $creditsBonus -= $loseAmount;
+
+            if ($creditsBonus < 0) {
+                $remainder = abs($creditsBonus);
+                $creditsBonus = 0;
+
+                $this->session->credits -= $remainder;
+            }
+
+            $this->session->credits_bonus = $creditsBonus;
+        }
+
+        $this->session->credits += $winAmount;
+    }
+
+    private function getTotalCredits() {
+        return $this->session->credits + $this->session->credits_bonus;
     }
 
     private function getTotalBet() {

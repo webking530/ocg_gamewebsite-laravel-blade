@@ -12,4 +12,10 @@ class GameUserWinning extends Model
 
     protected $table = 'game_user_winnings';
     protected $guarded = ['id'];
+
+    public function getNetWinAttribute() {
+        $net = $this->win_amount - $this->lose_amount;
+
+        return $net < 0 ? 0 : $net;
+    }
 }

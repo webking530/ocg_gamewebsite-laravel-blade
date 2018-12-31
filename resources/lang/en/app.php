@@ -30,4 +30,9 @@ return [
     'since_date' => 'Since :date',
     'not_enough_credits' => 'You do not have enough credits to perform this operation',
     'status' => 'Status',
+
+    'cookie_consent' => [
+        'i_accept' => 'I accept',
+        'text' => 'This website uses cookies to ensure you get the best experience on our website. Please check our <a href=":policy">Privacy Policy</a> and <a href=":terms">Terms & Conditions</a>.'
+    ]
 ];

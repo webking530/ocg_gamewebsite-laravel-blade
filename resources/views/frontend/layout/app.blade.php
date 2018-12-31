@@ -31,6 +31,8 @@
 
         @yield('styles')
 
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+
         <meta name="google-signin-scope" content="profile email">
         <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">
         <script src="https://apis.google.com/js/platform.js"></script>
@@ -332,6 +334,28 @@
         
         <script src="{!! mix('compiled/js/shared.js') !!}"></script>
         <script src="{!! mix('compiled/porto/porto.js') !!}"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+        <script>
+            window.addEventListener("load", function(){
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#252e39"
+                        },
+                        "button": {
+                            "background": "#14a7d0"
+                        }
+                    },
+                    "position": "bottom-left",
+                    "showLink": false,
+                    "content": {
+                        "message": '{!! trans('app.cookie_consent.text', ['policy' => route('home.policy'), 'terms' => route('home.terms')]) !!}',
+                        "dismiss": "{{ trans('app.cookie_consent.i_accept') }}"
+                    }
+                })});
+        </script>
+
         <!-- Smartsupp Live Chat script -->
         
        <script type="text/javascript">

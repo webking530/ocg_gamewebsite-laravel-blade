@@ -33,7 +33,9 @@ class Tournament extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class, 'tournament_user', 'tournament_id', 'user_id')->withPivot(['total_win', 'total_lose'])->orderBy('pivot_total_win', 'DESC');
+        return $this->belongsToMany(User::class, 'tournament_user', 'tournament_id', 'user_id')
+            ->withPivot(['total_win', 'total_lose'])
+            ->orderByRaw('pivot_total_win - pivot_total_lose DESC');
     }
 
     public function getFormattedGroupAttribute() {

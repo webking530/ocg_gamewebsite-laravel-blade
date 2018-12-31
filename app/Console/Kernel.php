@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
         Commands\Tournament\EnrollNewUsersToTournaments::class,
         Commands\Gaming\DistributeGameCash::class,
         Commands\Gaming\CloseDemoSessions::class,
+        Commands\Gaming\UpdateRecentWinnersCache::class,
         Commands\Pricing\DCPAbuse::class,
     ];
 
@@ -50,6 +51,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('games:distribute-money')->environments('production')->twiceDaily()->withoutOverlapping();
         $schedule->command('demo-sessions:close')->environments('production')->everyMinute()->withoutOverlapping();
+        $schedule->command('recent-winners:update-cache')->environments('production')->everyThirtyMinutes()->withoutOverlapping();
     }
 
     /**

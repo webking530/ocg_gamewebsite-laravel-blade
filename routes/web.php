@@ -63,7 +63,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
     Route::get('game/live/{game}', 'Account\GameController@playLive')->name('user.games.play_live');
 
     Route::get('game/check-settings/{game}', 'Account\GameController@checkSettings')->name('user.session.check_settings');
-    Route::get('session/{game}/close-ajax', 'Account\GameController@closeSession')->name('user.session.close_ajax');
     Route::get('session/{game}/save-credits', 'Account\GameController@saveCreditsToSession')->name('user.session.save_credits');
 
     Route::get('lottery/{lottery}/buy-tickets', 'Account\LotteryController@buyTickets')->name('user.lottery.buy_tickets');
@@ -86,6 +85,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
 
 // This route does not need Laravel's user authentication since it does the session token check internally
 Route::group(['prefix' => 'account'], function () {
+    Route::get('session/{game}/close-ajax', 'Account\GameController@closeSession')->name('user.session.close_ajax');
     Route::get('game/play/{game}', 'Account\GameController@playRequest')->name('user.games.play_request');
 });
 

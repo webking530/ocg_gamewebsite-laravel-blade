@@ -71,6 +71,7 @@ class GameController extends Controller
         DB::beginTransaction();
 
         $this->user->gameSessions()->attach($game->id, [
+            'credits_deposited' => $credits,
             'credits' => $credits,
             'credits_bonus' => $creditsBonus,
             'token' => GameUserSession::generateLiveToken($game, $this->user),
@@ -110,19 +111,9 @@ class GameController extends Controller
             return redirect()->back();
         }
 
-        // Create a new token every time the user decides to play. This will later be checked in-game
-        // to prevent having multiple tabs with the same game open
-        /*$now = Carbon::now();
-        $token = GameUserSession::generateLiveToken($game, $this->user);
+        $totalCredits = $gameSession->pivot->credits + $gameSession->pivot->credits_bonus;
 
-        $this->user->gameSessions()->updateExistingPivot($game->id, [
-            'token' => $token,
-            'updated_at' => $now
-        ]);
-
-        $gameSession = $this->user->getOpenSession($game);*/
-
-        $sessionData = $this->gameService->generateJSONSessionData($gameSession->pivot->token, $gameSession->pivot->credits);
+        $sessionData = $this->gameService->generateJSONSessionData($gameSession->pivot->token, $totalCredits);
         $gameData = $this->gameService->generateJSONGameData($game);
 
         //return view("user.live-games.{$game->slug}", compact('game', 'sessionData', 'gameData'));
@@ -165,6 +156,10 @@ class GameController extends Controller
     }
 
     public function closeSession(Game $game) {
+        if ( ! \Auth::check()) {
+            return redirect()->route('home.game', ['slug' => $game->slug]);
+        }
+
         $this->user->closeGameSession($game);
 
         return redirect()->route('user.game.manage_session', ['slug' => $game->slug]);
