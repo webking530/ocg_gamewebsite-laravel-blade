@@ -171,7 +171,7 @@
                             <p class="lead mb-xl">Sign up for an account now and start winning big!</p>
                         </div>
                         <div class="call-to-action-btn">
-                            <a href="{{ route('home.register') }}" target="_blank" class="btn btn-lg btn-primary btn-primary-scale-2 mr-md">Sign Up Now</a>
+                            <a href="{{ route('home.register') }}" target="_blank" class="btn btn-lg btn-gold mr-md">Sign Up Now</a>
                         </div>
                     </div>
                 </div>

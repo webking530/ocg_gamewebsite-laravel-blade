@@ -574,3 +574,38 @@ div.main {
     font: normal 14px/20px sans-serif, verdana, helvetica;
     padding: 10px
 }
+
+.btn-gold {
+    background: #e2b352;
+}
+
+
+html .btn-gold {
+    color: #006699;
+    background-color: #e2b352;
+    border-color: #0088cc #0088cc #006699;
+}
+
+html .btn-gold:hover {
+    border-color: #0099e6 #0099e6 #0077b3;
+    background-color: #cb9d4f;
+}
+
+html .btn-gold:active,
+html .btn-gold:focus,
+html .btn-gold:active:hover,
+html .btn-gold:active:focus {
+    border-color: #0077b3 #0077b3 #0077b3;
+    background-color: #cb9d4f;
+}
+
+html .btn-gold.dropdown-toggle {
+    border-left-color: #0077b3;
+}
+
+html .btn-gold:hover,
+html .btn-gold:focus,
+html .btn-gold:active:hover,
+html .btn-gold:active:focus {
+    color: #ffffff;
+}
