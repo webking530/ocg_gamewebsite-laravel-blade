@@ -14,7 +14,7 @@ class GameMathController extends Controller
 
         $this->flashNotifier->success(
             'Command output: <br><br>' .
-            implode($output, '<br>')
+            nl2br($output)
         );
 
         return redirect()->back();
@@ -25,7 +25,7 @@ class GameMathController extends Controller
 
         $this->flashNotifier->success(
             'Command output: <br><br>' .
-            implode($output, '<br>')
+            nl2br($output)
         );
 
         return redirect()->back();
