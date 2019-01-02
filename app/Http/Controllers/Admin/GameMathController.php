@@ -10,17 +10,23 @@ use Models\Gaming\GameService;
 class GameMathController extends Controller
 {
     public function regenerateMath() {
-        GameMathService::generateMathFiles();
+        $output = GameMathService::generateMathFiles();
 
-        $this->flashNotifier->success('Math files generated successfully');
+        $this->flashNotifier->success(
+            'Command output: <br><br>' .
+            implode($output, '<br>')
+        );
 
         return redirect()->back();
     }
 
     public function restartMathServer() {
-        GameMathService::restartMathServer();
+        $output = GameMathService::restartMathServer();
 
-        $this->flashNotifier->success('Server restarted successfully');
+        $this->flashNotifier->success(
+            'Command output: <br><br>' .
+            implode($output, '<br>')
+        );
 
         return redirect()->back();
     }

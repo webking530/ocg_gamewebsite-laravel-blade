@@ -282,13 +282,15 @@ class GameMathService
     }
 
     public static function generateMathFiles() {
-        exec('cd /web/ocg_math/public && sh math.sh > /dev/null &');
+        exec('cd /web/ocg_math/public && sh math.sh > /dev/null &', $output);
 
-        self::restartMathServer();
+        return array_merge($output, self::restartMathServer());
     }
 
     public static function restartMathServer() {
-        exec('kill -9 $(lsof -ti :3000)');
-        exec('cd /web/ocg_math/public && nodejs server.js > /dev/null &');
+        exec('kill -9 $(lsof -ti :3000)', $output);
+        exec('cd /web/ocg_math/public && nodejs server.js > /dev/null &', $output);
+
+        return $output;
     }
 }
