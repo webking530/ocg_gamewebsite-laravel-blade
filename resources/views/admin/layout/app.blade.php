@@ -140,7 +140,7 @@
             @if (Session::has('flash_message'))
             <div id="flash-notifier" class="flash-notifier alert alert-{{ Session::get('flash_type') }} alert-dismissible" role="alert" style="display: none">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p><i class="fas {{ Session::get('flash_icon') }}"></i> {{ Session::get('flash_message') }}</p>
+                <p><i class="fas {{ Session::get('flash_icon') }}"></i> {!! Session::get('flash_message') !!}</p>
             </div>
             @endif
 
