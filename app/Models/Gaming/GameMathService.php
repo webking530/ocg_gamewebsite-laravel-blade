@@ -284,6 +284,8 @@ class GameMathService
     public static function generateMathFiles() {
         exec('cd /web/ocg_math/public && sh math.sh > /tmp/ocg_math_generate.txt &');
 
+        sleep(10);
+
         $output = file_get_contents('/tmp/ocg_math_generate.txt');
 
         $output .= self::restartMathServer();
@@ -294,6 +296,8 @@ class GameMathService
     public static function restartMathServer() {
         exec('kill -9 $(lsof -ti :3000)');
         exec('cd /web/ocg_math/public && nodejs server.js > /tmp/ocg_math_server.txt &');
+
+        sleep(5);
 
         return file_get_contents('/tmp/ocg_math_server.txt');
     }
