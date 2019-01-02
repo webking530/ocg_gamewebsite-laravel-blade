@@ -293,7 +293,7 @@ class GameMathService
 
     public static function restartMathServer() {
         exec('kill -9 $(lsof -ti :3000)');
-        exec('cd /web/ocg_math/public && nodejs server.js > /tmp/ocg_math_server &');
+        exec('cd /web/ocg_math/public && nodejs server.js > /tmp/ocg_math_server.txt &');
 
         return file_get_contents('/tmp/ocg_math_server.txt');
     }
