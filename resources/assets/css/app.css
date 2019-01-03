@@ -575,13 +575,9 @@ div.main {
     padding: 10px
 }
 
-.btn-gold {
-    background: #e2b352;
-}
-
-
 html .btn-gold {
-    color: #006699;
+    font-weight: bold;
+    color: #fff;
     background-color: #e2b352;
     border-color: #0088cc #0088cc #006699;
 }
