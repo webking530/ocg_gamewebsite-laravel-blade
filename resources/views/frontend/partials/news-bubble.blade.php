@@ -15,7 +15,7 @@
                     <small><i class="fas fa-calendar-alt"></i> {{ $news->date_from->format('F j, Y, g:i a') }}</small>
                 </li>
             @empty
-                <li>No news to show at the moment.</li>
+                <li>{!! transdata('frontend/news_bubble.no_news_to_show') !!}</li>
             @endforelse
         </ul>
     </div>

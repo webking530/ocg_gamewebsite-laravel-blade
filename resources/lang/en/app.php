@@ -34,5 +34,19 @@ return [
     'cookie_consent' => [
         'i_accept' => 'I accept',
         'text' => 'This website uses cookies to ensure you get the best experience on our website. Please check our <a href=":policy">Privacy Policy</a> and <a href=":terms">Terms & Conditions</a>.'
+    ],
+    'menu' => [
+        'dashboard' => 'Dashboard',
+        'money' => 'Money',
+        'lottery' => 'Lottery',
+        'bonuses' => 'Bonuses',
+        'settings' => 'Settings',
+        'back_to_admin' => 'Back to Admin',
+        'language' => 'Language',
+        'my_public_profile' => 'My Public Profile',
+        'add_money' => 'Add Money',
+        'withdraw_money' => 'Withdraw Money',
+        'logout' => 'Logout',
+        'sign_up' =>'Sign Up'
     ]
 ];

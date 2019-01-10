@@ -98,65 +98,65 @@
                                                     @if (Auth::check())
                                                     <li class="{{ set_active('user.dashboard.index') }}">
                                                         <a href="{{ route('user.dashboard.index') }}">
-                                                            Dashboard
+                                                            {!! transdata('app.menu.dashboard') !!}
                                                         </a>
                                                     </li>
                                                     <li class="">
                                                         <a href="#">
-                                                            Money
+                                                            {!! transdata('app.menu.money') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*game*') }}">
-                                                        <a data-trans="frontend/game.casino_games" href="{{ route('user.games.index') }}">
-                                                            {{ trans('frontend/game.casino_games') }}
+                                                        <a href="{{ route('user.games.index') }}">
+                                                            {!! transdata('frontend/game.casino_games') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*lottery*') }}">
                                                         <a href="{{ route('lottery.index') }}">
-                                                            Lottery
+                                                            {!! transdata('app.menu.lottery') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*tournaments*') }}">
-                                                        <a data-trans="frontend/tournaments.meta.title" href="{{ route('home.tournaments') }}">
-                                                            {{ trans('frontend/tournaments.meta.title') }}
+                                                        <a href="{{ route('home.tournaments') }}">
+                                                            {!! transdata('frontend/tournaments.meta.title') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('home.bonuses') }}">
                                                         <a href="{{ route('home.bonuses') }}">
-                                                            Bonuses
+                                                            {!! transdata('app.menu.bonuses') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*settings*') }}">
                                                         <a href="{{ route('user.settings.index') }}">
-                                                            Settings
+                                                            {!! transdata('app.menu.settings') !!}
                                                         </a>
                                                     </li>
                                                     @if(Session::has('orig_user'))
                                                     <li class="">
                                                         <a href="{{ route('switch.stop') }}">
-                                                            Back To Admin
+                                                            {!! transdata('app.menu.back_to_admin') !!}
                                                         </a>
                                                     </li>
                                                     @endif
                                                     @else
                                                     <li class="">
-                                                        <a data-trans="frontend/game.casino_games" data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
-                                                            {{ trans('frontend/game.casino_games') }}
+                                                        <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
+                                                            {!! transdata('frontend/game.casino_games') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('lottery.index') }}">
                                                         <a href="{{ route('lottery.index') }}">
-                                                            Lottery
+                                                            {!! transdata('app.menu.lottery') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*tournaments*') }}">
-                                                        <a data-trans="frontend/tournaments.meta.title" href="{{ route('home.tournaments') }}">
-                                                            {{ trans('frontend/tournaments.meta.title') }}
+                                                        <a href="{{ route('home.tournaments') }}">
+                                                            {!! transdata('frontend/tournaments.meta.title') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('home.bonuses') }}">
                                                         <a href="{{ route('home.bonuses') }}">
-                                                            Bonuses
+                                                            {!! transdata('app.menu.bonuses') !!}
                                                         </a>
                                                     </li>
                                                     @endif
@@ -165,7 +165,7 @@
                                                 <ul class="nav nav-pills navbar-right navbar-custom">
                                                     <li class="dropdown">
                                                         <a class="dropdown-toggle" href="#">
-                                                            <i class="fas fa-globe"></i> Language
+                                                            <i class="fas fa-globe"></i> {!! transdata('app.menu.language') !!}
                                                         </a>
                                                         <ul class="dropdown-menu">
                                                             <li>
@@ -207,22 +207,22 @@
                                                                             <ul class="dropdown-mega-sub-nav text-center">
                                                                                 <li>
                                                                                     <a href="{{ route('home.user.profile', ['username' => Auth::user()->nickname]) }}">
-                                                                                        <i class="fas fa-user"></i> My Public Profile
+                                                                                        <i class="fas fa-user"></i> {!! transdata('app.menu.my_public_profile') !!}
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <a href="#">
-                                                                                        <i class="fas fa-plus-circle"></i> Add Money
+                                                                                        <i class="fas fa-plus-circle"></i> {!! transdata('app.menu.add_money') !!}
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <a href="#">
-                                                                                        <i class="fas fa-minus-circle"></i> Withdraw Money
+                                                                                        <i class="fas fa-minus-circle"></i> {!! transdata('app.menu.withdraw_money') !!}
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <a @if (Auth::check() && Auth::user()->isGoogleUser()) data-social-login="google" @endif href="{{ route('home.logout') }}">
-                                                                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                                                                        <i class="fas fa-sign-out-alt"></i> {!! transdata('app.menu.logout') !!}
                                                                                     </a>
                                                                                 </li>
                                                                             </ul>
@@ -235,12 +235,12 @@
                                                     @else
                                                     <li class="{{ set_active('home.login') }}">
                                                         <a href="{{ route('home.login') }}">
-                                                            <i class="fas fa-user"></i> Login
+                                                            <i class="fas fa-user"></i> {!! transdata('auth.login.title') !!}
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('home.register') }} register-link">
                                                         <a href="{{ route('home.register') }}">
-                                                            Sign Up
+                                                            {!! transdata('app.menu.sign_up') !!}
                                                         </a>
                                                     </li>
                                                     @endif
