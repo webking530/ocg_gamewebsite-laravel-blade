@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
         Commands\Gaming\CloseDemoSessions::class,
         Commands\Gaming\UpdateRecentWinnersCache::class,
         Commands\Pricing\DCPAbuse::class,
+        Commands\Translation\Import::class,
     ];
 
     /**

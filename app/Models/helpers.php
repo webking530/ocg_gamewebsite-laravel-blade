@@ -7,6 +7,38 @@ use libphonenumber\PhoneNumberFormat;
 use Models\Pricing\Currency;
 use Models\Setting\SettingsManager;
 
+if (!function_exists('transdata')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string  $key
+     * @param  array   $replace
+     * @param  string  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function transdata($key = null, $replace = [], $locale = null) {
+        $trans = trans($key, $replace, $locale);
+
+        return '<span data-trans="'.$key.'">'.$trans.'</span>';
+    }
+}
+
+if (!function_exists('transdata_choice')) {
+    /**
+     * Translate the given message.
+     *
+     * @param  string  $key
+     * @param  array   $replace
+     * @param  string  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     */
+    function transdata_choice($key, $number, array $replace = [], $locale = null) {
+        $trans = trans_choice($key, $number, $replace, $locale);
+
+        return '<span data-trans="'.$key.'">'.$trans.'</span>';
+    }
+}
+
 if (!function_exists('set_active')) {
 
     /**

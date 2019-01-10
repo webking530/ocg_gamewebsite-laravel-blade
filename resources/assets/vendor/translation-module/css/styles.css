@@ -1,0 +1,134 @@
+.to-text-center {
+    text-align: center;
+}
+
+.to-mt-5 {
+    margin-top: 5px;
+}
+
+.to-mt-10 {
+    margin-top: 10px;
+}
+
+.to-mt-15 {
+    margin-top: 15px;
+}
+
+.to-mr-5 {
+    margin-right: 5px;
+}
+
+.to-mr-10 {
+    margin-right: 10px;
+}
+
+.to-mr-15 {
+    margin-right: 15px;
+}
+
+.to-mb-5 {
+    margin-bottom: 5px;
+}
+
+.to-mb-10 {
+    margin-bottom: 10px;
+}
+
+.to-mb-15 {
+    margin-bottom: 15px;
+}
+
+.to-ml-5 {
+    margin-left: 5px;
+}
+
+.to-ml-10 {
+    margin-left: 10px;
+}
+
+.to-ml-15 {
+    margin-left: 15px;
+}
+
+.ui-progressbar {
+    position: relative;
+}
+
+.ui-progressbar-value {
+    background: #81d8ac;
+}
+
+.ui-progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.ui-dialog {
+    z-index: 99999991 !important;
+}
+
+.to-divider {
+    border: 0;
+    box-shadow: 0 0 3px 1px #cececea6;
+    margin-bottom: 15px;
+}
+
+.to-languages span {
+    background: #8dcff5;
+    padding: 2px 5px;
+    margin: 1px;
+    border-radius: 2px;
+}
+
+.to-languages span:nth-child(1) {
+    background: #dedede;
+}
+
+.to-languages span:nth-child(3) {
+    background: #81d8ac;
+}
+
+.to-strings {
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.to-strings div {
+    margin-bottom: 0;
+}
+
+.to-strings div textarea {
+    width: 88%;
+    border: 1px solid #bbb;
+    font-size: 12px;
+    background: #fff;
+    height: 30px;
+}
+
+.to-strings div textarea.to-pending {
+    border-left: 3px solid #e80618;
+}
+
+.to-strings div textarea.to-done {
+    border-left: 3px solid #00e800;
+}
+
+.to-mask {
+    position: absolute;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.4);
+    border: 1px dashed red;
+    z-index: 9999999;
+}
+
+.to-loading-gif {
+    background: url(../img/loading.gif) no-repeat center center;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background-size: contain;
+    vertical-align: top;
+    opacity: 0;
+}

@@ -81,6 +81,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['user']], function () {
     Route::post('settings', 'Account\SettingsController@store')->name('user.settings.store');
     Route::post('avatar', 'Account\SettingsController@updateAvatar')->name('user.avatar.update');
     Route::post('change-password', 'Account\SettingsController@changePassword')->name('user.settings.change_password');
+
+    // Routes for translators
+    Route::post('translations/get-page', 'Account\TranslationController@getPageTranslations')->name('user.translations.get_page');
+    Route::post('translations/get-orphans', 'Account\TranslationController@getOrphanTranslations')->name('user.translations.get_orphan');
+    Route::post('translations/save', 'Account\TranslationController@saveTranslation')->name('user.translations.save');
 });
 
 // This route does not need Laravel's user authentication since it does the session token check internally

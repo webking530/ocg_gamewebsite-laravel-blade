@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'cookies/set-read-news'
+        'cookies/set-read-news',
+        'account/translations/*'
     ];
 }

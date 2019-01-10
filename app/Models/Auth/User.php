@@ -25,6 +25,7 @@ class User extends Authenticatable {
 
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;
+    const ROLE_TRANSLATOR = 2;
     const GENDER_MALE = 0;
     const GENDER_FEMALE = 1;
 
@@ -139,7 +140,13 @@ class User extends Authenticatable {
     }
 
     public function isUser() {
-        return (int) $this->role === self::ROLE_USER;
+        return
+            (int) $this->role === self::ROLE_USER
+            || (int) $this->role === self::ROLE_TRANSLATOR;
+    }
+
+    public function isTranslator() {
+        return (int) $this->role === self::ROLE_TRANSLATOR;
     }
 
     public function isAdmin() {

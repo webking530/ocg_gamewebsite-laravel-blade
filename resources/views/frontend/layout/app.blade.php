@@ -107,7 +107,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*game*') }}">
-                                                        <a href="{{ route('user.games.index') }}">
+                                                        <a data-trans="frontend/game.casino_games" href="{{ route('user.games.index') }}">
                                                             {{ trans('frontend/game.casino_games') }}
                                                         </a>
                                                     </li>
@@ -117,7 +117,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*tournaments*') }}">
-                                                        <a href="{{ route('home.tournaments') }}">
+                                                        <a data-trans="frontend/tournaments.meta.title" href="{{ route('home.tournaments') }}">
                                                             {{ trans('frontend/tournaments.meta.title') }}
                                                         </a>
                                                     </li>
@@ -140,7 +140,7 @@
                                                     @endif
                                                     @else
                                                     <li class="">
-                                                        <a data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
+                                                        <a data-trans="frontend/game.casino_games" data-hash data-hash-offset="100" href="@if (Request::route()->getName() == 'home') #demos @else {{ route('home') }}#demos @endif">
                                                             {{ trans('frontend/game.casino_games') }}
                                                         </a>
                                                     </li>
@@ -150,7 +150,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="{{ set_active('*tournaments*') }}">
-                                                        <a href="{{ route('home.tournaments') }}">
+                                                        <a data-trans="frontend/tournaments.meta.title" href="{{ route('home.tournaments') }}">
                                                             {{ trans('frontend/tournaments.meta.title') }}
                                                         </a>
                                                     </li>
@@ -393,6 +393,18 @@
               });
             }
        });
+
+        @if (Auth::check() && Auth::user()->isTranslator())
+            $(document).ready(function() {
+                new Overlay({
+                    source_language: 'en',
+                    target_language: '{{ Auth::user()->locale_translator }}',
+                    save_translation_route: '{{ route('user.translations.save') }}',
+                    get_page_translations_route: '{{ route('user.translations.get_page') }}',
+                    get_orphan_translations_route: '{{ route('user.translations.get_orphan') }}'
+                });
+            });
+        @endif
         </script>
         @yield('scripts')
 

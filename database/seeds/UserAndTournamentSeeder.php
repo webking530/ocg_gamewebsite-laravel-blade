@@ -31,6 +31,7 @@ class UserAndTournamentSeeder extends Seeder
             'verified_identification' => true,
             'notifications' => true,
             'lottery_sms_notification_minutes' => 0,
+            'social_complete_register' => true
         ]);
 
         $user1 = User::create([
@@ -51,6 +52,7 @@ class UserAndTournamentSeeder extends Seeder
             'verified_identification' => true,
             'notifications' => true,
             'lottery_sms_notification_minutes' => 0,
+            'social_complete_register' => true
         ]);
 
         $user2 = User::create([
@@ -131,6 +133,29 @@ class UserAndTournamentSeeder extends Seeder
             'verified_identification' => true,
             'notifications' => true,
             'lottery_sms_notification_minutes' => 0,
+        ]);
+
+        $translator_tr = User::create([
+            'nickname' => 'translator_tr',
+            'name' => 'Translator',
+            'lastname' => 'Turkey',
+            'gender' => User::GENDER_MALE,
+            'mobile_number' => 123456,
+            'email' => 'translator_tr@ocgcasino.com',
+            'password' => bcrypt('translator_tr'),
+            'credits' => 150,
+            'credits_bonus' => 20,
+            'country_code' => 'DE',
+            'currency_code' => 'EUR',
+            'birthdate' => '1992-02-09',
+            'low_balance_threshold' => 0,
+            'role' => User::ROLE_TRANSLATOR,
+            'locale' => 'en',
+            'locale_translator' => 'tr',
+            'verified_identification' => true,
+            'notifications' => true,
+            'lottery_sms_notification_minutes' => 0,
+            'social_complete_register' => true
         ]);
 
         $tournament = Tournament::create([

@@ -118,7 +118,7 @@ class LoginController extends Controller
     }
 
     public function redirectPath() {
-        if ($this->guard()->user()->role == User::ROLE_USER) {
+        if ($this->guard()->user()->isUser()) {
              return route('user.dashboard.index');
         } else {
             return route('admin.home');

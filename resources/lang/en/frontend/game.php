@@ -20,4 +20,13 @@ return [
     'session_not_closed_properly' => 'An unexpected error occurred while closing your session. You will be redirected to the website to try again.',
     'out_of_money' => 'You do not have any credits left to play. You will be redirected to reload your balance.',
     'you_are_offline' => 'Connection with the server lost. You will be automatically redirected.',
+
+    'grid' => [
+        'all_games' => 'ALL GAMES',
+        'popular' => 'POPULAR',
+        'ocg_jackpot' => 'OCG JACKPOT',
+        'be_lucky_one' => 'BE THE LUCKY ONE!',
+        'highest_win' => 'HIGHEST WIN',
+        'last_win' => 'LAST WIN'
+    ]
 ];

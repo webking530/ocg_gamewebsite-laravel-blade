@@ -9,7 +9,9 @@ mix.styles([
     'resources/assets/vendor/jquery-confirm/jquery-confirm.min.css',
     'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.css',
     'resources/assets/vendor/json-editor/jsoneditor.min.css',
-    'resources/assets/vendor/datepicker/bootstrap-datetimepicker.min.css'
+    'resources/assets/vendor/datepicker/bootstrap-datetimepicker.min.css',
+    'resources/assets/vendor/translation-module/css/styles.css',
+    'resources/assets/vendor/translation-module/jquery-ui/jquery-ui.min.css',
 ], 'public/compiled/css/shared.css');
 
 mix.scripts([
@@ -22,12 +24,16 @@ mix.scripts([
     'resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js',
     'resources/assets/vendor/json-editor/jsoneditor.min.js',
     'resources/assets/vendor/datepicker/bootstrap-datetimepicker.min.js',
+    'resources/assets/vendor/translation-module/jquery-ui/jquery-ui.min.js',
+    'resources/assets/vendor/translation-module/js/translation.js',
     'resources/assets/js/app.js',
 ], 'public/compiled/js/shared.js');
 
 mix.copyDirectory('resources/assets/vendor/fontawesome-5.2.0/webfonts', 'public/compiled/webfonts');
 mix.copyDirectory('resources/assets/vendor/bootstrap/fonts/', 'public/compiled/fonts');
 mix.copyDirectory('resources/assets/vendor/ckeditor', 'public/compiled/plugins/ckeditor');
+mix.copyDirectory('resources/assets/vendor/translation-module/img', 'public/compiled/img');
+mix.copyDirectory('resources/assets/vendor/translation-module/jquery-ui/images', 'public/compiled/css/images');
 
 // Porto Template
 mix.styles([

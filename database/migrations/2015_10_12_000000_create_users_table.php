@@ -44,6 +44,9 @@ class CreateUsersTable extends Migration
             $table->string('locale', 2);
             $table->foreign('locale')->references('code')->on('languages');
 
+            $table->string('locale_translator', 2)->nullable();
+            $table->foreign('locale_translator')->references('code')->on('languages');
+
             $table->boolean('verified_identification');
             $table->boolean('notifications');
             $table->integer('lottery_sms_notification_minutes');
