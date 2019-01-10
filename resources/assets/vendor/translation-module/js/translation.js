@@ -119,13 +119,16 @@ class Overlay {
 
             if (targetElem.length > 0) {
                 self.createMask(targetElem);
-                self.focusElement(targetElem);
 
-                self.$overlayContainer.dialog("widget").position({
-                    my: 'left-10 bottom-10',
-                    at: 'right+20',
-                    of: targetElem
-                });
+
+                if (targetElem.offset().top >= 0) {
+                    self.focusElement(targetElem);
+                    self.$overlayContainer.dialog("widget").position({
+                        my: 'left-10 bottom-10',
+                        at: 'right+20',
+                        of: targetElem
+                    });
+                }
             }
         });
 
