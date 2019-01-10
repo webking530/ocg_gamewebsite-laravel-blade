@@ -120,7 +120,6 @@ class Overlay {
             if (targetElem.length > 0) {
                 self.createMask(targetElem);
 
-
                 if (targetElem.offset().top >= 0) {
                     self.focusElement(targetElem);
                     self.$overlayContainer.dialog("widget").position({
@@ -165,6 +164,8 @@ class Overlay {
             // Ignore the TAB key
             if ((event.keyCode || event.which) !== 9) {
                 $(this).data('save', '1');
+            } else {
+                return;
             }
 
 
@@ -172,13 +173,7 @@ class Overlay {
             let object = $(`[data-trans="${target}"]`);
             const value = $(this).val();
 
-            if (object.is('input[type="submit"]')) {
-                object.val(value);
-            } else if (object.is('input')) {
-                object.attr('placeholder', value);
-            } else {
-                object.html(value);
-            }
+            self.setValueForObject(object, value);
 
             const box = self.getElementBoundingBox(object);
             const highlightElem = self.getMask();
