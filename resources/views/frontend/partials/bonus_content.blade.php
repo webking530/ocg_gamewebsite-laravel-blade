@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 center mb-xl recent-posts">
-                <h2 class="mb-lg mt-md">Available <strong>Bonuses</strong></h2>
+                <h2 class="mb-lg mt-md">{!! transdata('frontend/bonuses.available_bonuses') !!}</h2>
 
                 <div class="owl-carousel owl-theme mb-none" data-plugin-options="{'items': 1, 'autoplay': true, 'autoplayTimeout': 5000}">
                     @foreach ($bannersService->getBonusContent() as $chunk)

@@ -48,5 +48,6 @@ return [
         'withdraw_money' => 'Withdraw Money',
         'logout' => 'Logout',
         'sign_up' =>'Sign Up'
-    ]
+    ],
+    'recent_winners' => 'Recent <strong>Winners</strong>',
 ];

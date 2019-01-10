@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 center mb-xl">
-                    <h2 class="mb-lg mt-md">Recent <strong>Winners</strong></h2>
+                    <h2 class="mb-lg mt-md">{!! transdata('app.recent_winners') !!}</h2>
 
                     <div class="owl-carousel owl-theme" data-plugin-options="{'items': 4, 'margin': 20, 'loop': true, 'autoplay': true, 'autoplayTimeout': 3000}">
                         @foreach ($bannersService->getRecentWinners() as $winner)

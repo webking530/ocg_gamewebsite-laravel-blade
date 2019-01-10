@@ -17,5 +17,6 @@ return [
         
     ],
     'add_bonus' => 'Add Bonus',
-    'edit_bonus' => 'Edit Bonus'
+    'edit_bonus' => 'Edit Bonus',
+    'available_bonuses' => 'Available <strong>Bonuses</strong>'
 ];

@@ -277,26 +277,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="footer-ribbon">
-                            <span>Get in Touch</span>
+                            <span>{!! transdata('frontend/contact.get_in_touch') !!}</span>
                         </div>
                         <div class="col-md-4">
                             <div class="contact-details">
-                                <h4>Contact Us</h4>
+                                <h4>{!! transdata('frontend/contact.contact_us') !!}</h4>
                                 <ul class="contact">
-                                    <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</p></li>
-                                    <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-789</p></li>
-                                    <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
+                                    <li><p><i class="fa fa-map-marker"></i> <strong>{!! transdata('frontend/contact.address') !!}:</strong> 1234 Street Name, City Name, United States</p></li>
+                                    <li><p><i class="fa fa-phone"></i> <strong>{!! transdata('frontend/contact.phone') !!}:</strong> (123) 456-789</p></li>
+                                    <li><p><i class="fa fa-envelope"></i> <strong>{!! transdata('frontend/contact.email') !!}:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h4>Latest News</h4>
+                            <h4>{!! transdata('frontend/news_bubble.latest_news') !!}</h4>
                             <div id="news" class="twitter">
                                 <ul>
                                     @forelse ($bannersService->getLatestNews() as $news)
                                         <li><a href="{{ route('news.details', ['news' => $news]) }}">{!! htmlspecialchars(trim(strip_tags(mb_strimwidth($news->content, 0, 178, '...'))))  !!}</a></li>
                                     @empty
-                                        <li>No news to show at the moment.</li>
+                                        <li>{!! transdata('frontend/news_bubble.no_news_to_show') !!}</li>
                                     @endforelse
                                 </ul>
                             </div>
@@ -312,13 +312,13 @@
                                 </a>
                             </div>
                             <div class="col-md-7">
-                                <p>© Copyright {{ date('Y') }}. All Rights Reserved.</p>
+                                <p>{!! transdata('app.copyright_footer', ['date' => date('Y')]) !!}</p>
                             </div>
                             <div class="col-md-4">
                                 <nav id="sub-menu">
                                     <ul class="inline-block">
-                                        <li><a href="{{ route('home.terms') }}">Terms & Conditions</a></li>
-                                        <li><a href="{{ route('home.policy') }}">Privacy Policy</a></li>
+                                        <li><a href="{{ route('home.terms') }}">{!! transdata('legal.terms_conditions.title') !!}</a></li>
+                                        <li><a href="{{ route('home.policy') }}">{!! transdata('legal.privacy_policy.title') !!}</a></li>
                                     </ul>
 
                                     <a class="hidden-mobile visible scroll-top" href="#"><i class="fa fa-chevron-up"></i></a>
