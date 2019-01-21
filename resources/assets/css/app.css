@@ -578,13 +578,13 @@ div.main {
 html .btn-gold {
     font-weight: bold;
     color: #fff;
-    background-color: #e2b352;
+    background-color: #cb9d4f;
     border-color: #0088cc #0088cc #006699;
 }
 
 html .btn-gold:hover {
     border-color: #0099e6 #0099e6 #0077b3;
-    background-color: #cb9d4f;
+    background-color: #e2b352;
 }
 
 html .btn-gold:active,
@@ -592,7 +592,7 @@ html .btn-gold:focus,
 html .btn-gold:active:hover,
 html .btn-gold:active:focus {
     border-color: #0077b3 #0077b3 #0077b3;
-    background-color: #cb9d4f;
+    background-color: #e2b352;
 }
 
 html .btn-gold.dropdown-toggle {
