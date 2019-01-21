@@ -82,7 +82,7 @@
                             <div class="header-column">
                                 <div class="header-logo">
                                     <a href="{{ route('home') }}">
-                                        <img alt="{{ trans('app.meta.short_title') }}" height="40" data-sticky-height="40" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
+                                        <img alt="{{ trans('app.meta.short_title') }}" height="60" data-sticky-height="60" data-sticky-top="33" src="{{ asset('img/logo.png') }}">
                                     </a>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                         <div class="row">
                             <div class="col-md-1">
                                 <a href="{{ route('home') }}" class="logo">
-                                    <img width="68" alt="OCG - Online Casino Games" class="img-responsive" src="{{ asset('img/logo.png') }}">
+                                    <img width="80" alt="OCG - Online Casino Games" class="img-responsive" src="{{ asset('img/logo.png') }}">
                                 </a>
                             </div>
                             <div class="col-md-7">
