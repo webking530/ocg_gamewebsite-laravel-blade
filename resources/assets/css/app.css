@@ -605,3 +605,7 @@ html .btn-gold:active:hover,
 html .btn-gold:active:focus {
     color: #ffffff;
 }
+
+#header .header-logo img {
+    margin: 5px 15px 5px 0 !important;
+}
