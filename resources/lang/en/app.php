@@ -36,7 +36,7 @@ return [
         'text' => 'This website uses cookies to ensure you get the best experience on our website. Please check our <a href=":policy">Privacy Policy</a> and <a href=":terms">Terms & Conditions</a>.'
     ],
     'menu' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Summary',
         'money' => 'Money',
         'lottery' => 'Lottery',
         'bonuses' => 'Bonuses',

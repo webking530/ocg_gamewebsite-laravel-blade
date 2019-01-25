@@ -12,8 +12,8 @@ class Jackpot extends Model
 
     protected $guarded = ['id'];
 
-    const JACKPOT_SIZE_PERCENT = 0.01;
-    const JACKPOT_CASINO_PERCENT = 0.5;
+    const JACKPOT_COEFFICIENT = 0.01;
+    const JACKPOT_MIN_BET_USD = 1;
 
     public function getDaysSinceJackpotAttribute() {
         $days = $this->created_at->diffInDays(Carbon::now());
@@ -24,6 +24,26 @@ class Jackpot extends Model
 
     public static function isRealJackpotEnabled() {
         return settings('enable_fake_jackpot') == 'false';
+    }
+
+    public static function getJackpotMinBet() {
+        return self::JACKPOT_MIN_BET_USD;
+    }
+
+    public static function getJackpotCoefficient() {
+        return self::JACKPOT_COEFFICIENT;
+    }
+
+    public static function getJackpotMinValue() {
+        return (int)settings('jackpot_min_value');
+    }
+
+    public static function getJackpotMaxValue() {
+        return (int)settings('jackpot_max_value');
+    }
+
+    public static function getRealJackpotValue() {
+        return (float)settings('real_jackpot_current');
     }
 
     public static function getCurrentJackpot() {
@@ -37,14 +57,15 @@ class Jackpot extends Model
             ];
         }
 
-        $creditsInMachines = Game::enabled()->where('has_jackpot', true)->sum('credits');
+        //$creditsInMachines = Game::enabled()->where('has_jackpot', true)->sum('credits');
         $latestJackpot = self::getLatestJackpot();
 
         $daysSinceJackpot = $latestJackpot == null ? $fakeJackpotDays : Carbon::now()->diffInDays($latestJackpot->created_at);
         $daysSinceJackpot = $daysSinceJackpot == 0 ? 1 : $daysSinceJackpot;
 
         return [
-            'size' => $creditsInMachines * self::JACKPOT_CASINO_PERCENT * self::JACKPOT_SIZE_PERCENT,
+            //'size' => $creditsInMachines * self::JACKPOT_CASINO_PERCENT * self::JACKPOT_SIZE_PERCENT,
+            'size' => self::getRealJackpotValue(),
             'days' => $daysSinceJackpot
         ];
     }

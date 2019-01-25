@@ -41,7 +41,7 @@ class SettingController extends Controller {
         $input = $request->all();
         $Settings = Setting::select('id', 'key', 'value');
         $Settings->orderBy('id', 'desc');
-        $data = $Settings->get()->except(10)->toArray();
+        $data = $Settings->get()->toArray();
         return Datatables::of($data)
                         ->filter(function ($instance) use ($request) {
                             

@@ -43,14 +43,14 @@ $(document).on('click', '.addEditBtn', function () {
     if (type == 'add') {
         $('.modal-title').html('Create Key');
         $('.modalBtn').html('Add');
-        $('#key').removeAttr('disabled');
+        $('#key').removeAttr('readonly');
         $('#key').val('');
         $('#value').val('');
     } else {
         $('.modal-title').html('Edit Key');
         $('.modalBtn').html('Update');
         $('#key').val($(this).attr('data-key'));
-        $('#key').attr('disabled', 'disabled');
+        $('#key').attr('readonly', 'readonly');
         $('#value').val($(this).attr('data-value'));
     }
     $('#modalForm').modal('show');

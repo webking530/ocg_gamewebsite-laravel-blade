@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row mt-lg">
                 <div class="col-md-12 center">
-                    <h1 class="mb-sm">My Dashboard</h1>
+                    <h1 class="mb-sm">Summary</h1>
                 </div>
             </div>
 

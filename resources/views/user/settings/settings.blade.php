@@ -74,7 +74,7 @@
 
                                         {!! Form::model($user, ['route' => 'user.settings.store', 'class' => 'form-horizontal']) !!}
                                         <div class="form-group">
-                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" data-original-title="Notifications via SMS, Email and Browser will be delivered to you when any important event occurs.">Enable all notifications</abbr></label>
+                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" title="Notifications via SMS, Email and Browser will be delivered to you when any important event occurs.">Enable all notifications</abbr></label>
 
                                             <div class="col-md-7">
                                                 {!! Form::hidden('notifications', 0) !!}
@@ -83,7 +83,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" data-original-title="When your credit balance gets lower than this amount, a notification will be shown.">Low balance notification in credits</abbr></label>
+                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" title="When your credit balance gets lower than this amount, a notification will be shown.">Low balance notification in credits</abbr></label>
 
                                             <div class="col-md-7">
                                                 {!! Form::number('low_balance_threshold', null, ['class' => 'form-control']) !!}
@@ -91,7 +91,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" data-original-title="An SMS will be sent this amount of minutes before the lottery you are participating in starts.">Lottery SMS notification in minutes</abbr></label>
+                                            <label class="control-label col-md-5"><abbr data-toggle="tooltip" title="An SMS will be sent this amount of minutes before the lottery you are participating in starts.">Lottery SMS notification in minutes</abbr></label>
 
                                             <div class="col-md-7">
                                                 {!! Form::number('lottery_sms_notification_minutes', null, ['class' => 'form-control']) !!}

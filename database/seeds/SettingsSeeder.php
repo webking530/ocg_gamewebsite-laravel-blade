@@ -47,6 +47,22 @@ class SettingsSeeder extends Seeder
         ]);
 
         Models\Setting\Setting::create([
+            'key' => 'real_jackpot_current',
+            'value' => '0',
+        ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'jackpot_min_value',
+            'value' => '0',
+        ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'jackpot_max_value',
+            'value' => '10000',
+        ]);
+
+
+        Models\Setting\Setting::create([
             'key' => 'fake_jackpot_increment_range_daily',
             'value' => '5,10',
         ]);

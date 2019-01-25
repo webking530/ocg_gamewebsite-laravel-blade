@@ -41,6 +41,8 @@ class GameMathService
     private $isLiveToken;
 
     private $serverResponse;
+    private $jackpotWon;
+    private $jackpotWinAmount;
 
     public function __construct(Game $game, $token, $bet, $lines) {
         $this->gameService = new GameService();
@@ -51,6 +53,9 @@ class GameMathService
 
         $this->isLiveToken = strpos($this->token, 'demo_') === false;
         $this->session = GameUserSession::where('token', $this->token)->first();
+
+        $this->jackpotWon = false;
+        $this->jackpotWinAmount = 0;
 
         // For free spins, bet and lines should be unchanged, just like they were when the player won the free spin
         // this is just a check to avoid cheating
@@ -96,25 +101,45 @@ class GameMathService
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CUSTOM);
         }
 
-        $result = $this->serverResponse->Result;
 
-        if (count($result->wins)) {
-            $winAmount = $this->bet * $result->win;
+        $jpResponse = $this->generateJackpotChance();
 
-            if ($result->bonus && $result->bonusData->amount > 0) {
-                $winAmount += $this->getTotalBet() * $result->bonusData->amount;
-            }
+        DB::beginTransaction();
+
+        if ($jpResponse['won']) {
+            $this->jackpotWon = true;
+            $this->jackpotWinAmount = $jpResponse['amount'];
+            $result = $jpResponse['result'];
+
+            $winAmount = $this->jackpotWinAmount;
+
+            Jackpot::create([
+                'user_id' => $this->session->user->id,
+                'prize' => $winAmount
+            ]);
+
+            settings('real_jackpot_current', 0);
         } else {
-            $winAmount = 0;
+            $result = $this->serverResponse->Result;
+
+            if (count($result->wins)) {
+                $winAmount = $this->bet * $result->win;
+
+                if ($result->bonus && $result->bonusData->amount > 0) {
+                    $winAmount += $this->getTotalBet() * $result->bonusData->amount;
+                }
+            } else {
+                $winAmount = 0;
+            }
         }
 
         if ($this->hasPendingFreeSpins()) {
             $loseAmount = 0;
         } else {
             $loseAmount = $this->getTotalBet();
-        }
 
-        DB::beginTransaction();
+            $this->distributeCreditsToJackpot($loseAmount);
+        }
 
         $this->distributeCreditsToSession($winAmount, $loseAmount);
 
@@ -141,7 +166,7 @@ class GameMathService
         $this->session->extra = $sessionExtra;
         $this->session->save();
 
-        if ($this->isLiveToken) {
+        if ($this->isLiveToken && ! $this->jackpotWon) {
             if ($winAmount > 0) {
                 $this->session->user->addWinMoneyToRunningTournaments($this->game, $winAmount);
             }
@@ -171,6 +196,86 @@ class GameMathService
                 'message' => ''
             ]
         ]);
+    }
+
+    private function generateJackpotChance() {
+        $currentJackpot = Jackpot::getRealJackpotValue();
+        $minJackpot = Jackpot::getJackpotMinValue();
+        $maxJackpot = Jackpot::getJackpotMaxValue();
+
+        $cannotGenerate =       ! $this->isLiveToken
+                            ||  ! $this->game->has_jackpot
+                            ||  ! Jackpot::isRealJackpotEnabled()
+                            ||  $this->hasPendingFreeSpins()
+                            ||  $this->session->credits_bonus > 0
+                            ||  $this->getTotalBet() < Jackpot::getJackpotMinBet()
+                            || $currentJackpot < $minJackpot;
+
+        if ($cannotGenerate) {
+            return [
+                'won' => false
+            ];
+        }
+
+        if ($currentJackpot > $maxJackpot) {
+            $currentJackpot = $maxJackpot;
+        }
+
+        $chance = ($currentJackpot - $minJackpot) / ($maxJackpot - $minJackpot);
+        $chance = $chance ** 120;
+
+        $rand = mt_rand() / mt_getrandmax(); // Minimum: 4.656E-10
+        if ($rand >= $chance) {
+            return [
+                'won' => false
+            ];
+        }
+
+        return [
+            'won' => true,
+            'amount' => $currentJackpot,
+            'result' => json_decode($this->generateJackpotResponse($currentJackpot))->data
+        ];
+    }
+
+    private function generateJackpotResponse($amount) {
+        return json_encode([
+            'data' => [
+                'combination' => [
+                    [1,1,1,1,1],
+                    [1,1,1,1,1],
+                    [1,1,1,1,1]
+                ],
+                'win' => 0,
+                'wins' => [],
+                'credits' => 0, // Will be overwritten
+                'bonus' => false,
+                'numItemInBonus' => 0,
+                'bonusData' => [
+                    'id' => -1,
+                    'amount' => -1
+                ],
+                'freeSpins' => false,
+                'freeSpinsData' => 0,
+                'jackpot' => true,
+                'jackpotData' => $amount * 100
+            ]
+        ]);
+    }
+
+    private function distributeCreditsToJackpot($bet) {
+        $cannotDistribute =     ! $this->isLiveToken
+                            ||  ! $this->game->has_jackpot
+                            ||  $this->session->credits_bonus > 0
+                            ||  $bet < Jackpot::getJackpotMinBet();
+
+        if ($cannotDistribute) {
+            return;
+        }
+
+        $currentJackpot = (float)settings('real_jackpot_current');
+        $currentJackpot += $bet * Jackpot::getJackpotCoefficient();
+        settings('real_jackpot_current', $currentJackpot);
     }
 
     private function getMathServerResponse() {

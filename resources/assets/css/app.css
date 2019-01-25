@@ -609,3 +609,7 @@ html .btn-gold:active:focus {
 #header .header-logo img {
     margin: 10px 15px 10px 0 !important;
 }
+
+abbr[data-original-title], abbr[title] {
+    text-decoration: none !important;
+}
