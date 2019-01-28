@@ -47,6 +47,27 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="real_jackpot_current" class="col-md-4 control-label">real_jackpot_current</label>
+                        <div class="col-md-6">
+                            <input id="real_jackpot_current" type='text' name='real_jackpot_current' value="{{ settings('real_jackpot_current') }}" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jackpot_min_value" class="col-md-4 control-label">jackpot_min_value</label>
+                        <div class="col-md-6">
+                            <input id="jackpot_min_value" type='text' name='jackpot_min_value' value="{{ settings('jackpot_min_value') }}" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jackpot_max_value" class="col-md-4 control-label">jackpot_max_value</label>
+                        <div class="col-md-6">
+                            <input id="jackpot_max_value" type='text' name='jackpot_max_value' value="{{ settings('jackpot_max_value') }}" class="form-control">
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">
                         Update
                     </button>
