@@ -101,6 +101,13 @@ class GameMathService
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CUSTOM);
         }
 
+        if ($this->hasPendingFreeSpins()) {
+            $loseAmount = 0;
+        } else {
+            $loseAmount = $this->getTotalBet();
+
+            $this->distributeCreditsToJackpot($loseAmount);
+        }
 
         $jpResponse = $this->generateJackpotChance();
 
@@ -135,13 +142,7 @@ class GameMathService
             }
         }
 
-        if ($this->hasPendingFreeSpins()) {
-            $loseAmount = 0;
-        } else {
-            $loseAmount = $this->getTotalBet();
 
-            $this->distributeCreditsToJackpot($loseAmount);
-        }
 
         $this->distributeCreditsToSession($winAmount, $loseAmount);
 
