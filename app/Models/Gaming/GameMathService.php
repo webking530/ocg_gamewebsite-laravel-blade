@@ -121,6 +121,8 @@ class GameMathService
             settings('real_jackpot_current', 0);
         } else {
             $result = $this->serverResponse->Result;
+            $result->jackpot = false;
+            $result->jackpotData = 0;
 
             if (count($result->wins)) {
                 $winAmount = $this->bet * $result->win;
