@@ -54,7 +54,7 @@ function CMain(oData){
               new CSlotSettings();
               _oPreloader.unload();
             
-              this.gotoMenu();
+              this.gotoGame();
          }
     };
     
@@ -133,7 +133,7 @@ function CMain(oData){
             new CSlotSettings();
             _oPreloader.unload();
             
-            this.gotoMenu();
+            this.gotoGame();
         }
     };
     

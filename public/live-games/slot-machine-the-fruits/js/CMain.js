@@ -138,7 +138,7 @@ function CMain(oData){
     this._onRemovePreloader = function(){
         _oPreloader.unload();
         
-        this.gotoMenu();
+        this.gotoGame();
     };
     
     this.gotoMenu = function(){

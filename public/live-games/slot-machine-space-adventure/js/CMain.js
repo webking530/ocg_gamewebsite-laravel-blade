@@ -145,7 +145,7 @@ function CMain(oData){
 
         s_oSoundTrack = playSound("soundtrack", 1,true);
 
-        this.gotoMenu();
+        this.gotoGame();
     };
     
     this.gotoMenu = function(){

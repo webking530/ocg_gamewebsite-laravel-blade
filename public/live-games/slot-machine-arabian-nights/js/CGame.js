@@ -320,6 +320,16 @@ function CGame(oData){
             if(_iBonus !== BONUS_WHEEL){
                 _oInterface.refreshMoney(_iMoney);
             }
+        }else if(_iJackpot > 0){
+            _iMoney += _iJackpot;
+            for(var i=0;i<3;i++){
+                for(var j=0;j<5;j++){
+                    _aStaticSymbols[i][j].show(1);
+                }
+            }
+            _oInterface.refreshMoney(_iMoney);
+            _oInterface.refreshWinText(_iJackpot);
+            playSound("win",0.3,false);
         }else{
             if(_iTotFreeSpin > 0){
                 _oLogo.visible = false;
@@ -582,7 +592,8 @@ function CGame(oData){
         _iCurState = GAME_STATE_IDLE;
     };
 
-    on('play', data => {
+    var _iJackpot = 0;
+    on(`play`, data => {
         if (data.bonus) {
             WHEEL_SETTINGS = ALL_WHEEL_SETTINGS[data.numItemInBonus - 3];
         }
@@ -591,10 +602,11 @@ function CGame(oData){
             freeSpins.bet = _iCurBet * 100;
             freeSpins.lines = _iLastLineActive;
         }
+        _iJackpot = data.jackpotData / 100;
         this.onSpinReceived({
             res: 'true',
             pattern: JSON.stringify(data.combination),
-            win: data.wins.length > 0 ? 'true' : 'false',
+            win: data.wins.length > 0 || data.jackpot ? 'true' : 'false',
             win_lines: JSON.stringify(data.wins),
             tot_win: (data.win * _iCurBet).toString(),
             money: (data.credits / 100).toString(),
@@ -605,7 +617,7 @@ function CGame(oData){
         });
     });
 
-    on('error', data => {
+    on(`error`, data => {
         // _iMoney += _iCurBet * _iLastLineActive;
         _oInterface.refreshMoney(_iMoney);
     });
@@ -708,7 +720,7 @@ function CGame(oData){
                     }
                     
                     //GET TOTAL WIN FOR THIS SPIN
-                    _iTotWin = parseFloat(oRetData.tot_win);
+                    _iTotWin = parseFloat(oRetData.tot_win) + _iJackpot;
 
                     _bReadyToStop = true;
                 }else{

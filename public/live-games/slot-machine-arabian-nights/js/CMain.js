@@ -175,7 +175,8 @@ function CMain(oData){
         //     PAYTABLE_VALUES[i] = oData["paytable_symbol_"+(i+1)];
         // }
         
-        this.gotoMenu();
+        tryCheckLogin();
+        this.gotoGame();
     };
     
     this.gotoMenu = function(){

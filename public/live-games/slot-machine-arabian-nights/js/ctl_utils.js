@@ -403,7 +403,8 @@ function tryCheckLogin(){
             MIN_BET = parseFloat(COIN_BET[0]);
             
             $(s_oMain).trigger("start_session");
-            s_oMenu.exitFromMenu();	
+            // DEPRICATED - Since Menu screen deprication
+            // s_oMenu.exitFromMenu();	
     }else{
             s_oMsgBox.show("can't login #" + oRetData.desc);
     }

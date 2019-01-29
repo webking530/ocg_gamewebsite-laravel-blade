@@ -176,7 +176,9 @@ const getErrorData = data => ({
             amount: -1
         },
         freeSpins: false,
-        freeSpinsData: data.freeSpinsData
+        freeSpinsData: data.freeSpinsData,
+        jackpot: false,
+        jackpotData: 0
     },
     error: {
         code: 'custom',
@@ -201,7 +203,7 @@ const processResponse = data => {
 // ----------------------------------------------------------------------------------------------------
 // Closing
 const close = () => {
-    window.location.href = game.sessionCloseUrl;
+    parent.window.location.href = game.sessionCloseUrl;
 };
 
 // ----------------------------------------------------------------------------------------------------

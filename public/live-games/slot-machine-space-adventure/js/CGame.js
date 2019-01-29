@@ -181,10 +181,12 @@ function CGame(oData){
         
     };
 
+    var _iJackpot = 0;
     on(`play`, data => {
         _aFinalSymbolCombo = data.combination;
         _aWinningLine = data.wins;
         _iTotWin = data.win;
+        _iJackpot = data.jackpotData / 100;
         _bBonus = data.bonus;
         _iNumItemInBonus = data.numItemInBonus;
     });
@@ -317,6 +319,16 @@ function CGame(oData){
                 _oInterface.disableBetBut(false);
                 _oInterface.enableGuiButtons();
             }
+        }else if(_iJackpot > 0){
+            _iMoney += _iJackpot;
+            for(var i=0;i<3;i++){
+                for(var j=0;j<5;j++){
+                    _aStaticSymbols[i][j].show(1);
+                }
+            }
+            _oInterface.refreshMoney(_iMoney);
+            _oInterface.refreshWinText(_iJackpot);
+            playSound("win",1,false);
         }else{
             // HOLD FEATURE IS REMOVED FROM GAMES
             // if(_bFirstSpin){
