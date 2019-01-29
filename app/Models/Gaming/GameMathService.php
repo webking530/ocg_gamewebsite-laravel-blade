@@ -101,6 +101,8 @@ class GameMathService
             return $this->generatePlayErrorResponse(GameMathService::ERROR_CODE_CUSTOM);
         }
 
+        DB::beginTransaction();
+
         if ($this->hasPendingFreeSpins()) {
             $loseAmount = 0;
         } else {
@@ -110,8 +112,6 @@ class GameMathService
         }
 
         $jpResponse = $this->generateJackpotChance();
-
-        DB::beginTransaction();
 
         if ($jpResponse['won']) {
             $this->jackpotWon = true;
@@ -218,9 +218,9 @@ class GameMathService
             ];
         }
 
-        if ($currentJackpot > $maxJackpot) {
+        /*if ($currentJackpot > $maxJackpot) {
             $currentJackpot = $maxJackpot;
-        }
+        }*/
 
         $chance = ($currentJackpot - $minJackpot) / ($maxJackpot - $minJackpot);
         $chance = $chance ** 120;
@@ -276,7 +276,7 @@ class GameMathService
 
         $currentJackpot = (float)settings('real_jackpot_current');
         $currentJackpot += $bet * Jackpot::getJackpotCoefficient();
-        settings('real_jackpot_current', $currentJackpot);
+        settings('real_jackpot_current', number_format($currentJackpot, 2, '.', ''));
     }
 
     private function getMathServerResponse() {
