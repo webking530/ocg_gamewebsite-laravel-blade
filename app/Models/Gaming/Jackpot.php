@@ -12,9 +12,6 @@ class Jackpot extends Model
 
     protected $guarded = ['id'];
 
-    const JACKPOT_COEFFICIENT = 0.01;
-    const JACKPOT_MIN_BET_USD = 1;
-
     public function getDaysSinceJackpotAttribute() {
         $days = $this->created_at->diffInDays(Carbon::now());
         $days = $days == 0 ? 1 : $days;
@@ -27,11 +24,11 @@ class Jackpot extends Model
     }
 
     public static function getJackpotMinBet() {
-        return self::JACKPOT_MIN_BET_USD;
+        return (float)settings('jackpot_min_bet_usd');
     }
 
     public static function getJackpotCoefficient() {
-        return self::JACKPOT_COEFFICIENT;
+        return (float)settings('jackpot_bet_coefficient');
     }
 
     public static function getJackpotMinValue() {

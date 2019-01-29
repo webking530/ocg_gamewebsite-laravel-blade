@@ -142,8 +142,6 @@ class GameMathService
             }
         }
 
-
-
         $this->distributeCreditsToSession($winAmount, $loseAmount);
 
         $sessionExtra = $this->session->extra;

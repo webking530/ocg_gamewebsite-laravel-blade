@@ -61,6 +61,16 @@ class SettingsSeeder extends Seeder
             'value' => '10000',
         ]);
 
+        Models\Setting\Setting::create([
+            'key' => 'jackpot_bet_coefficient',
+            'value' => '0.01',
+        ]);
+
+        Models\Setting\Setting::create([
+            'key' => 'jackpot_min_bet_usd',
+            'value' => '1',
+        ]);
+
 
         Models\Setting\Setting::create([
             'key' => 'fake_jackpot_increment_range_daily',

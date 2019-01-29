@@ -68,6 +68,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="jackpot_bet_coefficient" class="col-md-4 control-label">jackpot_bet_coefficient</label>
+                        <div class="col-md-6">
+                            <input id="jackpot_bet_coefficient" type='text' name='jackpot_bet_coefficient' value="{{ settings('jackpot_bet_coefficient') }}" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jackpot_min_bet_usd" class="col-md-4 control-label">jackpot_min_bet_usd</label>
+                        <div class="col-md-6">
+                            <input id="jackpot_min_bet_usd" type='text' name='jackpot_min_bet_usd' value="{{ settings('jackpot_min_bet_usd') }}" class="form-control">
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">
                         Update
                     </button>

@@ -49,7 +49,7 @@ class GameSessionSeeder extends Seeder
                 'game_id' => $gameId,
                 'user_id' => $testUser->id,
                 'credits' => 1000000,
-                'credits_bonus' => 500000,
+                'credits_bonus' => 0,
                 'token' => $token,
                 'extra' => json_encode([
                     'free_spins' => 0,
@@ -64,7 +64,7 @@ class GameSessionSeeder extends Seeder
                 'game_id' => $gameId,
                 'user_id' => null,
                 'credits' => 1000000,
-                'credits_bonus' => 500000,
+                'credits_bonus' => 0,
                 'token' => "demo_$token",
                 'extra' => json_encode([
                     'free_spins' => 0,
