@@ -17,13 +17,17 @@ function showNotifier(type, content) {
     }, 3000);
 }
 
-function googleSignOut(redirectUrl) {
+function googleSignOut(redirectUrl, msg) {
     // var googleLogoutRoute = $('[data-google-logout-route]').data('google-logout-route');
     gapi.load('auth2', function () {
         gapi.auth2.init().then(function () {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
-                window.location.href = redirectUrl;
+                if (msg === undefined) {
+                    window.location.href = redirectUrl;
+                } else {
+                    showNotifier('danger', msg);
+                }
             });
         });
     });

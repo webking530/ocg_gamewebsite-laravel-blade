@@ -22,9 +22,10 @@ function googleSignIn(googleUser) {
         if (response.status === 'success') {
             window.location.href = response.route;
         } else {
-            googleSignOut();
-            showNotifier('danger', response.msg);
+            googleSignOut(response.route, response.msg);
         }
+    }).fail(function(response) {
+        showNotifier('danger', 'Could not process your request at this time. Try again later');
     });
 }
 

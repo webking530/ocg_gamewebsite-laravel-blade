@@ -48,4 +48,8 @@ class Country extends Model {
         return ($deposite->countrydepossite) != null ? $deposite->countrydepossite : 0;
     }
 
+    public static function getDefaultCountryCode() {
+        return 'DE';
+    }
+
 }

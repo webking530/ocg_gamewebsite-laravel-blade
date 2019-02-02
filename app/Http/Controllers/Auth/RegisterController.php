@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Models\Location\Country;
 
 class RegisterController extends Controller
 {
@@ -151,7 +152,16 @@ class RegisterController extends Controller
         } else {
             return [
                 'status' => 'error',
-                'msg' => 'Invalid session token'
+                'msg' => 'Invalid session token',
+                'route' => route('home.login'),
+            ];
+        }
+
+        if (User::where('email', $payload['email'])->first() != null) {
+            return [
+                'status' => 'error',
+                'msg' => 'An account with this email address is already registered.',
+                'route' => route('home.login'),
             ];
         }
 
@@ -163,7 +173,7 @@ class RegisterController extends Controller
             'lastname' => $request->get('lastname'),
             'gender' => User::GENDER_MALE,
             'mobile_number' => 0,
-            'country_code' => 'DE',
+            'country_code' => Country::getDefaultCountryCode(),
             'currency_code' => 'USD',
             'birthdate' => null,
             'avatar_url' => $request->get('avatar_url'),
