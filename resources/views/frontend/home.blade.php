@@ -21,7 +21,7 @@
                     <div class="hero-container mt-lg">
                         <div class="hero-title text-center">
                             <h1>
-                            <span>
+                            <span style="text-shadow: 2px 2px 1px black;">
                                 {!! transdata('frontend/home.banner_are_you_ready') !!}
                             </span>
                             </h1>

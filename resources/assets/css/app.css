@@ -488,6 +488,7 @@ div.main {
     .hero .btn {
         display: block;
         /*max-width: 200px;*/
+        width: 75%;
         margin-left: auto!important;
         margin-right: auto!important
     }
