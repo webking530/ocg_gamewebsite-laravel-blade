@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row" id="hero-row">
                 <div class="col-lg-12">
-                    <div class="hero-container">
+                    <div class="hero-container mt-lg">
                         <div class="hero-title text-center">
                             <h1>
                             <span>
