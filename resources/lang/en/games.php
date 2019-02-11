@@ -28,6 +28,8 @@ return [
         'Plinko',
         'Roulette Royale',
         'American Roulette Royale',
+        'Zodiac Space Adventure',
+        'Zodiac Space Adventure Deluxe',
     ],
     'type' => [
         'Regular Game',

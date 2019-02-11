@@ -672,7 +672,126 @@ class GamesSeeder extends Seeder
             ],
             'enabled' => true
         ]);
+        Game::create([
+            'id' => 27,
+            'slug' => 'slot-machine-zodiac-space-adventure',
+            'icon_url' => 'img/games/7.jpg',
+            'credits' => 0,
+            'type' => GAME::TYPE_NORMAL,
+            'group' => Game::GROUP_SLOT,
+            'has_jackpot' => true,
+            'settings' => [
+                'config_name' => 'ZodiacSpaceAdventure',
+                'language' => [
+                    'TEXT_MONEY',
+                    'TEXT_PLAY',
+                    'TEXT_BET',
+                    'TEXT_COIN',
+                    'TEXT_MAX_BET',
+                    'TEXT_INFO',
+                    'TEXT_LINES',
+                    'TEXT_SPIN',
+                    'TEXT_WIN',
+                    'TEXT_HOLD',
+                    'TEXT_HELP_WILD',
+                    'TEXT_HELP_BONUS',
+                    'TEXT_CREDITS_DEVELOPED',
+                    'TEXT_CURRENCY',
+                    'TEXT_PRELOADER_CONTINUE',
 
+                    'TEXT_CONGRATULATIONS',
+                    'TEXT_SHARE_SHARE1',
+                    'TEXT_SHARE_SHARE2',
+                    'TEXT_MSG_SHARING1',
+                    'TEXT_MSG_SHARING2'
+                ],
+                'configuration' => [
+                    'paytable' => [
+                        [0, 0, 40, 400, 1000],
+                        [0, 0, 20, 100, 500],
+                        [0, 0, 20, 50, 400],
+                        [0, 0, 20, 50, 400],
+                        [0, 0, 10, 30, 200],
+                        [0, 0, 10, 30, 200],
+                        [0, 0, 10, 20, 100],
+                        [0, 0, 10, 20, 100]
+                    ],
+                    'bets' => [10, 50, 100, 200, 500, 1000],
+                    'fullscreen' => true,
+                    'checkOrientation' => true,
+                    'maxFramesReelEase' => 10,
+                    'minReelLoops' => 0,
+                    'reelDelay' => 0,
+                    'timeShowWins' => 1000,
+                    'bonus' => [
+                        [5, 10, 25],
+                        [10, 25, 50],
+                        [25, 50, 100]
+                    ]
+                ]
+            ],
+            'enabled' => true
+        ]);
+        Game::create([
+            'id' => 28,
+            'slug' => 'slot-machine-zodiac-space-adventure-deluxe',
+            'icon_url' => 'img/games/7.jpg',
+            'credits' => 0,
+            'type' => GAME::TYPE_NORMAL,
+            'group' => Game::GROUP_SLOT,
+            'has_jackpot' => true,
+            'settings' => [
+                'config_name' => 'ZodiacSpaceAdventureDeluxe',
+                'language' => [
+                    'TEXT_MONEY',
+                    'TEXT_PLAY',
+                    'TEXT_BET',
+                    'TEXT_COIN',
+                    'TEXT_MAX_BET',
+                    'TEXT_INFO',
+                    'TEXT_LINES',
+                    'TEXT_SPIN',
+                    'TEXT_WIN',
+                    'TEXT_HOLD',
+                    'TEXT_HELP_WILD',
+                    'TEXT_HELP_BONUS',
+                    'TEXT_CREDITS_DEVELOPED',
+                    'TEXT_CURRENCY',
+                    'TEXT_PRELOADER_CONTINUE',
+
+                    'TEXT_CONGRATULATIONS',
+                    'TEXT_SHARE_SHARE1',
+                    'TEXT_SHARE_SHARE2',
+                    'TEXT_MSG_SHARING1',
+                    'TEXT_MSG_SHARING2'
+                ],
+                'configuration' => [
+                    'paytable' => [
+                        [0, 0, 40, 400, 1000],
+                        [0, 0, 20, 100, 500],
+                        [0, 0, 20, 50, 400],
+                        [0, 0, 20, 50, 400],
+                        [0, 0, 10, 30, 200],
+                        [0, 0, 10, 30, 200],
+                        [0, 0, 10, 20, 100],
+                        [0, 0, 10, 20, 100]
+                    ],
+                    'bets' => [10, 50, 100, 200, 500, 1000],
+                    'fullscreen' => true,
+                    'checkOrientation' => true,
+                    'maxFramesReelEase' => 10,
+                    'minReelLoops' => 0,
+                    'reelDelay' => 0,
+                    'timeShowWins' => 1000,
+                    'bonus' => [
+                        [5, 10, 25],
+                        [10, 25, 50],
+                        [25, 50, 100]
+                    ]
+                ]
+            ],
+            'enabled' => true
+        ]);
         /*Game::create([
             'id' => 999,
             'slug' => 'slot-machine-dummy',
