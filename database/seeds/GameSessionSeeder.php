@@ -41,7 +41,9 @@ class GameSessionSeeder extends Seeder
             7 => '222bbb',
             13 => '333ccc',
             14 => '444ddd',
-            15 => '555eee'
+            15 => '555eee',
+            27 => 'zodiac',
+            28 => 'zodiax',
         ];
 
         foreach ($tokenMap as $gameId => $token) {
