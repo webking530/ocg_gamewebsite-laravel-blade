@@ -284,13 +284,52 @@ div.main {
 
 
 #primary-hero {
-    background: url(../../img/sliderbg.jpg) no-repeat 50%;
+    background-image: url(../../img/bg-parallax/bg-space.jpg);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
     background-size: cover;
-    /*margin-bottom: 60px;*/
-    height: 100%
+    background-attachment: fixed;
+    height: 100%;
 }
 
-#primary-hero>.container {
+#primary-hero .coin-layer {
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-size: cover;
+    background-attachment: local;
+    height: 100%;
+}
+
+#primary-hero .coin-layer-1 {
+    background-image: url(../../img/bg-parallax/coin-layer-1.png);
+}
+#primary-hero .coin-layer-2 {
+    background-image: url(../../img/bg-parallax/coin-layer-2.png);
+}
+#primary-hero .coin-layer-3 {
+    background-image: url(../../img/bg-parallax/coin-layer-3.png);
+}
+#primary-hero .coin-layer-4 {
+    background-image: url(../../img/bg-parallax/coin-layer-4.png);
+}
+#primary-hero .coin-layer-5 {
+    background-image: url(../../img/bg-parallax/coin-layer-5.png);
+}
+#primary-hero .coin-layer-6 {
+    background-image: url(../../img/bg-parallax/coin-layer-6.png);
+}
+#primary-hero .coin-layer-7 {
+    background-image: url(../../img/bg-parallax/coin-layer-7.png);
+}
+#primary-hero .coin-layer-8 {
+    background-image: url(../../img/bg-parallax/coin-layer-8.png);
+}
+#primary-hero .coin-layer-9 {
+    background-image: url(../../img/bg-parallax/coin-layer-9.png);
+}
+
+
+#primary-hero .container {
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);

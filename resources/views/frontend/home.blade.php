@@ -15,30 +15,50 @@
 
 @section('content')
     <section class="hero primary-hero" id="primary-hero">
-        <div class="container">
-            <div class="row" id="hero-row">
-                <div class="col-lg-12">
-                    <div class="hero-container mt-lg">
-                        <div class="hero-title text-center">
-                            <h1>
-                            <span style="text-shadow: 2px 2px 1px black;">
-                                {!! transdata('frontend/home.banner_are_you_ready') !!}
-                            </span>
-                            </h1>
-                        </div>
-                        <div class="hero-tagline text-center">
-                            <p class="hero-paragraph">{!! transdata('frontend/home.check_out_our_games') !!}</p>
-                        </div>
-                        <div class="hero-cta text-center">
-                            <a href="#demos" class="btn btn-lg btn-primary btn-borders text-uppercase" data-hash data-hash-offset="100">
-                                <p class="hero-paragraph">{!! transdata('frontend/home.start_playing_now') !!}</p>
-                            </a>
+        <div class="coin-layer coin-layer-1">
+            <div class="coin-layer coin-layer-2">
+                <div class="coin-layer coin-layer-3">
+                    <div class="coin-layer coin-layer-4">
+                        <div class="coin-layer coin-layer-5">
+                            <div class="coin-layer coin-layer-6">
+                                <div class="coin-layer coin-layer-7">
+                                    <div class="coin-layer coin-layer-8">
+                                        <div class="coin-layer coin-layer-9">
+                                            <div class="container">
+                                                <div class="row" id="hero-row">
+                                                    <div class="col-lg-12">
+                                                        <div class="hero-container mt-lg">
+                                                            <div class="hero-title text-center">
+                                                                <h1>
+                                <span style="text-shadow: 2px 2px 1px black;">
+                                    {!! transdata('frontend/home.banner_are_you_ready') !!}
+                                </span>
+                                                                </h1>
+                                                            </div>
+                                                            <div class="hero-tagline text-center">
+                                                                <p class="hero-paragraph">{!! transdata('frontend/home.check_out_our_games') !!}</p>
+                                                            </div>
+                                                            <div class="hero-cta text-center">
+                                                                <a href="#demos" class="btn btn-lg btn-primary btn-borders text-uppercase" data-hash data-hash-offset="100">
+                                                                    <p class="hero-paragraph">{!! transdata('frontend/home.start_playing_now') !!}</p>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <div role="main" class="main" style="margin-top: 0">
         <div class="home-intro" id="home-intro">
@@ -151,4 +171,16 @@
 
 @section('scripts')
     <script src="{!! mix('compiled/js/pages/game_grid.js') !!}"></script>
+
+    <script>
+        $(document).scroll(function() {
+            var scroll = $(window).scrollTop();
+            var coefs = [-1.2, 1.5, -2, 5.7, 2.5, 3, 2.2, -1.7, -1.5];
+
+            $.each($('.coin-layer'), function(k, obj) {
+                let rand = (Math.random() * 4) + 1;
+                $(obj).css("background-position", "50%" + (scroll / coefs[k]) + "px");
+            });
+        });
+    </script>
 @endsection
